@@ -83,32 +83,48 @@ class SentenceCorpus(object):
 
     def get_vocabs(self, path, src_path, thresh=2):
         """unks words occurring <= thresh times"""
-        tgt_voc = Counter()
+        tgt_voc = Counter()     # Total vocab counter for train.txt & src_train.txt
         assert os.path.exists(path)
 
-        linewords = []
-        with open(src_path, 'r') as f:
+        #: linewords: (For each mwp,) record the words appeared its source table (e.g. topic words)
+        linewords = []  
+        with open(src_path, 'r') as f:  # e.g. src_train.txt
             for line in f:
+
+                # IF    tokes := ['__start_topic__', 'A', 'B' ,'__end_topic__']
+                # THEN  fields := {('_topic', 1): 'A', ('_topic', 2): 'B'}
                 tokes = line.strip().split()
                 if self.wiki:
                     fields = get_wikibio_poswrds(tokes) #key, pos -> wrd
                 else:
                     fields = get_e2e_poswrds(tokes) # key, pos -> wrd
-                fieldvals = list(fields.values())
+
+                tgt_voc.update([k for k, idx in fields])     # ['_topic', '_topic']
+                tgt_voc.update([idx for k, idx in fields])   # [1, 2]
+                fieldvals = list(fields.values())            # ['A', 'B']
                 tgt_voc.update(fieldvals)
+                # tgt_voc so far: Counter({'_topic': 2, 'A': 1, 'B': 1, 1: 1, 2: 1})
+
+                #: intended for copy forcing
                 linewords.append(set(wrd for wrd in fieldvals
                                      if wrd not in punctuation))
-                tgt_voc.update([k for k, idx in fields])
-                tgt_voc.update([idx for k, idx in fields])
 
+        #: genwords: WAS words in a mwp but not in its source table (e.g. topic words)
+        #:           NOW words in a mwp
         genwords = Counter()
         # Add words to the dictionary
-        with open(path, 'r') as f:
+        with open(path, 'r') as f:      # e.g. train.txt
             #tokens = 0
             for l, line in enumerate(f):
                 words, spanlabels = line.strip().split('|||')
                 words = words.split()
-                genwords.update([wrd for wrd in words if wrd not in linewords[l]])
+
+                #: intended for copy forcing
+                #: => Disable copy forcing for now (otherwise all nouns must be copied, causing many <unk>s)
+                #: TODO: better condition e.g. topic words
+                #genwords.update([wrd for wrd in words if wrd not in linewords[l]]) # original
+                genwords.update(words) #:#unk
+
                 tgt_voc.update(words)
 
         # prune
@@ -116,13 +132,13 @@ class SentenceCorpus(object):
         # so we need separate unking for generation
         #print("comeon", "aerobatic" in genwords)
         
-        #: cntr dict
+        #: cntr: Counter dict
         for cntr in [tgt_voc, genwords]:
             for k in list(cntr.keys()):
                 if cntr[k] <= thresh:
                     del cntr[k]
 
-        self.genset = set(list(genwords.keys()))
+        self.genset = set(genwords.keys())  #:#2to3
         tgtkeys = list(tgt_voc.keys())
         # make sure gen stuff is first
         tgtkeys = sorted(tgtkeys,key=lambda x: -(x in self.genset))

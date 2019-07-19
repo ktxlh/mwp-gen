@@ -16,6 +16,7 @@ from utils import logsumexp1, make_fwd_constr_idxs, make_bwd_constr_idxs, backtr
 from data.utils import get_wikibio_poswrds, get_e2e_poswrds
 import infc
 
+import print_result
 
 class HSMM(nn.Module):
     """
@@ -1174,8 +1175,8 @@ if __name__ == "__main__":
             uniq_b = uniq_b.cuda()
 
         #:#ConditionOn
-        srcenc, srcfieldenc, uniqenc = net.encode(Variable(src_b, requires_grad=False), None, #:#volatile
-                                                  Variable(uniq_b, requires_grad=False))      #:#volatile
+        srcenc, srcfieldenc, uniqenc = net.encode(Variable(src_b, requires_grad=False), None, #:#volatile (deprecated)
+                                                  Variable(uniq_b, requires_grad=False))      #:#volatile (deprecated)
         init_logps, trans_logps = net.trans_logprobs(uniqenc, 2)
         _, len_scores = net.len_logprobs()
         len_lps = net.lsm(len_scores).data
@@ -1207,9 +1208,7 @@ if __name__ == "__main__":
 
         constr_sat = False
         # search over all templates
-        #print("\n\nD top_templates",top_temps)
         for templt in top_temps:
-            #print("templt is", templt) #0div
             # get templt transition prob
             tscores = [init_logps[0][templt[0]]]
             [tscores.append(trans_logps[0][templt[tt-1]][templt[tt]])
@@ -1270,28 +1269,7 @@ if __name__ == "__main__":
         top_temps, _, state2phrases = extract_from_tagged_data(args.data, args.bsz, args.thresh,
                                                    args.tagged_fi, args.ntemplates)
 
-        #print("D gen_from_src() top_temps=", top_temps) #:#0div
-
-        print("\n"*6+"="*500+"DEBUG"+"="*500+"\n"*6)
-
-        for template_it in range(5):    # Top 5 templates
-            print("#"*20+f" Top {template_it+1} template consists of "+"#"*20)
-
-            n_phrases = 10   # print top {n_phrases} examples for each state
-            template = top_temps[template_it]  # a tuple of states
-            template_examples = [[] for i in range(n_phrases)]  #[['phr1-1','phr2-1'], ['ph1-2', 'phr2-2']]
-            for i_state,state in enumerate(template):
-                # [0] for phrase; [1] for frequency
-                phr_frq = sorted(zip(state2phrases[state][1],state2phrases[state][0]), reverse=True)
-                for i_exp in range(n_phrases):
-                    example_phrase = ' '
-                    if i_exp < len(phr_frq):
-                        example_phrase = f"{phr_frq[i_exp][1]} ({phr_frq[i_exp][0]:.3f})"   #"How much (0.033)"
-                    template_examples[i_exp].append(example_phrase)
-            for i_exp in range(n_phrases):
-                print(f"| {' | '.join(template_examples[i_exp])} |")
-
-        print("\n"*6+"="*500+"DEBUG"+"="*500+"\n"*6)
+        print_result.top_template_phrase_examples(top_temps, state2phrases, k=5, n_phrases=5)
 
         with open(args.gen_from_fi) as f:
             src_lines = f.readlines()

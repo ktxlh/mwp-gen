@@ -4,13 +4,9 @@ from collections import defaultdict
 import torch
 
 import labeled_data
+import print_result
 
 seg_patt = re.compile('([^\|]+)\|(\d+)') # detects segments
-
-####
-# for other_mwp statistics only
-total_data_len = 1556
-####
 
 def group_by_template(fi, startlineno):
     """
@@ -28,7 +24,6 @@ def group_by_template(fi, startlineno):
             wordseq = [phrs.strip() for phrs in wordseq]
             labeseq = tuple(int(labe) for labe in labeseq)
             labes2sents[labeseq].append((wordseq, lineno))
-            #print(f"D group_by_template labeseq={labeseq}\t wordseq={wordseq}\t lineno={lineno}")
             lineno += 1
     return labes2sents
 
@@ -95,37 +90,7 @@ def extract_from_tagged_data(datadir, bsz, thresh, tagged_fi, ntemplates):
     #top_temps = sorted(temps2sents.keys(), key=lambda x: -len(temps2sents[x]))[:ntemplates]    #original code
     top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))[:ntemplates]
 
-    from collections import Counter
-    for i in range(5):  # Print top 5 tamplates
-        print(f"Top-{i+1} template:{top_temps[i]}")
-
-        ## HackMD table format
-        line_0, line_1 = '| ', '| '
-        for state in top_temps[i]:
-            line_0 = line_0 + f"{state} | "
-            line_1 = line_1 + "-"*8 + " | "
-        print(line_0 + "count | portion |")
-        print(line_1 + ("-"*8 + " | ") *2 )
-
-        sents = temps2sents[top_temps[i]]
-        duplicated = Counter()#set()     # Counter for duplicated templates
-        #j = 0
-        #while j < len(sents) and len(printed_line) < 10:    # 10 examples for each template
-        #    line = ' | '.join(sents[j][0])
-            #if line not in printed_line:
-            #    print(line)
-            #    printed_line.add(line)
-            #j = j + 1
-        for sent in sents:
-            templt = ' | '.join(sent[0])
-            duplicated[templt] += 1
-
-        duplicated = sorted([(c,t) for (t,c) in duplicated.items()], reverse=True)
-        sum_duplicated = sum([c for (c,t) in duplicated])
-        for count,templt in duplicated:
-            print(templt, f' | {count} | {count/total_data_len:.3f} |')
-        
-        print(f'In total: {sum_duplicated} problems using this templates')
+    print_result.top_templates_from_train(top_temps, temps2sents, k=5)
 
     #remap_eos_states(top_temps, temps2sents)
     state2phrases = just_state2phrases(top_temps, temps2sents)
