@@ -48,7 +48,7 @@ def analyze_seg(data,metadata_path,seg_path, k, n):
         top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
         return linenos, temps2sents, top_temps
        
-    def specific_top_templates(temps2sents,metadata, attribute):
+    def specific_top_templates(temps2sents,metadata, attribute, metadata_colnames):
         # sort attributes (e.g. solution_types (stype)) by their frequencies (counts)
         from collections import Counter
         stype_counts = Counter(metadata[attribute])
@@ -66,11 +66,12 @@ def analyze_seg(data,metadata_path,seg_path, k, n):
         for stype in solution_types:
             if stype_counts[stype] < 5:
                 continue    # HACK to avoiding printing stypes of little samples
-            print(f"## {stype} ({stype_counts[stype]})")
+            print(f"## {stype} ({stype_counts[stype]} samples)")
             stype_temps2sents = stype2templates[stype]
             top_temps = sorted(list(stype_temps2sents.keys()), key=lambda x: -len(stype_temps2sents[x]))
-            print_result.top_templates_from_train(top_temps,stype_temps2sents,metadata,
-                metadata_colnames=['solution type','source','question'], k=k, n=n)
+            #print_result.top_templates_from_train(top_temps,stype_temps2sents,metadata,
+            print_result.top_templates_from_train(top_temps,temps2sents,metadata,
+                metadata_colnames=metadata_colnames, k=k, n=n)
 
     def re_sort_metadata(metadata_path, linenos, new_idxname):
         metadata = pd.read_csv(metadata_path, sep='\t', header=0)
@@ -95,32 +96,17 @@ def analyze_seg(data,metadata_path,seg_path, k, n):
     2. solution type - top templates
     3. dataset - top templates / duplicated sentences
     """
-    print("# 1. top templates")
+    print("# 1. overall - top templates")
     print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
-        metadata_colnames=['solution type','source','question'],k=k, n=n)
+        metadata_colnames=['solution type','source'],k=k, n=n)  #'question'
     print()
     print("# 2. solution type - top templates")
-    specific_top_templates(temps2sents,metadata, 'solution type')
+    specific_top_templates(temps2sents,metadata, 'solution type',
+        metadata_colnames=['solution type','source'])
     print()
-    print('# 3. dataset - top templates / duplicated sentences')
-    specific_top_templates(temps2sents,metadata, 'source')
-
-
-    return
-    class Args(object):
-        def __init__(self):
-            self.data=data
-            self.bsz=15
-            self.thresh=3
-            self.tagged_fi=seg_path
-            self.ntemplates=10
-    args = Args()
-    from template_extraction import extract_from_tagged_data, align_cntr
-    top_temps, temps2sents, state2phrases = extract_from_tagged_data(args.data, args.bsz, args.thresh,
-                                                args.tagged_fi, args.ntemplates)
-    print('top_temps',top_temps)
-    print('temps2sents',temps2sents)
-    print('state2phrases',state2phrases)
+    print('# 3. dataset - top templates')
+    specific_top_templates(temps2sents,metadata, 'source',
+        metadata_colnames=['solution type','source'])
 
 
 def analyze_gen(data, metadata_path, gen_path, startlineno=0):
@@ -130,7 +116,7 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
     1. Statistics: How many samples use which template? Compare to training data distribution?
     """
 
-    print_title("# Analysis on generation", data=data, metadata_path=metadata_path, gen_path=gen_path)
+    print_title("generation", data=data, metadata_path=metadata_path, gen_path=gen_path)
 
     import re
     from collections import defaultdict
@@ -183,5 +169,5 @@ if __name__ == '__main__':
     DATA='/Users/shanglinghsu/mwp/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated'
     SEG = '/Users/shanglinghsu/mwp/ntg2/segs/seg-ai2-cmds-100-55-5-far-NER.txt'
     GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-cmds-100-55-5-far-NER.md'
-    analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=5, n=1)
-    #analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
+    #analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=10, n=1)
+    analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)

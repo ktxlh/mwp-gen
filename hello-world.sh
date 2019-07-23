@@ -11,7 +11,7 @@
 THRESH=3
 N_TEMPLATES=100
 EMB_SIZE=100
-HID_SIZE=100
+HID_SIZE=$EMB_SIZE
 LAYERS=1
 DROPOUT=0.3
 K=55
@@ -22,10 +22,12 @@ LR=0.5
 DATA_DIR=~/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated/
 GEN_FROM=~/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated/src_valid.txt
 
+TAG=ai2-cmds-$EMB_SIZE–$K-$KMUL-far-NER
+
 # Dynamically generate meaningful filename str
-MODEL=models/chsmm-ai2-cmds-100–55-5-far-NER.pt
-TAGGED_FI=segs/seg-ai2-cmds-100-55-5-far-NER.txt
-GEN_FI=gens/gen-ai2-cmds-100-55-5-far-NER.md
+MODEL=models/chsmm-$TAG.pt
+TAGGED_FI=segs/seg-$TAG.txt
+GEN_FI=gens/gen-$TAG.md
 
 # Training
 ## +Autoregressive

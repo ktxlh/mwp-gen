@@ -12,7 +12,8 @@ def _print_md_col_names(items):
     print(f"| {' | '.join([str(item) for item in items])} |")
     print(f"| {' | '.join(['-'*8 for item in items])} |")
 
-def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=None, k=5, n=3): 
+def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=None, k=5, n=3,
+        contains_only = None): 
     """
     Parameters:
     ----------
@@ -20,6 +21,8 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
             Max number of top templates to print
         n:   int
             Max number of sentence samples to print for each template
+        contains_only:  list of tuples
+            [{'solution type':'Addition','Subtraction'}]
     """   
 
     if k > len(top_temps):
@@ -28,18 +31,31 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
     
     # HACK If too many catogeries (e.g. 'questions'), don't print it
     some_cnames = [cname for cname in metadata_colnames if len(set(metadata[cname])) < 15]
-    
+    overall_stype_counts,solution_types = dict(),dict()
+    stype_counts = list()   # [ {'solution type' : {Addition':2, 'Subtraction':1} } ]
+    if len(some_cnames) > 0:
+        for cname in some_cnames:
+            # 'solution type' -> {'Addition':10, 'Subtraction':5}
+            overall_stype_counts[cname] = Counter(metadata[cname])
+
+            # 'solution type' -> ['Addition','Subtraction']
+            solution_types[cname] = [stype for stype, count in sorted(list(overall_stype_counts[cname].items()), key=lambda x: -x[1])]
+
+    Ns = 0
     for i in range(k):  # Print top k tamplates
         sents = temps2sents[top_temps[i]]
         
         N = len(sents)
-        print(f"### Top-{i+1} ({N}): {top_temps[i]}")
-
+        Ns += N
+        
         if metadata_colnames == None:
             metadata_colnames=list(metadata)
-        _print_md_col_names([*(top_temps[i]), *metadata_colnames])#, 'lineno', 'count', 'portion'])
 
-        duplicated = Counter()     # Counter for duplicated templates
+        if n> 0:
+            print(f"### Top-{i+1} ({N} samples using it): {top_temps[i]}")
+            _print_md_col_names([*(top_temps[i]), *metadata_colnames])#, 'lineno', 'count', 'portion'])
+
+        duplicated = Counter()     # Counter for duplicated templates # Make no sense to count it now
         j = 0
         for sent in sents:
             if j == n:      # HACK Print only n samples
@@ -62,20 +78,21 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
             
         print()
         # Distribution of some metadata_colnames using this template        
+        stype_counts.append(dict())
         if len(some_cnames) > 0:
-            print(f'### Distribution of {", ".join(some_cnames)} using this template')
             for cname in some_cnames:
-                stype_counts = Counter([metadata[cname][lineno] for (_, lineno) in sents])
-                solution_types = [stype for stype, count in sorted(list(stype_counts.items()), key=lambda x: -x[1])]
-
-                _print_md_col_names(solution_types)
-                row = '| '
-                for stype in solution_types:
-                    row += f"{str(stype_counts[stype])} ({stype_counts[stype]/N:.3f}) |"
-                print(row)
-                print()
+                stype_counts[i][cname] = Counter([metadata[cname][lineno] for (_, lineno) in sents])
             
-
+    if len(some_cnames) > 0:
+        for cname in some_cnames:
+            print(f'### Distribution of {cname}: the {Ns} samples using all top-{k} templates')
+            _print_md_col_names([' ',*solution_types[cname]])
+            for i in range(k):
+                row = f'| top-{i+1} | '
+                N = sum([stype_counts[i][cname][stype] for stype in solution_types[cname]])
+                for stype in solution_types[cname]:
+                    row += f"{stype_counts[i][cname][stype]} ({stype_counts[i][cname][stype]/N:.3f})" + ' |'
+                print(row)
     
     print()
 
