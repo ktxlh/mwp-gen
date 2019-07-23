@@ -255,7 +255,7 @@ def calc_pur(counters):
             vals = list(counter.values())
             if len(vals) > 0:
                 nonothers = [val for k, val in counter.items() if k != "other"]
-                oval = counter["other"] if "other" in counter else 0
+                oval = counter["other"] if "other" in counter else 0    # other value?
                 if len(nonothers) > 0:
                     total = float(sum(nonothers))
                     maxval = max(nonothers)
@@ -268,7 +268,3 @@ def calc_pur(counters):
 
 
 
-#: err print
-def eprint(*args, **kwargs):
-    #print(*args, file=sys.stderr, **kwargs)
-    pass

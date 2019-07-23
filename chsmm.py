@@ -12,11 +12,11 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.autograd import Variable
 import labeled_data
-from utils import logsumexp1, make_fwd_constr_idxs, make_bwd_constr_idxs, backtrace3, backtrace, eprint
+from utils import logsumexp1, make_fwd_constr_idxs, make_bwd_constr_idxs, backtrace3, backtrace
 from data.utils import get_wikibio_poswrds, get_e2e_poswrds
 import infc
 
-import print_result
+import print_result, my_utils
 
 class HSMM(nn.Module):
     """
@@ -1113,6 +1113,10 @@ if __name__ == "__main__":
         return neglogev/nsents
 
     def label_train():
+        
+        # TODO remove debug
+        print(f"D label_train(): corpus.train_mb2linenos={' '.join([str(i) for b in corpus.train_mb2linenos for i in b])}")
+
         net.ar = saved_args.ar_after_decay and not args.no_ar_for_vit
         print("btw, net.ar:", net.ar)
         for i in range(len(corpus.train)):
@@ -1208,7 +1212,7 @@ if __name__ == "__main__":
 
         constr_sat = False
         # search over all templates
-        for templt in top_temps:
+        for templt in top_temps:    # TODO Modify this line to use a specific template
             # get templt transition prob
             tscores = [init_logps[0][templt[0]]]
             [tscores.append(trans_logps[0][templt[tt-1]][templt[tt]])
@@ -1265,10 +1269,12 @@ if __name__ == "__main__":
         #assert False
 
     def gen_from_src():
+        print("# gen_from_src():")
         from template_extraction import extract_from_tagged_data, align_cntr
         top_temps, _, state2phrases = extract_from_tagged_data(args.data, args.bsz, args.thresh,
                                                    args.tagged_fi, args.ntemplates)
 
+        # Can't be integrated for now because of some encoding error
         print_result.top_template_phrase_examples(top_temps, state2phrases, k=5, n_phrases=5)
 
         with open(args.gen_from_fi) as f:
@@ -1279,7 +1285,7 @@ if __name__ == "__main__":
             chunksz = math.floor(len(src_lines)/float(nworkers))
             startln = int(wid*chunksz)
             endln = int((wid+1)*chunksz) if wid < nworkers-1 else len(src_lines)
-            eprint("worker", wid, "doing lines", startln, "thru", endln-1)
+            my_utils.eprint("worker", wid, "doing lines", startln, "thru", endln-1)
             src_lines = src_lines[startln:endln]
 
         net.eval()
@@ -1392,15 +1398,15 @@ if __name__ == "__main__":
         from utils import calc_pur
         cop_counters = align_stuff()
         calc_pur(cop_counters)
-    elif args.label_train:
+    elif args.label_train:  ### Viterbi Segmentation/Template Extraction
         net.eval()
         label_train()
-    elif len(args.gen_from_fi) > 0:
+    elif len(args.gen_from_fi) > 0: ### Generation
         gen_from_src()
     elif args.epochs == 0:
         net.eval()
         test(0)
-    else:
+    else:   ### Training
         prev_valloss, best_valloss = float("inf"), float("inf")
         decayed = False
         if args.prev_loss is not None:

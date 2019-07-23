@@ -113,7 +113,7 @@ class SentenceCorpus(object):
         #:           NOW words in a mwp
         genwords = Counter()
         # Add words to the dictionary
-        with open(path, 'r') as f:      # e.g. train.txt
+        with open(path, 'r') as f:
             #tokens = 0
             for l, line in enumerate(f):
                 words, spanlabels = line.strip().split('|||')

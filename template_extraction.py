@@ -14,7 +14,7 @@ def group_by_template(fi, startlineno):
     """
     labes2sents = defaultdict(list)
     lineno = startlineno
-    with open(fi) as f:
+    with open(fi,encoding='utf8') as f: #:#linenos
         for line in f:
             if '|' not in line:
                 continue
@@ -89,8 +89,6 @@ def extract_from_tagged_data(datadir, bsz, thresh, tagged_fi, ntemplates):
     temps2sents = group_by_template(tagged_fi, nskips)
     #top_temps = sorted(temps2sents.keys(), key=lambda x: -len(temps2sents[x]))[:ntemplates]    #original code
     top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))[:ntemplates]
-
-    print_result.top_templates_from_train(top_temps, temps2sents, k=5)
 
     #remap_eos_states(top_temps, temps2sents)
     state2phrases = just_state2phrases(top_temps, temps2sents)

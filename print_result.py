@@ -12,42 +12,80 @@ def _print_md_col_names(items):
     print(f"| {' | '.join([str(item) for item in items])} |")
     print(f"| {' | '.join(['-'*8 for item in items])} |")
 
-def top_templates_from_train(top_temps, temps2sents, k=5):    
+def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=None, k=5, n=3): 
+    """
+    Parameters:
+    ----------
+        k:   int
+            Max number of top templates to print
+        n:   int
+            Max number of sentence samples to print for each template
+    """   
 
-    print(f"# Top {k} templates from train")
+    if k > len(top_temps):
+        print(f"Warning: k={k} > len(top_temps) => k := {len(top_temps)}")
+        k = len(top_temps)
+    
+    # HACK If too many catogeries (e.g. 'questions'), don't print it
+    some_cnames = [cname for cname in metadata_colnames if len(set(metadata[cname])) < 15]
+    
     for i in range(k):  # Print top k tamplates
-        print(f"## Top-{i+1}: {top_temps[i]}")
-
-        _print_md_col_names([*(top_temps[i]), 'count', 'portion'])
-
         sents = temps2sents[top_temps[i]]
-        duplicated = Counter()#set()     # Counter for duplicated templates
-        #j = 0
-        #while j < len(sents) and len(printed_line) < 10:    # 10 examples for each template
-        #    line = ' | '.join(sents[j][0])
-            #if line not in printed_line:
-            #    print(line)
-            #    printed_line.add(line)
-            #j = j + 1
-        for sent in sents:
-            #lineno = sent[1]
-            templt = ' | '.join(sent[0])
-            duplicated[templt] += 1
-
-        duplicated = sorted([(c,t) for (t,c) in duplicated.items()], reverse=True)
-        sum_duplicated = sum([c for (c,t) in duplicated])
-        for count,templt in duplicated:
-            print(f'| {templt} | {count} | {count/total_data_len:.3f} |')
         
-        print(f'In total: {sum_duplicated} problems using this templates')
+        N = len(sents)
+        print(f"### Top-{i+1} ({N}): {top_temps[i]}")
+
+        if metadata_colnames == None:
+            metadata_colnames=list(metadata)
+        _print_md_col_names([*(top_temps[i]), *metadata_colnames])#, 'lineno', 'count', 'portion'])
+
+        duplicated = Counter()     # Counter for duplicated templates
+        j = 0
+        for sent in sents:
+            if j == n:      # HACK Print only n samples
+                break
+            lineno = sent[1]
+            attrs = [str(metadata[cname][lineno]) for cname in metadata_colnames]
+            templt = ' | '.join([*sent[0], *attrs]) #str(lineno),
+            duplicated[templt] += 1
+            j = j + 1
+            
+        #duplicated = sorted([(c,t) for (t,c) in duplicated.items()], reverse=True) # NOTE this makes the line numbers wrong
+        duplicated = [(c,t) for (t,c) in duplicated.items()]    # So don't sort it for now
+
+        for count,templt in duplicated:
+            #print(f'| {templt} | {count} | {count/total_data_len:.3f} |')
+            try:
+                print(f'| {templt} |')
+            except Exception:
+                pass
+            
+        print()
+        # Distribution of some metadata_colnames using this template        
+        if len(some_cnames) > 0:
+            print(f'### Distribution of {", ".join(some_cnames)} using this template')
+            for cname in some_cnames:
+                stype_counts = Counter([metadata[cname][lineno] for (_, lineno) in sents])
+                solution_types = [stype for stype, count in sorted(list(stype_counts.items()), key=lambda x: -x[1])]
+
+                _print_md_col_names(solution_types)
+                row = '| '
+                for stype in solution_types:
+                    row += f"{str(stype_counts[stype])} ({stype_counts[stype]/N:.3f}) |"
+                print(row)
+                print()
+            
+
     
     print()
 
 
 def top_template_phrase_examples(top_temps, state2phrases, k=5, n_phrases=10):
     """
-    Parameters:
-        n_phrases:  print top {n_phrases} examples for each state
+    Parameters
+    -----------
+        n_phrases:  int
+            Print top {n_phrases} examples for each state
     """
     def _print_it(with_freq):
         for template_it in range(k):    # Top 5 templates

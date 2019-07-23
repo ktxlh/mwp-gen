@@ -1,7 +1,11 @@
+# -*- coding: utf-8 -*-
+import pandas as pd
+import print_result
+
 def count_unk(path, UNK_TAG = '<unk>'):
     """
     path: Path to a space-separated file
-    for [NT-OTH-1]
+    for [NT-OTH-1] in tech report
     """
     unk, total = 0, 0
     with open(path,'r',encoding='utf8') as f:
@@ -10,8 +14,174 @@ def count_unk(path, UNK_TAG = '<unk>'):
         unk = sum([1 for token in tokens if UNK_TAG in token])
     return unk,total
 
+def print_title(name, **kwargs):
+    print(f"# Analysis on {name}")
+    for kw,arg in kwargs.items():
+        print(f"{kw}={arg}")
+
+def analyze_seg(data,metadata_path,seg_path, k, n):
+
+    print_title("segmentation", metadata_path=metadata_path,seg_path=seg_path,k=k,n=n)
+    #print("# Analysis on segmentation")
+    """
+    Give statistics according to given metadata and segmentation
+    """
+    from template_extraction import group_by_template
+    def parse_seg_file():
+        """
+        Returns:
+            linenos: list of int. ordered by seg; corresponding to metadata
+            temps2sents: dict. (states) -> [([phrases], lineno_in_seg_txt)]
+                Example:
+                key: (114, 201, 207, 184, 149, 252, 122, 75)
+                value: [(['Each', 'banana', 'costs $ <num>', 
+                    '. How much', 'do <num>', 'bananas', 'cost', '? <eos>'], 0)]
+            top_temps: list of temps2sents keys, sorted by frequency of samples
+        """
+        with open(seg_path,'r',encoding='utf8') as f:
+            lines = f.readlines()
+            for line in lines:
+                if line.startswith('D label_train(): corpus.train_mb2linenos='): # HACK Don't contain '|'
+                    linenos = [ int(strno) for strno in line.strip().split('=')[1].split()]
+                    break
+        temps2sents = group_by_template(seg_path,0) #NOTE startlineno=0
+        top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
+        return linenos, temps2sents, top_temps
+       
+    def specific_top_templates(temps2sents,metadata, attribute):
+        # sort attributes (e.g. solution_types (stype)) by their frequencies (counts)
+        from collections import Counter
+        stype_counts = Counter(metadata[attribute])
+        solution_types = [stype for stype, count in sorted(list(stype_counts.items()), key=lambda x: -x[1])]
+
+        # empty dictionary: stype -> { (temps) -> [sample sents] }
+        stype2templates = dict(zip(solution_types, [dict() for i in range(len(solution_types))]))
+
+        for temp, sents in temps2sents.items():
+            for (phrases,lineno_in_seg_txt) in sents:
+                stype = metadata[attribute][lineno_in_seg_txt]
+                if temp not in stype2templates[stype]:
+                    stype2templates[stype][temp] = []
+                stype2templates[stype][temp].append((phrases,lineno_in_seg_txt))
+        for stype in solution_types:
+            if stype_counts[stype] < 5:
+                continue    # HACK to avoiding printing stypes of little samples
+            print(f"## {stype} ({stype_counts[stype]})")
+            stype_temps2sents = stype2templates[stype]
+            top_temps = sorted(list(stype_temps2sents.keys()), key=lambda x: -len(stype_temps2sents[x]))
+            print_result.top_templates_from_train(top_temps,stype_temps2sents,metadata,
+                metadata_colnames=['solution type','source','question'], k=k, n=n)
+
+    def re_sort_metadata(metadata_path, linenos, new_idxname):
+        metadata = pd.read_csv(metadata_path, sep='\t', header=0)
+        # Sort metadata by linenos s.t. the idx match: metadata and temps2sents and seg file
+        # 1. Sort linenos
+        #   FROM  linenos[seg_index] = corresponding index in metadata
+        #   TO    linenos[metadata] = corresponding index in seg_index
+        linenos = [b for a,b in sorted(zip(linenos, range(len(linenos))), key=lambda x: x[0])]
+        # 2. Add metadata col
+        metadata[new_idxname] = linenos
+        metadata = metadata.sort_values(by=new_idxname)
+        metadata = metadata.set_index(new_idxname)
+        return metadata
+
+    linenos, temps2sents, top_temps = parse_seg_file()
+    metadata = re_sort_metadata(metadata_path, linenos, new_idxname='seg_linenos')
+    
+    """
+    Goal: Evaluate the quality of segmentation
+    TODO What statistics do you want? How will you evaluate it? (intuitively/visually/quantitatively?)
+    1. top templates
+    2. solution type - top templates
+    3. dataset - top templates / duplicated sentences
+    """
+    print("# 1. top templates")
+    print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
+        metadata_colnames=['solution type','source','question'],k=k, n=n)
+    print()
+    print("# 2. solution type - top templates")
+    specific_top_templates(temps2sents,metadata, 'solution type')
+    print()
+    print('# 3. dataset - top templates / duplicated sentences')
+    specific_top_templates(temps2sents,metadata, 'source')
+
+
+    return
+    class Args(object):
+        def __init__(self):
+            self.data=data
+            self.bsz=15
+            self.thresh=3
+            self.tagged_fi=seg_path
+            self.ntemplates=10
+    args = Args()
+    from template_extraction import extract_from_tagged_data, align_cntr
+    top_temps, temps2sents, state2phrases = extract_from_tagged_data(args.data, args.bsz, args.thresh,
+                                                args.tagged_fi, args.ntemplates)
+    print('top_temps',top_temps)
+    print('temps2sents',temps2sents)
+    print('state2phrases',state2phrases)
+
+
+def analyze_gen(data, metadata_path, gen_path, startlineno=0):
+    """
+    Give statistics according to metadata & generation file
+    Adapted from group_by_template(fi, startlineno) in template_extraction.py
+    1. Statistics: How many samples use which template? Compare to training data distribution?
+    """
+
+    print_title("# Analysis on generation", data=data, metadata_path=metadata_path, gen_path=gen_path)
+
+    import re
+    from collections import defaultdict
+    seg_patt = re.compile('([^\|]+)\|(\d+)') # detects segments
+    temps2sents = defaultdict(list)
+    lineno = startlineno
+
+    metadata = pd.read_csv(metadata_path, sep='\t', header=0)
+    conditions = ['' for i in range(metadata.shape[0])] # metadata.shape == (#rows, #cols)
+
+    with open(gen_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if line.startswith('__start'):
+                state = None
+                condition = None
+                for token in line.split():
+                    if token.startswith('__start'):
+                        assert state == None
+                        state = token[8:-2]
+                    elif token.startswith('__end'):
+                        assert state == token[6:-2]
+                        conditions[lineno] += f'{state}:{condition}  '
+                        state = None
+                    else:
+                        condition = token
+            elif '|||' in line:
+                mwp, seqs = line.split('|||')
+                seq = seg_patt.findall(seqs.strip())
+                wordseq, labeseq = zip(*seq) # 2 tuples
+                wordseq = [phrs.strip() for phrs in wordseq]
+                labeseq = tuple(int(labe) for labe in labeseq)
+                temps2sents[labeseq].append((wordseq, lineno))  #mwp, 
+                lineno += 1
+    
+    metadata['conditions'] = conditions
+    top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
+    print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
+        metadata_colnames=['conditions'], k=2, n=99999)
+
+#: err print
+def eprint(*args, **kwargs):
+    #print(*args, file=sys.stderr, **kwargs)
+    pass
+
 if __name__ == '__main__':
-    org_unk, org_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test.txt')
-    new_unk, new_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test-unk.txt')
-    print(org_unk,org_ttl,org_unk/org_ttl)
-    print(new_unk,new_ttl,new_unk/new_ttl)
+    #org_unk, org_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test.txt')
+    #new_unk, new_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test-unk.txt')
+    #print(org_unk,org_ttl,org_unk/org_ttl)
+    #print(new_unk,new_ttl,new_unk/new_ttl)
+    DATA='/Users/shanglinghsu/mwp/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated'
+    SEG = '/Users/shanglinghsu/mwp/ntg2/segs/seg-ai2-cmds-100-55-5-far-NER.txt'
+    GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-cmds-100-55-5-far-NER.md'
+    analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=5, n=1)
+    #analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
