@@ -19,7 +19,7 @@ def print_title(name, **kwargs):
     for kw,arg in kwargs.items():
         print(f"{kw}={arg}")
 
-def analyze_seg(data,metadata_path,seg_path, k, n):
+def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
 
     print_title("segmentation", metadata_path=metadata_path,seg_path=seg_path,k=k,n=n)
     #print("# Analysis on segmentation")
@@ -48,14 +48,26 @@ def analyze_seg(data,metadata_path,seg_path, k, n):
         top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
         return linenos, temps2sents, top_temps
        
-    def specific_top_templates(temps2sents,metadata, attribute, metadata_colnames):
-        # sort attributes (e.g. solution_types (stype)) by their frequencies (counts)
+    def specific_top_templates(temps2sents,metadata, attribute, metadata_colnames, 
+            pure = False):
+        """
+        Parameters:
+        -----------
+            attribute:  str
+                e.g. 'solution type'
+            pure:  bool
+                Whether print templates that is 'Addition' only (or so). Must match attribute
+        """
+        # sort solution types (stype, e.g. 'Addition') by their frequencies (counts)
         from collections import Counter
         stype_counts = Counter(metadata[attribute])
-        solution_types = [stype for stype, count in sorted(list(stype_counts.items()), key=lambda x: -x[1])]
+        stypes = [stype for stype, count in sorted(list(stype_counts.items()), key=lambda x: -x[1])]
 
         # empty dictionary: stype -> { (temps) -> [sample sents] }
-        stype2templates = dict(zip(solution_types, [dict() for i in range(len(solution_types))]))
+        stype2templates = dict(zip(stypes, [dict() for i in range(len(stypes))]))
+        
+        # stype -> [pure top_temps]
+        pure_templates = dict()
 
         for temp, sents in temps2sents.items():
             for (phrases,lineno_in_seg_txt) in sents:
@@ -63,15 +75,23 @@ def analyze_seg(data,metadata_path,seg_path, k, n):
                 if temp not in stype2templates[stype]:
                     stype2templates[stype][temp] = []
                 stype2templates[stype][temp].append((phrases,lineno_in_seg_txt))
-        for stype in solution_types:
-            if stype_counts[stype] < 5:
-                continue    # HACK to avoiding printing stypes of little samples
+        for stype in stypes:
+            if stype_counts[stype] < 5:     # HACK to avoiding printing stypes of little samples
+                continue
             print(f"## {stype} ({stype_counts[stype]} samples)")
             stype_temps2sents = stype2templates[stype]
             top_temps = sorted(list(stype_temps2sents.keys()), key=lambda x: -len(stype_temps2sents[x]))
-            #print_result.top_templates_from_train(top_temps,stype_temps2sents,metadata,
-            print_result.top_templates_from_train(top_temps,temps2sents,metadata,
-                metadata_colnames=metadata_colnames, k=k, n=n)
+            
+            # For correct statistics, use temps2sents instead of stype_temps2sents below
+            filters = {attribute:[stype]} if pure else None
+            printed = print_result.top_templates_from_train(top_temps,temps2sents,metadata,
+                metadata_colnames=metadata_colnames, n_toptemps=k, n_samples=n, filters=filters)
+            if pure:
+                pure_templates[stype] = [top_temps[p] for p in printed]
+        
+        if pure:
+            with open(pure_path,'w') as f:
+                f.writelines([f"{attribute}|{s}|||{' '.join([ ','.join([str(tt) for tt in t]) for t in pure_templates[s]])}\n" for s in stypes if s in pure_templates.keys()])
 
     def re_sort_metadata(metadata_path, linenos, new_idxname):
         metadata = pd.read_csv(metadata_path, sep='\t', header=0)
@@ -97,16 +117,16 @@ def analyze_seg(data,metadata_path,seg_path, k, n):
     3. dataset - top templates / duplicated sentences
     """
     print("# 1. overall - top templates")
-    print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
-        metadata_colnames=['solution type','source'],k=k, n=n)  #'question'
-    print()
+    print_result.top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=['solution type','source'],n_toptemps=k, n_samples=n)  #'question'
+    
     print("# 2. solution type - top templates")
-    specific_top_templates(temps2sents,metadata, 'solution type',
-        metadata_colnames=['solution type','source'])
-    print()
+    specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=False)
+
     print('# 3. dataset - top templates')
-    specific_top_templates(temps2sents,metadata, 'source',
-        metadata_colnames=['solution type','source'])
+    specific_top_templates(temps2sents,metadata, 'source', metadata_colnames=['solution type','source'], pure=False)
+
+    print('# 4. Pure templates: specific solution type')
+    specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=True)
 
 
 def analyze_gen(data, metadata_path, gen_path, startlineno=0):
@@ -154,12 +174,24 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
     metadata['conditions'] = conditions
     top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
     print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
-        metadata_colnames=['conditions'], k=2, n=99999)
+        metadata_colnames=['conditions'], n_toptemps=2, n_samples=99999)
 
 #: err print
 def eprint(*args, **kwargs):
     #print(*args, file=sys.stderr, **kwargs)
     pass
+
+def get_pure_toptemps(pure_path, some_stype):
+    pure_temps = [] # [(attr,stype,[temps])]    e.g. ('solution type','Addition',[(0,1,2),(3,4,5)] )
+    with open(pure_path) as f:
+        for line in f:
+            info , temps = line.split('|||')
+            attr, stype = info.split('|')   # 'solution type', 'Addition'
+            temps = [tuple(int(i) for i in t.split(',')) for t in temps.split(' ')]
+            if stype == some_stype:
+                return temps
+            #pure_temps.append((attr,stype,temps))
+    #return pure_temps
 
 if __name__ == '__main__':
     #org_unk, org_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test.txt')
@@ -169,5 +201,7 @@ if __name__ == '__main__':
     DATA='/Users/shanglinghsu/mwp/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated'
     SEG = '/Users/shanglinghsu/mwp/ntg2/segs/seg-ai2-cmds-100-55-5-far-NER.txt'
     GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-cmds-100-55-5-far-NER.md'
-    #analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=10, n=1)
-    analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
+    PURE = 'pure_temps.txt'
+    #analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=10, n=1, pure_path=PURE)
+    #analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
+    get_pure_toptemps(PURE,'Addition')

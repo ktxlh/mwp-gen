@@ -1212,6 +1212,12 @@ if __name__ == "__main__":
 
         constr_sat = False
         # search over all templates
+
+        #:# HACK DEBUG search over specific templates
+        from my_utils import get_pure_toptemps
+        pure_temps = get_pure_toptemps('pure_temps.txt','Addition')
+        top_temps = pure_temps
+
         for templt in top_temps:    # TODO Modify this line to use a specific template
             # get templt transition prob
             tscores = [init_logps[0][templt[0]]]
@@ -1275,7 +1281,7 @@ if __name__ == "__main__":
                                                    args.tagged_fi, args.ntemplates)
 
         # Can't be integrated for now because of some encoding error
-        print_result.top_template_phrase_examples(top_temps, state2phrases, k=5, n_phrases=5)
+        print_result.top_template_phrase_examples(top_temps, state2phrases, n_toptemps=5, n_phrases=5)
 
         with open(args.gen_from_fi) as f:
             src_lines = f.readlines()
