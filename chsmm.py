@@ -222,12 +222,14 @@ class HSMM(nn.Module):
                  [5 6 7 8]          [ 1   2   3   4   5   6   7   8 ]
                                     [ 2   3   4  <p>  6   7   8  <p>]
                                     [ 3   4  <p> <p>  7   8  <p> <p>]
+        # The above example means:
+        # bsz=2, seqlen=4. Each number denotes a word (which is a (,emb_size) matrix)
         """
         bsz, seqlen, emb_size = xemb.size()
-        newx = [self.start_emb.expand(bsz, seqlen, emb_size)]
+        newx = [self.start_emb.expand(bsz, seqlen, emb_size)]   # self.start_emb was nn.Parameter(torch.Tensor(1, 1, rnninsz))
         newx.append(xemb)
         for i in range(1, self.L):
-            pad = self.pad_emb.expand(bsz, i, emb_size)
+            pad = self.pad_emb.expand(bsz, i, emb_size)         # self.pad_emb was nn.Parameter(torch.zeros(1, 1, rnninsz))
             rowi = torch.cat([xemb[:, i:], pad], 1)
             newx.append(rowi)
         # L+1 x bsz x seqlen x emb_size -> L+1 x bsz*seqlen x emb_size
