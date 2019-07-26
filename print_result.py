@@ -12,7 +12,7 @@ def _print_md_col_names(items):
     print(f"| {' | '.join([str(item) for item in items])} |")
     print(f"| {' | '.join(['-' for item in items])} |")
 
-def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=None, 
+def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=[], 
         n_toptemps=5, n_samples=3, filters=None): 
     """
     Parameters:
@@ -24,11 +24,11 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
         filters:   dict
             Keeps only pure 'Addition', etc. e.g. {'solution type':['Addition']}
     """   
-    if metadata_colnames == None:
+    some_cnames = []
+    if metadata_colnames is None and metadata is not None:
         metadata_colnames=list(metadata)
-
-    # HACK If too many catogeries (e.g. 'questions'), don't print its distribution
-    some_cnames = [cname for cname in metadata_colnames if len(set(metadata[cname])) < 15]
+        # HACK If too many catogeries (e.g. 'questions'), don't print its distribution
+        some_cnames = [cname for cname in metadata_colnames if len(set(metadata[cname])) < 15]
     overall_stype_counts,solution_types = dict(),dict()
     stype_counts = list()   # [ {'solution type' : {Addition':2, 'Subtraction':1} } ]
     if len(some_cnames) > 0:
@@ -49,7 +49,7 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
         sents = temps2sents[temp]
         
         # Check purity
-        if filters is not None:
+        if filters is not None and metadata is not None:
             pure = True
             for (_, lineno) in sents:
                 for (cname, filterlist) in filters.items():
@@ -73,8 +73,9 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
         for (tokens, lineno) in sents:
             if j == n_samples:      # Print only n_samples samples
                 break
-            attrs = [str(metadata[cname][lineno]) for cname in metadata_colnames]
+            attrs = [str(metadata[cname][lineno]) for cname in metadata_colnames] if metadata is not None else []
             templt = ' | '.join([*tokens, *attrs]) #str(lineno),
+            templt = str(templt.encode('utf-8'))[2:-1]  # HACK ==
             print(f'| {templt} |')
             j = j + 1
         
@@ -111,6 +112,8 @@ def top_template_phrase_examples(top_temps, state2phrases, n_toptemps=5, n_phras
     """
     def _print_it(with_freq):
         for template_it in range(n_toptemps):    # Top 5 templates
+            if template_it >= len(top_temps):
+                break
             print(f"### Top-{template_it+1}")
 
             _print_md_col_names(top_temps[template_it])

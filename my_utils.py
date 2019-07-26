@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import argparse
 import pandas as pd
 import print_result
 
@@ -58,6 +59,9 @@ def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
             pure:  bool
                 Whether print templates that is 'Addition' only (or so). Must match attribute
         """
+        if metadata is None:
+            return None
+
         # sort solution types (stype, e.g. 'Addition') by their frequencies (counts)
         from collections import Counter
         stype_counts = Counter(metadata[attribute])
@@ -94,7 +98,11 @@ def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
                 f.writelines([f"{attribute}|{s}|||{' '.join([ ','.join([str(tt) for tt in t]) for t in pure_templates[s]])}\n" for s in stypes if s in pure_templates.keys()])
 
     def re_sort_metadata(metadata_path, linenos, new_idxname):
-        metadata = pd.read_csv(metadata_path, sep='\t', header=0)
+        try:
+            metadata = pd.read_csv(metadata_path, sep='\t', header=0)
+        except FileNotFoundError:
+            return None
+
         # Sort metadata by linenos s.t. the idx match: metadata and temps2sents and seg file
         # 1. Sort linenos
         #   FROM  linenos[seg_index] = corresponding index in metadata
@@ -144,8 +152,11 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
     temps2sents = defaultdict(list)
     lineno = startlineno
 
-    metadata = pd.read_csv(metadata_path, sep='\t', header=0)
-    conditions = ['' for i in range(metadata.shape[0])] # metadata.shape == (#rows, #cols)
+    try:
+        metadata = pd.read_csv(metadata_path, sep='\t', header=0)
+        conditions = ['' for i in range(metadata.shape[0])] # metadata.shape == (#rows, #cols)
+    except FileNotFoundError: 
+        metadata = None
 
     with open(gen_path, 'r', encoding='utf-8') as f:
         for line in f:
@@ -158,7 +169,8 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
                         state = token[8:-2]
                     elif token.startswith('__end'):
                         assert state == token[6:-2]
-                        conditions[lineno] += f'{state}:{condition}  '
+                        if metadata is not None:
+                            conditions[lineno] += f'{state}:{condition}  '
                         state = None
                     else:
                         condition = token
@@ -171,37 +183,60 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
                 temps2sents[labeseq].append((wordseq, lineno))  #mwp, 
                 lineno += 1
     
-    metadata['conditions'] = conditions
     top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
-    print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
-        metadata_colnames=['conditions'], n_toptemps=2, n_samples=99999)
+    if metadata is not None:
+        metadata['conditions'] = conditions
+        print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
+            metadata_colnames=['conditions'], n_toptemps=2, n_samples=99999)
+    else:
+        print_result.top_templates_from_train(top_temps, temps2sents, None, 
+            metadata_colnames=[], n_toptemps=2, n_samples=99999)
 
 #: err print
 def eprint(*args, **kwargs):
     #print(*args, file=sys.stderr, **kwargs)
     pass
 
-def get_pure_toptemps(pure_path, some_stype):
+def get_pure_toptemps(pure_path, some_types):
     pure_temps = [] # [(attr,stype,[temps])]    e.g. ('solution type','Addition',[(0,1,2),(3,4,5)] )
     with open(pure_path) as f:
         for line in f:
             info , temps = line.split('|||')
             attr, stype = info.split('|')   # 'solution type', 'Addition'
             temps = [tuple(int(i) for i in t.split(',')) for t in temps.split(' ')]
-            if stype == some_stype:
-                return temps
-            #pure_temps.append((attr,stype,temps))
-    #return pure_temps
+            if stype in some_types:
+                pure_temps.extend(temps)
+    return pure_temps
+
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('-data', type=str, default='', help='path to data dir')
+parser.add_argument('-tagged_fi', type=str, default='', help='path to tagged fi i.e. seg')
+parser.add_argument('-gen_fi', type=str, default='', help='path to gen fi')
+parser.add_argument('-pure', type=str, default='', help='path to pure_temps')
+
+parser.add_argument('-a_seg', action='store_true', help='')
+parser.add_argument('-a_gen', action='store_true', help='')
 
 if __name__ == '__main__':
+    args = parser.parse_args()
+    print(args)
+
     #org_unk, org_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test.txt')
     #new_unk, new_ttl = count_unk('segs/seg-otherTrain-100-55-5-far-NER-no_test-unk.txt')
     #print(org_unk,org_ttl,org_unk/org_ttl)
     #print(new_unk,new_ttl,new_unk/new_ttl)
-    DATA='/Users/shanglinghsu/mwp/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated'
-    SEG = '/Users/shanglinghsu/mwp/ntg2/segs/seg-ai2-cmds-100-55-5-far-NER.txt'
-    GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-cmds-100-55-5-far-NER.md'
-    PURE = 'pure_temps.txt'
-    #analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=10, n=1, pure_path=PURE)
-    #analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
-    get_pure_toptemps(PURE,'Addition')
+    DATA = args.data
+    SEG = args.tagged_fi
+    GEN = args.gen_fi
+    PURE = args.pure
+    #DATA='/Users/shanglinghsu/mwp/Datasets/ai2-ilds-train-valid/ai2-ilds-train-valid-concated'
+    #SEG = '/Users/shanglinghsu/mwp/ntg2/segs/seg-ai2-cmds-100-55-5-far-NER.txt'
+    #GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-ilds-100-55-5-far-NER-pure_add-sub.md'
+    if args.a_seg:
+        analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=10, n=1, pure_path=PURE)
+    if args.a_gen:
+        analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
+    
+    #PURE = 'pure_temps.txt'
+    #get_pure_toptemps(PURE,'Addition')
+    

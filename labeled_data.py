@@ -99,6 +99,7 @@ class SentenceCorpus(object):
                 else:
                     fields = get_e2e_poswrds(tokes) # key, pos -> wrd
 
+                #: It doesn't make sense to add these two in @@ To debug??? (but buggy after deleting it @@)
                 tgt_voc.update([k for k, idx in fields])     # ['_topic', '_topic']
                 tgt_voc.update([idx for k, idx in fields])   # [1, 2]
                 fieldvals = list(fields.values())            # ['A', 'B']
