@@ -1,0 +1,7 @@
+*.pyc
+data/*
+*.sh
+gens/*
+segs/*
+models/*
+*.txt
