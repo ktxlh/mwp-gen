@@ -4,3 +4,4 @@ data/*
 gens/*
 segs/*
 models/*
+*.txt
