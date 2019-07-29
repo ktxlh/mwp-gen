@@ -117,24 +117,20 @@ def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
     linenos, temps2sents, top_temps = parse_seg_file()
     metadata = re_sort_metadata(metadata_path, linenos, new_idxname='seg_linenos')
     
-    """
-    Goal: Evaluate the quality of segmentation
-    TODO What statistics do you want? How will you evaluate it? (intuitively/visually/quantitatively?)
-    1. top templates
-    2. solution type - top templates
-    3. dataset - top templates / duplicated sentences
-    """
-    print("# 1. overall - top templates")
+    
+    # Evaluate the quality of segmentation
+    print("# Overall - top templates")
     print_result.top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=['solution type','source'],n_toptemps=k, n_samples=n)  #'question'
     
-    print("# 2. solution type - top templates")
+    print("# Solution type - top templates")
     specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=False)
 
-    print('# 3. dataset - top templates')
+    print('# Dataset - top templates')
     specific_top_templates(temps2sents,metadata, 'source', metadata_colnames=['solution type','source'], pure=False)
 
-    print('# 4. Pure templates: specific solution type')
-    specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=True)
+    if pure_path is not '':
+        print('# Pure templates: specific solution type')
+        specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=True)
 
 
 def analyze_gen(data, metadata_path, gen_path, startlineno=0):
@@ -233,7 +229,8 @@ if __name__ == '__main__':
     #SEG = '/Users/shanglinghsu/mwp/ntg2/segs/seg-ai2-cmds-100-55-5-far-NER.txt'
     #GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-ilds-100-55-5-far-NER-pure_add-sub.md'
     if args.a_seg:
-        analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, k=10, n=1, pure_path=PURE)
+        analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, 
+            k=10, n=1, pure_path=PURE)
     if args.a_gen:
         analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
     

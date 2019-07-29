@@ -431,32 +431,44 @@ class HSMM(nn.Module):
 
     def get_next_word_dist(self, hid, k, srcfieldenc):
         """
-        hid - 1 x bsz x rnn_size
-        srcfieldenc - 1 x nfields x dim
+        hid - 1 x bsz x rnn_size                          # h^k_{i-1}
+        srcfieldenc - 1 x nfields x dim                   # r_j (records)
         returns a bsz x nthings dist; not a log dist
         """
         bsz = hid.size(1)
         _, nfields, rnn_size = srcfieldenc.size()
-        srcfldenc = srcfieldenc.expand(bsz, nfields, rnn_size)
+        srcfldenc = srcfieldenc.expand(bsz, nfields, rnn_size)      # r_j (records)
+
+        # "copy scores"
+        # h^k_{i-1}     hid
+        # g^k_2         state_att_...[k]
+        # r_j           srcfldenc
         attnin1 = (hid * self.state_att_gates[k].expand_as(hid)
                    + self.state_att_biases[k].expand_as(hid)) # 1 x bsz x rnn_size
         attnin1 = torch.tanh(attnin1)
         ascores = torch.bmm(attnin1.transpose(0, 1), srcfldenc.transpose(1, 2)) # bsz x 1 x nfields
+
+        # "scores v_{i-1} for each word in the output vocabulary"
+        # c^k_{i-1}     ctx
+        # h^k_{i-1}     hid
+        # g^k_1         state_out_...[k]
         aprobs = F.softmax(ascores, dim=2)
-        ctx = torch.bmm(aprobs, srcfldenc) # bsz x 1 x rnn_size
+        ctx = torch.bmm(aprobs, srcfldenc) # bsz x 1 x rnn_size     # c^k_{i-1} (context vector)
         cat_ctx = torch.cat([hid, ctx.transpose(0, 1)], 2) # 1 x bsz x rnn_size
         state_k = torch.tanh(cat_ctx * self.state_out_gates[k].expand_as(cat_ctx)
                          + self.state_out_biases[k].expand_as(cat_ctx)) # 1 x bsz x rnn_size
 
         if self.sep_attn:
+            # "copy scores" (if using a different attention from "scores v_{i-1}...")
             attnin2 = (hid * self.state_att2_gates[k].expand_as(hid)
                        + self.state_att2_biases[k].expand_as(hid))
             attnin2 = torch.tanh(attnin2)
             ascores = torch.bmm(attnin2.transpose(0, 1), srcfldenc.transpose(1, 2)) # bsz x 1 x nfld
 
+        # concat normal generation scores and copy scores for softmax
         wlps_k = F.softmax(torch.cat([self.decoder(state_k.squeeze(0)),
                                       ascores.squeeze(1)], 1), dim=1)
-        return wlps_k.data
+        return wlps_k.data  # the words' log probabilities given state k
 
     def collapse_word_probs(self, row2tblent, wrd_dist, corpus):
         """
@@ -655,12 +667,13 @@ class HSMM(nn.Module):
 
         # start ar rnn; hackily use bos_idx
         rnnsz = self.ar_rnn.hidden_size
+        # the following t is for 'template'
         thid, (thc, tcc) = self.ar_rnn(self.lut.weight[2].view(1, 1, -1)) # 1 x 1 x rnn_size
 
-        for stidx, ss in enumerate(templt):
+        for stidx, ss in enumerate(templt):  # enumerate the states of a template
             final_state = (stidx == len(templt) - 1)
             minq = [] # so we can compare stuff of different lengths
-            rul_ss = ss % self.K
+            rul_ss = ss % self.K    # K:=55, Kmul:=5 => 5 states share an embedding?!
 
             if self.one_rnn:
                 cond_start_inp = torch.cat([start_inp, self.state_embs[rul_ss]], 2) # 1x1x cat_size
@@ -671,7 +684,7 @@ class HSMM(nn.Module):
             hc = hc.expand_as(thc)
             cc = cc.expand_as(tcc)
 
-            for ell in range(self.L+1):
+            for ell in range(self.L+1): # +1 for <eop> (but <eop> isn't put in ___(?) )
                 new_hyps, anc_hs, anc_cs, anc_ths, anc_tcs = [], [], [], [], []
                 inps.data[:, 1].fill_(w2i["<ncf1>"])
                 inps.data[:, 2].fill_(w2i["<ncf2>"])
@@ -803,7 +816,7 @@ class HSMM(nn.Module):
             return None, -float("inf"), 0
         curr_labe = hyp[0][1]
         tokes = 0
-        for widx, labe in hyp:
+        for widx, labe in hyp:  # Guess: hyp [('Daniel',0),('Powter',0),('is',1),...]
             if labe != curr_labe:
                 phrases.append(phrs)
                 tokes += len(phrs)
@@ -1049,7 +1062,7 @@ if __name__ == "__main__":
             neglogev -= log_marg.data#[0] #:
             lossvar = -log_marg/bsz
             lossvar.backward()
-            torch.nn.utils.clip_grad_norm(net.parameters(), args.clip)
+            torch.nn.utils.clip_grad_norm_(net.parameters(), args.clip)
             if optalg is not None:
                 optalg.step()
             else:
@@ -1222,7 +1235,7 @@ if __name__ == "__main__":
         #top_temps = pure_temps
         
 
-        for templt in top_temps:    # TODO Modify this line to use a specific template
+        for templt in top_temps:
             # get templt transition prob
             tscores = [init_logps[0][templt[0]]]
             [tscores.append(trans_logps[0][templt[tt-1]][templt[tt]])

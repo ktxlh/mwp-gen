@@ -6,6 +6,9 @@ import torch
 
 from collections import Counter, defaultdict
 
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 from data.utils import get_wikibio_poswrds, get_e2e_poswrds
 
 import random
@@ -110,7 +113,7 @@ class SentenceCorpus(object):
                 linewords.append(set(wrd for wrd in fieldvals
                                      if wrd not in punctuation))
 
-        #: genwords: WAS words in a mwp but not in its source table (e.g. topic words)
+        #: genwords: WAS words in a mwp but not in its source table
         #:           NOW words in a mwp
         genwords = Counter()
         # Add words to the dictionary
@@ -122,8 +125,7 @@ class SentenceCorpus(object):
 
                 #: intended for copy forcing
                 #: => Disable copy forcing for now (otherwise all nouns must be copied, causing many <unk>s)
-                #: TODO: better condition e.g. topic words
-                #genwords.update([wrd for wrd in words if wrd not in linewords[l]]) # original
+                #genwords.update([wrd for wrd in words if wrd not in linewords[l]]) # original #cp
                 genwords.update(words) #:#unk
 
                 tgt_voc.update(words)
@@ -161,7 +163,7 @@ class SentenceCorpus(object):
         src_feats, src_wrd2idxs, src_wrd2fields = [], [], []
         w2i = self.dictionary.word2idx
         with open(src_path, 'r') as f:
-            for line in f:
+            for lit,line in enumerate(f):
                 tokes = line.strip().split()
                 #fields = get_e2e_fields(tokes, keys=self.e2e_keys) #keyname -> list of words
                 if self.wiki:
@@ -171,17 +173,22 @@ class SentenceCorpus(object):
                 # wrd2things will be unordered
                 feats, wrd2idxs, wrd2fields = [], defaultdict(list), defaultdict(list)
                 # get total number of words per field
-                fld_cntr = Counter([key for key, _ in fields])
-                for (k, idx), wrd in fields.items():
+                fld_cntr = Counter([key for key, _ in fields]) # {'_name':2}
+                for (k, idx), wrd in fields.items(): # fields {('_name',1):'Daniel', ('_name',2):'Powter'}
                     if k in w2i:
                         featrow = [self.dictionary.add_word(k, add_to_dict),
                                    self.dictionary.add_word(idx, add_to_dict),
                                    self.dictionary.add_word(wrd, add_to_dict)]
                         wrd2idxs[wrd].append(len(feats))
                         #nflds = self.dictionary.add_word(fld_cntr[k], add_to_dict)
-                        cheatfeat = w2i["<stop>"] if fld_cntr[k] == idx else w2i["<go>"]
+
+                        # Constraint Learning: Here it is!!!! Aaaaaaaaah!!!
+                        # comment if ... to make every token the end of condition?
+                        cheatfeat = w2i["<stop>"] #if fld_cntr[k] == idx else w2i["<go>"]
                         wrd2fields[wrd].append((featrow[2], featrow[0], featrow[1], cheatfeat))
+
                         feats.append(featrow)
+
                 src_wrd2idxs.append(wrd2idxs)
                 src_wrd2fields.append(wrd2fields)
                 src_feats.append(feats)
@@ -208,12 +215,14 @@ class SentenceCorpus(object):
                         copied.append(src_wrd2idxs[tgtline][word])
                         winps = [[widx, kidx, idxidx, nidx]
                                  for widx, kidx, idxidx, nidx in src_wrd2fields[tgtline][word]]
-                        insent.append(winps)
+                        insent.append(winps) # list of [[0(Daniel),1(_name),2(1),3(<stop>)], [4(Powter),5(_name),6(2),7(<stop>)]]
                     else:
                         #assert sent[-1] < self.ngen_types
                         copied.append([-1])
                          # 1 x wrd, tokennum, totalnum
                         #insent.append([[sent[-1], w2i["<ncf1>"], w2i["<ncf2>"]]])
+                        #: sent[-1] is idx of current word (because we've just appended its w2i to sent)
+                        #: ncf1 to 3 are dummy variables for padding or so
                         insent.append([[sent[-1], w2i["<ncf1>"], w2i["<ncf2>"], w2i["<ncf3>"]]])
                 #sent.extend([self.dictionary.add_word(word, add_to_dict) for word in words])
                 if add_eos:
