@@ -103,8 +103,9 @@ class SentenceCorpus(object):
                     fields = get_e2e_poswrds(tokes) # key, pos -> wrd
 
                 #: It doesn't make sense to add these two in @@ To debug??? (but buggy after deleting it @@)
+                # Did they embed [1, 2] as well? OAO (Go learning Regression Analysis!)
                 tgt_voc.update([k for k, idx in fields])     # ['_topic', '_topic']
-                tgt_voc.update([idx for k, idx in fields])   # [1, 2]
+                #tgt_voc.update([idx for k, idx in fields])   # [1, 2]
                 fieldvals = list(fields.values())            # ['A', 'B']
                 tgt_voc.update(fieldvals)
                 # tgt_voc so far: Counter({'_topic': 2, 'A': 1, 'B': 1, 1: 1, 2: 1})
@@ -315,9 +316,9 @@ class SentenceCorpus(object):
         for i in range(len(sents)):
             if len(sents[i]) != curr_len or len(curr_batch) == bsz: # we're done
                 minibatches.append((torch.LongTensor(curr_batch).t().contiguous(),
-                                    curr_labels, self.padded_feat_mb(curr_feats),
-                                    self.padded_loc_mb(curr_locs),
-                                    self.padded_inp_mb(curr_inps).transpose(0, 1).contiguous()))
+                                    curr_labels, self.padded_feat_mb(curr_feats),   # type
+                                    self.padded_loc_mb(curr_locs),                  # position
+                                    self.padded_inp_mb(curr_inps).transpose(0, 1).contiguous()))    # word value
                 mb2linenos.append(curr_linenos)
                 curr_batch = [sents[i]]
                 curr_len = len(sents[i])

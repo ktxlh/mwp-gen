@@ -17,6 +17,8 @@ from data.utils import get_wikibio_poswrds, get_e2e_poswrds
 import infc
 
 import print_result, my_utils
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 class HSMM(nn.Module):
     """
@@ -49,7 +51,7 @@ class HSMM(nn.Module):
         self.emb_size, self.layers, self.hid_size = opt.emb_size, opt.layers, opt.hid_size
         self.pad_idx = opt.pad_idx
         self.lut = nn.Embedding(wordtypes, opt.emb_size, padding_idx=opt.pad_idx)
-        self.mlpinp = opt.mlpinp
+        self.mlpinp = opt.mlpinp    # Multi layer percpetron input
         self.word_ar = opt.word_ar
         self.ar = False
         inp_feats = 4
@@ -1267,6 +1269,10 @@ if __name__ == "__main__":
                 best_score, best_tscore, best_gscore = ascore, tscore, gscore
                 best_phrases, best_templt = phrases, templt
                 best_len = rul_tokes
+                print("best_phrases:")
+                pp.pprint(best_phrases)
+                print("best_templt:")
+                pp.pprint(best_templt)
             #str_phrases = [" ".join(phrs) for phrs in phrases]
             #tmpltd = ["%s|%d" % (phrs, templt[k]) for k, phrs in enumerate(str_phrases)]
             #statstr = "a=%.2f t=%.2f g=%.2f" % (ascore, tscore, gscore)
@@ -1277,6 +1283,7 @@ if __name__ == "__main__":
         try:
             str_phrases = [" ".join(phrs) for phrs in best_phrases]
         except TypeError:
+            print(best_phrases)
             # sometimes it puts an actual number in
             str_phrases = [" ".join([str(n) if type(n) is int else n for n in phrs]) for phrs in best_phrases]
         tmpltd = ["%s|%d" % (phrs, best_templt[kk]) for kk, phrs in enumerate(str_phrases)]

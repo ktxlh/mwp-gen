@@ -158,7 +158,7 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
         for line in f:
             if line.startswith('__start'):
                 state = None
-                condition = None
+                condition = []
                 for token in line.split():
                     if token.startswith('__start'):
                         assert state == None
@@ -166,10 +166,11 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
                     elif token.startswith('__end'):
                         assert state == token[6:-2]
                         if metadata is not None:
-                            conditions[lineno] += f'{state}:{condition}  '
+                            conditions[lineno] += f'{state}:{" ".join(condition)}  '
                         state = None
+                        condition = []
                     else:
-                        condition = token
+                        condition.append(token)
             elif '|||' in line:
                 mwp, seqs = line.split('|||')
                 seq = seg_patt.findall(seqs.strip())
