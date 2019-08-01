@@ -16,39 +16,41 @@ def count_unk(path, UNK_TAG = '<unk>'):
     return unk,total
 
 def print_title(name, **kwargs):
-    print(f"# Analysis on {name}")
+    print(f"# Analysis of {name}")
     for kw,arg in kwargs.items():
         print(f"{kw}={arg}")
 
-def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
+def parse_seg_file(seg_path):
+    """
+    Returns:
+    -----------
+        linenos: list of int. ordered by seg; corresponding to metadata
+        temps2sents: dict. (states) -> [([phrases], lineno_in_seg_txt)]
+            Example:
+            key: (114, 201, 207, 184, 149, 252, 122, 75)
+            value: [(['Each', 'banana', 'costs $ <num>', 
+                '. How much', 'do <num>', 'bananas', 'cost', '? <eos>'], 0)]
+        top_temps: list of temps2sents keys, sorted by frequency of samples
+    """
+    from template_extraction import group_by_template
+    linenos = []
+    with open(seg_path,'r',encoding='utf8') as f:
+        lines = f.readlines()
+        for line in lines:
+            if line.startswith('D label_train(): corpus.train_mb2linenos='): # HACK Don't contain '|'
+                linenos = [ int(strno) for strno in line.strip().split('=')[1].split()]
+                break
+    temps2sents = group_by_template(seg_path,0) #NOTE startlineno=0
+    top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
+    return linenos, temps2sents, top_temps
 
-    print_title("segmentation", metadata_path=metadata_path,seg_path=seg_path,k=k,n=n)
-    #print("# Analysis on segmentation")
+
+def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
     """
     Give statistics according to given metadata and segmentation
     """
-    from template_extraction import group_by_template
-    def parse_seg_file():
-        """
-        Returns:
-            linenos: list of int. ordered by seg; corresponding to metadata
-            temps2sents: dict. (states) -> [([phrases], lineno_in_seg_txt)]
-                Example:
-                key: (114, 201, 207, 184, 149, 252, 122, 75)
-                value: [(['Each', 'banana', 'costs $ <num>', 
-                    '. How much', 'do <num>', 'bananas', 'cost', '? <eos>'], 0)]
-            top_temps: list of temps2sents keys, sorted by frequency of samples
-        """
-        with open(seg_path,'r',encoding='utf8') as f:
-            lines = f.readlines()
-            for line in lines:
-                if line.startswith('D label_train(): corpus.train_mb2linenos='): # HACK Don't contain '|'
-                    linenos = [ int(strno) for strno in line.strip().split('=')[1].split()]
-                    break
-        temps2sents = group_by_template(seg_path,0) #NOTE startlineno=0
-        top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
-        return linenos, temps2sents, top_temps
-       
+    print_title("segmentation", metadata_path=metadata_path,seg_path=seg_path,k=k,n=n)
+
     def specific_top_templates(temps2sents,metadata, attribute, metadata_colnames, 
             pure = False):
         """
@@ -114,7 +116,7 @@ def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
         metadata = metadata.set_index(new_idxname)
         return metadata
 
-    linenos, temps2sents, top_temps = parse_seg_file()
+    linenos, temps2sents, top_temps = parse_seg_file(seg_path)
     metadata = re_sort_metadata(metadata_path, linenos, new_idxname='seg_linenos')
     
     
@@ -122,18 +124,18 @@ def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
     print("# Overall - top templates")
     print_result.top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=['solution type','source'],n_toptemps=k, n_samples=n)  #'question'
     
-    print("# Solution type - top templates")
-    specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=False)
+    #print("# Solution type - top templates")
+    #specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=False)
 
-    print('# Dataset - top templates')
-    specific_top_templates(temps2sents,metadata, 'source', metadata_colnames=['solution type','source'], pure=False)
+    #print('# Dataset - top templates')
+    #specific_top_templates(temps2sents,metadata, 'source', metadata_colnames=['solution type','source'], pure=False)
 
     if pure_path is not '':
         print('# Pure templates: specific solution type')
         specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=True)
 
 
-def analyze_gen(data, metadata_path, gen_path, startlineno=0):
+def analyze_gen(data, metadata_path, gen_path, startlineno=0, seg_path=''):
     """
     Give statistics according to metadata & generation file
     Adapted from group_by_template(fi, startlineno) in template_extraction.py
@@ -141,6 +143,8 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
     """
 
     print_title("generation", data=data, metadata_path=metadata_path, gen_path=gen_path)
+
+    _,seg_temps2sents,_ = parse_seg_file(seg_path) if seg_path!='' else None,{},None
 
     import re
     from collections import defaultdict
@@ -153,7 +157,9 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
         conditions = ['' for i in range(metadata.shape[0])] # metadata.shape == (#rows, #cols)
     except FileNotFoundError: 
         metadata = None
-
+    
+    #metadata = None #HACK  # cuz the linenos aren't for #alltmplt gen
+    
     with open(gen_path, 'r', encoding='utf-8') as f:
         for line in f:
             if line.startswith('__start'):
@@ -184,10 +190,10 @@ def analyze_gen(data, metadata_path, gen_path, startlineno=0):
     if metadata is not None:
         metadata['conditions'] = conditions
         print_result.top_templates_from_train(top_temps, temps2sents, metadata, 
-            metadata_colnames=['conditions'], n_toptemps=2, n_samples=99999)
+            metadata_colnames=['conditions'], n_toptemps=999, n_samples=99999, seg_temps2sents=seg_temps2sents, n_examples=2)
     else:
         print_result.top_templates_from_train(top_temps, temps2sents, None, 
-            metadata_colnames=[], n_toptemps=2, n_samples=99999)
+            metadata_colnames=[], n_toptemps=999, n_samples=99999, seg_temps2sents=seg_temps2sents, n_examples=2)
 
 #: err print
 def eprint(*args, **kwargs):
@@ -231,9 +237,9 @@ if __name__ == '__main__':
     #GEN = '/Users/shanglinghsu/mwp/ntg2/gens/gen-ai2-ilds-100-55-5-far-NER-pure_add-sub.md'
     if args.a_seg:
         analyze_seg(data=DATA, metadata_path=DATA+'/metadata_train.tsv', seg_path=SEG, 
-            k=10, n=1, pure_path=PURE)
+            k=100, n=10, pure_path=PURE)
     if args.a_gen:
-        analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN)
+        analyze_gen(data=DATA, metadata_path=DATA+'/metadata_valid.tsv', gen_path=GEN, seg_path=SEG)
     
     #PURE = 'pure_temps.txt'
     #get_pure_toptemps(PURE,'Addition')

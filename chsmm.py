@@ -37,7 +37,7 @@ class HSMM(nn.Module):
         #: Uniform distribution in [1,L], L is max segment length
         # i.e. assume the lengths distributed uniformly over [1,L]
         if self.unif_lenps:
-            self.len_scores = nn.Parameter(torch.ones(1, opt.L))
+            self.len_scores = nn.Parameter(torch.ones(1, opt.L))    #unif0L
             self.len_scores.requires_grad = False
         else:
             self.len_decoder = nn.Linear(2*opt.A_dim, opt.L)
@@ -51,10 +51,10 @@ class HSMM(nn.Module):
         self.emb_size, self.layers, self.hid_size = opt.emb_size, opt.layers, opt.hid_size
         self.pad_idx = opt.pad_idx
         self.lut = nn.Embedding(wordtypes, opt.emb_size, padding_idx=opt.pad_idx)
-        self.mlpinp = opt.mlpinp    # Multi layer percpetron input
+        self.mlpinp = opt.mlpinp    # Multi layer perceptron input
         self.word_ar = opt.word_ar
         self.ar = False
-        inp_feats = 4
+        inp_feats = 4 #-2 #:#num
         sz_mult = opt.mlp_sz_mult
         if opt.mlpinp:
             rnninsz = sz_mult*opt.emb_size
@@ -134,7 +134,7 @@ class HSMM(nn.Module):
         self.lut.weight.data.uniform_(-initrange, initrange)
         self.lut.weight.data[self.pad_idx].zero_()
         self.lut.weight.data[corpus.dictionary.word2idx["<ncf1>"]].zero_()
-        self.lut.weight.data[corpus.dictionary.word2idx["<ncf2>"]].zero_()
+        self.lut.weight.data[corpus.dictionary.word2idx["<ncf2>"]].zero_()  #:num
         self.lut.weight.data[corpus.dictionary.word2idx["<ncf3>"]].zero_()
         params = [self.src_bias, self.state_out_gates, self.state_att_gates,
                   self.state_out_biases, self.state_att_biases, self.start_emb,
@@ -399,7 +399,7 @@ class HSMM(nn.Module):
           uniqfields - bsz x maxfields
         returns bsz x emb_size, bsz x nfields x emb_size
         """
-        bsz, nfields, nfeats = src.size()
+        bsz, nfields, nfeats = src.size()   # 15, 5, 2
         emb_size = self.lut.embedding_dim
         # do src stuff that depends on words
         embs = self.lut(src.view(-1, nfeats)) # bsz*nfields x nfeats x emb_size
@@ -476,6 +476,8 @@ class HSMM(nn.Module):
         """
         wrd_dist is a K x nwords matrix and it gets modified.
         this collapsing only makes sense if src_tbl is the same for every row.
+        : If a word appears multiple times in wrd_dist,
+        : the probability of it will be moved to the last occurrence.
         """
         nout_wrds = self.decoder.out_features
         i2w, w2i = corpus.dictionary.idx2word, corpus.dictionary.word2idx
@@ -506,7 +508,7 @@ class HSMM(nn.Module):
         len_lps - K x L, log normalized
         """
         #print("D temp_bs row2feats=",row2feats)#:#KE
-        rul_ss = ss % self.K
+        rul_ss = ss % self.K    # K [state_embs]s in total
         i2w = corpus.dictionary.idx2word
         w2i = corpus.dictionary.word2idx
         genset = corpus.genset
@@ -547,7 +549,7 @@ class HSMM(nn.Module):
             new_hyps, anc_hs, anc_cs = [], [], []
             #inps.data.fill_(pad_idx)
             inps.data[:, 1].fill_(w2i["<ncf1>"])
-            inps.data[:, 2].fill_(w2i["<ncf2>"])
+            inps.data[:, 2].fill_(w2i["<ncf2>"])   #:#num
             inps.data[:, 3].fill_(w2i["<ncf3>"])
             for k in range(2*K):
                 anc, wrd = top2k[k] / cols, top2k[k] % cols
@@ -650,6 +652,10 @@ class HSMM(nn.Module):
 
     def temp_ar_bs(self, templt, row2tblent, row2feats, h0, c0, srcfieldenc, len_lps,  K,
                 corpus):
+        
+        #: NOTE The K here stands for beam size;
+        # different from self.K with self.Kmul for number of states
+
         assert self.unif_lenps # ignoring lenps
         exh0 = h0.view(1, 1, self.hid_size).expand(self.layers, 1, self.hid_size)
         exc0 = c0.view(1, 1, self.hid_size).expand(self.layers, 1, self.hid_size)
@@ -660,7 +666,7 @@ class HSMM(nn.Module):
         unk_idx, eos_idx, pad_idx = w2i["<unk>"], w2i["<eos>"], w2i["<pad>"]
 
         curr_hyps = [(None, None, None)]
-        nfeats = 4
+        nfeats = 4 #-2 #:#num
         inps = Variable(torch.LongTensor(K, nfeats), requires_grad=False)
         curr_scores, curr_lens, nulens = torch.zeros(K, 1), torch.zeros(K, 1), torch.zeros(K, 1)
         if self.lut.weight.data.is_cuda:
@@ -675,7 +681,7 @@ class HSMM(nn.Module):
         for stidx, ss in enumerate(templt):  # enumerate the states of a template
             final_state = (stidx == len(templt) - 1)
             minq = [] # so we can compare stuff of different lengths
-            rul_ss = ss % self.K    # K:=55, Kmul:=5 => 5 states share an embedding?!
+            rul_ss = ss % self.K    # K:=55, Kmul:=5 => 5 states share an embedding
 
             if self.one_rnn:
                 cond_start_inp = torch.cat([start_inp, self.state_embs[rul_ss]], 2) # 1x1x cat_size
@@ -689,26 +695,26 @@ class HSMM(nn.Module):
             for ell in range(self.L+1): # +1 for <eop> (but <eop> isn't put in ___(?) )
                 new_hyps, anc_hs, anc_cs, anc_ths, anc_tcs = [], [], [], [], []
                 inps.data[:, 1].fill_(w2i["<ncf1>"])
-                inps.data[:, 2].fill_(w2i["<ncf2>"])
+                inps.data[:, 2].fill_(w2i["<ncf2>"])   #:#num
                 inps.data[:, 3].fill_(w2i["<ncf3>"])
 
-                wrd_dist = self.get_next_word_dist(hid + thid, rul_ss, srcfieldenc) # K x nwords
+                wrd_dist = self.get_next_word_dist(hid + thid, rul_ss, srcfieldenc) # K x nwords (which path, which next word)
                 currK = wrd_dist.size(0)
                 # disallow unks and eos's
                 wrd_dist[:, unk_idx].zero_()
                 if not final_state:
                     wrd_dist[:, eos_idx].zero_()
-                self.collapse_word_probs(row2tblent, wrd_dist, corpus)
+                self.collapse_word_probs(row2tblent, wrd_dist, corpus)  #: deal with duplicated words in wrd_dist
                 wrd_dist.log_()
                 curr_scores[:currK].mul_(curr_lens[:currK])
                 wrd_dist.add_(curr_scores[:currK].expand_as(wrd_dist))
                 wrd_dist.div_((curr_lens[:currK]+1).expand_as(wrd_dist))
-                maxprobs, top2k = torch.topk(wrd_dist.view(-1), 2*K)
-                cols = wrd_dist.size(1)
+                maxprobs, top2k = torch.topk(wrd_dist.view(-1), 2*K)    #: flatten the K x nwords table to get top2k max values in the whole table
+                cols = wrd_dist.size(1)                                 #: and get the number of cols to recover the coordinates: (which path, which next word)
                 # used to check for eos here, but maybe we shouldn't
 
-                for k in range(2*K):
-                    anc, wrd = top2k[k] / cols, top2k[k] % cols
+                for k in range(2*K):    #: beam search
+                    anc, wrd = top2k[k] / cols, top2k[k] % cols         #: recover the coordinates: (which path, which next word)
                     # check if any of the maxes are eop
                     if wrd == self.eop_idx and ell > 0 and (not final_state or curr_hyps[anc][0] == eos_idx):
                         ## add len score (and avg over num words *incl eop*)
@@ -862,7 +868,7 @@ def make_combo_targs(locs, x, L, nfields, ngen_types):
     return newlocs.transpose(1, 2).contiguous().view(L, bsz*seqlen, max_locs)
 
 
-def get_uniq_fields(src, pad_idx, keycol=0):
+def get_uniq_fields(src, pad_idx, keycol=0): #keycol=? See: featrow = [self.dictionary.add_word(k, add_to_dict)
     """
     src - bsz x nfields x nfeats
     """
@@ -960,6 +966,8 @@ parser.add_argument('-gen_on_valid', action='store_true', help='')
 parser.add_argument('-align', action='store_true', help='')
 parser.add_argument('-wid_workers', type=str, default='', help='')
 
+parser.add_argument('-copy_forced', action='store_true', help='force copying')
+
 if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
@@ -973,7 +981,7 @@ if __name__ == "__main__":
 
     # Load data
     corpus = labeled_data.SentenceCorpus(args.data, args.bsz, thresh=args.thresh, add_bos=False,
-                                     add_eos=False, test=args.test)
+                                     add_eos=False, test=args.test, copy_forced=args.copy_forced)
 
     if not args.interactive and not args.label_train and len(args.gen_from_fi) == 0:
         # make constraint things from labels
@@ -1056,7 +1064,7 @@ if __name__ == "__main__":
             init_logps, trans_logps = net.trans_logprobs(uniqenc, seqlen) # bsz x K, T-1 x bsz x KxK
             len_logprobs, _ = net.len_logprobs()
             fwd_obs_logps = net.obs_logprobs(Variable(inps), srcenc, srcfieldenc, Variable(fmask),
-                                             Variable(combotargs), bsz) # L x T x bsz x K
+                                             Variable(combotargs), bsz) # L x T x bsz x K(*Kmul? #:)
             # get T+1 x bsz x K beta quantities
             beta, beta_star = infc.just_bwd(trans_logps, fwd_obs_logps,
                                             len_logprobs, constraints=cidxs)
@@ -1269,21 +1277,28 @@ if __name__ == "__main__":
                 best_score, best_tscore, best_gscore = ascore, tscore, gscore
                 best_phrases, best_templt = phrases, templt
                 best_len = rul_tokes
-                print("best_phrases:")
-                pp.pprint(best_phrases)
-                print("best_templt:")
-                pp.pprint(best_templt)
-            #str_phrases = [" ".join(phrs) for phrs in phrases]
-            #tmpltd = ["%s|%d" % (phrs, templt[k]) for k, phrs in enumerate(str_phrases)]
-            #statstr = "a=%.2f t=%.2f g=%.2f" % (ascore, tscore, gscore)
-            #print("%s|||%s" % (" ".join(str_phrases), " ".join(tmpltd)), statstr)
+                #print("best_phrases:")
+                #pp.pprint(best_phrases)
+                #print("best_templt:")
+                #pp.pprint(best_templt)
+            ############################################################
+            #: The following was commented out #alltmplt################
+            ############################################################
+            #try: #:
+            #    str_phrases = [" ".join(phrs) for phrs in phrases]
+            #    tmpltd = ["%s|%d" % (phrs, templt[k]) for k, phrs in enumerate(str_phrases)]
+            #    statstr = "a=%.2f t=%.2f g=%.2f" % (ascore, tscore, gscore)
+            #    if args.verbose:    #:
+            #        print(src_line) #:
+            #    print("%s|||%s" % (" ".join(str_phrases), " ".join(tmpltd)), statstr)
+            #except: #:
+            #    pass #:
             #assert False
         #assert False
-
+        
         try:
             str_phrases = [" ".join(phrs) for phrs in best_phrases]
         except TypeError:
-            print(best_phrases)
             # sometimes it puts an actual number in
             str_phrases = [" ".join([str(n) if type(n) is int else n for n in phrs]) for phrs in best_phrases]
         tmpltd = ["%s|%d" % (phrs, best_templt[kk]) for kk, phrs in enumerate(str_phrases)]
@@ -1297,14 +1312,14 @@ if __name__ == "__main__":
             print(statstr)
             print()
         #assert False
-
+        
     def gen_from_src():     # Generation
         from template_extraction import extract_from_tagged_data, align_cntr
         top_temps, _, state2phrases = extract_from_tagged_data(args.data, args.bsz, args.thresh,
                                                    args.tagged_fi, args.ntemplates)
 
         # Can't be separated (to my own files) for now because of some encoding error
-        #print_result.top_template_phrase_examples(top_temps, state2phrases, n_toptemps=5, n_phrases=5)
+        #print_result.top_template_phrase_examples(top_temps, state2phrases, n_toptemps=10, n_phrases=5)
 
         with open(args.gen_from_fi) as f:
             src_lines = f.readlines()
@@ -1321,7 +1336,7 @@ if __name__ == "__main__":
         coeffs = [float(flt.strip()) for flt in args.gen_wts.split(',')]
         if args.gen_on_valid:
             for i in range(len(corpus.valid)):
-                if i > 2:
+                if i > 2:   #: only generate 3?!
                     break
                 x, _, src, locs, inps = corpus.valid[i]
                 seqlen, bsz = x.size()
@@ -1342,6 +1357,12 @@ if __name__ == "__main__":
                     gen_from_srctbl(src_tbl, top_temps, coeffs, src_line=src_line)
         else:
             for ll, src_line in enumerate(src_lines):
+                if ll > 20: #:#HACK # 20 lines take 687 seconds ~34seconds/sample
+                    exit() ########################################
+                    ########################################
+                    ########################################
+                    ########################################
+                    ########################################
                 if "wiki" in args.data:
                     src_tbl = get_wikibio_poswrds(src_line.strip().split())
                 else:
@@ -1446,6 +1467,9 @@ if __name__ == "__main__":
                 decayed = True
                 best_valloss = args.best_loss
             print("starting with", prev_valloss, best_valloss)
+
+        print("Number of parameters: %d" % sum([len(t) for t in list(net.parameters())]))
+        print("Number of training samples: %d" % sum([len(t) for t in corpus.train]))
 
         for epoch in range(1, args.epochs + 1):
             if epoch > args.no_ar_epochs and not net.ar and decayed:

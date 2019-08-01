@@ -13,7 +13,7 @@ def _print_md_col_names(items):
     print(f"| {' | '.join(['-' for item in items])} |")
 
 def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=[], 
-        n_toptemps=5, n_samples=3, filters=None): 
+        n_toptemps=5, n_samples=3, filters=None, seg_temps2sents={}, n_examples=2): 
     """
     Parameters:
     ----------
@@ -68,7 +68,18 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
             print(f"### Top-{it+1} ({N} samples using it): {temp}")
             _print_md_col_names([*(temp), *metadata_colnames])#, 'lineno', 'count', 'portion'])
 
-        
+        # Print seg examples
+        if seg_temps2sents!={}:
+            if temp in seg_temps2sents:
+                seg_examples = seg_temps2sents[temp]
+                for segi in range(min(n_examples,len(seg_examples))):
+                    tokens, lineno = seg_examples[segi]
+                    templt = ' | '.join([*tokens, str(lineno)])
+                    templt = str(templt.encode('utf-8'))[2:-1]  # HACK ==
+                    print(f'| {templt} |')
+                print(f'| ')
+
+        # Print gen results
         j = 0
         for (tokens, lineno) in sents:
             if j == n_samples:      # Print only n_samples samples
@@ -80,14 +91,15 @@ def top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames
             j = j + 1
         
         print()
-        # Distribution of some metadata_colnames using this template        
+        # Distribution of some metadata_colnames (e.g. solution type) using this template        
         stype_counts.append(dict())
         if len(some_cnames) > 0:
             for cname in some_cnames:
                 stype_counts[len(printed)][cname] = Counter([metadata[cname][lineno] for (_, lineno) in sents])
         
         printed.append(it)
-            
+    
+    # Distribution of some metadata_colnames (e.g. solution type) using this template        
     if len(some_cnames) > 0:
         for cname in some_cnames:
             print(f'### Distribution of {cname}: the {Ns} samples using all top-{n_toptemps} templates')
@@ -114,7 +126,7 @@ def top_template_phrase_examples(top_temps, state2phrases, n_toptemps=5, n_phras
         for template_it in range(n_toptemps):    # Top 5 templates
             if template_it >= len(top_temps):
                 break
-            print(f"### Top-{template_it+1}")
+            print(f"### Top-{template_it+1}: {top_temps[template_it]}")
 
             _print_md_col_names(top_temps[template_it])
 

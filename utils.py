@@ -194,8 +194,9 @@ def beam_search2(net, corpus, ss, start_inp, exh0, exc0, srcfieldenc,
         new_hyps, anc_hs, anc_cs = [], [], []
         #inps.data.fill_(pad_idx)
         inps.data[:, 1].fill_(w2i["<ncf1>"])
-        inps.data[:, 2].fill_(w2i["<ncf2>"])
+        inps.data[:, 2].fill_(w2i["<ncf2>"])   #:#num
         inps.data[:, 3].fill_(w2i["<ncf3>"])
+
         for k in range(2*K):
             anc, wrd = top2k[k] / cols, top2k[k] % cols
             # check if any of the maxes are eop

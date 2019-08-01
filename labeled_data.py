@@ -45,10 +45,11 @@ class Dictionary(object):
 
 class SentenceCorpus(object):
     def __init__(self, path, bsz, thresh=0, add_bos=False, add_eos=False,
-                 test=False):
+                 test=False, copy_forced=True):
         self.dictionary = Dictionary()
         self.bsz = bsz
         self.wiki = "wiki" in path
+        self.copy_forced = copy_forced
 
         train_src = os.path.join(path, "src_train.txt")
 
@@ -102,15 +103,16 @@ class SentenceCorpus(object):
                 else:
                     fields = get_e2e_poswrds(tokes) # key, pos -> wrd
 
-                #: It doesn't make sense to add these two in @@ To debug??? (but buggy after deleting it @@)
-                # Did they embed [1, 2] as well? OAO (Go learning Regression Analysis!)
-                tgt_voc.update([k for k, idx in fields])     # ['_topic', '_topic']
-                #tgt_voc.update([idx for k, idx in fields])   # [1, 2]
                 fieldvals = list(fields.values())            # ['A', 'B']
-                tgt_voc.update(fieldvals)
+                #: It doesn't make sense to add these two in (in our case) :3
+                tgt_voc.update([k for k, idx in fields])     # ['_topic', '_topic']
+
+                tgt_voc.update([idx for k, idx in fields])  # [1, 2]  #:#num
+                #tgt_voc.update([2 for k, idx in fields])
+                
+                tgt_voc.update(fieldvals)                    # ['A', 'B']
                 # tgt_voc so far: Counter({'_topic': 2, 'A': 1, 'B': 1, 1: 1, 2: 1})
 
-                #: intended for copy forcing
                 linewords.append(set(wrd for wrd in fieldvals
                                      if wrd not in punctuation))
 
@@ -124,10 +126,12 @@ class SentenceCorpus(object):
                 words, spanlabels = line.strip().split('|||')
                 words = words.split()
 
-                #: intended for copy forcing
+                #: intended for copy forcing    #cp
                 #: => Disable copy forcing for now (otherwise all nouns must be copied, causing many <unk>s)
-                #genwords.update([wrd for wrd in words if wrd not in linewords[l]]) # original #cp
-                genwords.update(words) #:#unk
+                if self.copy_forced:
+                    genwords.update([wrd for wrd in words if wrd not in linewords[l]]) # original #cp
+                else:
+                    genwords.update(words) #:#unk
 
                 tgt_voc.update(words)
 
@@ -148,10 +152,11 @@ class SentenceCorpus(object):
         tgtkeys = sorted(tgtkeys,key=lambda x: -(x in self.genset))
         self.dictionary.bulk_add(tgtkeys)
         # make sure we did everything right (assuming didn't encounter any special tokens)
+        #: what does the "4 +" mean here??
         assert self.dictionary.idx2word[4 + len(self.genset) - 1] in self.genset
         assert self.dictionary.idx2word[4 + len(self.genset)] not in self.genset
         self.dictionary.add_word("<ncf1>", train=True)
-        self.dictionary.add_word("<ncf2>", train=True)
+        self.dictionary.add_word("<ncf2>", train=True)  #:#num
         self.dictionary.add_word("<ncf3>", train=True)
         self.dictionary.add_word("<go>", train=True)
         self.dictionary.add_word("<stop>", train=True)
@@ -177,9 +182,12 @@ class SentenceCorpus(object):
                 fld_cntr = Counter([key for key, _ in fields]) # {'_name':2}
                 for (k, idx), wrd in fields.items(): # fields {('_name',1):'Daniel', ('_name',2):'Powter'}
                     if k in w2i:
-                        featrow = [self.dictionary.add_word(k, add_to_dict),
-                                   self.dictionary.add_word(idx, add_to_dict),
-                                   self.dictionary.add_word(wrd, add_to_dict)]
+                        featrow = [self.dictionary.add_word(k, add_to_dict),    #[0] now
+
+                                   self.dictionary.add_word(idx, add_to_dict), #:#num
+                                   #self.dictionary.add_word(2, add_to_dict),
+
+                                   self.dictionary.add_word(wrd, add_to_dict)]  #[1] now
                         wrd2idxs[wrd].append(len(feats))
                         #nflds = self.dictionary.add_word(fld_cntr[k], add_to_dict)
 
@@ -187,6 +195,7 @@ class SentenceCorpus(object):
                         # comment if ... to make every token the end of condition?
                         cheatfeat = w2i["<stop>"] #if fld_cntr[k] == idx else w2i["<go>"]
                         wrd2fields[wrd].append((featrow[2], featrow[0], featrow[1], cheatfeat))
+                        #wrd2fields[wrd].append((featrow[1], featrow[0]))    #:#num
 
                         feats.append(featrow)
 
@@ -214,8 +223,12 @@ class SentenceCorpus(object):
                         sent.append(w2i["<unk>"])
                     if word not in punctuation and word in src_wrd2idxs[tgtline]:
                         copied.append(src_wrd2idxs[tgtline][word])
-                        winps = [[widx, kidx, idxidx, nidx]
+                        
+                        winps = [[widx, kidx, idxidx, nidx]    #:#num
                                  for widx, kidx, idxidx, nidx in src_wrd2fields[tgtline][word]]
+                        #winps = [[widx, kidx]
+                        #         for widx, kidx in src_wrd2fields[tgtline][word]]
+
                         insent.append(winps) # list of [[0(Daniel),1(_name),2(1),3(<stop>)], [4(Powter),5(_name),6(2),7(<stop>)]]
                     else:
                         #assert sent[-1] < self.ngen_types
@@ -224,7 +237,10 @@ class SentenceCorpus(object):
                         #insent.append([[sent[-1], w2i["<ncf1>"], w2i["<ncf2>"]]])
                         #: sent[-1] is idx of current word (because we've just appended its w2i to sent)
                         #: ncf1 to 3 are dummy variables for padding or so
+
                         insent.append([[sent[-1], w2i["<ncf1>"], w2i["<ncf2>"], w2i["<ncf3>"]]])
+                        #insent.append([[sent[-1], w2i["<ncf1>"]]]) #:#num
+
                 #sent.extend([self.dictionary.add_word(word, add_to_dict) for word in words])
                 if add_eos:
                     sent.append(self.dictionary.add_word('<eos>', True))
@@ -249,7 +265,10 @@ class SentenceCorpus(object):
         for (k, idx), wrd in fields.items():
             if k in self.dictionary.word2idx:
                 featrow = [self.dictionary.add_word(k, False),
-                           self.dictionary.add_word(idx, False),
+                           
+                           self.dictionary.add_word(idx, False), #:#num
+                           #self.dictionary.add_word(2, False),
+
                            self.dictionary.add_word(wrd, False)]
                 feats.append(featrow)
         return torch.LongTensor(feats)

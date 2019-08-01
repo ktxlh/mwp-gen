@@ -158,7 +158,7 @@ def just_fwd(pi, trans_logprobs, bwd_obs_logprobs, constraints=None):
 
 def just_bwd(trans_logprobs, fwd_obs_logprobs, len_logprobs, constraints=None):
     """
-    fwd_obs_logprobs - L x T x bsz x K, obs probs starting at t
+    fwd_obs_logprobs - L x T x bsz x K(*Kmul? #:), obs probs starting at t
     trans_logprobs   - T-1 x bsz x K x K, trans_logprobs[t] = p(q_{t+1} | q_t)
     """
     neginf = -1e38 # -float("inf")
