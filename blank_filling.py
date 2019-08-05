@@ -6,30 +6,65 @@ from random import shuffle, choice
 from my_utils import parse_seg_file, re_sort_metadata
 from generate import load_model, get_seed_sent, masked_decoding
 from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM, BertForMaskedLM
+from pyclustering.cluster.kmedoids import kmedoids
+from sklearn.cluster import SpectralClustering, AgglomerativeClustering
+import numpy as np
+#import textdistance # .lcsstr for consecutive; otherwise; .lcsseq
+    
 
 bert_version = "bert-large-uncased" # bert-(base|large)-(un)?cased
-print(f"Loading BERT ({bert_version})...")
-tokenizer = BertTokenizer.from_pretrained(bert_version)
-model = load_model(bert_version)
-print("BERT loaded.")
+#print(f"Loading BERT ({bert_version})...")
+#tokenizer = BertTokenizer.from_pretrained(bert_version)
+#model = load_model(bert_version)
+#print("BERT loaded.")
 
 EOS = "<eos>"
 NUMBER = "<num>"    
 UNK = "<unk>"
 MASK = "[MASK]"
+seqs=None #debug only
 
-def get_sim_mat(lines, scheme='lcsseq'):
+def lcs(X, Y): 
+    # Code copied from https://www.geeksforgeeks.org/python-program-for-longest-common-subsequence/
+    # find the length of the strings 
+    m = len(X) 
+    n = len(Y) 
+  
+    # declaring the array for storing the dp values 
+    L = [[None]*(n + 1) for i in range(m + 1)] 
+  
+    """Following steps build L[m + 1][n + 1] in bottom up fashion 
+    Note: L[i][j] contains length of LCS of X[0..i-1] 
+    and Y[0..j-1]"""
+    for i in range(m + 1): 
+        for j in range(n + 1): 
+            if i == 0 or j == 0 : 
+                L[i][j] = 0
+            elif X[i-1] == Y[j-1]: 
+                L[i][j] = L[i-1][j-1]+1
+            else: 
+                L[i][j] = max(L[i-1][j], L[i][j-1]) 
+  
+    # L[m][n] contains the length of LCS of X[0..n-1] & Y[0..m-1] 
+    return L[m][n] 
+
+def get_sim_mat(seqs, scheme='lcsseq'):
     """
+    Paramters:
+    ---------
+        seqs    list of list
+            e.g. [[0,1,2],[3,1]] is for 2 MWPs and variable-length input
+        scheme  str
+            One of {'lcsseq'}
+
     Returns:
     ---------
-    len(lines) x len(lines) numpy similarity matrix
+        len(seqs) x len(seqs) numpy similarity matrix
     """
-    import numpy as np
-    import textdistance # .lcsstr for consecutive; otherwise; .lcsseq
-    from nltk import word_tokenize
     sim = None
-    def compute_sim(func, inpts):
-        sim = [[ func(line1, line2) for lid2,line2 in enumerate(seqs) if lid2 < lid1] for lid1,line1 in enumerate(inpts)]
+    def apply_scheme(func, inpts):
+        print("Applying scheme...")
+        sim = [[ func(line1, line2) for lid2,line2 in enumerate(inpts) if lid2 < lid1] for lid1,line1 in enumerate(inpts)]
         # Lower triangular matrix for similarity. i.e. indices: sim[biger][smaller]
         # x x
         # o x   
@@ -40,35 +75,40 @@ def get_sim_mat(lines, scheme='lcsseq'):
                 # o 0
         return sim
     if scheme == 'lcsseq':
-        seqs = [word_tokenize(line) for line in lines]
-        ##### HACK: neg dis for now
-        sim = compute_sim( (lambda l1,l2: -len(textdistance.lcsseq(l1,l2))), seqs)
-        #sim = [[ - len(textdistance.lcsseq(line1,line2)) for lid2,line2 in enumerate(seqs) if lid2 < lid1] for lid1,line1 in enumerate(seqs)]
-    elif scheme == 'editdist':
-        sim = [[ ]  for lid1,line1 in enumerate(seqs)]
-    return sim #np.array(sim) 
+        sim = apply_scheme( (lambda l1,l2: lcs(l1,l2)), seqs)  #len(textdistance.lcsseq(l1,l2))) is for string only ...@@
+        sim = [[e+1 for e in l] for l in sim]    # => connected graph
+    #elif scheme == 'editdist': # hamming distance is only for comparing strings of the same length
+    #    sim = apply_scheme( textdistance..., seqs)
+    
+    return np.array(sim)
     
 
 def lcs_subtemplate(seg_path):  #, metadata_path
     linenos, temps2sents, top_temps = parse_seg_file(seg_path)
-    #metadata = re_sort_metadata(metadata_path, linenos, new_idxname='seg_linenos')
-
-    # Get subtemplate
+    return get_sim_mat(top_temps, 'lcsseq'), linenos, temps2sents, top_temps
     
 
-def lcs_subsentence(data_path):
+def lcs_submwp(data_path):
     """
-    Baseline. Cluster the training data directly.
+    Baseline. Get the lcs-similarity of MWPs directly.
     """
-    with open(os.path.join(data_path,'train.txt'),'r') as f:
-        lines = f.readlines()
-        sim = get_sim_mat(lines, 'lcsseq')
-        
-        # Hierarchical Clustering
+    matrix,seqs= None,None
+    with open(os.path.join(data_path,'train.txt'),'r',encoding='utf-8') as f:
+        seqs = [line.split('|||')[0].split() for line in list(f.readlines())][:10] # HACK for debugging
+        matrix = get_sim_mat(seqs, 'lcsseq')
+    return matrix, seqs
 
-
-
-        
+def clustering(matrix, n_clusters, scheme):
+    clustering = None
+    if scheme == 'spectral':
+        clustering = SpectralClustering(n_clusters=n_clusters,affinity='precomputed').fit(matrix)
+    elif scheme == 'hierarchical':
+        clustering = AgglomerativeClustering(n_clusters=n_clusters,affinity='precomputed',linkage='average').fit(matrix)
+    # clustering.labels_ is a list of labels indicating the cluster each seq belongs to
+    clusters = [[] for _ in range(n_clusters)]
+    for lid,l in enumerate(clustering.labels_):
+        clusters[l].append(lid) 
+    return clusters # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
 
 
 def read_ner_file(nerf_path):
@@ -156,6 +196,8 @@ if __name__ == "__main__":
     print(args)
 
     seg_path = args.seg_path
-    substitute_seg(seg_path, args.data_path)
-    test_bert()#seed_sentence, masking) 
-    
+    #substitute_seg(seg_path, args.data_path)
+    #test_bert()#seed_sentence, masking) 
+
+    data_path = '/Users/shanglinghsu/mwp/Datasets/srl-ai2-ilds-train-valid/ai2-ilds-train-valid-concated'
+    scheme='hierarchical'
