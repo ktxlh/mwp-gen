@@ -435,7 +435,7 @@ class HSMM(nn.Module):
         """
         hid - 1 x bsz x rnn_size                          # h^k_{i-1}
         srcfieldenc - 1 x nfields x dim                   # r_j (records)
-        returns a bsz x nthings dist; not a log dist
+        returns a bsz x nthings dist; not a log dist      # nthings: [a,b,c,d,e, b,e] => 7
         """
         bsz = hid.size(1)
         _, nfields, rnn_size = srcfieldenc.size()
@@ -713,7 +713,7 @@ class HSMM(nn.Module):
                 cols = wrd_dist.size(1)                                 #: and get the number of cols to recover the coordinates: (which path, which next word)
                 # used to check for eos here, but maybe we shouldn't
 
-                for k in range(2*K):    #: beam search
+                for k in range(2*K):    #: beam search  #: anc should stand for anchor, i.e. which path
                     anc, wrd = top2k[k] / cols, top2k[k] % cols         #: recover the coordinates: (which path, which next word)
                     # check if any of the maxes are eop
                     if wrd == self.eop_idx and ell > 0 and (not final_state or curr_hyps[anc][0] == eos_idx):
@@ -722,7 +722,7 @@ class HSMM(nn.Module):
                         #wlenscore = maxprobs[k]/(ell+1) # + len_lps[ss][ell-1]
                         #assert not final_state or curr_hyps[anc][0] == eos_idx # seems like should hold...
                         heapitem = (maxprobs[k], curr_lens[anc][0]+1, curr_hyps[anc],
-                                    thc.narrow(1, anc, 1), tcc.narrow(1, anc, 1))
+                                    thc.narrow(1, anc, 1), tcc.narrow(1, anc, 1)) #: narrow(dim, start, len) to get part of a tensor (here: In dim 1, 1-len from position anc)
                         if len(minq) < K:
                             heapq.heappush(minq, heapitem)
                         else:
@@ -1277,7 +1277,7 @@ if __name__ == "__main__":
                 best_score, best_tscore, best_gscore = ascore, tscore, gscore
                 best_phrases, best_templt = phrases, templt
                 best_len = rul_tokes
-                #print("best_phrases:")
+                print("best_phrases:",best_phrases)
                 #pp.pprint(best_phrases)
                 #print("best_templt:")
                 #pp.pprint(best_templt)
@@ -1296,22 +1296,26 @@ if __name__ == "__main__":
             #assert False
         #assert False
         
-        try:
-            str_phrases = [" ".join(phrs) for phrs in best_phrases]
-        except TypeError:
-            # sometimes it puts an actual number in
-            str_phrases = [" ".join([str(n) if type(n) is int else n for n in phrs]) for phrs in best_phrases]
-        tmpltd = ["%s|%d" % (phrs, best_templt[kk]) for kk, phrs in enumerate(str_phrases)]
-        if args.verbose:
-            print(src_line)
-            #print(src_tbl)
+        if best_phrases is None:#:
+            print("NO BEST_PHRASES")#:
+        else:#: # The following were all indented
+            #: TypeError: 'NoneType' object is not iterable
+            try:
+                str_phrases = [" ".join(phrs) for phrs in best_phrases]
+            except TypeError:
+                # sometimes it puts an actual number in
+                str_phrases = [" ".join([str(n) if type(n) is int else n for n in phrs]) for phrs in best_phrases]
+            tmpltd = ["%s|%d" % (phrs, best_templt[kk]) for kk, phrs in enumerate(str_phrases)]
+            if args.verbose:
+                print(src_line)
+                #print(src_tbl)
 
-        print("%s|||%s" % (" ".join(str_phrases), " ".join(tmpltd)))
-        if args.verbose:
-            statstr = "a=%.2f t=%.2f g=%.2f" % (best_score, best_tscore, best_gscore)
-            print(statstr)
-            print()
-        #assert False
+            print("%s|||%s" % (" ".join(str_phrases), " ".join(tmpltd)))
+            if args.verbose:
+                statstr = "a=%.2f t=%.2f g=%.2f" % (best_score, best_tscore, best_gscore)
+                print(statstr)
+                print()
+            #assert False
         
     def gen_from_src():     # Generation
         from template_extraction import extract_from_tagged_data, align_cntr

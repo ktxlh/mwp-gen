@@ -40,10 +40,26 @@ def parse_seg_file(seg_path):
             if line.startswith('D label_train(): corpus.train_mb2linenos='): # HACK Don't contain '|'
                 linenos = [ int(strno) for strno in line.strip().split('=')[1].split()]
                 break
-    temps2sents = group_by_template(seg_path,0) #NOTE startlineno=0
+    temps2sents = group_by_template(seg_path,0) # startlineno=0; returns a label-tup -> [(phrase-list, lineno), ...] map
     top_temps = sorted(list(temps2sents.keys()), key=lambda x: -len(temps2sents[x]))
     return linenos, temps2sents, top_temps
 
+def re_sort_metadata(metadata_path, linenos, new_idxname):
+    try:
+        metadata = pd.read_csv(metadata_path, sep='\t', header=0)
+    except FileNotFoundError:
+        return None
+
+    # Sort metadata by linenos s.t. the idx match: metadata and temps2sents and seg file
+    # 1. Sort linenos
+    #   FROM  linenos[seg_index] = corresponding index in metadata
+    #   TO    linenos[metadata] = corresponding index in seg_index
+    linenos = [b for a,b in sorted(zip(linenos, range(len(linenos))), key=lambda x: x[0])]
+    # 2. Add metadata col
+    metadata[new_idxname] = linenos
+    metadata = metadata.sort_values(by=new_idxname)
+    metadata = metadata.set_index(new_idxname)
+    return metadata
 
 def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
     """
@@ -99,30 +115,12 @@ def analyze_seg(data,metadata_path,seg_path, k, n, pure_path=''):
             with open(pure_path,'w') as f:
                 f.writelines([f"{attribute}|{s}|||{' '.join([ ','.join([str(tt) for tt in t]) for t in pure_templates[s]])}\n" for s in stypes if s in pure_templates.keys()])
 
-    def re_sort_metadata(metadata_path, linenos, new_idxname):
-        try:
-            metadata = pd.read_csv(metadata_path, sep='\t', header=0)
-        except FileNotFoundError:
-            return None
-
-        # Sort metadata by linenos s.t. the idx match: metadata and temps2sents and seg file
-        # 1. Sort linenos
-        #   FROM  linenos[seg_index] = corresponding index in metadata
-        #   TO    linenos[metadata] = corresponding index in seg_index
-        linenos = [b for a,b in sorted(zip(linenos, range(len(linenos))), key=lambda x: x[0])]
-        # 2. Add metadata col
-        metadata[new_idxname] = linenos
-        metadata = metadata.sort_values(by=new_idxname)
-        metadata = metadata.set_index(new_idxname)
-        return metadata
-
     linenos, temps2sents, top_temps = parse_seg_file(seg_path)
     metadata = re_sort_metadata(metadata_path, linenos, new_idxname='seg_linenos')
     
-    
     # Evaluate the quality of segmentation
     print("# Overall - top templates")
-    print_result.top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=['solution type','source'],n_toptemps=k, n_samples=n)  #'question'
+    print_result.top_templates_from_train(top_temps, temps2sents, metadata, metadata_colnames=['solution type','source'],n_toptemps=k, n_samples=n) #,'question'
     
     #print("# Solution type - top templates")
     #specific_top_templates(temps2sents,metadata, 'solution type', metadata_colnames=['solution type','source'], pure=False)
