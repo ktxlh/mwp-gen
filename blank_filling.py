@@ -2,7 +2,7 @@
 import os
 import argparse
 import names
-from random import shuffle, choice
+from random import shuffle, choice, randint
 from my_utils import parse_seg_file, re_sort_metadata
 from generate import load_model, get_seed_sent, masked_decoding
 from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
@@ -12,7 +12,7 @@ import numpy as np
 #import textdistance # .lcsstr for consecutive; otherwise; .lcsseq
     
 
-bert_version = "bert-large-uncased" # bert-(base|large)-(un)?cased
+bert_version = "bert-large-cased" # bert-(base|large)-(un)?cased
 
 EOS = "<eos>"
 NUMBER = "<num>"    
@@ -127,6 +127,8 @@ def temp2masked(seqs, spls, temps2sents):
         temps   list of masked sents
     """
     #MASK = '[MASK]'#'_'
+    # TODO: Counter() for most common list of phrases in the fixed positions, and use the most common combination only
+    # For now, it's simply hollowing out the non-fixed segments
     new_sents = []
     for seq,spl in zip(seqs,spls):          # iterate lcs
         for sp in spl:                      # iterate sample templates set
@@ -154,10 +156,42 @@ def read_ner_file(nerf_path):
     with open(nerf_path,'r') as f:
         pass
 
+def fill_tags(tokens,nums,nams):
+    n_preds = len(nams)
+    fixed_rand_wid = randint(0,len(tokens)-1)
+    new_mwps = []
+    for pid in range(n_preds):
+        numid,n_masks = 0,0
+        new_tokens = []
+        for token in tokens:  # Handle: <PER_i>, <unk>, <num>
+            if token == NUMBER:
+                token = nums[numid] # Assume each number is different
+                numid += 1
+            elif token.startswith('<PER_'):
+                namid = int(token[5:-1])-1   # 1-indexed to 0-indexed
+                token = nams[pid][namid]
+            elif token == UNK:
+                token = MASK
+                n_masks += 1
+            elif token == MASK:
+                n_masks += 1
+            elif token == EOS:
+                break
+            new_tokens.append(token)
+        # TODO so what do i want to mask??? nouns?
+        # Read the src_ and randomly mask some word for now
+        if n_masks == 0:
+            try:
+                new_tokens[ fixed_rand_wid ] = MASK
+            except Exception as e:
+                print(e)
+                continue
+        new_mwps.append(" ".join(new_tokens))
+    return new_mwps
+
 def substitute_seg(seg_path, data_path):
     n_preds = 5
-    n_items = 30 # How many <PER_i>, <num>, ...?
-    # TODO: Get nums & names (only) from training data
+    n_items = 10 # How many <PER_i>, <num>, ...?
     nums = [str(i) for i in range(n_items)]  # Different preds shares same numbers
     shuffle(nums)
     nams = [[names.get_first_name() for i in range(n_items)] for j in range(n_preds)]
@@ -171,40 +205,13 @@ def substitute_seg(seg_path, data_path):
 
     for temp in top_temps:
         for (segments,lineno) in temps2sents[temp]:
-            
+            tokens = [s for segment in segments for s in segment.split()]
             #print("IN:"," ".join(segments),lineno)
-            fixed_rand_wid = choice(tags[linenos[lineno]][:-1])[0]
-            for pid in range(n_preds):
-                # Handle: <PER_i>, <unk>, <num>
-                numid,n_masks = 0,0
-                new_tokens = []
-                for segment in segments:
-                    tokens = segment.split()
-                    for token in tokens:
-                        if token == NUMBER:
-                            token = nums[numid] # Assume each number is different
-                            numid += 1
-                        elif token.startswith('<PER_'):
-                            namid = int(token[5:-1])-1   # 1-indexed to 0-indexed
-                            token = nams[pid][namid]
-                        elif token == UNK:
-                            token = MASK
-                        elif token == EOS:
-                            break
-                        new_tokens.append(token)
-                # TODO so what do i want to mask??? nouns?
-                # Read the src_ and randomly mask some word for now
-                if n_masks == 0:
-                    try:
-                        new_tokens[ fixed_rand_wid ] = MASK
-                    except Exception as e:
-                        print(e)
-                        continue
-                new_sent = " ".join(new_tokens)
-                #print("OUT:",new_sent)
-                fout.writelines(new_sent+"\n")
+            #fixed_rand_wid = choice(tags[linenos[lineno]][:-1])[0] # buggy here
+            new_mwps = fill_tags(tokens,nums,nams)
+            #print("OUT:",new_mwps)
+            fout.writelines('\n'.join(new_mwps)+"\n")
     fout.close()
-    
 
 def test_bert(pathin,pathout):
     tokenizer,model = get_bert()
@@ -213,8 +220,9 @@ def test_bert(pathin,pathout):
     for seed_sentence in lines_in:
         toks, seg_tensor, mask_ids = get_seed_sent(seed_sentence, tokenizer, masking="none", n_append_mask=0)
         toks = masked_decoding(toks, seg_tensor, mask_ids, model, tokenizer, "argmax")
-        print("Final: %s" % (" ".join(toks)))
-        fout.writelines(" ".join(toks)+'\n')
+        print("Final: %s\n" % (" ".join(toks)))
+        fout.writelines("IN\t"+seed_sentence)
+        fout.writelines("OUT\t"+" ".join(toks)+'\n\n')
     fout.close()
 
 parser = argparse.ArgumentParser(description='')
@@ -225,23 +233,31 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
+    bertin = 'bert_masklcs.in'
+    bertout = bertin.split('.')[0]+'.out'
+    
+    n_preds = 1
+    n_items = 10 # How many <PER_i>, <num>, ...?
+    nums = [str(i+1) for i in range(n_items)]  # Different preds shares same numbers
+    shuffle(nums)
+    nams = [[names.get_first_name() for i in range(n_items)] for j in range(n_preds)]
+
     #substitute_seg(args.seg_path, args.data_path)
-    #test_bert()#seed_sentence, masking) 
 
     seqs, linenos, temps2sents = get_template_seqs(args.seg_path)
     #seqs = get_mwp_seqs(args.data_path)
     seqs = seqs[:100]
-    
+
     spls = [[t] for t in seqs] # spls: list(samples using the seqs)
-    n_clusters = 20
+    n_clusters = 40
     while len(seqs) > n_clusters:
         seqs, spls = cluster(seqs, spls)
     print(seqs)
     sents = temp2masked(seqs, spls, temps2sents)
-    lines = '\n'.join(sorted(list(set(sents))))+'\n'
-    
-    bertin = 'bert_masklcs.in'
-    bertout = bertin.split('.')[0]+'.out'
+    sents = sorted(list(set(sents)))
+    new_mwps = [fill_tags(sent.split(),nums,nams) for sent in sents]
+    new_mwps = [t for s in new_mwps for t in s]
+    lines = '\n'.join(new_mwps)+'\n'
 
     with open(bertin,'w') as f:
         f.writelines(lines)
