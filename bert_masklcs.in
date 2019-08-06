@@ -1,0 +1,225 @@
+<ORG_1> grew <num> [MASK] [MASK] [MASK] grew <num> potatoes . How many potatoes did [MASK] [MASK] in total ?
+<ORG_1> has <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] will <PER_2> have [MASK]
+<PER_1> <unk> <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did <PER_1> <unk> ?
+<PER_1> <unk> <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did <PER_1> fly ?
+<PER_1> baked <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> have to bake [MASK] have <num> muffins [MASK]
+<PER_1> collects <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> have ?
+<PER_1> drove <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] miles would [MASK] [MASK] in <num> hours ?
+<PER_1> found <num> [MASK] [MASK] [MASK] found <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did they find [MASK] [MASK]
+<PER_1> found <num> [MASK] [MASK] [MASK] found <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did they find [MASK] [MASK]
+<PER_1> grew <num> [MASK] [MASK] [MASK] grew <num> [MASK] [MASK] [MASK] [MASK] grew <num> onions . How many onions did [MASK] [MASK] in all ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] grew <num> cantelopes . How many cantelopes did [MASK] [MASK] in total ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] grew <num> carrots . How many carrots did [MASK] [MASK] in all ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] grew <num> carrots . How many carrots did [MASK] [MASK] in total ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] grew <num> pumpkins . How many pumpkins did [MASK] [MASK] in total ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] pumpkins [MASK] [MASK] grew <num> turnips . How many turnips did [MASK] [MASK] in total ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] turnips [MASK] [MASK] grew <num> carrots . How many carrots did [MASK] [MASK] in all ?
+<PER_1> grew <num> [MASK] [MASK] [MASK] watermelons [MASK] [MASK] grew <num> carrots . How many carrots did [MASK] [MASK] in all ?
+<PER_1> grew <num> watermelons [MASK] [MASK] [MASK] [MASK] [MASK] grew <num> watermelons . How many watermelons did [MASK] [MASK] in total ?
+<PER_1> has <num> <MISC_1> [MASK] [MASK] [MASK] [MASK] does she need to give [MASK] [MASK] [MASK] [MASK] [MASK] have <num> games [MASK] [MASK]
+<PER_1> has <num> [MASK] . <num> are about school [MASK] [MASK] [MASK] are about sports [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> have [MASK]
+<PER_1> has <num> [MASK] . <num> are eaten by a hippopotamus [MASK] [MASK] [MASK] [MASK] will <PER_1> have [MASK]
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] brings <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are <num> [MASK] [MASK] [MASK] [MASK] bananas must [MASK] in each box ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] brings <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are <num> [MASK] [MASK] [MASK] [MASK] oranges must [MASK] in each box ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] hold <num> [MASK] [MASK] [MASK] [MASK] [MASK] will she need ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] hold <num> [MASK] [MASK] [MASK] [MASK] [MASK] will he need ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are <num> [MASK] [MASK] [MASK] [MASK] blocks must [MASK] in each box ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are <num> [MASK] [MASK] [MASK] [MASK] oranges must [MASK] in each box ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does she need to buy [MASK] have <num> fish [MASK]
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] holds <num> [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> have ?
+<PER_1> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> have ?
+<PER_1> has <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] will <PER_1> have [MASK]
+<PER_1> has <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] will <PER_1> have [MASK]
+<PER_1> has <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] will <PER_1> have [MASK]
+<PER_1> has <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] do they have [MASK] [MASK]
+<PER_1> has <num> [MASK] [MASK] [MASK] has <num> books . How many more books does [MASK] [MASK] than <PER_2> ?
+<PER_1> has <num> [MASK] [MASK] [MASK] has with <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_2> end [MASK] [MASK]
+<PER_1> has <num> blue [MASK] [MASK] [MASK] has <num> blue [MASK] [MASK] [MASK] [MASK] has <num> blue balloons . How many blue balloons do [MASK] [MASK] in all ?
+<PER_1> has <num> blue [MASK] [MASK] [MASK] has <num> blue [MASK] [MASK] [MASK] [MASK] has <num> blue balloons . How many blue balloons do [MASK] [MASK] in total ?
+<PER_1> picked <num> [MASK] [MASK] [MASK] picked <num> [MASK] [MASK] [MASK] picked <num> apples . How many oranges were [MASK] in all ?
+<PER_1> picked <num> [MASK] [MASK] [MASK] picked <num> [MASK] [MASK] [MASK] picked <num> apples . How many oranges were [MASK] in total ?
+<PER_1> picked <num> [MASK] [MASK] [MASK] picked <num> [MASK] [MASK] [MASK] picked <num> pears . How many oranges were [MASK] in total ?
+<PER_1> ran <num> [MASK] [MASK] walked <num> [MASK] [MASK] [MASK] [MASK] [MASK] did <PER_1> run [MASK] [MASK] [MASK]
+<PER_1> removes <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] were originally <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] apples are [MASK] in the jar ?
+<PER_1> removes <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] were originally <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bananas are [MASK] in the jar ?
+<PER_1> removes <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] were originally <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] eggs are [MASK] in the jar ?
+<PER_1> removes <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] were originally <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] pencils are [MASK] in the jar ?
+<PER_1> scored <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] points did [MASK] [MASK] in <num> games ?
+<PER_1> sold <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> need ?
+<PER_1> sold <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does <PER_1> need ?
+<PER_1> starts with <num> [MASK] . <num> are eaten by a hippopotamus [MASK] [MASK] [MASK] [MASK] does <PER_1> end [MASK] [MASK]
+<PER_1> strolled <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did <PER_1> stroll ?
+<PER_1> wandered <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did <PER_1> <unk> ?
+<PER_1> weighs <num> [MASK] [MASK] [MASK] weighs <num> [MASK] [MASK] [MASK] [MASK] [MASK] is <PER_1> than <PER_2> [MASK]
+<PER_1> went to the [MASK] <num> [MASK] [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] peanuts did [MASK] [MASK] last month ?
+<num> birds were sitting in a tree [MASK] [MASK] [MASK] fly up to the tree [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in the tree [MASK] [MASK] [MASK] [MASK] [MASK] up to the tree ?
+<num> birds were sitting on the fence [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] on the fence ?
+<num> children were <unk> on the bus [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] got on the bus [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] altogether on the bus [MASK] [MASK] [MASK] [MASK] [MASK] on the bus at the bus [MASK] ?
+<num> ducks are <unk> in a lake [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in the lake ?
+<unk> heads come in packages of <num> [MASK] [MASK] ate <num> <MISC_1> <MISC_2> [MASK] [MASK] [MASK] [MASK] [MASK] did he eat [MASK] [MASK] [MASK] [MASK] [MASK] does he have [MASK] [MASK]
+<unk> pencil weighs <num> [MASK] [MASK] [MASK] [MASK] do <num> pencils weigh ?
+A <unk> has <num> [MASK] [MASK] [MASK] [MASK] [MASK] do <num> bees have ?
+Each <unk> costs $ <num> . How much do <num> tickets cost ?
+Each banana costs $ <num> . How much do <num> bananas cost ?
+Each child has <num> bottle [MASK] [MASK] [MASK] [MASK] are <num> children [MASK] [MASK] [MASK] [MASK] caps are [MASK] [MASK] [MASK] ?
+Each child has <num> oranges [MASK] [MASK] [MASK] are <num> children [MASK] [MASK] [MASK] oranges are [MASK] [MASK] [MASK] ?
+Each child has <num> pencils [MASK] [MASK] [MASK] are <num> children [MASK] [MASK] [MASK] pencils are [MASK] [MASK] [MASK] ?
+Each cup <unk> <num> ounces . How many ounces are in <num> cups ?
+How much would <num> pieces of <unk> gum cost <unk> each piece costs <num> cents ?
+If <PER_1> <unk> <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was <PER_1> <unk> ?
+If <PER_1> jogged <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was <PER_1> <unk> ?
+If <PER_1> sold <num> [MASK] of <MISC_1> , how many cases [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] from the cookie mom ?
+If <PER_1> strolled <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was <PER_1> <unk> ?
+If <PER_1> walked <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was <PER_1> <unk> ?
+If <PER_1> wandered for <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] did <PER_1> go ?
+If each <unk> costs $ <num> [MASK] [MASK] [MASK] must <PER_1> <unk> [MASK] [MASK] [MASK] [MASK]
+If there are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] inside , how many crayons [MASK] in the box ?
+If there are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] inside , how many eggs [MASK] in the box ?
+If there are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] inside , how many erasers [MASK] in the box ?
+If there are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] puts <num> more [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] caps are in the box ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] apples are [MASK] in the pile ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bananas are [MASK] in the pile ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] candies are [MASK] in the pile ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] organized into <num> [MASK] [MASK] [MASK] [MASK] is each group [MASK]
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] plant <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] trees will [MASK] [MASK] [MASK] when the workers [MASK] [MASK] ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bees are [MASK] than flowers ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] birds are [MASK] than <unk> ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] crayons are in <num> boxes ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] eggs are in <num> boxes ?
+There are <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] marbles are in <num> boxes ?
+There are <num> [MASK] in the class [MASK] [MASK] [MASK] . If the [MASK] are divided equally among the students [MASK] [MASK] [MASK] does each student [MASK] [MASK]
+There are <num> cards . <num> cards more are added . How many are there total ?
+There are <num> marbles . <num> marbles more are added . How many are there total ?
+There are <num> short [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] plant <num> short [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bushes will [MASK] [MASK] [MASK] when the workers [MASK] [MASK] ?
+There are <num> short [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] plant <num> short [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] trees will [MASK] [MASK] [MASK] when the workers [MASK] [MASK] ?
+There were <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are now <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bales did [MASK] [MASK] in the barn ?
+[MASK] <PER_2> <num> [MASK] [MASK] [MASK] shares <num> with <PER_3> [MASK] [MASK] [MASK] oranges will <PER_1> have [MASK]
+[MASK] [MASK] <unk> <num> [MASK] to a party [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] cookies will each friend get [MASK]
+[MASK] [MASK] [MASK] <unk> a [MASK] [MASK] [MASK] [MASK] are <num> [MASK] [MASK] [MASK] [MASK] on each school [MASK] [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK]
+[MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] to get [MASK] [MASK] [MASK] [MASK] did <PER_1> go [MASK]
+[MASK] [MASK] [MASK] baked <num> [MASK] [MASK] [MASK] [MASK] [MASK] baked <num> [MASK] [MASK] [MASK] [MASK] <unk> them to [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] cookies did they have [MASK] [MASK]
+[MASK] [MASK] [MASK] gives out [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] earned <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] earned <num> more [MASK] [MASK] [MASK] [MASK] stars did <PER_1> <unk> [MASK] [MASK] [MASK]
+[MASK] [MASK] [MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave <num> to her [MASK] [MASK] [MASK] [MASK] kittens does she now have [MASK]
+[MASK] [MASK] [MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave <num> to her [MASK] [MASK] [MASK] [MASK] puppies does she now have [MASK]
+[MASK] [MASK] [MASK] had <num> [MASK] [MASK] [MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] over the weekend [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] did [MASK] [MASK] [MASK] [MASK] [MASK]
+[MASK] [MASK] [MASK] split a [MASK] [MASK] crayons into groups [MASK] [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] will be [MASK] ?
+[MASK] [MASK] [MASK] split a [MASK] [MASK] erasers into groups [MASK] [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] will be [MASK] ?
+[MASK] [MASK] baking a [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of sugar [MASK] [MASK] [MASK] put in <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] flour does she need [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] [MASK] [MASK] [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] erasers are now there [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] [MASK] [MASK] [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] pencils are now there [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] [MASK] [MASK] [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] rulers are now there [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] [MASK] [MASK] [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] scissors are now there [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] in a box [MASK] [MASK] has <num> [MASK] in a bag [MASK] [MASK] takes <num> [MASK] out of the box [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] crayons are now there [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] pencils are now there [MASK] [MASK] [MASK]
+[MASK] are <num> [MASK] in the drawer [MASK] [MASK] placed <num> [MASK] in the drawer [MASK] [MASK] [MASK] scissors are now there [MASK] [MASK] [MASK]
+[MASK] are <num> eggs in a box [MASK] [MASK] takes <num> [MASK] [MASK] [MASK] [MASK] are left ?
+[MASK] are <num> oranges in a box [MASK] [MASK] takes <num> [MASK] [MASK] [MASK] [MASK] are left ?
+[MASK] are <num> pencils in a box [MASK] [MASK] takes <num> [MASK] [MASK] [MASK] [MASK] are left ?
+[MASK] found <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave <PER_2> some of her [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] seashells did she give [MASK] [MASK] [MASK]
+[MASK] found <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave <num> of the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] seashells does <PER_1> now have [MASK]
+[MASK] found <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave <PER_2> <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] seashells does he now have [MASK]
+[MASK] grew <num> [MASK] [MASK] [MASK] grew <num> [MASK] [MASK] [MASK] [MASK] grew <num> [MASK] [MASK] [MASK] worked for <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] onions did they grow [MASK] [MASK] [MASK]
+[MASK] grew <num> [MASK] [MASK] [MASK] grew <num> [MASK] [MASK] [MASK] [MASK] grew <num> [MASK] [MASK] [MASK] worked for <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] pumpkins did they grow [MASK] [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bought <num> of <PER_1> 's [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] cards does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] went to the [MASK] and picked [MASK] to <unk> [MASK] [MASK] [MASK] are now <num> [MASK] [MASK] [MASK] [MASK] did he pick [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] went to the [MASK] and picked [MASK] to <unk> [MASK] [MASK] [MASK] are now <num> [MASK] [MASK] [MASK] [MASK] did she pick [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] borrowed <num> of his [MASK] [MASK] [MASK] [MASK] dimes does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave her <num> [MASK] [MASK] [MASK] [MASK] nickels does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] gave her <num> [MASK] [MASK] [MASK] [MASK] quarters does she have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] picked <num> more [MASK] [MASK] [MASK] [MASK] strawberries did he have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] spent <num> of her [MASK] [MASK] [MASK] [MASK] quarters does she have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] spent <num> of his [MASK] [MASK] [MASK] [MASK] pennies does he have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] in her bank [MASK] [MASK] [MASK] borrowed <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] nickels does she have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] in her bank [MASK] [MASK] [MASK] borrowed <num> [MASK] [MASK] [MASK] [MASK] dimes does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] in his bank [MASK] [MASK] [MASK] borrowed <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] nickels does he have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] in his bank [MASK] [MASK] [MASK] borrowed <num> [MASK] [MASK] [MASK] [MASK] dimes does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] [MASK] lost <num> <MISC_1> [MASK] [MASK] [MASK] <MISC_1> does she have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] gave her <num> more [MASK] [MASK] [MASK] [MASK] markers does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] [MASK] cookies does <PER_2> have [MASK] [MASK] [MASK]
+[MASK] had <num> [MASK] in his bank [MASK] [MASK] [MASK] gave him <num> [MASK] [MASK] [MASK] [MASK] dimes does <PER_1> have [MASK] [MASK]
+[MASK] had <num> [MASK] in his bank [MASK] [MASK] [MASK] gave him <num> [MASK] [MASK] [MASK] [MASK] quarters does he have [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] lost <num> of the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] balloons does <PER_1> have [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] bought <num> of <PER_1> 's [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] cards does <PER_1> have [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] bought <num> of <PER_1> <PER_3> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] cards does <PER_1> have [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] [MASK] caps does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] gave <PER_2> <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] balloons does he now have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] gave <PER_2> <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] marbles does he now have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] shares them among <num> [MASK] [MASK] [MASK] [MASK] bananas does each friend [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] shares them among <num> [MASK] [MASK] [MASK] [MASK] erasers does each friend [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] shares them among <num> [MASK] [MASK] [MASK] [MASK] marbles does each friend [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] [MASK] shares them among <num> [MASK] [MASK] [MASK] [MASK] tickets does each friend [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] <MISC_1> does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] marbles does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] candies does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] finds another <num> [MASK] [MASK] [MASK] apples does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] finds another <num> [MASK] [MASK] [MASK] oranges does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gets <num> more from <MISC_1> [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] bananas does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gets <num> more from <MISC_1> [MASK] [MASK] [MASK] apples does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gets <num> more from <PER_2> [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] apples does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gets <num> more from <PER_2> [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] crayons does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gets <num> more from <PER_2> [MASK] [MASK] [MASK] marbles does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gets <num> more from <PER_2> [MASK] [MASK] [MASK] stickers does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] apples does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] [MASK] buys <num> [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] eggs does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] candies does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] pencils does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] tickets does <PER_1> have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <num> to <MISC_2> [MASK] [MASK] [MASK] <MISC_1> will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] gives <num> to <PER_2> [MASK] [MASK] [MASK] blocks will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] has <num> [MASK] [MASK] [MASK] candies do they have [MASK] [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] has <num> more [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] marbles does <PER_2> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] has <num> more [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] whistles does <PER_2> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] has <num> more than <PER_1> [MASK] [MASK] [MASK] <unk> does <PER_2> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] cards will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] marbles will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] lost <num> of them [MASK] [MASK] [MASK] [MASK] balloons does <PER_1> have [MASK] [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] shares <num> with <MISC_1> [MASK] [MASK] [MASK] bananas will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] shares <num> with <PER_2> [MASK] [MASK] [MASK] marbles will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] apples will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] cards will <PER_1> have [MASK]
+[MASK] has <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] oranges will <PER_1> have [MASK]
+[MASK] has <num> blue [MASK] [MASK] lost <num> of them [MASK] [MASK] [MASK] [MASK] balloons does <PER_1> have [MASK] [MASK]
+[MASK] picked <num> [MASK] [MASK] [MASK] picked <num> [MASK] from the <unk> tree [MASK] [MASK] [MASK] [MASK] were [MASK] [MASK] [MASK] [MASK]
+[MASK] picked <num> [MASK] [MASK] [MASK] picked <num> [MASK] from the pear tree [MASK] [MASK] [MASK] [MASK] were [MASK] [MASK] [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] [MASK] finds another <num> [MASK] [MASK] [MASK] [MASK] caps does <ORG_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] [MASK] gets <num> more from <PER_2> [MASK] [MASK] [MASK] [MASK] caps does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] [MASK] shares <num> with <PER_2> [MASK] [MASK] [MASK] [MASK] caps does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] [MASK] caps does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] <MISC_1> does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] apples does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] buys <num> more [MASK] [MASK] [MASK] eggs does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] finds another <num> [MASK] [MASK] [MASK] apples does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] finds another <num> [MASK] [MASK] [MASK] cards does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] finds another <num> [MASK] [MASK] [MASK] eggs does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gets <num> more from <MISC_1> [MASK] [MASK] [MASK] cards does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gets <num> more from <MISC_1> [MASK] [MASK] [MASK] oranges does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gets <num> more from <PER_2> [MASK] [MASK] [MASK] bananas does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] <MISC_1> does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] bananas does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] erasers does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <PER_1> <num> more [MASK] [MASK] [MASK] peanuts does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <num> to <MISC_1> [MASK] [MASK] [MASK] eggs does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <num> to <PER_2> [MASK] [MASK] [MASK] apples does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <num> to <PER_2> [MASK] [MASK] [MASK] erasers does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <num> to <PER_2> [MASK] [MASK] [MASK] pencils does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] gives <num> to <PER_2> [MASK] [MASK] [MASK] stickers does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] bananas does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] blocks does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] erasers does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] peanuts does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] loses <num> [MASK] [MASK] [MASK] stickers does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] shares <num> with <PER_2> [MASK] [MASK] [MASK] <MISC_1> does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] shares <num> with <PER_2> [MASK] [MASK] [MASK] apples does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] shares <num> with <PER_2> [MASK] [MASK] [MASK] blocks does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] shares <num> with <PER_2> [MASK] [MASK] [MASK] marbles does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] candies does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] cards does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] crayons does <PER_1> end [MASK] [MASK]
+[MASK] starts with <num> [MASK] [MASK] [MASK] takes <num> away [MASK] [MASK] [MASK] eggs does <LOC_1> end [MASK] [MASK]
+[MASK] took <PER_1> <num> [MASK] to run [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is it between <PER_1> 's house [MASK] [MASK] [MASK] [MASK] [MASK]
+[MASK] took <PER_1> <num> [MASK] to stroll [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is it between <PER_1> 's house [MASK] [MASK] [MASK] [MASK] [MASK]
+[MASK] went to <num> [MASK] [MASK] this year [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] went to <num> [MASK] last year [MASK] [MASK] [MASK] [MASK] games did <PER_1> go [MASK] [MASK] [MASK] [MASK]
+[MASK] went to <num> [MASK] [MASK] this year [MASK] [MASK] went to <num> [MASK] last year [MASK] [MASK] [MASK] [MASK] games did <PER_1> go [MASK] [MASK] [MASK] [MASK]
+[MASK] were <num> [MASK] in the vase [MASK] [MASK] cut some [MASK] from her flower garden [MASK] [MASK] are now <num> [MASK] in the vase [MASK] [MASK] [MASK] [MASK] did [MASK] [MASK] [MASK]
+[MASK] were <num> red [MASK] [MASK] [MASK] [MASK] [MASK] in the vase [MASK] [MASK] cut some red [MASK] from her flower garden [MASK] [MASK] are now <num> red [MASK] in the vase [MASK] [MASK] [MASK] [MASK] [MASK] did [MASK] [MASK] [MASK]

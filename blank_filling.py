@@ -5,7 +5,7 @@ import names
 from random import shuffle, choice
 from my_utils import parse_seg_file, re_sort_metadata
 from generate import load_model, get_seed_sent, masked_decoding
-from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM, BertForMaskedLM
+from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
 from pyclustering.cluster.kmedoids import kmedoids
 #from sklearn.cluster import SpectralClustering, AgglomerativeClustering
 import numpy as np
@@ -13,16 +13,19 @@ import numpy as np
     
 
 bert_version = "bert-large-uncased" # bert-(base|large)-(un)?cased
-#print(f"Loading BERT ({bert_version})...")
-#tokenizer = BertTokenizer.from_pretrained(bert_version)
-#model = load_model(bert_version)
-#print("BERT loaded.")
 
 EOS = "<eos>"
 NUMBER = "<num>"    
 UNK = "<unk>"
 MASK = "[MASK]"
-seqs=None #debug only
+#seqs=None #debug only
+
+def get_bert():
+    print(f"Loading BERT ({bert_version})...")
+    tokenizer = BertTokenizer.from_pretrained(bert_version)
+    model = load_model(bert_version)
+    print("BERT loaded.")
+    return tokenizer,model
 
 def compute_lcs(X, Y): 
     UP_LEFT,UP,LEFT = 0,1,2
@@ -60,11 +63,11 @@ def get_lcs_sim_mat(seqs):
     ---------
         seqs    list of list
             e.g. [[0,1,2],[3,1]] is for 2 MWPs and variable-length input
-
     Returns:
     ---------
         len(seqs) x len(seqs) numpy similarity matrix
     """
+    # TODO: Don't repeat computing for seen pairs! (For now, recompute for each level)
     print("Computing lcs similarity matrix...")
     sim = np.zeros((len(seqs),len(seqs)))
     lcss = [[None]*len(seqs) for _ in range(len(seqs))]
@@ -81,15 +84,15 @@ def get_lcs_sim_mat(seqs):
 
 def get_template_seqs(seg_path):
     linenos, temps2sents, top_temps = parse_seg_file(seg_path)
-    return top_temps[:30], linenos, temps2sents # HACK for debugging
+    return top_temps, linenos, temps2sents
 
 def get_mwp_seqs(data_path):
     seqs= None,None
     with open(os.path.join(data_path,'train.txt'),'r',encoding='utf-8') as f:
-        seqs = [line.split('|||')[0].split() for line in list(f.readlines())][:10] # HACK for debugging
+        seqs = [line.split('|||')[0].split() for line in list(f.readlines())]
     return seqs
 
-def cluster(seqs):#, n_clusters):#, scheme):
+def cluster(seqs, spls):#, n_clusters):#, scheme):
     ## Commented code doesn't make sense. '
     ## ab' and 'ac' is close; 'ab' and 'db' is close; 
     ## but 'ac' and 'db' should not be clustered together. 
@@ -103,13 +106,44 @@ def cluster(seqs):#, n_clusters):#, scheme):
     #clusters = [[] for _ in range(n_clusters)]
     #for lid,l in enumerate(clustering.labels_):
     #   clusters[l].append(lid) 
-    print("cluster:",seqs)
+    print("len seqs:",len(seqs))
     matrix,lcss = get_lcs_sim_mat(seqs)
-    indices = sorted([matrix.argmax(None)//len(seqs), matrix.argmax(None)%len(seqs)],reverse=True)
-    new_seqs = [s for si,s in enumerate(seqs) if si not in indices]
-    new_seqs.append(lcss[indices[0]][indices[1]])   # The newest cluster is put last
-    return new_seqs # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
+    ids = sorted([matrix.argmax(None)//len(seqs), matrix.argmax(None)%len(seqs)],reverse=True)
+    new_seqs = [s for si,s in enumerate(seqs) if si not in ids]
+    new_spls = [s for si,s in enumerate(spls) if si not in ids]
+    new_seqs.append(lcss[ids[0]][ids[1]])  # Newest cluster last
+    new_spls.append(spls[ids[0]] + spls[ids[1]])
+    return new_seqs,new_spls # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
 
+def temp2masked(seqs, spls, temps2sents):
+    """
+    Parameters:
+    ----------
+        seqs    list of template lcs
+        spls    list of set of temps using of which their lcs is seqs
+        temps2sents     dict temp -> [([phrases],lineno)]
+    Returns:
+    ----------
+        temps   list of masked sents
+    """
+    #MASK = '[MASK]'#'_'
+    new_sents = []
+    for seq,spl in zip(seqs,spls):          # iterate lcs
+        for sp in spl:                      # iterate sample templates set
+            for segs,_ in temps2sents[sp]:  # iterate mwps using that sample templates # (_ is lineno)
+                new_tokes = []
+                for s,g in zip(sp,segs):    # iterate segments
+                    if s in seq:
+                        new_tokes.append(g)
+                    else:
+                        new_tokes.extend([MASK]*len(g.split()))
+                new_sent = ' '.join(' '.join(new_tokes).split()[:-1]) #HACK: exclude <eos>
+                new_sents.append(new_sent)
+    return new_sents
+
+def mwp2masked(seqs, spls):
+    # Baseline model: not using tempalte at all
+    pass
 
 def read_ner_file(nerf_path):
     """
@@ -172,14 +206,10 @@ def substitute_seg(seg_path, data_path):
     fout.close()
     
 
-def test_bert():#seed_sentence, masking):
-    #seed_sentence = "Two [MASK] weighs 3 [MASK] . How much do 3 [MASK] weigh ?"
-    #seed_sentence = "There are <num> candies in <PER_1> 's candy collection . If the candies are organized into <num> groups , how big is each group ?"
-    #seed_sentence = "There are 3 [MASK] in Mary 's [MASK] collection . If the [MASK] are organized into 3 groups , how big is each group ?"
-    #seed_sentence = "<PER_1> has <num>|271 books|40 . <num> are <unk>|215 school|180 and the|148 rest|42 are <unk>|182 <unk>|53 . How many|162 books|251 <unk>|72 <unk>|222 does <PER_1> have|214 ? <eos>|139 "
-    #masking = "none" #','.join([str(sid) for sid,s in enumerate(seed_sentence.split()) if s.startswith('<')])
-    lines_in = list((open("berttest.in", 'r',encoding='utf-8')).readlines())
-    fout = open("berttest.out",'w',encoding='utf-8')
+def test_bert(pathin,pathout):
+    tokenizer,model = get_bert()
+    lines_in = list((open(pathin, 'r',encoding='utf-8')).readlines())
+    fout = open(pathout,'w',encoding='utf-8')
     for seed_sentence in lines_in:
         toks, seg_tensor, mask_ids = get_seed_sent(seed_sentence, tokenizer, masking="none", n_append_mask=0)
         toks = masked_decoding(toks, seg_tensor, mask_ids, model, tokenizer, "argmax")
@@ -195,15 +225,25 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
-    seg_path = args.seg_path
-    data_path = args.data_path
-    #substitute_seg(seg_path, args.data_path)
+    #substitute_seg(args.seg_path, args.data_path)
     #test_bert()#seed_sentence, masking) 
 
-    top_temps, linenos, temps2sents = get_template_seqs(seg_path)
-    seqs = top_temps
-    #seqs = get_mwp_seqs(data_path)
-    n_clusters = 3
+    seqs, linenos, temps2sents = get_template_seqs(args.seg_path)
+    #seqs = get_mwp_seqs(args.data_path)
+    seqs = seqs[:100]
+    
+    spls = [[t] for t in seqs] # spls: list(samples using the seqs)
+    n_clusters = 20
     while len(seqs) > n_clusters:
-        seqs = cluster(seqs)
+        seqs, spls = cluster(seqs, spls)
     print(seqs)
+    sents = temp2masked(seqs, spls, temps2sents)
+    lines = '\n'.join(sorted(list(set(sents))))+'\n'
+    
+    bertin = 'bert_masklcs.in'
+    bertout = bertin.split('.')[0]+'.out'
+
+    with open(bertin,'w') as f:
+        f.writelines(lines)
+    
+    test_bert(bertin, bertout)
