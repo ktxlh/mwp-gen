@@ -20,26 +20,6 @@ UNK = "<unk>"
 MASK = "[MASK]"
 #seqs=None #debug only
 
-#######################################################################################
-# TODO: tree nodes for lcs (to avoid recomputing sim score, store it with lcs nodes)  #
-# No, we only have to manipulate the table: delete 2 rows&cols; add 1 row*col. done.  #
-#######################################################################################
-class LcsNode:
-    def __init__(self, lcs, samples, l_node=None, r_node=None):
-        self.l_node = l_node
-        self.r_node = r_node
-        self.lcs = lcs
-        self.samples = samples
-        self.score = len(lcs)
-    def merge(node1, node2, top_only):
-        _,newlcs = compute_lcs(node1.lcs, node2.lcs)
-        if top_only:
-            return LcsNode(newlcs, node1.samples + node2.samples)
-        elif node1.score < node2.score:
-            LcsNode(newlcs, node1.samples + node2.samples, node1, node2)
-        else:
-            LcsNode(newlcs, node2.samples + node1.samples, node2, node1)
-
 def get_bert():
     print(f"Loading BERT ({bert_version})...")
     tokenizer = BertTokenizer.from_pretrained(bert_version)
@@ -89,7 +69,6 @@ def get_lcs_sim_mat(seqs):
     ---------
         len(seqs) x len(seqs) numpy similarity matrix
     """
-    # TODO: Don't repeat computing for seen pairs! (For now, recompute for each level)
     print("Computing lcs similarity matrix...")
     sim = np.zeros((len(seqs),len(seqs)))
     lcss = [[None]*len(seqs) for _ in range(len(seqs))]
@@ -100,7 +79,6 @@ def get_lcs_sim_mat(seqs):
                 sim[si1,si2] = lcs_len +1 # connected graph
                 lcss[si1][si2] = lcs
     sim = sim + sim.transpose() # Full
-    #scheme == 'editdist': # hamming distance is only for comparing strings of the same length
     return sim,lcss
     
 
@@ -114,28 +92,45 @@ def get_mwp_seqs(data_path):
         seqs = [line.split('|||')[0].split() for line in list(f.readlines())]
     return seqs
 
-def cluster(seqs, spls):#, n_clusters):#, scheme):
-    ## Commented code doesn't make sense. '
-    ## ab' and 'ac' is close; 'ab' and 'db' is close; 
-    ## but 'ac' and 'db' should not be clustered together. 
-    ## LCS does not imply mutual similarity of multiple strings.
-    #clusters = None
-    #if scheme == 'spectral':
-    #    clustering = SpectralClustering(n_clusters=n_clusters,affinity='precomputed').fit(matrix)
-    #elif scheme == 'hierarchical':
-    #clustering = AgglomerativeClustering(n_clusters=n_clusters,affinity='precomputed',linkage='average').fit(matrix)
-    ## clustering.labels_ is a list of labels indicating the cluster each seq belongs to
-    #clusters = [[] for _ in range(n_clusters)]
-    #for lid,l in enumerate(clustering.labels_):
-    #   clusters[l].append(lid) 
+def update_lcs_sim_mat(ids, new_seqs, matrix, lcss):
+    """
+    * ids[0] > ids[1]
+    * lcss is lower triangular
+    """
+    # Delete 2 rows & cols
+    for o in [0,1]:
+        del lcss[ids[o]] # row
+        for lcs in lcss: # col
+            if len(lcs) > ids[o]:
+                del lcs[ids[o]]
+
+        for a in [0,1]: # row & col
+            matrix = np.delete(arr=matrix,obj=ids[o], axis=a)
+
+    # Add 1 row & col
+    # TODO: O(n^2) to O(n)
+    new_mat = np.zeros((len(new_seqs),len(new_seqs)))
+    new_mat[:-1,:-1] = matrix
+    lcss.append([0 for i in range(len(new_seqs)-1)])
+    for si,seq in enumerate(new_seqs[:-1]):
+        lcs_len,lcs = compute_lcs(new_seqs[-1], seq)
+        new_mat[-1,si] = lcs_len +1 # connected graph
+        new_mat[si,-1] = new_mat[-1,si] # symmetry full matrix
+        lcss[-1][si] = lcs # keep lower triangular
+    return new_mat, lcss
+
+def cluster(seqs, spls, matrix, lcss):
+
     print("len seqs:",len(seqs))
-    matrix,lcss = get_lcs_sim_mat(seqs)
-    ids = sorted([matrix.argmax(None)//len(seqs), matrix.argmax(None)%len(seqs)],reverse=True)
+    ids = sorted([matrix.argmax(None)//len(seqs), matrix.argmax(None)%len(seqs)],reverse=True)  # [greater,less]
     new_seqs = [s for si,s in enumerate(seqs) if si not in ids]
     new_spls = [s for si,s in enumerate(spls) if si not in ids]
     new_seqs.append(lcss[ids[0]][ids[1]])  # Newest cluster last
     new_spls.append(spls[ids[0]] + spls[ids[1]])
-    return new_seqs,new_spls # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
+
+    # Update sim matrix
+    matrix, lcss = update_lcs_sim_mat(ids, new_seqs, matrix, lcss)
+    return new_seqs,new_spls,matrix,lcss # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
 
 def temp2masked(seqs, spls, temps2sents):
     """
@@ -268,20 +263,20 @@ if __name__ == "__main__":
 
     seqs, linenos, temps2sents = get_template_seqs(args.seg_path)
     #seqs = get_mwp_seqs(args.data_path)
-    seqs = seqs[:100]
-
+    seqs = seqs[:100]   # HACK for debug only? (top 100 templates when seqs is top_temps)
     spls = [[t] for t in seqs] # spls: list(samples using the seqs)
+    matrix, lcss = get_lcs_sim_mat(seqs)
     n_clusters = 40
     while len(seqs) > n_clusters:
-        seqs, spls = cluster(seqs, spls)
-    print(seqs)
-    sents = temp2masked(seqs, spls, temps2sents)
-    sents = sorted(list(set(sents)))
-    new_mwps = [fill_tags(sent.split(),nums,nams) for sent in sents]
-    new_mwps = [t for s in new_mwps for t in s]
-    lines = '\n'.join(new_mwps)+'\n'
+        seqs, spls, matrix, lcss = cluster(seqs, spls, matrix, lcss)
+    print(seqs) # NOTE for temps, lists are merged; tuples aren't.
+    #sents = temp2masked(seqs, spls, temps2sents)
+    #sents = sorted(list(set(sents)))
+    #new_mwps = [fill_tags(sent.split(),nums,nams) for sent in sents]
+    #new_mwps = [t for s in new_mwps for t in s]
+    #lines = '\n'.join(new_mwps)+'\n'
 
-    with open(bertin,'w') as f:
-        f.writelines(lines)
+    #with open(bertin,'w') as f:
+    #    f.writelines(lines)
     
-    test_bert(bertin, bertout)
+    #test_bert(bertin, bertout)
