@@ -20,6 +20,26 @@ UNK = "<unk>"
 MASK = "[MASK]"
 #seqs=None #debug only
 
+#######################################################################################
+# TODO: tree nodes for lcs (to avoid recomputing sim score, store it with lcs nodes)  #
+# No, we only have to manipulate the table: delete 2 rows&cols; add 1 row*col. done.  #
+#######################################################################################
+class LcsNode:
+    def __init__(self, lcs, samples, l_node=None, r_node=None):
+        self.l_node = l_node
+        self.r_node = r_node
+        self.lcs = lcs
+        self.samples = samples
+        self.score = len(lcs)
+    def merge(node1, node2, top_only):
+        _,newlcs = compute_lcs(node1.lcs, node2.lcs)
+        if top_only:
+            return LcsNode(newlcs, node1.samples + node2.samples)
+        elif node1.score < node2.score:
+            LcsNode(newlcs, node1.samples + node2.samples, node1, node2)
+        else:
+            LcsNode(newlcs, node2.samples + node1.samples, node2, node1)
+
 def get_bert():
     print(f"Loading BERT ({bert_version})...")
     tokenizer = BertTokenizer.from_pretrained(bert_version)
@@ -59,6 +79,8 @@ def compute_lcs(X, Y):
 
 def get_lcs_sim_mat(seqs):
     """
+    Get longest common subsequence similarity matrix.
+
     Paramters:
     ---------
         seqs    list of list
@@ -135,7 +157,7 @@ def temp2masked(seqs, spls, temps2sents):
             for segs,_ in temps2sents[sp]:  # iterate mwps using that sample templates # (_ is lineno)
                 new_tokes = []
                 for s,g in zip(sp,segs):    # iterate segments
-                    if s in seq:
+                    if s in seq:            # TODO: get pointers to go throw seq one by one in order (s.t. O(n) in total)
                         new_tokes.append(g)
                     else:
                         new_tokes.extend([MASK]*len(g.split()))
