@@ -209,6 +209,7 @@ def get_pure_toptemps(pure_path, some_types):
                 pure_temps.extend(temps)
     return pure_temps
 
+    
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('-data', type=str, default='', help='path to data dir')
 parser.add_argument('-tagged_fi', type=str, default='', help='path to tagged fi i.e. seg')

@@ -1,26 +1,33 @@
 # -*- coding: utf-8 -*-
-import os
+"""
+TODO: [UNK],[SEP],[PAD]
+"""
 import argparse
+import os
+from random import choice, random, shuffle
+
 import names
-from random import shuffle, choice, randint
-from my_utils import parse_seg_file, re_sort_metadata
-from generate import load_model, get_seed_sent, masked_decoding
-from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
-from pyclustering.cluster.kmedoids import kmedoids
 #from sklearn.cluster import SpectralClustering, AgglomerativeClustering
 import numpy as np
-#import textdistance # .lcsstr for consecutive; otherwise; .lcsseq
-    
+from nltk.tokenize import sent_tokenize
+from pyclustering.cluster.kmedoids import kmedoids
+from pytorch_pretrained_bert import BertForMaskedLM, BertTokenizer
 
-bert_version = "bert-large-cased" # bert-(base|large)-(un)?cased
+from generate import get_seed_sent, load_model, masked_decoding
+from my_utils import parse_seg_file, re_sort_metadata
+
+#import textdistance # .lcsstr for consecutive; otherwise; .lcsseq
+
 
 EOS = "<eos>"
 NUMBER = "<num>"    
-UNK = "<unk>"
+UNK_IN = "<unk>"    # TODO: unified this token
+UNK_BERT = "[UNK]"
+SEP = "[SEP]"
 MASK = "[MASK]"
 #seqs=None #debug only
 
-def get_bert():
+def get_bert(bert_version):
     print(f"Loading BERT ({bert_version})...")
     tokenizer = BertTokenizer.from_pretrained(bert_version)
     model = load_model(bert_version)
@@ -108,7 +115,6 @@ def update_lcs_sim_mat(ids, new_seqs, matrix, lcss):
             matrix = np.delete(arr=matrix,obj=ids[o], axis=a)
 
     # Add 1 row & col
-    # TODO: O(n^2) to O(n)
     new_mat = np.zeros((len(new_seqs),len(new_seqs)))
     new_mat[:-1,:-1] = matrix
     lcss.append([0 for i in range(len(new_seqs)-1)])
@@ -128,6 +134,8 @@ def cluster(seqs, spls, matrix, lcss):
     new_seqs.append(lcss[ids[0]][ids[1]])  # Newest cluster last
     new_spls.append(spls[ids[0]] + spls[ids[1]])
 
+    print(f"{seqs[ids[0]]}, {seqs[ids[1]]} -> {new_seqs[-1]}")
+
     # Update sim matrix
     matrix, lcss = update_lcs_sim_mat(ids, new_seqs, matrix, lcss)
     return new_seqs,new_spls,matrix,lcss # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
@@ -143,21 +151,34 @@ def temp2masked(seqs, spls, temps2sents):
     ----------
         temps   list of masked sents
     """
-    #MASK = '[MASK]'#'_'
     # TODO: Counter() for most common list of phrases in the fixed positions, and use the most common combination only
     # For now, it's simply hollowing out the non-fixed segments
+    SEP_CODE = -1
     new_sents = []
     for seq,spl in zip(seqs,spls):          # iterate lcs
         for sp in spl:                      # iterate sample templates set
             for segs,_ in temps2sents[sp]:  # iterate mwps using that sample templates # (_ is lineno)
-                new_tokes = []
-                for s,g in zip(sp,segs):    # iterate segments
-                    if s in seq:            # TODO: get pointers to go throw seq one by one in order (s.t. O(n) in total)
-                        new_tokes.append(g)
+
+                # Add [SEP] tag TODO doesn't make sense to use more than two sentences
+                # See https://github.com/google-research/bert/issues/395 for details
+                # Suggestion: use unused1 (See vocab.txt) => but it requires extra training :3
+                old_states = [ state for state,seg in zip(sp,segs) for _ in range(len(seg.split()))]
+                mwp = f' {SEP} '.join(sent_tokenize(' '.join(segs).replace(' '+EOS,'')))+f' {SEP}'
+                new_states = [SEP_CODE if word==SEP else old_states.pop(0) for word in mwp.split()]
+                
+                new_tokes = [ ]
+                seq_copied = list(seq)
+                for s,w in zip(new_states,mwp.split()): # iterate words
+                    if len(seq_copied) > 0 and s == seq_copied[0]:
+                        new_tokes.append(w)
+                        del seq_copied[0]
+                    elif s == SEP_CODE:
+                        new_tokes.append(w)
+                    elif s == EOS:
+                        continue
                     else:
-                        new_tokes.extend([MASK]*len(g.split()))
-                new_sent = ' '.join(' '.join(new_tokes).split()[:-1]) #HACK: exclude <eos>
-                new_sents.append(new_sent)
+                        new_tokes.append(MASK)
+                new_sents.append(' '.join(new_tokes))                
     return new_sents
 
 def mwp2masked(seqs, spls):
@@ -173,9 +194,9 @@ def read_ner_file(nerf_path):
     with open(nerf_path,'r') as f:
         pass
 
-def fill_tags(tokens,nums,nams):
+def fill_tags(tokens,nums,nams,must_mask):
     n_preds = len(nams)
-    fixed_rand_wid = randint(0,len(tokens)-1)
+    fixed_rand = random()
     new_mwps = []
     for pid in range(n_preds):
         numid,n_masks = 0,0
@@ -187,9 +208,8 @@ def fill_tags(tokens,nums,nams):
             elif token.startswith('<PER_'):
                 namid = int(token[5:-1])-1   # 1-indexed to 0-indexed
                 token = nams[pid][namid]
-            elif token == UNK:
-                token = MASK
-                n_masks += 1
+            elif token == UNK_IN:
+                token = MASK #UNK_BERT
             elif token == MASK:
                 n_masks += 1
             elif token == EOS:
@@ -197,86 +217,108 @@ def fill_tags(tokens,nums,nams):
             new_tokens.append(token)
         # TODO so what do i want to mask??? nouns?
         # Read the src_ and randomly mask some word for now
-        if n_masks == 0:
+        if n_masks == 0 and must_mask:
             try:
-                new_tokens[ fixed_rand_wid ] = MASK
+                new_tokens[ int(fixed_rand*len(new_tokens)) ] = MASK
             except Exception as e:
                 print(e)
                 continue
         new_mwps.append(" ".join(new_tokens))
     return new_mwps
-
-def substitute_seg(seg_path, data_path):
-    n_preds = 5
-    n_items = 10 # How many <PER_i>, <num>, ...?
-    nums = [str(i) for i in range(n_items)]  # Different preds shares same numbers
-    shuffle(nums)
-    nams = [[names.get_first_name() for i in range(n_items)] for j in range(n_preds)]
     
-    fout = open("berttest.in",'w',encoding='utf-8')
+
+def bert_prediction(pathin,pathout,bert_version):
+    lines_in = list((open(pathin, 'r',encoding='utf-8')).readlines())
+    with open(pathout,'w',encoding='utf-8') as fout:
+        tokenizer,model = get_bert(bert_version)
+        for seed_sentence in lines_in:
+            toks, seg_tensor, mask_ids = get_seed_sent(seed_sentence, tokenizer, masking="none", n_append_mask=0)
+            toks = masked_decoding(toks, seg_tensor, mask_ids, model, tokenizer, "argmax")
+            toks = [tok.replace(' ##','') for tok in toks]
+            print("Final: %s\n" % (" ".join(toks)))
+            fout.writelines("IN\t"+seed_sentence)
+            fout.writelines("OUT\t"+" ".join(toks)+'\n\n')
+                        
+
+def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
+    """
+    Parameters:
+    ----------
+        sents   list of list
+    """
+    
+    def get_num_nam(n_preds, n_items):
+        nums = [str(i+1) for i in range(n_items)]  # Different preds shares same numbers
+        shuffle(nums)
+        nams = [[names.get_first_name() for i in range(n_items)] for j in range(n_preds)]
+        return nums, nams
+
+    nums, nams = get_num_nam(n_preds, n_items)
+    new_mwps = [fill_tags(sent.split(),nums,nams,must_mask) for sent in sents]
+    new_mwps = [t for s in new_mwps for t in s]
+    lines = '\n'.join(new_mwps)+'\n'
+
+    with open(new_gen_fi,'w',encoding='utf-8') as fout:
+        fout.writelines(lines)
+
+def substitute_seg(seg_path, data_path, bert_in, n_preds, n_items):
+
     linenos, temps2sents, top_temps = parse_seg_file(seg_path)
-    metadata = re_sort_metadata(os.path.join(data_path,'metadata_train.tsv'), linenos, new_idxname='seg_linenos')
+    #metadata = re_sort_metadata(os.path.join(data_path,'metadata_train.tsv'), linenos, new_idxname='seg_linenos')
 
     train_tagged = list((open(os.path.join(data_path,"train.txt"),'r',encoding='utf-8')).readlines())
     tags = [[tuple(int(a) for a in t.split(',')) for t in line.strip().split('|||')[1].split()] for line in train_tagged]
 
-    for temp in top_temps:
-        for (segments,lineno) in temps2sents[temp]:
-            tokens = [s for segment in segments for s in segment.split()]
-            #print("IN:"," ".join(segments),lineno)
-            #fixed_rand_wid = choice(tags[linenos[lineno]][:-1])[0] # buggy here
-            new_mwps = fill_tags(tokens,nums,nams)
-            #print("OUT:",new_mwps)
-            fout.writelines('\n'.join(new_mwps)+"\n")
-    fout.close()
+    sents = [[s for segment in segments for s in segment.split()] \
+        for temp in top_temps for (segments,lineno) in temps2sents[temp]]
+    fi_tag_filling(sents, bert_in, n_preds, n_items, must_mask=True) # todo: add [MASK]s before storing it
 
-def test_bert(pathin,pathout):
-    tokenizer,model = get_bert()
-    lines_in = list((open(pathin, 'r',encoding='utf-8')).readlines())
-    fout = open(pathout,'w',encoding='utf-8')
-    for seed_sentence in lines_in:
-        toks, seg_tensor, mask_ids = get_seed_sent(seed_sentence, tokenizer, masking="none", n_append_mask=0)
-        toks = masked_decoding(toks, seg_tensor, mask_ids, model, tokenizer, "argmax")
-        print("Final: %s\n" % (" ".join(toks)))
-        fout.writelines("IN\t"+seed_sentence)
-        fout.writelines("OUT\t"+" ".join(toks)+'\n\n')
-    fout.close()
+    # TODO use tags (& metadata?) for substitution
+    # src: know which tag
+    # metadata: know where to tag
+
+def gen_fi_tag_filling(old_fi_path,new_gen_fi,n_preds, n_items):
+    with open(old_fi_path,'r', encoding='utf-8') as fin:
+        sents = [line.split('|||')[0].replace('(c) ','').split()  for line in fin.readlines() if '|||' in line]
+        fi_tag_filling(sents, new_gen_fi, n_preds, n_items, must_mask=False)
+   
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('-seg_path', type=str, default='', help='path to seg file')
 parser.add_argument('-data_path', type=str, default='', help='path to data dir')
+parser.add_argument('-bert_in', type=str, default='', help='path to bert in file (may be generated)')
+parser.add_argument('-bert_out', type=str, default='', help='path to bert out file')
+parser.add_argument('-bert_version', type=str, default='',help='bert-(base|large)-(un)?cased(-whole-word-masking(-finetuned-squad)?)?')
+parser.add_argument('-write_bert_in', action='store_true', help='')
 
 if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
-    bertin = 'bert_masklcs.in'
-    bertout = bertin.split('.')[0]+'.out'
-    
     n_preds = 1
     n_items = 10 # How many <PER_i>, <num>, ...?
-    nums = [str(i+1) for i in range(n_items)]  # Different preds shares same numbers
-    shuffle(nums)
-    nams = [[names.get_first_name() for i in range(n_items)] for j in range(n_preds)]
+    n_clusters = 20#100
+    n_sequences = 100#int(1e7) # 100K = 1e5 samples in the current largest dataset => 1e7 means infinity
 
-    #substitute_seg(args.seg_path, args.data_path)
+    def write_bert_in():
+        
+        #substitute_seg(args.seg_path, args.data_path, args.bert_in, n_preds, n_items)
 
-    seqs, linenos, temps2sents = get_template_seqs(args.seg_path)
-    #seqs = get_mwp_seqs(args.data_path)
-    seqs = seqs[:100]   # HACK for debug only? (top 100 templates when seqs is top_temps)
-    spls = [[t] for t in seqs] # spls: list(samples using the seqs)
-    matrix, lcss = get_lcs_sim_mat(seqs)
-    n_clusters = 40
-    while len(seqs) > n_clusters:
-        seqs, spls, matrix, lcss = cluster(seqs, spls, matrix, lcss)
-    print(seqs) # NOTE for temps, lists are merged; tuples aren't.
-    #sents = temp2masked(seqs, spls, temps2sents)
-    #sents = sorted(list(set(sents)))
-    #new_mwps = [fill_tags(sent.split(),nums,nams) for sent in sents]
-    #new_mwps = [t for s in new_mwps for t in s]
-    #lines = '\n'.join(new_mwps)+'\n'
+        seqs, linenos, temps2sents = get_template_seqs(args.seg_path)
+        #seqs = get_mwp_seqs(args.data_path)
 
-    #with open(bertin,'w') as f:
-    #    f.writelines(lines)
+        seqs = seqs[:n_sequences]
+        spls = [[t,] for t in seqs] # spls: list(samples using the seqs)    # NOTE the comma matters a lot!!!
+        matrix, lcss = get_lcs_sim_mat(seqs)
+        
+        while len(seqs) > n_clusters:
+            seqs, spls, matrix, lcss = cluster(seqs, spls, matrix, lcss)
+        print(seqs) # NOTE for temps, lists are merged; tuples aren't.
+        sents = temp2masked(seqs, spls, temps2sents)
+        sents = sorted(list(set(sents)))
+
+        fi_tag_filling(sents, args.bert_in, n_preds, n_items, must_mask=True)
     
-    #test_bert(bertin, bertout)
+    if args.write_bert_in:
+        write_bert_in()
+    bert_prediction(args.bert_in, args.bert_out, args.bert_version)
