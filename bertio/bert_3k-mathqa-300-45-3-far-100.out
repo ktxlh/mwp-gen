@@ -1,0 +1,988 @@
+IN	[CLS] ( [MASK] [MASK] ( [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] ( ) = ( ( ) = ( ( ) ) = ( ( ) ) = [SEP]
+
+IN	[CLS] ( [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] + [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( + + + + + ) | [SEP] | [SEP] | [SEP] + + + + ? [SEP]
+
+IN	[CLS] ( [MASK] [MASK] [MASK] ? [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ? ) ? ? [SEP] ? ? [SEP]
+
+IN	[CLS] ( [MASK] x [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( x x x ) = ? [SEP]
+
+IN	[CLS] - [MASK] [MASK] [MASK] + [MASK] [MASK] ? [SEP]
+OUT	[CLS] - - - - + - - ? [SEP]
+
+IN	[CLS] Mary earns [MASK] [MASK] [MASK] hour for [MASK] [MASK] [MASK] hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] mary earn ##s one - half hour for 1 . 5 hours . 2014 : 2014 : 2012 : 2013 : 2013 : | [SEP] 2013 : 2013 : 2013 : 2013 : | 2014 : | | | | [SEP]
+
+IN	[CLS] 9 % [MASK] [MASK] is [SEP]
+OUT	[CLS] 9 % of population is [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] build the [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 . 8 . 7 . 8 . 8 . 8 . 7 . 8 . 8 . [SEP] 9 . 8 . 8 . 8 . 8 . 8 . 8 . 8 . build the new world . [SEP]
+
+IN	[CLS] 9 [MASK] 1 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 1 . ? ? ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] * [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . f * * k ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 . 1 , pp . 1 , 2 - 3 . [SEP] . [SEP] vol . [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] 9 ( london , p . 1 , pp . 2 ; [SEP] . [SEP] . [SEP] 2 ) [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] - [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . - - - - ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] 1 [MASK] [MASK] ã [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . ( 1 ) is a person a person ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . what is this place ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] = [SEP]
+OUT	[CLS] 9 . | = [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 ? 10 ? ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] x [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . x . x . x + ? x . x + ? ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] solution containing [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [SEP]
+OUT	[CLS] 9 . 1 . 1 . 1 . 1 the solution solution containing the following : 1 . 1 = . [SEP] 1 . 1 = . this solution solution is . [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [SEP] = [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 ##d . [SEP] = 1 ##d . [SEP]
+
+IN	[CLS] 9 [MASK] dice [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] [MASK] the probability [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP]
+OUT	[CLS] 9 . dice . . . . . . . [SEP] . [SEP] . [SEP] . [SEP] . . the probability of the future . [SEP] . . . . . . . . . . . . [SEP] . . . . . . . [SEP] . [SEP]
+
+IN	[CLS] 9 [MASK] of [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] 9 % of votes . . = [SEP]
+
+IN	[CLS] 9 [MASK] x [MASK] [MASK] [MASK] [MASK] [MASK] is ? [SEP]
+OUT	[CLS] 9 x x 9 x 9 what it is ? [SEP]
+
+IN	[CLS] 9 log 1 [MASK] [MASK] 5 [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 log 1 ? ? 5 ? ? ? [SEP]
+
+IN	[CLS] 9 years [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 years . the first year of the " plan b " was completed . [SEP] the first year was completed . the second year was completed first . [SEP] the second year was completed . 10 years . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] money will [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 ; [SEP] 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . [SEP] the prize money will be raised by the charity " the hope foundation " . . [SEP]
+
+IN	[CLS] [MASK] a speed [MASK] [MASK] [MASK] [MASK] meters [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] at a speed of 1 . 5 meters per second . [SEP]
+
+IN	[CLS] [MASK] bought [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] and sold [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he bought a new " a " . [SEP] . . [SEP] . . . . [SEP] he was sold and sold to the public . [SEP] . . [SEP] . . . . . . [SEP]
+
+IN	[CLS] [MASK] can [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] you can also also find the following : . . . . . . . . . . . . . . [SEP] this is the sequence number . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] ages are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it is also used for the same purpose . [SEP] all three ages are currently used for the same purpose . the station is also not staffed . [SEP]
+
+IN	[CLS] [MASK] is [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] this is a good thing . [SEP] " i can still see the other side now . [SEP] you must not always be there , " he said softly . [SEP]
+
+IN	[CLS] [MASK] is [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the area [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it is also famous . [SEP] the city is famous for its famous temple and the famous temple complex . [SEP] the famous temple is in the famous hindu town . [SEP] it is the area of the famous temple of the hindu god . [SEP]
+
+IN	[CLS] [MASK] made [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] are the sculpture [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] they made the " art of life " series . [SEP] the museum has a large art museum collection . [SEP] the art museum has a large collection of the national art collection . [SEP] there also are the sculpture museum collections . [SEP]
+
+IN	[CLS] [MASK] produces [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it produces the " new generation " series . [SEP] the new generation series is based on the old generation and the " old " series . [SEP] the series includes the new generation series and the " old generation " series respectively . [SEP]
+
+IN	[CLS] ? [SEP] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [SEP]
+OUT	[CLS] ? [SEP] ? ? ? 9 ? ? [SEP]
+
+IN	[CLS] ? [SEP] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ? [SEP] because of the war ? [SEP]
+
+IN	[CLS] [MASK] % of [MASK] [MASK] % of [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 70 % of the 80 % of the population is muslim . [SEP]
+
+IN	[CLS] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] smith , ( in english , by david smith , " . . . [SEP] . [SEP] . [SEP] . ) [SEP]
+
+IN	[CLS] [MASK] : [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP]
+OUT	[CLS] note : + + + + + + + + + + + + + . [SEP]
+
+IN	[CLS] [MASK] : [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] source : + / - + / - | [SEP]
+
+IN	[CLS] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] and 9 % of the population is foreign nationals . [SEP]
+
+IN	[CLS] [MASK] 9 % of [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] about 9 % of the total population is employed in the local government of kota . [SEP]
+
+IN	[CLS] [MASK] 9 [MASK] into yards [MASK] [SEP]
+OUT	[CLS] the 9 turned into yards . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] together [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] the three play cards together : . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . . ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] sell 9 pounds [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first to ever sell 9 pounds . the first to sell 100 pounds each . [SEP] the first to sell 100 pounds . the first to sell 100 pounds per day . [SEP] the first to sell 100 pounds per day . [SEP]
+
+IN	[CLS] [MASK] [MASK] a distance [MASK] [MASK] km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] at about a distance of 10 km , the station is located at the airport . [SEP] from the airport , the train station is located at the airport ( [UNK] ) . [SEP] the railway station is located here . [SEP]
+
+IN	[CLS] [MASK] [MASK] a distance [MASK] [MASK] km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( at a distance of 10 km ) . ( distance of 10 km ) . [SEP] ( distance of 10 km ) . ( distance of 10 km ) . . . [SEP] ( distance of 10 km ) [SEP]
+
+IN	[CLS] [MASK] [MASK] covers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the route covers the entire route from the city center to the city of chicago . [SEP] buses cover the entire distance from the city center to the chicago river and the lake shore ##front area . [SEP]
+
+IN	[CLS] [MASK] [MASK] covers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the series covers the entire world , from 1 to 10 years . [SEP] they cover the entire distance of the world , from 1 year up to 1 year in the future . [SEP]
+
+IN	[CLS] [MASK] [MASK] covers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the route covers the entire route from the airport to the city . [SEP] buses cover the entire distance from the airport to the city . buses are available for all routes . [SEP]
+
+IN	[CLS] [MASK] [MASK] for [MASK] [MASK] seconds [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP]
+OUT	[CLS] this lasted for 30 - seconds . [SEP] the second time . [SEP] the camera was also used to show the same scene as the first and the second time . [SEP]
+
+IN	[CLS] [MASK] [MASK] has [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find p lines [MASK] [SEP]
+OUT	[CLS] the game has a simple plot . - - - - - - - - - - - - - - - . [SEP] - - - - - - - . [SEP] find p lines . [SEP]
+
+IN	[CLS] [MASK] [MASK] has [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] perimeter [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the park has a large grassy area . [SEP] it is the northern perimeter of the city . [SEP]
+
+IN	[CLS] [MASK] [MASK] took [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] score is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the event took place in the evening . the score is given in the following table : a . [SEP] a . b . a . b . b . b . a . a . a . b a . [SEP]
+
+IN	[CLS] [MASK] [MASK] % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] number is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( 100 % ) ( % ) the total number is : ( % ) ? ? ? [SEP]
+
+IN	[CLS] [MASK] [MASK] , working [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] tank in [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in addition , working with the army to build a light light tank in those days . [SEP] he also had to build a large tank , and he also designed a light aircraft . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 1 % [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 0 . 9 % . 1 % . 1 % . - 1 % . - 1 % . [SEP] - 1 % . - 1 . [SEP] - 1 % . - 1 % . - 1 . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 % [MASK] pass [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 % to pass . [SEP] 1 . 9 % to pass . 1 % . 0 % . 0 % . 0 % to pass . . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 [MASK] [MASK] be [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 . to be . 1 . 10 . [SEP] 1 . 11 . 12 . 12 . 12 . 12 . 12 . 12 . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] multiples of [MASK] ? [SEP]
+OUT	[CLS] 1 . 9 . 1 . 1 . 1 . 1 . 1 . the multiple ##s of ... ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 kg [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] amount [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 kg . 1 kg . 1 kg . 1 kg . 1 kg . 1 kg . 1 kg . 1 kg . [SEP] the total amount was 2 . 5 kg each . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 m . 1 . 9 m . 1 m . 1 m . 1 m . 1 m . 1 m . . [SEP] find the speed of the wind . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the length [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 m . the total length is about 1 . 5 m . ; [SEP] this is the length of the body . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 m . 1 . 9 m . the speed of light . find the speed of the light . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 9 m . , 2 . 5 . [SEP] 1 . 8 m . , 3 . 5 m . , 4 . 5 m . , 5 . 5 m . , 6 . 5 m . respectively . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 pairs [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] could [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it has 9 pairs of keys . [SEP] the key is set to a single key , and is not the only key that could be used . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] days are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [SEP]
+OUT	[CLS] key : 1st day : 1st day : 2nd day : 3 additional days are added to the total of the 9 days . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] watch for rs [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the new year ' s day , the public can also watch for rs . [SEP] m . [SEP] on the first day of the festival at the sri krishna temple complex . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] c is 9 inches [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the size of the letter type c is 9 inches . the letter is a small square , with a small center , and the small square is rounded . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] invests [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the following companies are in the following categories . [SEP] it invest ##s in . [SEP] ( see also : ( see also ) . [SEP] ( see also ) . [SEP] see also : . . . . [SEP] . . [SEP] . . . ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] had [MASK] [MASK] [MASK] [SEP] [MASK] sells 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the latter company had no employees . [SEP] it sells 9 % of the total total company revenue . [SEP] the company has no operating subsidiaries . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] had [MASK] [MASK] [MASK] [SEP] [MASK] sells 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the company also had some subsidiaries . [SEP] it sells 9 % of the total of its shares . [SEP] and a private bank . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] need [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the most pressing need was to keep the whole town safe , and to stop the evil that had been lurking in the shadows of the city . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] provisions [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] for [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the following are provisions for the following : - except for 30 days . [SEP] - - - - - - - - - - - - - . [SEP]
+
+IN	[CLS] [MASK] [MASK] = 9 ^ [MASK] [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a ##² = 9 ^ 2 . 5 . b ##² = 9 ^ 2 . [SEP]
+
+IN	[CLS] [MASK] [MASK] = [MASK] [MASK] [MASK] 55 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] x [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] x ##² = ( 1 . 55 ) = ( 1 ) + x ##² = 1 ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] ( [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first edition ( the first edition of the series ) , with a total of 4 episodes ( 9 episodes , 2 special ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [SEP]
+OUT	[CLS] j . smith , and , smith , david . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( in german , isbn 978 - 9 - 1 ) [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] votes [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( 0 . 9 % ) . ( 1 % ) . ( 1 % ) . [SEP] ( 2 votes ) . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] ^ 1 [MASK] [MASK] [MASK] ^ [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . ( 9 ) . 1 ^ 1 . 1 1 ^ 2 1 ^ 3 1 ^ 4 1 ^ 5 1 ^ 6 1 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] blue [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the probability [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( p . 9 ) " the blue book of mathematics " . [SEP] in : " " " the blue book of the probability theory " " " . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 articles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] find the profit [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the following are 9 articles : " the good life " " . [SEP] " find the profit " " " . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 candidates [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] votes [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it had only 9 candidates ( 1 elected ) : 1 elected . 1 elected . 1 elected unopposed . [SEP] 2 ( votes ) elected . [SEP] 2 elected . 1 elected . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the film lasted 9 hours . the film was shot in the studio . [SEP] " y ##s " was shot in the same studio as " the movie " film version . [SEP] the film was shot in the same studio . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 hours [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] do the [MASK] job [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the team had 9 hours of the best time . [SEP] the team was able to successfully do the entire job . [SEP] the team was able to successfully get the team to complete the task and then to complete the task . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the line is 9 km long . the train is going on from the station and it is going to london . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 liters [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] milk [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the other is 9 liter ##s . the water is a single liter of fresh milk , and the milk is not available . [SEP] the milk is a single liter bottle . [SEP] the milk is a single - serving milk bottle . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 miles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was his rate [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he was about 9 miles ' s ' the ' . this distance was his rate . he was about 4 miles . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 pairs [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] shoes [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the store sold 9 pairs of the following types : 1 - 5 . [SEP] the first shoes were the " a " model , then " a " model and the mini . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 parts [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] replaced [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the book has 9 parts : 1 . 1 . 1 . 2 . . [SEP] . . . . . . . . . . replaced by . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] finished the [MASK] half [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the other , 9 percent , was the top - ranked . the team was also ranked at the time . the team finished the first half with a perfect record . [SEP] the team scored a perfect 10 points . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] p [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the other , 9 percent , was the " best of 2010 " award . [SEP] the 2010 p ##br awards awarded the best overall album for the 2010 " best album " . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent [MASK] [MASK] [MASK] [MASK] q [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first , 9 percent , of the " q - 1 " index . the second , " q - 2 " index , ( ( ( ( ( ( ) ) ) ) ) ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 pounds [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is jake [MASK] s [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he weighs about 9 pounds . jake is a young man , and a young woman . [SEP] he has a small black beard . [SEP] he is jake ' s tall , and very handsome . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 years [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] age [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( 0 - 9 years ) . ( 2 ) [SEP] ( 2 ) under - age ( 0 ) . ( 3 ) women . [SEP] ( 3 ) young people only . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] was one [MASK] fifth [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the current class leader is mr . john j . van dyke . [SEP] mr . john brown was one of fifth graders in the first grade class . [SEP] mr . john j brown . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] feet does [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the " name " is " the foot " ) . [SEP] ( the feet does not mean " foot " . [SEP] thus , " foot " ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] last [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] hour of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the last and the last , the last of the last hour . [SEP] the last hour of time , the last hour of the last hour . the last hour of the last hour forever . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] % of [MASK] is greater [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in fact , 50 % of this is greater than the total of the population . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] , [MASK] is the sum [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following notation , it is the sum of a pair of two numbers and . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] : [MASK] [MASK] [SEP] : [MASK] [MASK] [SEP]
+OUT	[CLS] : : : : : : . [SEP] : : . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] : [MASK] [SEP] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " . " . : . [SEP] history of the world . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] sales [MASK] [SEP]
+OUT	[CLS] the following are the 9 % of the total : ( 1 ) = 1 . 5 million ticket sales . [SEP] ( 1 ) = 1 million tickets . ( 2 ) = . [SEP] find the ticket sales . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] = [MASK] [SEP]
+OUT	[CLS] | | | | 9 = | | , 10 = 11 = | [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the team won all 9 games in 10 days , with the best record . [SEP] the team was defeated by the chinese team in the first round . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] hours [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the film ran for 9 minutes in two hours . [SEP] the film was originally released in the uk as " the last man standing " ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 feet [MASK] [MASK] [MASK] [MASK] [MASK] is the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the bridge is about 9 feet in length . the bridge is the " old bridge " ( [UNK] [UNK] ) type . [SEP] the bridge is a wooden arch truss bridge . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 games [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] games [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( 2 ) : 9 games ( 1 ) : 1 ) ; [SEP] ( 2 games ) ; quarterfinals ; [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 hours [MASK] day [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the school has a 9 hours a day school day . [SEP] the school is equipped with a computer lab , a computer lab , a science and math laboratory . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [MASK] m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the new version of 9 m . 9 m . 9 m . 9 m . 9 m . 9 m . 9 m . [SEP] 9 m . 9 m . 9 m . 9 m . 9 m . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] population would [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the plan would " to make the city look like a " big city " " . [SEP] the plan was also stated that the city population would be reduced by " a small percentage " only . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] cost [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] less must [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the . the less must cost . the . the . [SEP] the less . the . the . the . the . the . less must cost the . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] age will [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the future , it is not so much possible that the golden - age will be so great . [SEP] it is so very unlikely . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] was [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] was the price [MASK] [MASK] [SEP]
+OUT	[CLS] but the whole damn thing was just a big , fat , fat lie . [SEP] the only thing missing was the price tag . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] = [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ) [MASK] [MASK] [MASK] a [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( ( ) = ( ) ) , ( ) , ( ( ) ) ) . ( ( a , a , a ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] + [MASK] [MASK] € [MASK] [MASK] [MASK] [MASK] € [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( € ) ) + ( ( € ) ) + ( € ) + | [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 % of [MASK] [MASK] marks [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( * ) - - 9 % of the total marks in mathematics . [SEP] ( * ) - - 1 % in science . [SEP] ( * ) - . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] 1 [MASK] [MASK] / [MASK] [MASK] [SEP]
+OUT	[CLS] the average speed is about 9 . 5 km / h , maximum speed is 1 km ##h / h . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the team had won all 9 games in two days . the team was then then sent back to the league for further training . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the team had won all 9 games in two days . the team was then invited to play in the championship game . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 acres [MASK] [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the park is 1 . 9 acres . built in two days , the park is currently used to host the annual spring festival event . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 times [MASK] [MASK] [MASK] [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the city was visited only 9 times in the past . in those days , the city was not yet considered a " city " status . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] for rs [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 1 . 1 . 1 . 1 . for rs . [SEP] 1 . [SEP] 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . [SEP] 1 . 1 . 1 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ate [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] " oh no , i just ate it all . [SEP] " " well , what did you do then ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] get [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if you have a phone number , you get the right one . [SEP] you have the right number . and you have the right person here . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] get [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if you have the right number , you get the right answer . [SEP] you have the right number . " " i have a number . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] log 9 [MASK] is [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the log 7 is the minimum , the log 9 , is the maximum . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] 1 . 1 . 1 / / / / / / / / / / / / / / / / / / / / = [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the mark [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( 1 % ) , 9 % ) . the following . [SEP] ( = = = = = = = = = = = = = ) . [SEP] this is the mark ( = = = ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 / [MASK] [MASK] [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first was the 1 / 9 / 11 and the 1 1 / 2 / 11 . the second one was the 1 / 3 / 11 . [SEP] the third was the third . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [SEP] [MASK] is the distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the average length is 2 . 9 cm . [SEP] this is the distance between the head and the body when adult . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the average speed is about about 9 km . the train is operated by the mumbai suburban railway company . [SEP] it is the highest speed in the country . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the cost [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] ( $ 1 . 5 . 9 m ) . ( [UNK] ) . [SEP] this is the cost of a single car ( 1 . 5 m ) per 100 km journey . [SEP] [UNK] . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the cost [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] the total cost is 1 . 9 m . the total cost is . [SEP] find the cost of the unit is : . . . . . . . [SEP] . . . . [SEP] . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 mph [MASK] [SEP] [MASK] boat [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the boat is rated at about 9 mph . [SEP] the boat is rated at a high speed rating . [SEP] the boat is also available as a full size boat , with a single - seat cabin version . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 sec [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] train [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the train was timed at about 9 sec . from 1 may , the train was delayed . [SEP] from 1 may , the train was timed at about 1 min . from 1 may , the train was delayed . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 times [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the rectangle [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( 1 ) = ( 9 times ) ) . [SEP] ( ( 1 ) ) . ( ( 1 ) ) is the rec ##tangle where ( ( 1 ) ) = . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] is the [MASK] price [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " but the real ' s eyes are a big deal . [SEP] . " [SEP] " but ... " he said , " no . [SEP] no . [SEP] this is the only price you have left . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] have [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] have [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the following list of the following players have a single team name . [SEP] the following are the players who may have been a regular player . [SEP] the following players are currently playing for the same club * . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the [MASK] length [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the number of the number of letters is the number of the number of the number of letters . using a number of letters to find the word length is not possible . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [SEP] find the ratio [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] let us say that the first one is the same . [SEP] find the ratio of the second one , and let us say that . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] metres [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the breadth [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the total surface of the lake is 9 square metres . [SEP] the lake is composed of a large area of 10 square kilometres , which is the breadth of a lake . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the weight [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first version is a 1 . 9 cm model with a small size sensor . [SEP] the first generation of camera . [SEP] the new model is made with a small size sensor , so we can find the weight of the camera . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] surface [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the water is about 1 . 5 9 cm . the water is clear . [SEP] find the water surface is almost black . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the volume [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( 1 cm ) , ( 9 cm ) , ( ) ) . [SEP] find the volume of the cylinder . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 feet [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the length [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the average length of the tree is 9 feet and a half of the tree . [SEP] by using a single - leaf ##ed tree , we find the length of the tree . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 hectares [MASK] [SEP] find the cost [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the total land area is 1 . 9 hectares . [SEP] find the cost of the land is 1 . 5 hectares . [SEP] the total area . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 machines [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] fill [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the new machine had a total of 9 machines , with 2 more added to fill the new machine . [SEP] the new machine had 2 . 5 ##m ram , with 2 . 5 ##m ram and 2 ##m rom . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ( [MASK] [MASK] [MASK] ) [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] 1 . 1 . 1 . 1 . ( 1 . 1 ) . 1 . 1 . 1 . 1 . 1 . 1 . 1 = [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] * [MASK] m * [MASK] m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] | m * * * * * * * | m * * m * * * * | | | [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] rs [MASK] [SEP] [MASK] [MASK] - [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] - - - - - - - - . [SEP] - - - - - - - rs . [SEP] - - - - - - ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 27 [MASK] [MASK] [MASK] , are [MASK] [MASK] [SEP]
+OUT	[CLS] the largest single - cell cells , at 27 mm in diameter , are solitary . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first two were the following : the 9 / 11 / 11 / 11 / 11 / 11 y - 12 / 11 / 11 / 11 . [SEP] the first two were the 11 / 11 / 11 / 11 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] ( [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] ( . . . . . . . 9 ) . . ( . [SEP] . [SEP] . ) [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] a . 7 . 5 . 8 . 9 . 5 . b . 5 . 4 . 6 . 5 . 5 . 4 . 5 . = [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 runs [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] score [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the " a " team had scored only 9 runs in the match . [SEP] the team was also unable to make a score , with the team now only having to field two players , with only a single batsman available . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] did the [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : the great fire of the world - the fire that has been set to the world ? ) . [SEP] why then did the great fire happen ? . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the number of the number of the number that are in the number . the number of the number that are in the number of numbers . [SEP] number is the number of the number of numbers in . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] m [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] the height [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the total height of the bridge is 1 . 9 . 5 m . in length . [SEP] and the height is 6 m . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] x [MASK] 1 [MASK] [MASK] x [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first ( the first ) of the first 9 ( 1 x x 1 x 1 x 1 ) is then chosen to be a " key " number . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the bank of the west , the west bank bank , the bank of y ##s , the west bank bank , the west bank of the west . the value of the west bank . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] he [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " oh , no ! " he said , horrified . [SEP] and then , he was suddenly very still . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] / [MASK] mile [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ride was [SEP]
+OUT	[CLS] the ride was : 1 . 5 - 1 1 / 2 mile . 1 . 5 - 2 / 3 mile . 1 / 2 mile . 1 / 2 mile the final ride was [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 kg [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] weights [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the " a " is a weight of 0 . 9 kg . the " a " is a " weight " . [SEP] find the following weights : ( ( a ) ) = . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 kg [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . 9 kg . [SEP] . . . . . . . b . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [SEP] [MASK] [MASK] perimeter [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the base is a large square building measuring 2 . 9 m . [SEP] at the perimeter of the building is a large square tower . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 years [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the teacher [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] - - - - - - - - - - 9 years . [SEP] - - - - - - - - - - - - - - - . [SEP] she is the teacher of the new school class . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 years [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the teacher [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the school is a mixed - sex school for under 9 years . [SEP] the school is run by a local community . the school has to help find the teacher to be there . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is 9 [MASK] fifth [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : see also : " " " " " " " ) . [SEP] it is 9 - fifth ##s in length . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] marks [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " " " " " " " " " " this is a simple test . " " " " " " " " " yes . [SEP] find the right marks . " " " " yes . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] must [MASK] the value [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in a financial institution , which is not a financial institution , it must be the value of money . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] it travel [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : " if it is alive " ) . [SEP] " can not it travel ? " ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] will [MASK] the weight [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " " oh , no ! " i said , horrified . [SEP] " will , the weight is like a thousand thousand pounds already . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] / 1 [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the world of the dead ( 2 / 3 ) : 9 ( 2 / 1 / 3 / 3 ) . ( 2 / 2 / 3 ) . ; [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] increases [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] score after [MASK] innings [MASK] [SEP]
+OUT	[CLS] if the ball is hit by the batter , the run rate increases with the total of runs . [SEP] the batter is to not score after two innings . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] numbers is [SEP]
+OUT	[CLS] the number of the number of the number of the two numbers is called . [SEP] the number of the numbers is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] must [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] that is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( ( ( ( ( ( ) ) ) ) ) must be ( ( ( ) ) ) that is , ( ( ( ( ( ) ) ) ) ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] it be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : see also : see also : see ) . [SEP] ( let not it be . ) ( see also : see also ) . [SEP] . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] he spend [MASK] [SEP]
+OUT	[CLS] he was a rich man , who was not only a good man , but how did he spend ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] is the selling [MASK] [MASK] [SEP]
+OUT	[CLS] - - - - - - - - - - - - - . [SEP] what is the selling price ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [MASK] + 9 [MASK] x [SEP]
+OUT	[CLS] x = 0 + 1 + x + x + x x x = 0 + 9 + x [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] % of [MASK] remainder left [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] key : key : - - - - - - - - - 1 % of the remainder left . - - - - - . [SEP] - - - - - - - . - - - - - - . - . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] its area [MASK] [SEP]
+OUT	[CLS] the village has a total of 2 cm . of the total of 1 , 5 cm , the village has 3 of its area . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] meter [MASK] [MASK] and [MASK] meter [MASK] [MASK] [SEP]
+OUT	[CLS] the game is played with a single card deck , a card deck deck , a meter deck , and a meter deck . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 kmph [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] take [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the last season , the team had a total of 1 . 5 9 km ##ph . [SEP] in the last season , the team had to be moved back to the main track , to take a new training course . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] and [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the school is composed of the following schools : the school is a boarding school , a day school and a boarding ( boarding ) . [SEP] the school is a private boarding school . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the [MASK] [MASK] value [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the value of the value of the value of the value of is zero , then is the absolute absolute value of , . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] would [MASK] the result [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : see also : see also : see also : ) . . [SEP] this would be the result of the " the end " . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 pipes [MASK] [MASK] fill the [MASK] tank [MASK] [SEP]
+OUT	[CLS] the pumps are : 1 , 500 cubic feet of water per minute , through 9 pipes , to fill the storage tank . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] working [MASK] [MASK] [MASK] [MASK] the [MASK] work [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the team is composed of the following teams : the team is a professional football club . [SEP] working with the youth , the team work with the professional players . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] would [MASK] the thickness [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if a ship was not so much so thick that it could be carried on a ship , it too would have the thickness , and thus the same weight . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the [MASK] [MASK] value [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following example , if , then , then , then , then , then then , where is the expected present value of and . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the value [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the modern day , the value of a gold coin is expressed in the decimal system , as is the value of a silver ( sterling ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] m [MASK] [MASK] and [MASK] m [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first group of four members of the new group was named , including john henry smith , william m . smith and john m . smith . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] will [MASK] the average [SEP]
+OUT	[CLS] the average is the average . if the average is a square ( a circle ) number , it will be the average [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP]
+OUT	[CLS] the first was the first to have a full - time pilot , and it was also the first production version of the m - 1 ( aka " the eagle " ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] find the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] find the code . find the code . find the code . find the code . find it . [SEP] find the code number . find the code number . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " okay . [SEP] find the speed of sound first . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] m [MASK] [MASK] and [MASK] cm [MASK] [SEP]
+OUT	[CLS] the school has : 1 m . , 2 m . , 3 m . , 4 m . , 5 m . , and 6 cm . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] feed [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the system includes : - - - - - - - - - - - - - - - 9 ##x ; [SEP] - - - - - - - - - - feed ; - - - feed ; [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ( [MASK] n [MASK] [MASK] [MASK] [MASK] [MASK] b are [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the following is : the following are the main categories : category a is " a " . ( category n is " n " ) b are " b . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] is the cyclist [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] * * * * * * * * * * * * * * * * * * * * * . [SEP] he is the cyclist . * * * * * * . he is the cyclist . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( = = = = = = = = = = = = = = = = = = = ) . [SEP] find the speed of the train . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] is the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . . . . . . . . . . . in mathematics , a prime is the largest number . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] is the length [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the number of the number of the number of the number of the number of the number of the number of numbers . [SEP] it is the length of the number of numbers . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 kg [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the weight [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the following is : . . . . . . . . . . . . . . . 9 kg . . . . . . . [SEP] find the weight . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] to cross [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the game is played by the following teams : team : team : 1 . 1 . 2 . 3 . 4 . 5 . [SEP] team : team : attempt to cross the river water . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the value [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following table , the values are : 1 . 1 . 1 . 1 . 1 . 1 . 1 in the table , where is the value of the second term : . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] would [MASK] a loss [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the company had not already purchased the " two - year " contract that would allow it to make a " new " product , it would make a loss on the market . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] is the value [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first is the number of the number of the number of the number of the number of the number of the number of the number of the number . [SEP] this is the value of n . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " the value of money ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] value [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the " a " is the " a - a - a " . the " a - a - a " is the " a - a - a " value . [SEP] this is the highest value of a . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " the value of money ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] speed [MASK] [MASK] [MASK] for [MASK] [MASK] trip [MASK] [SEP]
+OUT	[CLS] the new model : the new model : the new model : the new model : the new model : the new model : the new model : the new model the maximum speed is set only for one round trip . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] sum of [MASK] digits [MASK] n is [MASK] [SEP]
+OUT	[CLS] the number is : 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . 1 . [SEP] the sum of the digits of n is . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] number of pencils is [MASK] [SEP]
+OUT	[CLS] the number of pencil ##s is . the number of the pencil ##s is . if the pencil ##s are all the same , then . . . the total number of pencil ##s is . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] age of [MASK] [MASK] [MASK] men is [SEP]
+OUT	[CLS] the age of the women is : . . . . . . . . . . . . . . . . . . . . . . [SEP] the average age of the two adult men is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the value [MASK] [MASK] + [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following table : ( ) . ( ) . ( ) . ( ) . ( ) . ( ) . ( ) . where : is the value of x + y + z . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " " " " " " " " the value of art ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the range of [MASK] / [MASK] [MASK] [SEP]
+OUT	[CLS] the group of three - member groups of the group of three - member groups of the group of three - member groups of the group of the range of sizes / shapes . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value [MASK] [MASK] [MASK] [MASK] [MASK] ) ? [SEP]
+OUT	[CLS] ( ) ? ) ? . ( ) ? . ? . ? . ? . ? . ? . ? . ? . ? . is the value of ( ( ) ? ) ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " " " " " " " the value of money ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the value [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following table , the number is : where : where : : : : : : : : : : : : : . [SEP] , , , , , , and is the value of and . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " " " " " . [SEP] " " " " " " " " the value of art ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the percentage [MASK] [MASK] in [MASK] [MASK] solution [MASK] [SEP]
+OUT	[CLS] the system is based on the following : the total number of the total number of the number of total total of the solution . [SEP] it is the percentage of points in the total solution . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] marks of [MASK] [MASK] students is [SEP]
+OUT	[CLS] the school was : the school was : - - - - - - - - - - - - - - - the highest marks of the school students is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the following lists the following categories : notes : notes : = = = = = = = = = . [SEP] = = the total number of the most played matches in the season . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] value of [MASK] [MASK] y [MASK] z is [SEP]
+OUT	[CLS] the number of the number of the number of the number of the number of the number of the number of the the expected value of x , y and z is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] will [MASK] the range [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the vehicle is not in the correct condition , it is also possible to also use a special or special vehicle . [SEP] if it is not in the correct condition , it will exceed the range of the test vehicle . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] hand is [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] is his salary [MASK] [SEP]
+OUT	[CLS] ( see also : see also : ) ( note : ) ( note : ) ( ( note : ) ) . [SEP] ( ) his right hand is left . [SEP] ( ) this is his salary . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] an [MASK] loss [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] find the [MASK] worth [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " no . [SEP] i have an emotional loss , sir . [SEP] no . [SEP] find the situation worth the effort here . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] articles [MASK] [SEP] [MASK] [MASK] the percentage [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the most popular online newspapers is : the times , the guardian , the independent , the independent . list of newspaper articles . [SEP] table shows the percentage of people who are online readers . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] ( see also : ) ( see also : ) ( see also : ) ( see also : ) what is not the value of money ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] the time [MASK] [MASK] [MASK] [MASK] [MASK] using the [MASK] [MASK] [SEP]
+OUT	[CLS] the game is played by a small team of two players , called a team of two ( [UNK] ) players . [SEP] the score is also the time that is being played when using the game . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] for [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] savings did [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the bill also included : the bill would also include : the bill would not include : the bill would not provide for tax credits . [SEP] the bill for tax savings did not include : the tax credit program . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] non [MASK] zero [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] y ? [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " " " " " non - zero " " " " " " " " y ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] paint the [MASK] [MASK] [MASK] cube [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the project is based on : a - cube , a - cube , a - cube , a - cube . paint the cube , the cube . paint the cube again . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ^ [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the " 1 - 2 " - 1 - 3 " - 4 " - 5 " numbers has the value of 1 ^ 2 ^ 3 ^ 4 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] value of [MASK] x [MASK] y is [SEP]
+OUT	[CLS] in the following table , the number of the number is : where : : : : : : : the absolute value of both x and y is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the ratio [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] school [MASK] [SEP]
+OUT	[CLS] the school has a total of 3 , 000 students with a total of 1 , 000 total student population . [SEP] this is the ratio of the total students enrolled in the school . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the worker [MASK] [MASK] [MASK] [MASK] before [MASK] increase [MASK] [SEP]
+OUT	[CLS] ( see also : see also : see also : ) ( see also : see also : ) . . [SEP] . . the worker will be paid wages before wages increase . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the value [MASK] x [MASK] [SEP]
+OUT	[CLS] in the following , let : let : let : let : let : let : let : let : . [SEP] where is the value of x . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the value of [MASK] [MASK] [SEP]
+OUT	[CLS] the system used to be based on the following steps : the system is designed to find the right way to find the value of x . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] piece is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the probability [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following , the number is : where : : : : : : : : : is the probability piece is : : : : : : is the probability is : : : : and is the probability . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] ( see also : ) - - - - - - - - - - - - - - - - the value of life ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] grams of [MASK] b are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the largest amount of vitamin b is produced from the plant ( see also " vitamin b " ) . [SEP] 1 . 5 grams of vitamin b are produced from the plant ( table ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] find the [MASK] price [MASK] [MASK] good [MASK] [SEP]
+OUT	[CLS] the price of the world is not enough . but , if you can find the right price ... . [SEP] . . [SEP] find the right price is always good . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [SEP] find the [MASK] part [MASK] [SEP]
+OUT	[CLS] the list of the following categories ( category 1 : category 2 : category 3 : category 4 ) , are shown . [SEP] find the next part . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the [MASK] [MASK] value [MASK] [MASK] [MASK] [MASK] n [MASK] [SEP]
+OUT	[CLS] the number is : : : : : : : : : : : : : : : where n is the expected present value and n = - n . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] speed of [MASK] faster train is [MASK] [SEP]
+OUT	[CLS] the train is run from the first station . the train is run from the second station only . [SEP] the second train is run from the first station . the average speed of the faster train is . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] into [MASK] school [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] girls becomes [SEP]
+OUT	[CLS] the school is a " girls ' high school " , and is a " college " school . [SEP] the school was later converted back into a school . the school that teaches the girls becomes [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] equal numbers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( 1 ) ) where : where : , , , , , , , , and . [SEP] let be equal numbers , , , , , and , . [SEP] , is the natural number , and , , . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] percent of b is [MASK] [MASK] [SEP]
+OUT	[CLS] the table of the total number of the number of the number of the total of the number . [SEP] the percent of b is given . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] build a wall [MASK] [MASK] m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the law of the four - sided wall was also changed so that the king was obliged to " build a wall 4 . m . high and four sides " . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] factors does [MASK] [MASK] ? [SEP]
+OUT	[CLS] the gene pool of the species is : - - - - - - - - - what genetic factors does it contain ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] price is [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( 1 ) ) where : where : where : : : : : : : : the price is : : : : . [SEP] where is the purchase number . where : : : : = 1 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] result [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the numbers [MASK] [SEP]
+OUT	[CLS] " " " " " " " " " " " " " " " " " " the result is : " " " " " " . [SEP] find the numbers . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] students at [MASK] college are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] key to knowledge : - - - - - - - - - - - - - - the students at the college are trained to be a professional engineer . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the product [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] ? [SEP]
+OUT	[CLS] - - - - - - - - - - - - - - - - - - - the product is now available . - - - in europe ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] diameter of [MASK] ball is [MASK] [SEP]
+OUT	[CLS] the ball is a . a . a . the diameter is . . . . . . [SEP] . . . . . . . . . . . . . . . . . [SEP] the diameter of the ball is . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the ratio [MASK] [MASK] [MASK] women [MASK] [SEP]
+OUT	[CLS] the ratio of women to men is : = = = = = = = = = . [SEP] = = = = = = = = = = = = = is the ratio of men to women . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] age of b is [SEP]
+OUT	[CLS] . . . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . the golden age of b is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] days required [MASK] complete the work [MASK] [SEP]
+OUT	[CLS] the project was funded by the indian national congress and the indian national congress in the uk . [SEP] the indian film industry was reportedly reportedly given the 30 days required to complete the work . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] area of [MASK] [MASK] region is [SEP]
+OUT	[CLS] the region is composed of : the islands of the archipelago : islands of the archipelago ##s . [SEP] the islands of the archipelago . the area of the whole region is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] ratio of [MASK] ages will [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : see also : ( see also : compare the average age of children . [SEP] ) in general , the ratio of average ages will be ( 1 ) . [SEP] ) . ( see also : compare ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] exactly [MASK] [MASK] deviations less [MASK] [MASK] mean [MASK] [SEP]
+OUT	[CLS] the table of the data is called the " nearest neighbor " ( or mean ) table . [SEP] the average is exactly two standard deviation ##s less than the mean . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] amount of [MASK] bill is [SEP]
+OUT	[CLS] the amount of the amount of the amount is called the " total dollar " of money . [SEP] and . [SEP] the amount of the bill is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the work [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] is the share [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] - from the holy bible : - - - - - - - - - - - . [SEP] - - the work of the lord . [SEP] . . [SEP] this is the share of god . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] feet [MASK] [SEP] [MASK] [MASK] the area [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the station is built with a double - track platform and a single - track track , separated by several feet . [SEP] it serves the area of the former railroad yard . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] from [MASK] list [MASK] [MASK] [SEP] [MASK] may be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the following is : - - - - - - - - - ( taken from the list ) . [SEP] it may be read as a " - - - - - " sequence . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] direction [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the length [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first version of the song had a short opening sequence with the two main characters walking together in the direction of the main character and the other two characters walking away . [SEP] this was the length of the original version . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the value of [MASK] [MASK] [SEP]
+OUT	[CLS] the value of a set is called a set of all values of a set , where a is the value of a . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] more [MASK] gasoline [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the law of the wild . the law of the wild . the law of the wild . more than gasoline . the law of the wild . and now the law is the law of nature . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] hours [MASK] [MASK] the distance [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : note : note : ( see also : ) note : the average time of 24 hours is twice the distance of a day . [SEP] ) note : ( see also : ) note . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value of [MASK] ? [SEP]
+OUT	[CLS] - - - - - - - - - - - - - - - - - - the value of love ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] age of b is [SEP]
+OUT	[CLS] . . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . the golden age of b is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] integer [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] integers are [MASK] [MASK] [SEP]
+OUT	[CLS] the number of the number is : where : : : : : : : : . [SEP] : : : : : : : . . results end in an integer . . . . the two integers are equal . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the student [MASK] [MASK] [MASK] [MASK] in kilograms [MASK] [SEP]
+OUT	[CLS] the team is composed of : a . c . , a . c . s . [SEP] , and a . c . ; [SEP] and , the student is usually measured only in kilograms . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] save in [MASK] year [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] the " " " " " " " " " " " " " " " . [SEP] " " " " . save in a year . " " " " " " " " " ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] pipes are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] fill the tank [MASK] [SEP]
+OUT	[CLS] the tank is supplied by the water supply system and the water supply is not regulated . [SEP] the water supply pipes are connected to the water supply by a pipe used to fill the tank . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] the branch [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] one piece [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the " first " branch is called the " first " ( [UNK] ) branch , . [SEP] the rest of the branch is then usually divided into a one piece ( [UNK] ) branch . [SEP] the second branch is called the second . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the value [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the project is based on the " green card " ( or green card ) system . [SEP] it measures the value of the green card as measured directly by the national id card ( nic card ) . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] time will [MASK] pass a bridge [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the bridge is built on the same site as the old new york city toll bridge . [SEP] no other time will one pass a bridge on the same site . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the probability [MASK] [MASK] [MASK] n [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the probability of the number n is called the " least probable " of the event . [SEP] it is the probability of the number n being " least probable " of occurring today . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the probability [MASK] n [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the number is in the right range , then where and where and and respectively . [SEP] where is the probability that n = 1 , and where , , and , respectively . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the speed [MASK] train [MASK] [SEP]
+OUT	[CLS] notes : notes : notes : notes : notes : " the speed of train " . [SEP] what is the speed of train ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] cover the [MASK] floor [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first number is the first number . the second number is the second number only . [SEP] then the third number is the third number . the numbers that cover the entire floor are the same . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] a [MASK] [MASK] / b [MASK] [MASK] / [MASK] [MASK] [SEP]
+OUT	[CLS] the first three of the four groups are : a / b . a / b . a . a / b . a / b . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] runs [MASK] [SEP] [MASK] [MASK] his average [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the game was followed by a further innings , with the england team beating the australian team by 34 runs . [SEP] he made his average score of 11 , with a match record of a single " duck " . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] hr take to cross [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the first of the three , the first of the three . the first of the three hr take to cross the river . the first to to to to to to to to to to to to . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] seconds [MASK] [SEP] [MASK] [MASK] the length [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the game is played by a small game of the same type , which is played out in 30 seconds . [SEP] this is the length of the game time . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in place [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] the weight [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the system was designed to help keep the aircraft in flight while the wing is still fully in place and to reduce the total weight required . [SEP] this system reduces the weight of the wing itself . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] [MASK] amount [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] amount [MASK] [SEP]
+OUT	[CLS] the system is based on the total amount of the amount received , and the total amount of the total amount of the amount received is calculated . [SEP] this is the total amount . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] people is [MASK] [MASK] will the population [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the population is not in a stable state , then if the number of employed young people is high , will the population be in a decline ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the speed [MASK] [MASK] [MASK] in [MASK] water [MASK] [SEP]
+OUT	[CLS] the system is based on the american national marine mammal system , or nam ##s , and the speed of the animal in the water . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 ? [SEP]
+OUT	[CLS] the value of the number is : 1 ? 1 ? 1 ? 1 ? 1 ? the value is : 9 ? 9 ? 9 ? 9 ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] sum for [MASK] [MASK] time is [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( = ( ( ) ) ; ( ( ( ) ) ) ; ) ; [SEP] ( ( ( ) ) ) ; the sum for each given time is 1 ; [SEP] ) ; [SEP] ( ) ) ; [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [SEP] find their incomes [MASK] [SEP]
+OUT	[CLS] the company is " a new world " . " to make money " . " [SEP] to make money " . [SEP] " to help people to make money , it is to make money . [SEP] find their incomes . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] minutes [MASK] [SEP] [MASK] [MASK] [MASK] the length [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( source : source : source : source : source : source : ( ) ; [SEP] ( * ) goals scored in penalty minutes ; [SEP] min = min the length of time ; [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] school [MASK] [MASK] the number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the school is used for : a school . a school . a school hall . [SEP] a school . the numbers in the school hall are the number of students in the school . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] days will [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] complete the work [MASK] [SEP]
+OUT	[CLS] the project is planned to be completed by the construction of the new terminal building . [SEP] in 30 working days will be spent on the new terminal building and to complete the work . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] days would [MASK] [MASK] [MASK] complete the [MASK] job [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the plan would be simple : just get her back to the main ##frame ##s . [SEP] two more days would be enough to complete the whole job in time . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] weight of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] vessel is [MASK] [MASK] [SEP]
+OUT	[CLS] the " " " " " " " " " " " " " " . [SEP] the total weight of the vessel is : " " " " " " " " " " " " the whole vessel is empty . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] percentage of discount [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] $ 1 per month . 1 . 5 % of the total annual tax revenue . [SEP] a percentage of discount ##ed federal tax revenue received . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] at [MASK] km [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] speed [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the train is operated by the indian railways . the pune - pune express is operated at 110 km / hr . [SEP] it has the average speed of ( 55 km / hr ) . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] average of [MASK] rest is [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( 1 ) ( 1 ) ( 2 ) . ( 2 ) the weighted average of the rest is : . [SEP] where : , , , , , , and , . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] b are [MASK] [MASK] [MASK] [SEP] find for [MASK] values [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the values of a , b , c , d , e , a , and b are all known . [SEP] find for the values of a , b , c , d , e , and b respectively . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] percent [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] speed is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the united states , the speed range of the electric car is only " reduced by 50 percent " , while the average road speed is " 100 mph " overall . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] current is [MASK] [MASK] [MASK] [SEP] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the current is low , then let the current be high , and the output current is high enough . [SEP] find the speed of light , . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does [MASK] [MASK] [MASK] f ( x [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ( ( ( x ) ) ) . ( ( ( x ) ) ) . does not exist in f ( x ) . ( ( ( x ) ) ) . exists . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the work [MASK] [SEP]
+OUT	[CLS] the project was done by the same team as the first one and was completed successfully in 10 days . [SEP] the second team was also involved in completing the work . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] interest on rs [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . . . . . . there is no net security interest on rs . [SEP] . . . . . . . . . . [SEP] . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] form [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] k is [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the number of the number of the form is called the number of the number k of the form . the number of the number k is called the number . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] progression is [MASK] [MASK] [MASK] is the sum [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the chord progression is : 1 . 1 . 2 . 3 . 4 the chord progression is : " this is the sum of the three thousand thousand years " . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] was the percent [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the list of the " a - list " was the " a " . [SEP] the list of the " a - list " was the " a " , and so was the percent " a " list . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] percentage of [MASK] [MASK] remaining employees would [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the company were not able to pay the company the same compensation amount . [SEP] the company was also required to pay a certain minimum percentage of what the remaining employees would have received . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] ages of [MASK] [MASK] b [MASK] c be [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in the following table , let let a , b and c be integers . [SEP] let the relative ages of a , b and c be integers . [SEP] let a , b be integers . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] numbers are [MASK] [MASK] [MASK] numbers are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] key : key : key : key : key : key : key : | [SEP] | | numbers are : | | numbers are : | | | | | | | | | | | [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] total of [MASK] ages [MASK] [MASK] [MASK] [MASK] [MASK] c be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . b . a . a . a . b . a b . [SEP] with a total of four ages : a . a . c be . a . c . a b . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] train crosses [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] length of [MASK] faster [MASK] [MASK] [SEP]
+OUT	[CLS] ( see also : see also : ( see also : ) . ) . [SEP] the second train crosses the river , and then the first train follows . [SEP] the same length of the faster train . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] must [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] " so , if you can get us to the main road , then . [SEP] to cover the same distance as the other two cars , you must have to be in front . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] [MASK] [MASK] [MASK] [MASK] is divided [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the school is divided into : a main building and a secondary school building . [SEP] it is the main school . the school is divided into houses . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] [MASK] number [MASK] [MASK] who speak [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the group is composed of the following : the majority are ethnic ##ally german . [SEP] this is the same small number of people who speak the local language . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] class of [MASK] students is [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the class is based on the same model as the previous year . the first class of 12 students is introduced . [SEP] the school is now a fully fledged school . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] days can [MASK] [MASK] [MASK] [MASK] work ? [SEP]
+OUT	[CLS] the day is a day . why do people always get to work when their days can be made as just work ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in place [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] the [MASK] age [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the program is based on the same model of the original series , but is in place of the original series ' s " series " . [SEP] " the ice age " episode no . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in place [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] the weight [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the system was designed to keep the ship under the water with the anchor still in place and to keep the ship in place . [SEP] this system reduced the weight of the anchor itself . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 

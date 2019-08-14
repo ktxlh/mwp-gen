@@ -1,0 +1,508 @@
+IN	[CLS] ( [MASK] [MASK] ( [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] ( ) ) ( ) = ( ) = ( ) = ( ( ) ) = [SEP]
+
+IN	[CLS] ( [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] + [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( x + y + 3 ) = [SEP] ? [SEP] ? [SEP] + 2 = x ? [SEP]
+
+IN	[CLS] ( [MASK] [MASK] [MASK] ? [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] ( = 10 ) ? [SEP] 2 ? [SEP]
+
+IN	[CLS] ( [MASK] x [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( 2 x 2 ) = ? [SEP]
+
+IN	[CLS] - [MASK] [MASK] [MASK] + [MASK] [MASK] ? [SEP]
+OUT	[CLS] - - - - + - = ? [SEP]
+
+IN	[CLS] Mary earns [MASK] [MASK] [MASK] hour for [MASK] [MASK] [MASK] hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] mary earn ##s . . . hour for . . . hours . . . . . . . . . . . . [SEP] . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] 9 % [MASK] [MASK] is [SEP]
+OUT	[CLS] 9 % of which is [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] build the [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 . . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . . . . . . . build the new bridge . [SEP]
+
+IN	[CLS] 9 [MASK] 1 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 : 1 : 2 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] * [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 * 8 * 9 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 . 5 , 10 . 5 , 12 . 5 . [SEP] . [SEP] . . [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] 9 . 5 , 10 . 5 , 12 . 5 . [SEP] . [SEP] . [SEP] . ) [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] - [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 5 - 10 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] 1 [MASK] [MASK] ã [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . find 1 % of a number of numbers ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 5 % is rs ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] = [SEP]
+OUT	[CLS] 9 . 5 = [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 5 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] x [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 = x + x + x + x + 2 x = 9 ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] solution containing [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [SEP]
+OUT	[CLS] 9 . . . . . . . . is a solution containing the number of the number of integers . [SEP] the number of the integers in the solution is ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [SEP] = [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 . 5 [SEP] = 10 . 5 [SEP]
+
+IN	[CLS] 9 [MASK] dice [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] [MASK] the probability [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP]
+OUT	[CLS] 9 . dice is the sum of the numbers ? [SEP] . [SEP] . [SEP] . [SEP] what is the probability of getting 12 ? [SEP] find the number of consecutive numbers that are equal to 12 ? [SEP] find the number of consecutive numbers ? [SEP] . [SEP]
+
+IN	[CLS] 9 [MASK] of [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] 9 % of the total population = [SEP]
+
+IN	[CLS] 9 [MASK] x [MASK] [MASK] [MASK] [MASK] [MASK] is ? [SEP]
+OUT	[CLS] 9 . x . x . the number is ? [SEP]
+
+IN	[CLS] 9 log 1 [MASK] [MASK] 5 [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 log 1 = + 5 log 2 ? [SEP]
+
+IN	[CLS] 9 years [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 years . . . . . . . . b . . . . [SEP] . . . . . . . . . . . . . [SEP] . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] money will [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . [SEP] . . . . . . . . . . . . . . . . [SEP] how much money will be spent on the sum of the two numbers in rs . [SEP]
+
+IN	[CLS] [MASK] a speed [MASK] [MASK] [MASK] [MASK] meters [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] at a speed of 45 . 5 meters , b runs [SEP]
+
+IN	[CLS] [MASK] bought [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] and sold [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he bought the sum of the money . [SEP] . . [SEP] . . . . [SEP] . . . and sold the same amount . [SEP] . . [SEP] . . . . . . [SEP]
+
+IN	[CLS] [MASK] can [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . can . . . . . . . . . . . . . . . . . . . . [SEP] what is the least number of the number of the numbers in the set ? [SEP]
+
+IN	[CLS] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] ages are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . is . . . . . . . [SEP] if their ages are . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] is [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . is . . . . [SEP] . . . . . . . . . . [SEP] . . . . be . . . . . . . [SEP]
+
+IN	[CLS] [MASK] is [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the area [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] what is the ) . [SEP] . . . . . . . . . . . . . . [SEP] . . . . . . . . . . [SEP] what is the area of the square of the number of digits ? [SEP]
+
+IN	[CLS] [MASK] made [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] are the sculpture [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he made a " . . . . . . [SEP] . . . . . . . . . [SEP] . . . . . . . . . . . . . [SEP] how many are the sculpture ##s in ? [SEP]
+
+IN	[CLS] [MASK] produces [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . produces . . . . . . . [SEP] . . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] ? [SEP] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [SEP]
+OUT	[CLS] ? [SEP] . . = 9 . . [SEP]
+
+IN	[CLS] ? [SEP] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ? [SEP] number of the number ? [SEP]
+
+IN	[CLS] [MASK] % of [MASK] [MASK] % of [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] what % of the the % of the the the is ? [SEP]
+
+IN	[CLS] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] 2 , 5 , 6 , 7 , 8 , 9 , 10 . [SEP] . [SEP] . [SEP] . ) [SEP]
+
+IN	[CLS] [MASK] : [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP]
+OUT	[CLS] . : . . . + . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] : [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] find : ( 2 ) + ( 3 ) [SEP]
+
+IN	[CLS] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . 9 % of the population is a woman . [SEP]
+
+IN	[CLS] [MASK] 9 % of [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . 9 % of the . . is . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] 9 [MASK] into yards [MASK] [SEP]
+OUT	[CLS] convert 9 metres into yards . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] together [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] . . . . together . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . . ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] sell 9 pounds [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . sell 9 pounds . . . . . . . . . [SEP] . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] a distance [MASK] [MASK] km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it covers a distance of 100 km . . . . . . . . . [SEP] . . . . . . . . . . . . . . . . [SEP] . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] a distance [MASK] [MASK] km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] it covers a distance of 100 km . . . . . . . . . [SEP] . . . . . . . . . . . . . . . . [SEP] . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] covers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a bus covers a distance of 3 km in a row of 4 km each . [SEP] to cover the same distance , it takes a bus to cover a distance of 3 km per hour . [SEP]
+
+IN	[CLS] [MASK] [MASK] covers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a bus covers a distance of 50 km in a single hour . [SEP] to cover the same distance in 4 hours , it takes a bus to cover a distance of rs . [SEP]
+
+IN	[CLS] [MASK] [MASK] covers [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] cover the [MASK] distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a bus covers a distance of 50 km in a single hour . [SEP] to cover the same distance in 4 hours , it takes a bus to cover 60 km more . [SEP]
+
+IN	[CLS] [MASK] [MASK] for [MASK] [MASK] seconds [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP]
+OUT	[CLS] . . for the remaining seconds . [SEP] . . . . [SEP] . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] has [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find p lines [MASK] [SEP]
+OUT	[CLS] a line has a number of p . . . . . . . . . . . . . . . . [SEP] . . . . . . . . [SEP] find p lines . [SEP]
+
+IN	[CLS] [MASK] [MASK] has [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] perimeter [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a square has a diagonal of 3 . [SEP] what is the approximate perimeter of the square ? [SEP]
+
+IN	[CLS] [MASK] [MASK] took [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] score is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a student took a test , and his average score is 5 . 5 . he scored rs . [SEP] 5 . 5 . he scored rs . 5 . 5 . he scored rs . 5 . 5 . . [SEP]
+
+IN	[CLS] [MASK] [MASK] % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] number is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] the ) % of the number is what the number is the number of the other number ? [SEP]
+
+IN	[CLS] [MASK] [MASK] , working [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] tank in [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a man , working a certain tank , can fill the same tank in 10 days . [SEP] he can fill the tank in 20 days . what is the rate of the work ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 1 % [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . 9 % of the number of the number is . 1 % of the number is . [SEP] . . . . . . . [SEP] . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 % [MASK] pass [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] there is 9 % . pass . [SEP] . . . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 [MASK] [MASK] be [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . 9 . . be . . . . . [SEP] . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] multiples of [MASK] ? [SEP]
+OUT	[CLS] . . 9 . . . . . . . . . . . are multiple ##s of 7 ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 kg [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] amount [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . 9 kg . . . . . . . . . . . . . . . . . . . . . . [SEP] find the amount of salt in the mixture . . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he walked 9 m . . . . . . . . . . . . . . . . . . . . . . [SEP] find the speed of his horse . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the length [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . 9 m . . . . . . . . . . . . [SEP] what is the length of the platform ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . 9 m . . . . . . . . . . . find the speed of the train . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . 9 m . . . . . . [SEP] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 pairs [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] could [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . 9 pairs . . . [SEP] . . . . . . . . . . . . . . . . could be formed . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] days are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . . how many days are the days of the month after 9 days ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] watch for rs [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . . watch for rs . [SEP] . . [SEP] . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] c is 9 inches [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the area of the a . c is 9 inches . it has a rectangular base of 8 inches . the area of the a . c . is ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] invests [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . what are the number of rs . [SEP] he invest ##s in ? [SEP] find the amount of rs . . . . [SEP] . . . . . [SEP] . . . . . . . [SEP] . . [SEP] . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] had [MASK] [MASK] [MASK] [SEP] [MASK] sells 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the new company had a profit . [SEP] it sells 9 % of the total of the shares . [SEP] find the profit of the company . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] had [MASK] [MASK] [MASK] [SEP] [MASK] sells 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a certain man had a book . [SEP] he sells 9 % of the book at a profit . [SEP] what is his share ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] need [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . need . . . . . . . . . . . . . . . . . . . . of . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] provisions [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] for [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . provisions . . . . . . for 3 days . [SEP] . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] = 9 ^ [MASK] [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if a = 9 ^ 2 , a + b = 2 , then a = [SEP]
+
+IN	[CLS] [MASK] [MASK] = [MASK] [MASK] [MASK] 55 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] x [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 2 x = 2 x = 55 , then what is the value x of the equation ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] ( [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . ( . . . of . . . , . . . . . . . 9 ) . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [SEP]
+OUT	[CLS] find the number , in decimal form , by . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . , . . . 9 . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] votes [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a candidate gets 9 % of the votes and 2 % of the votes are invalid . [SEP] how many votes are invalid ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] ^ 1 [MASK] [MASK] [MASK] ^ [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 ^ 2 9 ^ 1 . . . ^ 2 . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] blue [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the probability [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 . . . blue . . . . . [SEP] . . . . . . . what is the probability of the result getting ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 articles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] find the profit [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . of 9 articles , in the ratio of the cost . [SEP] . find the profit of the seller . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 candidates [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] votes [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a committee selected 9 candidates to be elected from a committee . what is the number of candidates selected ? [SEP] how many votes were cast ? [SEP] find the total of candidates ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 hours . . . . . . . . . [SEP] . y . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 hours [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] do the [MASK] job [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 hours . . . . . [SEP] . . . . . to do the same job . [SEP] . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a man walks 9 km . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 liters [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] milk [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 liter ##s of the water is the . . . of milk . . . . . . . . [SEP] . . . . . . . . [SEP] . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 miles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was his rate [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . . 9 miles . . . . . . . what was his rate of walking in . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 pairs [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] shoes [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 pairs of the feet of a man are . . [SEP] . . shoes are . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 parts [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] replaced [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 parts . . . . . . . . . . [SEP] . . . . . . . . . is replaced by the term . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] finished the [MASK] half [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 percent of the total . . . . . . . . . . . . . . people finished the first half of the work together . [SEP] . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] p [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 percent . . . . . . . . . . [SEP] . . p . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent [MASK] [MASK] [MASK] [MASK] q [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . 9 percent . . . . q . . . . . . . . . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 pounds [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is jake [MASK] s [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . is 9 pounds . . . . . . . . . . . . [SEP] . . . . . . . [SEP] what is jake ' s weight in the first round ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 years [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] age [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a man is 9 years old at a school . [SEP] a student of a certain age is the age of the student of 10 . [SEP] what is the age of him ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] was one [MASK] fifth [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . is . . . . . . . . [SEP] . . . . was one - fifth of the number of the number . [SEP] the number of the number . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] feet does [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . is . . . . . . [SEP] by what feet does the man walk in . . [SEP] . . . . . . ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] last [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] hour of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . last . . . . . . . . [SEP] . . . . . . . . hour of the hour is the same as the hour of the hour before . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] % of [MASK] is greater [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the ratio of the % of a is greater than the ratio of the % . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] , [MASK] is the sum [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] if the number is , what is the sum of the two numbers in the set ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] : [MASK] [MASK] [SEP] : [MASK] [MASK] [SEP]
+OUT	[CLS] find the value of : : : [SEP] : : ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] : [MASK] [SEP] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the number is then : . [SEP] sum of the digits is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] sales [MASK] [SEP]
+OUT	[CLS] . . . . 9 % . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . . . . [SEP] find the total sales ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] = [MASK] [SEP]
+OUT	[CLS] the ) = ( 9 ) = 7 , ( the ) = ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . 9 . in 3 days . . . . . . [SEP] . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] hours [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . 9 . in 4 hours . [SEP] . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 feet [MASK] [MASK] [MASK] [MASK] [MASK] is the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . 9 feet . . . . . is the . . . . . . . . . . [SEP] . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 games [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] games [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . a . 9 games . b . a . a . [SEP] . 8 games . b . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 hours [MASK] day [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . 9 hours a day . . . [SEP] . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [MASK] m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . 9 m . . m . . . . . . . . . . . . . . . . [SEP] . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] population would [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . . . . . . . . [SEP] . . . . . . then the population would be 200 people . what is the population of ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] cost [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] less must [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . cost . . . . . [SEP] . . . . . . . . . . . . . less must be paid . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] age will [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . is . . . . . . . the age will be . . . [SEP] . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] was [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] was the price [MASK] [MASK] [SEP]
+OUT	[CLS] the the . . . was the . . . . . . . . [SEP] . . . what was the price . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] = [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ) [MASK] [MASK] [MASK] a [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . = . . . , . . . . . . . ) . . . a . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] + [MASK] [MASK] € [MASK] [MASK] [MASK] [MASK] € [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . + . . € . . . . € . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 % of [MASK] [MASK] marks [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . a . obtained 9 % of his total marks in mathematics . [SEP] he obtained a . a . in english only . [SEP] he obtained an a . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] 1 [MASK] [MASK] / [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . 9 . 5 % / . . . . . 1 . 5 / . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . 9 . in 2 days . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . 9 . in 2 days . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 acres [MASK] [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . 9 acres . . in 2 days . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 times [MASK] [MASK] [MASK] [MASK] in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . 9 times . . . . in 5 days . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] for rs [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . for rs . [SEP] . . [SEP] . . . . . . . . . . . . . . . . . . . . . . [SEP] . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ate [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] . . . . . he ate a meal . [SEP] what is the average number of people he met ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] get [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . , . get . . . . [SEP] . is the least number of numbers in the set of the numbers ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] get [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . , . get . . . . [SEP] . is the least number of numbers in the set of integers . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] log 9 [MASK] is [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the number of the two numbers , log log 9 , is log 10 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] . . . . . . / . . . / . . . . . . . . . . . . . . = [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the mark [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . is 9 % of the total number . [SEP] the number of the number is 9 % of the number of the total number . [SEP] what is the mark ##up of the total number ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 / [MASK] [MASK] [MASK] [MASK] [MASK] / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . 9 / . . . . . / . . . . . . . . . . . . . . . [SEP] . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [SEP] [MASK] is the distance [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the . . . . is 9 cm . [SEP] what is the distance between the two . . . . . ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 km [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the [MASK] speed [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a man walks a distance of 9 km / hr at a rate of 4 km / hr . . [SEP] what is the average speed of the man ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the cost [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . 9 m . . . . . . [SEP] what is the cost of the machine at what rate is the cost of the machine at rs . [SEP] . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the cost [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . 9 m . . . . . . [SEP] find the cost of the machine at what percent of the cost of rs . [SEP] . . . . [SEP] . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 mph [MASK] [SEP] [MASK] boat [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the speed of the stream is 9 mph . [SEP] a boat goes downstream at 6 km / hr . [SEP] it goes downstream at 6 km / hr . what is the speed of the stream in meters ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 sec [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] train [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the train takes a time of 9 sec . . . . . . . . . . [SEP] . . . . the train takes a time of 10 sec . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 times [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is the rectangle [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . 9 times . . . [SEP] . . . . . . . . . . what is the rec ##tangle of the rec ##tangle in the square ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] is the [MASK] price [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . what are the price of . [SEP] . . [SEP] . . . . . . . . . . [SEP] . . [SEP] what is the cost price of the article ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] have [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] have [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . have . . . . . [SEP] . . . . . . . have . . . . . [SEP] . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the [MASK] length [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the . . . . . . is . . . . . . . . . . . . . . . . . find the total length of the platform . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [SEP] find the ratio [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the . . . . . . is . . . [SEP] find the ratio of the . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] metres [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the breadth [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the . . . . . . 9 . metres . [SEP] . . . . . . . . . . . . . . is the breadth of the platform . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the weight [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . 9 cm . . . . . . . [SEP] . . . . . . [SEP] . . . . . . . . . . . . . . find the weight of the object . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] surface [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the the the the the the the 9 cm the the the the the the [SEP] find the the surface of the cylinder . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 cm [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the volume [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the the . . . . . 9 cm . . . . . . [SEP] find the volume of the cylinder . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 feet [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] find the length [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . 9 feet . . . . . . . [SEP] . . . . . . . . . . find the length of the platform . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 hectares [MASK] [SEP] find the cost [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the area of a rectangular plot is 9 hectares . [SEP] find the cost of fencing the plot in a rectangular plot ? [SEP] find the area . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 machines [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] fill [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . 9 machines . . . . . . fill . . . . [SEP] . . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ( [MASK] [MASK] [MASK] ) [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] . . . . . . . . ( . . . ) . . . . . . . . . . . . . . = [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] * [MASK] m * [MASK] m [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . * . m * . m . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] rs [MASK] [SEP] [MASK] [MASK] - [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] the sum of the two numbers is rs . [SEP] 50 . find the sum of the rs . [SEP] 50 and - 50 respectively numbers ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 27 [MASK] [MASK] [MASK] , are [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . 27 . . . , are . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . 9 / . . . . . . . . . y . . . . . . . . . [SEP] . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] ( [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] find the number of numbers in the set 9 and 10 . ( ? [SEP] ? [SEP] ? ) [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] . . . . . . . . 9 . . . b . . . . . . . . . . . . . . . = [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 runs [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] score [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . . . . . . scored 9 runs in a match . [SEP] a . . . . . . . score in a match . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] did the [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . . . . . . . . . . . . . . [SEP] how much did the sum of the numbers be [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the number [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . are . . . . . . . . . . . . . . . . . [SEP] what is the number of digits of the number ? . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] m [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] the height [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the area of a square is 8 m by 9 . 5 m . the area is [SEP] find the height of the square . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] x [MASK] 1 [MASK] [MASK] x [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the . . . . . . . . 9 . . x . 1 . . x . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the value [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . , . . . y . . . . . . . . . . . . . find the value of the number of digits [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] he [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he has a total of 50 days of work remaining . [SEP] in a week he completes the remaining work . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] / [MASK] mile [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ride was [SEP]
+OUT	[CLS] a horse is a horse that is driven at 1 / 2 mile per hour at 1 / 2 mile per hour at 1 / 2 mile per hour . the speed of the ride was [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 kg [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] find the [MASK] weights [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . = 9 kg . . . . . . . . . . . [SEP] find the actual weights of the two men in the race . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 kg [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . . 9 kg . [SEP] . . . . . . . b . . . . . . . . . . . . . . . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 m [MASK] [SEP] [MASK] [MASK] perimeter [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a . . . . . . . . is 9 m . [SEP] . the perimeter is 8 m . . . . . . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 years [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the teacher [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] . . . . . . . . . after 9 years . [SEP] . . . . . . . . . . . . . . . . [SEP] what is the teacher ' s salary in years ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [M
