@@ -1,0 +1,45 @@
+IN	It took Robert [MASK] hours to stroll to [MASK] [MASK] house at [MASK] miles per hour . [SEP] [MASK] [MASK] is it [MASK] [MASK] [MASK] house and [MASK] [MASK] house ? [SEP]
+OUT	It took Robert two hours to s ##tro ##ll to his own house at ninety miles per hour . [SEP] What good is it having a big house and a little house ? [SEP]
+
+IN	It took Robert [MASK] hours to run to [MASK] [MASK] house at [MASK] miles per hour . [SEP] [MASK] [MASK] is it [MASK] [MASK] [MASK] house and [MASK] [MASK] house ? [SEP]
+OUT	It took Robert two hours to run to his own house at ninety miles per hour . [SEP] What good is it having a big house and a little house ? [SEP]
+
+IN	It took Robert [MASK] hours to ride to [MASK] [MASK] house at [MASK] miles per hour . [SEP] [MASK] [MASK] is it [MASK] [MASK] [MASK] house and [MASK] [MASK] house ? [SEP]
+OUT	It took Robert two hours to ride to his own house at ninety miles per hour . [SEP] What good is it having a big house and a little house ? [SEP]
+
+IN	It took Robert [MASK] hours to stroll to [MASK] [MASK] house at [MASK] miles per hour . [SEP] [MASK] [MASK] is it [MASK] [MASK] [MASK] house and [MASK] [MASK] house ? [SEP]
+OUT	It took Robert two hours to s ##tro ##ll to his own house at ninety miles per hour . [SEP] What good is it having a big house and a little house ? [SEP]
+
+IN	It took Robert [MASK] hours to stroll to [MASK] [MASK] house at [MASK] miles per hour . [SEP] [MASK] [MASK] is it [MASK] [MASK] [MASK] house and [MASK] [MASK] house ? [SEP]
+OUT	It took Robert two hours to s ##tro ##ll to his own house at ninety miles per hour . [SEP] What good is it having a big house and a little house ? [SEP]
+
+IN	Robert wants to split a collection of erasers into groups of [MASK] . [SEP] [MASK] has 9 erasers . [SEP] [MASK] [MASK] groups will be created ? [SEP]
+OUT	Robert wants to split a collection of erase ##rs into groups of 5 . [SEP] Who has 9 erase ##rs . [SEP] Which 5 groups will be created ? [SEP]
+
+IN	Robert wants to split a collection of cards into groups of [MASK] . [SEP] [MASK] has 9 cards . [SEP] [MASK] [MASK] groups will be created ? [SEP]
+OUT	Robert wants to split a collection of cards into groups of 3 . [SEP] He has 9 cards . [SEP] Which 3 groups will be created ? [SEP]
+
+IN	Robert wants to split a collection of peanuts into groups of [MASK] . [SEP] [MASK] has 9 peanuts . [SEP] [MASK] [MASK] groups will be created ? [SEP]
+OUT	Robert wants to split a collection of p ##eanut ##s into groups of 5 . [SEP] He has 9 p ##eanut ##s . [SEP] What other groups will be created ? [SEP]
+
+IN	Robert wants to split a collection of crayons into groups of [MASK] . [SEP] [MASK] has 9 crayons . [SEP] [MASK] [MASK] groups will be created ? [SEP]
+OUT	Robert wants to split a collection of c ##ray ##ons into groups of 5 . [SEP] He has 9 c ##ray ##ons . [SEP] What other groups will be created ? [SEP]
+
+IN	Each [MASK] costs $ [MASK] . [SEP] [MASK] [MASK] do 9 tickets cost ? [SEP]
+OUT	Each It costs $ 100 . [SEP] What more do 9 tickets cost ? [SEP]
+
+IN	If [MASK] [MASK] costs $ [MASK] , [MASK] [MASK] must Robert [MASK] for [MASK] [MASK] ? [SEP]
+OUT	If The play costs $ 100 , but what must Robert do for it all ? [SEP]
+
+IN	How [MASK] would 9 pieces of [MASK] [MASK] [MASK] if [MASK] piece costs 1 cents ? [SEP]
+OUT	How What would 9 pieces of jewelry be worth if each piece costs 1 cents ? [SEP]
+
+IN	Robert went to [MASK] store [MASK] [MASK] [MASK] month . [SEP] [MASK] buys 9 [MASK] [MASK] [MASK] she goes [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] did Robert buy [MASK] [MASK] [MASK] [SEP]
+OUT	Robert went to the store for a whole month . [SEP] She buys 9 , and then she goes to school again . [SEP] And why exactly did Robert buy it back ? [SEP]
+
+IN	Robert went to [MASK] store [MASK] [MASK] [MASK] month . [SEP] [MASK] buys 9 [MASK] [MASK] [MASK] he goes [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] did Robert buy [MASK] [MASK] [MASK] [SEP]
+OUT	Robert went to the store in the same month . [SEP] He buys 9 , and then he goes to school again . [SEP] So why then did Robert buy it again ? [SEP]
+
+IN	Robert went to [MASK] store [MASK] [MASK] [MASK] month . [SEP] [MASK] buys 9 [MASK] [MASK] [MASK] she goes [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] did Robert buy [MASK] [MASK] [MASK] [SEP]
+OUT	Robert went to the store for a whole month . [SEP] She buys 9 , and then she goes to school again . [SEP] And why exactly did Robert buy it back ? [SEP]
+
