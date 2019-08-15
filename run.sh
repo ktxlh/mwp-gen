@@ -77,7 +77,7 @@ analyze_seg () {
     echo $(( SECONDS - start ))
 }
 
-# Generation with neural templates
+# Generate with neural templates
 generate () {
     start=$SECONDS
     echo "echo '# Generation'" >> $CMDS
@@ -97,6 +97,7 @@ analyze_gen () {
     echo $(( SECONDS - start ))
 }
 
+# Generate with BERT
 blank_filling() {
     start=$SECONDS
     echo "echo '# Blank filling'" >> $CMDS
