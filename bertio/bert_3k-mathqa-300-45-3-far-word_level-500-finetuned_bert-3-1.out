@@ -1,0 +1,144 @@
+IN	[CLS] $ [MASK] [MASK] [MASK] in [MASK] [MASK] account that pays 7 % [MASK] interest compounded semiannually . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] how much [MASK] in the account at the end of [MASK] year ? [SEP]
+OUT	[CLS] $ 100 is deposited in a savings account that pays 7 % annual interest compound ##ed semi ##ann ##ually . [SEP] if the account balance has how much money in the account at the end of the year ? [SEP]
+
+IN	[CLS] ( 7 + 14 ) [MASK] 16 [SEP]
+OUT	[CLS] ( 7 + 14 ) = 16 [SEP]
+
+IN	[CLS] ( √ 7 + √ 14 [MASK] / √ 16 = ? [SEP]
+OUT	[CLS] ( √ 7 + √ 14 ) / √ 16 = ? [SEP]
+
+IN	[CLS] 2,7 , 17,3 , 11,19 , 5,13 , _ _ [MASK]
+OUT	[CLS] 2 , 7 , 17 , 3 , 11 , 19 , 5 , 13 , _ _ .
+
+IN	[CLS] Mary needs to paint all the airplane hangars at the airport , so he buys 7 gallons of paint to do the job . [SEP] during the first week , he uses 14 / 16 of all the paint . [SEP] during the second week , he uses 5 / 15 of the remaining paint . [SEP] how many [MASK] of paint has joe used ? [SEP]
+OUT	[CLS] mary needs to paint all the airplane hangar ##s at the airport , so he buys 7 gallons of paint to do the job . [SEP] during the first week , he uses 14 / 16 of all the paint . [SEP] during the second week , he uses 5 / 15 of the remaining paint . [SEP] how many gallons of paint has joe used ? [SEP]
+
+IN	[CLS] 7 % of ( 14 % of $ 16 ) is ? [MASK]
+OUT	[CLS] 7 % of ( 14 % of $ 16 ) is ? .
+
+IN	[CLS] 7 % of employees are women [MASK] fair hair . [SEP] 14 % of fair - haired employees are women . [SEP] what percent of employees have fair hair ? [SEP]
+OUT	[CLS] 7 % of employees are women with fair hair . [SEP] 14 % of fair - haired employees are women . [SEP] what percent of employees have fair hair ? [SEP]
+
+IN	[MASK] 7 % of the population of a village is 14 . [SEP] the total population of the village is ? [SEP]
+OUT	. 7 % of the population of a village is 14 . [SEP] the total population of the village is ? [SEP]
+
+IN	[CLS] 7 [MASK] of x is greater than 14 / 16 rd of x by 5 . [SEP] what is x ? [SEP]
+OUT	[CLS] 7 rd of x is greater than 14 / 16 rd of x by 5 . [SEP] what is x ? [SEP]
+
+IN	[CLS] 7 ) a marketing firm determined that , of 14 households surveyed , 16 used neither brand a nor brand b soap . [SEP] 5 used only brand a soap and for every household that used both brands of soap , 15 used only brand b soap . [SEP] how [MASK] of the 1 household surveyed used both brands of soap ? [SEP]
+OUT	[CLS] 7 ) a marketing firm determined that , of 14 households surveyed , 16 used neither brand a nor brand b soap . [SEP] 5 used only brand a soap and for every household that used both brands of soap , 15 used only brand b soap . [SEP] how many of the 1 household surveyed used both brands of soap ? [SEP]
+
+IN	[CLS] [MASK] + 14 [SEP]
+OUT	[CLS] 12 + 14 [SEP]
+
+IN	[CLS] [MASK] , x , 14 , - 16 , - 5 [SEP]
+OUT	[CLS] y , x , 14 , - 16 , - 5 [SEP]
+
+IN	[CLS] 7 [MASK] 14 - 16 - 5 - 15 - 1 do any operations between the numbers to make the sum as 4 ? [SEP]
+OUT	[CLS] 7 - 14 - 16 - 5 - 15 - 1 do any operations between the numbers to make the sum as 4 ? [SEP]
+
+IN	[CLS] 7 - ? [SEP] + [MASK] = 16 [SEP]
+OUT	[CLS] 7 - ? [SEP] + 7 = 16 [SEP]
+
+IN	[CLS] 7 / 14 = [MASK]
+OUT	[CLS] 7 / 14 = the
+
+IN	[CLS] 7 friends decided to divide the hotel bill evenly . [SEP] if the bill was $ [MASK] dollars , how much money did they pay if 16 cent is the smallest unit ? [SEP]
+OUT	[CLS] 7 friends decided to divide the hotel bill evenly . [SEP] if the bill was $ 100 dollars , how much money did they pay if 16 cent is the smallest unit ? [SEP]
+
+IN	[CLS] 7 friends had dinner at a restaurant . [SEP] when the bill was received , akshitha paid 14 / 16 [MASK] much as veena paid and veena paid 5 / 15 as much as lasya paid . [SEP] what fraction of the bill did veena pay ? [SEP]
+OUT	[CLS] 7 friends had dinner at a restaurant . [SEP] when the bill was received , ak ##shi ##tha paid 14 / 16 as much as ve ##ena paid and ve ##ena paid 5 / 15 as much as las ##ya paid . [SEP] what fraction of the bill did ve ##ena pay ? [SEP]
+
+IN	[CLS] 7 houses are available in a new flat . [SEP] 14 persons apply [MASK] the houses . [SEP] each applies for 16 house without consulting others . [SEP] the probability that all the 5 apply for the same house is ? [SEP]
+OUT	[CLS] 7 houses are available in a new flat . [SEP] 14 persons apply for the houses . [SEP] each applies for 16 house without consulting others . [SEP] the probability that all the 5 apply for the same house is ? [SEP]
+
+IN	[CLS] 7 [MASK] divided into two parts in such a way that seventh part of first and ninth part of second are equal . [SEP] find the smallest part ? [SEP]
+OUT	[CLS] 7 is divided into two parts in such a way that seventh part of first and ninth part of second are equal . [SEP] find the smallest part ? [SEP]
+
+IN	[CLS] 7 litres of diesel is required to travel 14 km using a 16 cc engine . [SEP] if the volume of diesel required to cover a distance varies [MASK] as the capacity of the engine , then how many litres of diesel is required to travel 5 km using 15 cc engine ? [SEP]
+OUT	[CLS] 7 litres of diesel is required to travel 14 km using a 16 cc engine . [SEP] if the volume of diesel required to cover a distance varies directly as the capacity of the engine , then how many litres of diesel is required to travel 5 km using 15 cc engine ? [SEP]
+
+IN	[CLS] 7 men [MASK] 14 hours per day [MASK] complete [MASK] work in 16 days . [SEP] to complete the same work in 5 days , working 15 hours a day , the number of men required [MASK] [SEP]
+OUT	[CLS] 7 men work 14 hours per day to complete a work in 16 days . [SEP] to complete the same work in 5 days , working 15 hours a day , the number of men required is [SEP]
+
+IN	[CLS] 7 men are equal to as many women as are equal to 14 [MASK] . [SEP] all of them earn rs . [SEP] 16 only . [SEP] men â € ™ s wages are ? [SEP]
+OUT	[CLS] 7 men are equal to as many women as are equal to 14 men . [SEP] all of them earn rs . [SEP] 16 only . [SEP] men a € ™ s wages are ? [SEP]
+
+IN	[CLS] 7 men can cut 14 trees in 16 hours . [SEP] if 5 men leave the job , how many trees [MASK] be cut in 15 hours ? [SEP]
+OUT	[CLS] 7 men can cut 14 trees in 16 hours . [SEP] if 5 men leave the job , how many trees will be cut in 15 hours ? [SEP]
+
+IN	[CLS] 7 women can complete a work in 14 days and 16 children take [MASK] days to complete the work . [SEP] how many days will 15 women and 1 children take to complete the work ? [SEP]
+OUT	[CLS] 7 women can complete a work in 14 days and 16 children take 10 days to complete the work . [SEP] how many days will 15 women and 1 children take to complete the work ? [SEP]
+
+IN	[CLS] 7 x 14 + 16 x 5 = [MASK] [SEP]
+OUT	[CLS] 7 x 14 + 16 x 5 = ? [SEP]
+
+IN	[CLS] 7 x [MASK] = ? [SEP]
+OUT	[CLS] 7 x 7 = ? [SEP]
+
+IN	[CLS] 7 x 14 ÷ 16 + 5 = [MASK] [SEP]
+OUT	[CLS] 7 x 14 ÷ 16 + 5 = ? [SEP]
+
+IN	[CLS] 7 ã — 14 + 16 [MASK] — 5 = ? [SEP]
+OUT	[CLS] 7 a — 14 + 16 b — 5 = ? [SEP]
+
+IN	[CLS] [MASK] 7 - liter solution of [MASK] [MASK] [MASK] is made from 14 % [MASK] water . [SEP] if 16 liters of [MASK] and 5 liters of [MASK] were added to the solution , what percent of the solution is [MASK] ? [SEP]
+OUT	[CLS] a 7 - liter solution of a certain mixture is made from 14 % pure water . [SEP] if 16 liter ##s of water and 5 liter ##s of milk were added to the solution , what percent of the solution is water ? [SEP]
+
+IN	[CLS] [MASK] 7 - liter solution of [MASK] is made from 14 % water [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] if 16 liters of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] and 5 liters of [MASK] [MASK] were added to the solution , what percent of the solution is [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a 7 - liter solution of water is made from 14 % water and 12 % water and 12 % water and 12 % alcohol . [SEP] if 16 liter ##s of water were added to the solution and 5 liter ##s of the alcohol were added to the solution , what percent of the solution is the original solution ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 7 , [MASK] 14 , [MASK] 16 , [MASK] 5 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is to be [MASK] [MASK] [MASK] from [MASK] [MASK] [MASK] [MASK] [SEP] what is the probability that [MASK] [MASK] [MASK] will be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] if number 7 , number 14 , number 16 , number 5 , number 6 , number 7 , number 8 , number 9 , number 10 , number 11 , number 12 is to be selected by random from the same group . [SEP] what is the probability that number of members will be selected from the group of numbers from the group of numbers from the group of numbers from the group of numbers of members ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 7 miles [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] per hour [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of 14 miles per hour . [SEP] if [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 16 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] what is 7 miles per hour ? [SEP] if the car travels at a constant speed of 6 . 5 per hour , the constant speed of the car is 4 times the constant speed of 14 miles per hour . [SEP] if it is the constant speed of the car traveling at the same speed as the constant speed of the car traveling at the same speed of the car traveling at the same constant speed . [SEP] in the same direction , it travels 16 miles per hour at the same speed as the constant speed of the car traveling at 6 . 5 mph , what is the constant speed e ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 7 miles per hour [MASK] the [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] [MASK] 14 miles per hour [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] if the [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] 16 [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] [MASK] is the [MASK] ? [SEP]
+OUT	[CLS] a car averages 7 miles per hour in the first 10 minutes of a certain trip and 14 miles per hour in the remaining 10 minutes respectively . [SEP] if the average speed of the entire trip is 16 miles per hour , what percent of it is the average ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] 7 [MASK] , 14 [MASK] [MASK] [MASK] [MASK] , 16 [MASK] [MASK] [MASK] , [MASK] 5 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] is to be [MASK] [MASK] from [MASK] [MASK] [MASK] what is the probability that [MASK] [MASK] will [MASK] [MASK] [MASK] [MASK] [MASK] be [MASK] ? [SEP]
+OUT	[CLS] a car consists of 7 cars , 14 cars , 12 trucks , 16 cars 12 trucks , and 5 cars . if the car is parked at random . [SEP] if the car is to be parked away from the garage , what is the probability that the car will be parked and the truck be parked ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 7 [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] [MASK] [MASK] [MASK] the same [MASK] . [SEP] if [MASK] [MASK] at a [MASK] of 14 miles per hour and [MASK] at a [MASK] of 16 miles per hour , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] miles [MASK] [MASK] ? [SEP]
+OUT	[CLS] a car travels a distance 7 miles per hour in minutes and 6 miles downstream at the same rate . [SEP] if it upstream at a rate of 14 miles per hour and downstream at a rate of 16 miles per hour , what is the rate of the car upstream at 6 miles per hour ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 7 [MASK] [MASK] and [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the same [MASK] . [SEP] if [MASK] [MASK] at a [MASK] [MASK] of 14 miles per hour and [MASK] [MASK] at a [MASK] [MASK] of 16 miles per hour , [MASK] [MASK] miles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a car travels a distance 7 miles long and a distance of 10 miles per hour in 4 hours at the same speed . [SEP] if it travels at a constant speed of 14 miles per hour and then travels at a constant speed of 16 miles per hour , how many miles per hour is the car traveling ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 7 men [MASK] 14 hours per day complete [MASK] [MASK] [MASK] work in 16 days . [SEP] to complete the same work in 5 days , working 15 hours a day , the number of men required [MASK] [MASK] [SEP]
+OUT	[CLS] a work of a crew 7 men working 14 hours per day complete a piece of work in 16 days . [SEP] to complete the same work in 5 days , working 15 hours a day , the number of men required is ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 7 , 14 , 16 , 5 [MASK] [MASK] [MASK] is to be [MASK] [MASK] [MASK] from [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] what is the probability that [MASK] will be [MASK] ? [SEP]
+OUT	[CLS] if a number of integers ( 1 , 2 , 5 , 7 , 14 , 16 , 5 , and 16 is to be divided by 5 from the first number of integers ( ) , what is the probability that y will be included ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 7 miles per hour [MASK] the [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 14 miles per hour . [SEP] if the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] 16 [MASK] [MASK] [MASK] , [MASK] is the [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] if the car travels a 6 - mile of a highway at a speed of 7 miles per hour , the average - speed of the car is 15 miles per hour . the average - speed of the car is 15 miles per hour and the average speed is 14 miles per hour . [SEP] if the average - speed of the car the - speed is 16 miles per hour , what is the average - speed ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] if the sum of the [MASK] of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] to the sum of the [MASK] of [MASK] [MASK] , what is the [MASK] of the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] find the number of positive integers in the number n ? [SEP] if the sum of the squares of the positive integers in n is equal to the sum of the squares of the integers , what is the sum of the positive integers in the number n ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] driven [MASK] a [MASK] rate of 7 miles per hour , [MASK] [MASK] 14 [MASK] [MASK] miles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] how many miles [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] driven at [MASK] [MASK] rate of 16 miles per hour ? [SEP]
+OUT	[CLS] a car is a car of a type that is driven at a constant rate of 7 miles per hour , and at 14 . 5 miles per hour at a constant rate of 8 miles per hour in a certain city . [SEP] how many miles per hour in the city of the type can be driven at a constant rate of 16 miles per hour ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] sell for $ 7 [MASK] and [MASK] [MASK] [MASK] sell for $ 14 [MASK] . [SEP] during a sale [MASK] [MASK] [MASK] [MASK] [MASK] are discounted at different rates so that a [MASK] [MASK] [MASK] total of $ 16 [MASK] [MASK] [MASK] [MASK] by [MASK] 5 [MASK] [MASK] and 15 [MASK] [MASK] . [SEP] if the sum of the [MASK] [MASK] [MASK] [MASK] two [MASK] [MASK] [MASK] is 1 percent , what is the discount rate on [MASK] ? [SEP]
+OUT	[CLS] two shop ##keeper ' s shop ##keeper ' s shoes sell for $ 7 each and their shoes each sell for $ 14 each . [SEP] during a sale , the shoes and shoes are discount ##ed at different rates so that a shop sells a total of $ 16 each of the shoes by selling 5 , 10 and 15 shoes respectively . [SEP] if the sum of the discount rates on the two shoes and shoes is 1 percent , what is the discount rate on shoes ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] average ( arithmetic mean ) of 7 . [SEP] if [MASK] [MASK] the numbers [MASK] [MASK] [MASK] is [MASK] [MASK] 14 , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] what is the [MASK] average of [MASK] [MASK] ? [SEP]
+OUT	[CLS] a number is a multiple of 3 times the average ( arithmetic mean ) of 7 . [SEP] if each of the numbers in the set is greater than 14 , then the number is less than 15 . what is the arithmetic average of the number ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] speed of 7 km / hr [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of 14 km / hr . [SEP] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] in [MASK] [MASK] [MASK] [MASK] [SEP] is : [SEP]
+OUT	[CLS] find the speed of the train ? [SEP] find out the average speed of the train in a constant speed of 7 km / hr . [SEP] find the speed of the train in a direction in which it has speed of 14 km / hr . [SEP] the average speed of the train travelling in a constant speed ? [SEP] is : [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] the price of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] 7 [MASK] [MASK] 14 [MASK] , [MASK] the price of 16 [MASK] and 5 [MASK] [MASK] [MASK] 15 , what is the price [MASK] in [MASK] [MASK] [MASK] 1 [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] price [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] find the cost of a clock ? [SEP] if the price of a clock is the same as the price of the clock of 7 minutes and 14 minutes , and the price of 16 minutes and 5 minutes and then 15 , what is the price , in the ratio of 1 hour ? [SEP] if the same price is twice the cost price of a clock of 12 minutes and 15 minutes [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the probability [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is 7 / 14 . [SEP] if the coin is [MASK] 16 times , what is the probability that [MASK] [MASK] [MASK] [MASK] up on the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] on a certain coin toss , if the probability of getting a 3 - pointer is 7 / 14 . [SEP] if the coin is tossed 16 times , what is the probability that the ball will end up on the ground in the second round of the 3 - pointer ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] a certain [MASK] , [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] first [MASK] [MASK] [SEP] of the [MASK] that [MASK] [MASK] [MASK] month [MASK] 7 / 14 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] 16 [MASK] [MASK] the [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , how many [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] ? [SEP]
+OUT	[CLS] in a certain holiday season in a certain country , the holiday season is defined as the beginning of the year and the holiday is celebrated as the first holiday . [SEP] of the people that live in the month , 7 / 14 of the people are not religious . [SEP] if 16 % of the people are religious and 10 % of the people are not religious either , how many people are not religious in the month ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] a [MASK] [MASK] [MASK] [MASK] from [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] at 7 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] a [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] at [MASK] [MASK] [MASK] [MASK] 14 [MASK] / hr . [SEP] [MASK] [MASK] [MASK] 16 [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] [MASK] [MASK] a [MASK] [MASK] [MASK] [MASK] / hr [MASK] at what time do [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a man is walking back to the house from work . [SEP] he meets a man walking 20 km from the house . [SEP] a man walks towards the house at 7 km / hr and back to a house at 6 km / hr . he walks back at 6 km ##ph and 14 km / hr . [SEP] the man walks 16 km towards the house , and then returns to a house at 8 km / hr . at what time do the man reach the house from work from the house ? [SEP]
+
