@@ -84,22 +84,28 @@ def get_lcs_sim_mat(seqs):
     lcss = [[None]*len(seqs) for _ in range(len(seqs))]
     for si1,s1 in enumerate(seqs):
         for si2,s2 in enumerate(seqs):
-            if si2 < si1: # Lower triangular, id2 < id1
-                lcs_len,lcs = compute_lcs(s1, s2)
-                sim[si1,si2] = lcs_len +1 # connected graph
-                lcss[si1][si2] = lcs
+            if si2 >= si1:  # Lower triangular, id2 < id1
+                break
+            lcs_len,lcs = compute_lcs(s1, s2)
+            sim[si1,si2] = lcs_len +1 # connected graph
+            lcss[si1][si2] = lcs
     sim = sim + sim.transpose() # Full
     return sim,lcss
     
 
 def get_template_seqs(seg_path):
-    linenos, temps2sents, top_temps = parse_seg_file(seg_path)
+    linenos, temps2sents, top_temps = parse_seg_file(seg_path)  
+    # The seg_path was from train.txt unless specified 
+    # when training neural tempplate (so use the same split of data from all models!)
     return top_temps, linenos, temps2sents
 
-def get_mwp_seqs(data_path):
+def get_mwp_seqs(data_path):    
+    # HACK should've used valid for clustering, 
+    # but get_template_seqs uses train.txt too
     seqs= None,None
-    with open(os.path.join(data_path,'valid.txt'),'r',encoding='utf-8') as f:
-        seqs = [line.split('|||')[0].split() for line in list(f.readlines())]
+    with open(os.path.join(data_path,'train.txt'),'r',encoding='utf-8') as f:
+        # HACK avoid duplicated
+        seqs = [s for s in set([tuple(line.split('|||')[0].split()) for line in list(f.readlines())])]
     return seqs
 
 def update_lcs_sim_mat(ids, new_seqs, matrix, lcss):
@@ -129,7 +135,8 @@ def update_lcs_sim_mat(ids, new_seqs, matrix, lcss):
     return new_mat, lcss
 
 def cluster(seqs, spls, matrix, lcss):
-    # TODO keep a max-heap for the matrix so extract-max reduced to O(log n) rather than O(n)
+    # TODO keep a max-heap for the matrix 
+    # so extract-max O(n) -> O(log n)
 
     print("len seqs:",len(seqs))
     ids = sorted([matrix.argmax(None)//len(seqs), matrix.argmax(None)%len(seqs)],reverse=True)  # [greater,less]
@@ -142,7 +149,9 @@ def cluster(seqs, spls, matrix, lcss):
 
     # Update sim matrix
     matrix, lcss = update_lcs_sim_mat(ids, new_seqs, matrix, lcss)
-    return new_seqs,new_spls,matrix,lcss # [[0],[1,5],[2],[3,4]] is 4 clusters, each of several indices corresponding to seqs
+    # [[0],[1,5],[2],[3,4]] is 4 clusters, 
+    # each of several indices corresponding to seqs
+    return new_seqs,new_spls,matrix,lcss 
 
 def temp2masked(seqs, spls, temps2sents):
     """
@@ -155,7 +164,8 @@ def temp2masked(seqs, spls, temps2sents):
     ----------
         temps   list of masked sents
     """
-    # TODO: Counter() for most common list of phrases in the fixed positions, and use the most common combination only
+    # TODO: Counter() for most common list of phrases 
+    # in the fixed positions, and use the most common combination only
     # For now, it's simply hollowing out the non-fixed segments
     OTHER_CODE = -1
     new_sents = []
@@ -251,7 +261,8 @@ def bert_prediction(pathin,pathout,bert_version,gibbs):
     with open(pathout,'w',encoding='utf-8') as fout:
         tokenizer,model = get_bert(bert_version)
         for seed_sentence in lines_in:
-            toks, seg_tensor, mask_ids = get_seed_sent(seed_sentence, tokenizer, masking="none", n_append_mask=0)
+            toks, seg_tensor, mask_ids = get_seed_sent(
+                seed_sentence, tokenizer, masking="none", n_append_mask=0)
             
             # Gibbs Sampling (from left to right == auto-regression?)
             #enum = [i for i in range(len(toks)) if toks[i] not in {'[SEP]','[CLS]'} ] # and i not in mask_ids
@@ -266,6 +277,7 @@ def bert_prediction(pathin,pathout,bert_version,gibbs):
 
 def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
     """
+    Fill in the <num> and <PER_#> and write it to new_gen_fi
     Parameters:
     ----------
         sents   list of list
@@ -287,7 +299,10 @@ def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
         fout.writelines(lines)
 
 def substitute_seg(seg_path, data_path, bert_in, n_preds, n_items):
-
+    """
+    Replace <num>, <PER_#> in segmentation file with [MASK]
+    * Not required. 
+    """
     linenos, temps2sents, top_temps = parse_seg_file(seg_path)
     #metadata = re_sort_metadata(os.path.join(data_path,'metadata_train.tsv'), linenos, new_idxname='seg_linenos')
 
@@ -302,6 +317,8 @@ def substitute_seg(seg_path, data_path, bert_in, n_preds, n_items):
     # metadata: know where to tag   
 
 def gen_fi_tag_filling(old_fi_path,new_gen_fi,n_preds, n_items):
+    """
+    """
     with open(old_fi_path,'r', encoding='utf-8') as fin:
         sents = [line.split('|||')[0].replace('(c) ','').split()  for line in fin.readlines() if '|||' in line]
         fi_tag_filling(sents, new_gen_fi, n_preds, n_items, must_mask=False)
@@ -323,7 +340,7 @@ if __name__ == "__main__":
     print(args)
 
     n_preds = 1
-    n_items = 10 # How many <PER_i>, <num>, ...?
+    n_items = 20 # How many <PER_i>, <num>, ...?
     n_sequences = int(1e7) # 100K = 1e5 samples in the current largest dataset => 1e7 means infinity
 
     def write_bert_in():
@@ -335,14 +352,15 @@ if __name__ == "__main__":
         else:
             seqs, linenos, temps2sents = get_template_seqs(args.seg_path)
         
-
         seqs = seqs[:n_sequences]
         spls = [[t,] for t in seqs] # spls: list(samples using the seqs)    # NOTE the comma matters a lot!!!
         matrix, lcss = get_lcs_sim_mat(seqs)
         
+        print(f"len(seqs)={len(seqs)}; args.n_clusters={args.n_clusters}")
         while len(seqs) > args.n_clusters:
             seqs, spls, matrix, lcss = cluster(seqs, spls, matrix, lcss)
-        print(seqs) # NOTE for temps, lists are merged; tuples aren't.
+        print(f"len(seqs)={len(seqs)}; args.n_clusters={args.n_clusters} (clustered)")
+        #print(seqs) # NOTE for temps, lists are merged; tuples aren't.
         
         sents = mwp2masked(seqs, spls) if args.word_level else temp2masked(seqs, spls, temps2sents)
         sents = sorted(list(set(sents)))
