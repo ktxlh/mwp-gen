@@ -77,7 +77,7 @@ analyze_seg () {
     echo $(( SECONDS - start ))
 }
 
-# Generation
+# Generation with neural templates
 generate () {
     start=$SECONDS
     echo "echo '# Generation'" >> $CMDS
