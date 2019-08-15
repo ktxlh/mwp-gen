@@ -94,15 +94,18 @@ def sequential_decoding(toks, seg_tensor, model, tokenizer, selection_strategy):
 def masked_decoding(toks, seg_tensor, masks, model, tokenizer, selection_strategy):
     """ Decode from model by replacing masks """
     print("In: %s" % (" ".join(toks)))
+    last = toks.copy() # for Gibbs
     for step_n, mask_id in enumerate(masks):
-        now = toks.copy() # for Gibbs
-        toks[mask_id] = "[MASK]" # for Gibbs
+        
+        # Gibbs
+        if last != toks and "[MASK]" not in toks:
+            print("Iter %2d: %s" % (step_n, " ".join(toks)))
+        last = toks.copy()
+        toks[mask_id] = "[MASK]"
+
         tok_tensor = preprocess(toks, tokenizer)
         pred_toks = predict(model, tokenizer, tok_tensor, seg_tensor, selection_strategy)
-        #print("\tBERT prediction: %s\n" % (" ".join(pred_toks)))
         toks[mask_id] = pred_toks[mask_id]
-        if now[mask_id] != toks[mask_id] and "[MASK]" not in toks: # for Gibbs
-            print("Iter %2d: %s" % (step_n, " ".join(toks))) # for Gibbs
     return toks
 
 def interact(args, model, tokenizer):
