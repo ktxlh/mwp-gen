@@ -1,0 +1,567 @@
+IN	[CLS] $ [MASK] is divided among [MASK] [MASK] b , [MASK] c so [MASK] [MASK] receives half as [MASK] [MASK] b , [MASK] b receives half as [MASK] [MASK] c . [SEP] [MASK] [MASK] money is c ' [MASK] share ? [SEP]
+OUT	[CLS] $ 1000 is divided among a , b , and c so that a receives half as much as b , and b receives half as much as c . [SEP] how much money is c ' s share ? [SEP]
+
+IN	[CLS] ( [MASK] [MASK] ( [MASK] [MASK] [MASK] ( [MASK] [MASK] ( [MASK] [MASK] ( [MASK] [MASK] = [SEP]
+OUT	[CLS] ( x ) ( x ) + ( x ) ( x ) ( x ) = [SEP]
+
+IN	[CLS] ( [MASK] [MASK] + [MASK] [MASK] [MASK] - [MASK] [MASK] [MASK] . [SEP] calculate the value of x [SEP]
+OUT	[CLS] ( x ) + ( x ) - ( x ) . [SEP] calculate the value of x [SEP]
+
+IN	[CLS] ( [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [SEP] . [SEP] [MASK] [SEP] + [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( x + y + x ) = [SEP] . [SEP] ? [SEP] + y = x ? [SEP]
+
+IN	[CLS] ( [MASK] [MASK] [MASK] ? [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] ( find the number ? [SEP] ) . [SEP]
+
+IN	[CLS] ( [MASK] x [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] ( 2 x 2 ) = ? [SEP]
+
+IN	[CLS] + [MASK] = [MASK] [MASK] [MASK] 55 [MASK] [MASK] [MASK] [MASK] what is x [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] + x = 50 x + 55 x = 50 , what is x + 55 y ? [SEP]
+
+IN	[CLS] - [MASK] [MASK] [MASK] + [MASK] [MASK] ? [SEP]
+OUT	[CLS] - 2 ^ 2 + 2 = ? [SEP]
+
+IN	[CLS] . [SEP] [MASK] car covers a distance of [MASK] km in [MASK] hours . [SEP] find its speed ? [SEP]
+OUT	[CLS] . [SEP] a car covers a distance of 100 km in 4 hours . [SEP] find its speed ? [SEP]
+
+IN	[CLS] Mary [MASK] [MASK] can finish a job together [MASK] [MASK] hours . [SEP] [MASK] john can do the job [MASK] [MASK] in [MASK] hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] do ? [SEP]
+OUT	[CLS] mary and john can finish a job together in 6 hours . [SEP] if john can do the job in time in 4 hours , what is the least work mary can do ? [SEP]
+
+IN	[CLS] Mary does [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the work in [MASK] days [MASK] [SEP] [MASK] [MASK] would paul take to do the work [MASK] [MASK] ? [SEP]
+OUT	[CLS] mary does not take the work for a week and she takes a rest . [SEP] she can do it in 12 days and the work in 15 days . [SEP] how long would paul take to do the work in time ? [SEP]
+
+IN	[CLS] Mary earns $ [MASK] [MASK] hour for [MASK] [MASK] [MASK] hours he works per week , [MASK] [MASK] [MASK] rate for [MASK] . [SEP] [MASK] [MASK] earned $ [MASK] [MASK] week , [MASK] [MASK] hours did he work ? [SEP]
+OUT	[CLS] mary earn ##s $ 10 per hour for each of the hours he works per week , equal to her rate for overtime . [SEP] if he earned $ 10 per week , how many hours did he work ? [SEP]
+
+IN	[CLS] Mary finished 9 [MASK] [MASK] of [MASK] book . [SEP] [MASK] calculated that [MASK] finished 1 [MASK] pages than [MASK] has [MASK] [MASK] read . [SEP] [MASK] [MASK] is her book ? [SEP]
+OUT	[CLS] mary finished 9 / 10 of her book . [SEP] she calculated that she finished 1 more pages than she has yet to read . [SEP] how long is her book ? [SEP]
+
+IN	[CLS] Mary has 9 pairs of shoes . [SEP] [MASK] [MASK] loses 1 [MASK] [MASK] , [MASK] is the [MASK] number of [MASK] pairs she could have left ? [SEP]
+OUT	[CLS] mary has 9 pairs of shoes . [SEP] if she loses 1 shoe altogether , what is the greatest number of shoe pairs she could have left ? [SEP]
+
+IN	[CLS] Mary obtained 9 [MASK] [MASK] , [MASK] [MASK] [MASK] and [MASK] [MASK] of [MASK] [MASK] [MASK] subjects , [MASK] will be the average [SEP]
+OUT	[CLS] mary obtained 9 of english , 6 of french and the rest of german as study subjects , what will be the average [SEP]
+
+IN	[CLS] Mary spent 9 [MASK] [MASK] of [MASK] savings on [MASK] and [MASK] rest on [MASK] tv . [SEP] [MASK] [MASK] tv cost her [MASK] [MASK] , [MASK] were her [MASK] savings ? [SEP]
+OUT	[CLS] mary spent 9 / 10 of her savings on food and the rest on a tv . [SEP] if the tv cost her $ 100 , what were her total savings ? [SEP]
+
+IN	[CLS] 9 % of [MASK] [MASK] % of [MASK] [MASK] [MASK] is ? [SEP]
+OUT	[CLS] 9 % of the 15 % of the original number is ? [SEP]
+
+IN	[CLS] 9 % of [MASK] is [SEP]
+OUT	[CLS] 9 % of population is [SEP]
+
+IN	[CLS] 9 % of [MASK] number is added to [MASK] , [MASK] result is the [MASK] number . [SEP] find the number ? [SEP]
+OUT	[CLS] 9 % of a number is added to it , the result is the same number . [SEP] find the number ? [SEP]
+
+IN	[CLS] 9 % of [MASK] number is more [MASK] [MASK] % of [MASK] [MASK] [MASK] . [SEP] find the number ? [SEP]
+OUT	[CLS] 9 % of a number is more than 20 % of its whole length . [SEP] find the number ? [SEP]
+
+IN	[CLS] 9 % people of [MASK] village in [MASK] [MASK] [MASK] by [MASK] , [MASK] % of [MASK] remainder left the village on [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] population is reduced to [MASK] , [MASK] [MASK] was it in [MASK] beginning ? [SEP]
+OUT	[CLS] 9 % people of a village in a town died by accident , 10 % of the remainder left the village on the second day . [SEP] if the total population is reduced to 300 , how much was it in the beginning ? [SEP]
+
+IN	[CLS] 9 , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] . [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] 9 , 000 , 10 , 000 , 15 , 000 , etc . [SEP] . [SEP] . [SEP] . ) [SEP]
+
+IN	[CLS] 9 [MASK] , working [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] can [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] hours will [MASK] [MASK] 1 [MASK] [MASK] [MASK] at [MASK] [MASK] pace , [MASK] build the [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 men , working at a constant rate , together can build a wall in 6 hours . [SEP] how many hours will they take 1 man , working at the same pace , to build the same wall ? [SEP]
+
+IN	[CLS] 9 [MASK] buy same [MASK] cost them [MASK] [MASK] . [SEP] [MASK] [MASK] have 1 % of [MASK] [MASK] [MASK] cellphone . [SEP] [MASK] is the [MASK] cost [MASK] of [MASK] pay to [MASK] . [SEP]
+OUT	[CLS] 9 people buy same and cost them $ 100 . [SEP] a person have 1 % of the cost of cell ##phone . [SEP] what is the total cost price of he pay to them . [SEP]
+
+IN	[CLS] 9 [MASK] ’ s [MASK] [MASK] [MASK] are [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] price of [MASK] goat be [MASK] [MASK] [SEP] [MASK] . [SEP] [MASK] is the [MASK] price of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 man ’ s wages per day are rs . 800 ? [SEP] . . [SEP] what should the price of a goat be rs . [SEP] . . [SEP] what is the average price of the goat ? [SEP]
+
+IN	[CLS] 9 [MASK] 1 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 : 1 : 5 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] * [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 * 10 * 12 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] + [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] x [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 + 10 + 10 + 10 + 10 + 10 x 10 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] . [SEP] [MASK] [SEP] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 , 8 , 9 , 9 , 9 , 9 . [SEP] . [SEP] . . [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] . [SEP] [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] 9 , 10 , 12 , 15 , 20 , . . [SEP] . [SEP] . [SEP] . ) [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] , [MASK] [MASK] [MASK] 1 [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 . 5 , 000 . rs 1 , 000 . [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] - [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 5 - 10 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] - [MASK] [MASK] [MASK] - [MASK] [MASK] [MASK] do any [MASK] between [MASK] numbers to make the sum as [MASK] ? [SEP]
+OUT	[CLS] 9 - 10 - 12 - 15 - 20 must not do any difference between the numbers to make the sum as whole ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] 1 [MASK] [MASK] ã [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 50 1 / 2 a . m . ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 , 000 , 000 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] = [SEP]
+OUT	[CLS] 9 x 10 = [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] : [MASK] [MASK] [SEP] : [MASK] [MASK] [SEP]
+OUT	[CLS] 9 : : 12 : : ? [SEP] : : ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] 1 [MASK] [MASK] [MASK] 5 [MASK] [MASK] [MASK] ( [MASK] [SEP] [MASK] [SEP] [MASK] ) [SEP]
+OUT	[CLS] 9 . 5 = 1 . 5 / 5 / 2 / ( ? [SEP] ? [SEP] ? ) [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 . 5 = ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [MASK] of [MASK] [MASK] in [MASK] [MASK] and [MASK] in [MASK] only . [SEP] [MASK] [MASK] [MASK] in [MASK] ? [SEP]
+OUT	[CLS] 9 is the sum of the numbers in the set and 6 in numbers only . [SEP] what is y in numbers ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] [SEP] = [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 x ? [SEP] = 10 x ? [SEP]
+
+IN	[CLS] 9 [MASK] [MASK] water is [MASK] [MASK] [MASK] [MASK] of [MASK] solution containing [MASK] [MASK] [MASK] alcohol [MASK] [MASK] [MASK] . [SEP] [MASK] % of [MASK] [MASK] [MASK] [MASK] mixture is ? [SEP]
+OUT	[CLS] 9 litres of water is added to a mixture of a solution containing 5 litres of alcohol and water respectively . [SEP] the % of alcohol in the new mixture is ? [SEP]
+
+IN	[CLS] 9 [MASK] biology books and [MASK] [MASK] chemistry books lie on [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] ways can a student pick 1 books of [MASK] type ? [SEP]
+OUT	[CLS] 9 basic biology books and 3 basic chemistry books lie on the shelf . [SEP] in how many ways can a student pick 1 books of each type ? [SEP]
+
+IN	[CLS] 9 [MASK] can complete a piece of work in [MASK] days . [SEP] [MASK] [MASK] [MASK] days will [MASK] [MASK] complete the [MASK] work ? [SEP]
+OUT	[CLS] 9 men can complete a piece of work in 10 days . [SEP] how many more days will they together complete the same work ? [SEP]
+
+IN	[CLS] 9 [MASK] dice and [MASK] [MASK] dice are thrown . [SEP] [MASK] [SEP] [MASK] [SEP] . [SEP] [MASK] is the probability that [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] dice is [MASK] [MASK] [MASK] both [MASK] [MASK] [MASK] [SEP] appeared on [MASK] [MASK] [MASK] dice . [SEP] [MASK] [SEP]
+OUT	[CLS] 9 red dice and 6 blue dice are thrown . [SEP] ? [SEP] ? [SEP] . [SEP] what is the probability that a no . [SEP] of the 3 dice is a square of both the numbers ? [SEP] appeared on the first 3 dice . [SEP] ? [SEP]
+
+IN	[CLS] 9 [MASK] of [MASK] [MASK] [MASK] = [SEP]
+OUT	[CLS] 9 % of a certain number = [SEP]
+
+IN	[CLS] 9 [MASK] x = [MASK] , [MASK] x is ? [SEP]
+OUT	[CLS] 9 / x = 10 , then x is ? [SEP]
+
+IN	[CLS] 9 ^ [MASK] [MASK] [MASK] ã [MASK] [MASK] [MASK] ( [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 ^ 2 ^ 2 a = how much ( a ) = ? [SEP]
+
+IN	[CLS] 9 balls are [MASK] 1 [MASK] [MASK] . [SEP] [MASK] ball is [MASK] and [MASK] [MASK] ball is drawn without [MASK] . [SEP] [MASK] is the probability [MASK] [MASK] [MASK] have even numbers [MASK] [SEP]
+OUT	[CLS] 9 balls are drawn 1 / 2 . [SEP] one ball is drawn and then another ball is drawn without replacement . [SEP] what is the probability that both balls have even numbers ? [SEP]
+
+IN	[CLS] 9 friends decided to divide the [MASK] bill [MASK] . [SEP] [MASK] [MASK] bill was $ [MASK] dollars , [MASK] [MASK] money did they pay if [MASK] [MASK] is the [MASK] unit ? [SEP]
+OUT	[CLS] 9 friends decided to divide the lunch bill equally . [SEP] if the bill was $ 100 dollars , how much money did they pay if the bill is the same unit ? [SEP]
+
+IN	[CLS] 9 is a [MASK] cube . [SEP] [MASK] x is added to [MASK] [MASK] factor of [MASK] , [MASK] result is a [MASK] number . [SEP] [MASK] is x ? [SEP]
+OUT	[CLS] 9 is a perfect cube . [SEP] if x is added to the prime factor of 9 , the result is a prime number . [SEP] what is x ? [SEP]
+
+IN	[CLS] 9 is divided into [MASK] parts in [MASK] [MASK] way [MASK] [MASK] part of [MASK] [MASK] [MASK] part of [MASK] are equal . [SEP] find the [MASK] part ? [SEP]
+OUT	[CLS] 9 is divided into two parts in a certain way . one part of 9 and one part of 10 are equal . [SEP] find the other part ? [SEP]
+
+IN	[CLS] 9 is subtracted from [MASK] % of [MASK] number , [MASK] result is 1 . [SEP] find the number ? [SEP]
+OUT	[CLS] 9 is sub ##tracted from 20 % of a number , the result is 1 . [SEP] find the number ? [SEP]
+
+IN	[CLS] 9 is to be divided into [MASK] parts such [MASK] [MASK] sum of [MASK] times the [MASK] [MASK] [MASK] times the [MASK] is 1 . [SEP] [MASK] [MASK] part is : [SEP]
+OUT	[CLS] 9 is to be divided into two parts such that the sum of 3 times the first and 2 times the second is 1 . [SEP] the larger part is : [SEP]
+
+IN	[CLS] 9 is what percent of [MASK] ? [SEP]
+OUT	[CLS] 9 is what percent of x ? [SEP]
+
+IN	[CLS] 9 k 1 [MASK] k 5 [MASK] [MASK] [MASK] - [MASK] [MASK] [MASK] - [MASK] [MASK] [MASK] if [MASK] [MASK] [MASK] represent non [MASK] zero digits within [MASK] integers [MASK] , [MASK] is y ? [SEP]
+OUT	[CLS] 9 k 1 - k 5 - k 4 - k 5 - - k - k if y and x represent non - zero digits within the integers x , what is y ? [SEP]
+
+IN	[CLS] 9 liters of [MASK] mixture is [MASK] by mixing liquid p and [MASK] q in [MASK] ratio 1 [MASK] [MASK] . [SEP] [MASK] [MASK] liters of [MASK] q must be added to make the ratio 5 [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 liter ##s of a mixture is obtained by mixing liquid p and liquid q in the ratio 1 : 3 . [SEP] how many liter ##s of liquid q must be added to make the ratio 5 : 4 ? [SEP]
+
+IN	[CLS] 9 log 1 [MASK] [MASK] 5 [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 log 1 * log 5 * = ? [SEP]
+
+IN	[CLS] 9 men [MASK] [MASK] a [MASK] in [MASK] days . [SEP] [MASK] [MASK] man works half [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] men and [MASK] boys can [MASK] [MASK] [MASK] [MASK] in [MASK] [SEP]
+OUT	[CLS] 9 men can do a work in 10 days . [SEP] if each man works half the same amount in 10 days alone , then 8 men and 8 boys can do the same work in ? [SEP]
+
+IN	[CLS] 9 men are equal [MASK] [MASK] [MASK] women as are equal [MASK] [MASK] boys . [SEP] [MASK] [MASK] [MASK] earn rs . [SEP] [MASK] [MASK] [MASK] [SEP] men â [MASK] [MASK] s wages are ? [SEP]
+OUT	[CLS] 9 men are equal to as many women as are equal to 8 boys . [SEP] in total they earn rs . [SEP] 1000 ##0 . [SEP] men a week ' s wages are ? [SEP]
+
+IN	[CLS] 9 men can complete a piece of work in [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] days can 1 men [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] 9 men can complete a piece of work in 10 days . [SEP] how many more days can 1 men complete in 4 days less ? [SEP]
+
+IN	[CLS] 9 men can cut 1 trees in [MASK] hours [MASK] [SEP] [MASK] [MASK] men leave [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] be cut in [MASK] hours ? [SEP]
+OUT	[CLS] 9 men can cut 1 trees in 2 hours . [SEP] how many men leave the forest if 2 more trees can be cut in 3 hours ? [SEP]
+
+IN	[CLS] 9 men can do a work in [MASK] days . [SEP] [MASK] [MASK] [MASK] men leave [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] leave the work ? [SEP]
+OUT	[CLS] 9 men can do a work in 10 days . [SEP] how many more men leave the work than they should have , if they have only 15 days to leave the work ? [SEP]
+
+IN	[CLS] 9 men have provisions for [MASK] days . [SEP] [MASK] [MASK] [MASK] men join them , [MASK] [MASK] [MASK] days will the provisions last [MASK] ? [SEP]
+OUT	[CLS] 9 men have provisions for 20 days . [SEP] if 10 more men join them , how many more days will the provisions last for ? [SEP]
+
+IN	[CLS] 9 people can [MASK] 1 book in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] day [MASK] can be written by [MASK] people ? [SEP]
+OUT	[CLS] 9 people can write 1 book in 4 days , and the total amount of [SEP] the book in a day that can be written by 9 people ? [SEP]
+
+IN	[CLS] 9 people can do work in [MASK] days how [MASK] people they required to complete the work in [MASK] days ? [SEP]
+OUT	[CLS] 9 people can do work in 10 days how many people they required to complete the work in 10 days ? [SEP]
+
+IN	[CLS] 9 people candidates [MASK] an election and [MASK] received 1 [MASK] [MASK] and [MASK] [MASK] [MASK] . [SEP] [MASK] is the percentage of [MASK] [MASK] votes did the winning candidate get ? [SEP]
+OUT	[CLS] 9 people candidates in an election and each received 1 % votes and 2 % votes . [SEP] what is the percentage of total valid votes did the winning candidate get ? [SEP]
+
+IN	[CLS] 9 percent of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] covered by [MASK] carpet [MASK] [MASK] 1 feet by [MASK] feet . [SEP] [MASK] is the area of [MASK] [MASK] room [MASK] [MASK] [SEP]
+OUT	[CLS] 9 percent of the floor of a rectangular room is covered by a carpet of dimensions 1 feet by 2 feet . [SEP] what is the area of the rectangular room floor ? [SEP]
+
+IN	[CLS] 9 persons can [MASK] a road in [MASK] days [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] days will [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] complete the work ? [SEP]
+OUT	[CLS] 9 persons can build a road in 10 days , 15 days and 20 days . [SEP] how many more days will they take to complete the work than they will complete the work ? [SEP]
+
+IN	[CLS] 9 trains starting at [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] going [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] distance of [MASK] km [MASK] [MASK] of [MASK] stations . [SEP] [MASK] is the ratio of [MASK] speeds [SEP]
+OUT	[CLS] 9 trains starting at a certain speed of 60 km / hr and then going at a certain speed of 60 km and distance of 120 km are part of two stations . [SEP] what is the ratio of their speeds [SEP]
+
+IN	[CLS] 9 women [MASK] do a work in [MASK] days . [SEP] [MASK] men can complete the [MASK] work in [MASK] days [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] woman ? [SEP]
+OUT	[CLS] 9 women can do a work in 10 days . [SEP] 10 men can complete the same work in 20 days . [SEP] how many men can do it in 10 days than does one woman ? [SEP]
+
+IN	[CLS] 9 women can [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] children take 1 days [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] days will 5 women [MASK] [MASK] children take to complete the work ? [SEP]
+OUT	[CLS] 9 women can do a work in 6 days and 4 children take 1 days to complete the work . [SEP] how many days will 5 women and 4 children take to complete the work ? [SEP]
+
+IN	[CLS] 9 workers should finish a job in [MASK] days . [SEP] [MASK] [MASK] days came [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] finish the [MASK] job ? [SEP]
+OUT	[CLS] 9 workers should finish a job in 10 days . [SEP] how many days came to finish the job ? [SEP] how many days did the workers take to finish the whole job ? [SEP]
+
+IN	[CLS] 9 x = 1 , [MASK] is the sum of [MASK] [MASK] [MASK] values of x ? [SEP]
+OUT	[CLS] 9 x = 1 , what is the sum of the two possible values of x ? [SEP]
+
+IN	[CLS] 9 x [MASK] [MASK] [MASK] 1 [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 9 x 10 = ( 1 x 10 ) ? [SEP]
+
+IN	[CLS] 9 years [MASK] , [MASK] [MASK] age of [MASK] [MASK] b was 1 years . [SEP] [MASK] age of [MASK] [MASK] b and c today is 5 years . [SEP] [MASK] [MASK] will c be after [MASK] years ? [SEP]
+OUT	[CLS] 9 years ago , the average age of a and b was 1 years . [SEP] the age of a , b and c today is 5 years . [SEP] how old will c be after 9 years ? [SEP]
+
+IN	[CLS] 9 years ago [MASK] [MASK] ratio of [MASK] ages of [MASK] [MASK] [MASK] was 1 [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] , [MASK] ratio of [MASK] ages will be 5 [MASK] [MASK] . [SEP] [MASK] is [MASK] ' [MASK] age at present ? [SEP]
+OUT	[CLS] 9 years ago , the ratio of the ages of a and b was 1 : 2 . [SEP] after 9 years , the ratio of their ages will be 5 : 4 . [SEP] what is b ' s age at present ? [SEP]
+
+IN	[CLS] [MASK] : [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] - [MASK] x [MASK] [MASK] [MASK] . [SEP]
+OUT	[CLS] evaluate : x + y + y = x - 2 x + 2 y . [SEP]
+
+IN	[CLS] [MASK] : [MASK] [MASK] [MASK] + [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] evaluate : a + b + c = ? [SEP]
+
+IN	[CLS] [MASK] 9 % of [MASK] [MASK] [MASK] is [MASK] to [MASK] a by [MASK] [MASK] ? [SEP]
+OUT	[CLS] if 9 % of the total number is added to set a by dividing by ? [SEP]
+
+IN	[CLS] [MASK] 9 miles into [MASK] ? [SEP]
+OUT	[CLS] convert 9 miles into miles ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 [MASK] [MASK] inclusive in [MASK] [MASK] exercise . [SEP] [MASK] [MASK] [MASK] does he solve ? [SEP]
+OUT	[CLS] he solve ##s 9 questions , inclusive in a certain exercise . [SEP] how many questions does he solve ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] last [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] sides . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] to [MASK] one hour of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a clock shows the last minute of a clock on all sides . [SEP] the time is equal only to the one hour of the hour and the second hour of the hour of the day . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] with [MASK] [MASK] in [MASK] room . [SEP] [MASK] number of [MASK] is 9 [MASK] [SEP] number of persons = ? [SEP]
+OUT	[CLS] a man sitting with a woman in a room . [SEP] the number of women is 9 . [SEP] number of persons = ? [SEP]
+
+IN	[CLS] [MASK] [MASK] rs . [SEP] [MASK] [MASK] amounted to [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] years at [MASK] interest . [SEP] had the interest [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] 800 and rs . [SEP] 800 ##0 amounted to rs . [SEP] 1000 in 2 years at simple interest . [SEP] had the interest earned in both cases ? [SEP] find the rate of interest ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , type 9 lines within [MASK] minutes then [MASK] lines can type within [MASK] minutes . [SEP] [MASK] [MASK] [MASK] are needed ? [SEP]
+OUT	[CLS] in a computer , type 9 lines within 5 minutes then 8 lines can type within 5 minutes . [SEP] how many lines are needed ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] % of [MASK] [MASK] in [MASK] fixed [MASK] account and spends 9 % of [MASK] remaining amount on [MASK] . [SEP] [MASK] [MASK] cash in hand is rs [MASK] [SEP] [MASK] , [MASK] is his salary ? [SEP]
+OUT	[CLS] he puts 10 % of his salary in a fixed savings account and spends 9 % of the remaining amount on food . [SEP] if the cash in hand is rs . [SEP] 800 , what is his salary ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] , [MASK] [MASK] [SEP]
+OUT	[CLS] find the number , in units digit , in . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] what is the length of the platform ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] also buys [MASK] [MASK] [MASK] with [MASK] price of [MASK] [MASK] , [MASK] is the average ( [MASK] mean [MASK] [MASK] [MASK] [MASK] [MASK] baskets ? [SEP]
+OUT	[CLS] a man buys a basket of apples with a certain price . [SEP] if he also buys a second basket with the price of the first , what is the average ( arithmetic mean ) price of the two baskets ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] in [MASK] account [MASK] [MASK] [MASK] [MASK] [MASK] , compounded [MASK] . [SEP] [MASK] [MASK] money will there be [MASK] [MASK] [MASK] at [MASK] end [MASK] [MASK] year ? [SEP]
+OUT	[CLS] . . [SEP] . . . . in an account of $ 1 , 000 , compound ##ed annually . [SEP] how much money will there be in the account at the end of the year ? [SEP]
+
+IN	[CLS] [MASK] [MASK] school ’ [MASK] [MASK] class [MASK] 9 boys and [MASK] girls . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] percentage of [MASK] [MASK] class plan to [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a certain school ’ s senior class of 9 boys and 8 girls . [SEP] if there are 2 boys in the class , they will be replaced by 3 girls . what percentage of the senior class plan to be replaced ? [SEP]
+
+IN	[CLS] [MASK] [MASK] sum of [MASK] [MASK] integers from [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] the sum of [MASK] [MASK] integers from [MASK] [MASK] [MASK] , [MASK] , [MASK] is the value of [MASK] [MASK] b ? [SEP]
+OUT	[CLS] if the sum of the positive integers from a , b , and c equals the sum of the positive integers from b , c , d , what is the value of a / b ? [SEP]
+
+IN	[CLS] [MASK] a [MASK] equation with [MASK] [MASK] of [MASK] [MASK] [MASK] solve for w . [SEP] [MASK] answer as [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] w + [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] w + [MASK] [MASK] / [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] solve a certain equation with a remainder of 5 / 9 solve for w . [SEP] the answer as follows : . . [SEP] find ( w + 2 ) / 9 + ( ( w + 2 ) / 9 ) . [SEP]
+
+IN	[CLS] [MASK] a speed of [MASK] kmph in meters per second ? [SEP]
+OUT	[CLS] at a speed of 1 km ##ph in meters per second ? [SEP]
+
+IN	[CLS] [MASK] and [MASK] are [MASK] in [MASK] business . [SEP] [MASK] invests rs . [SEP] [MASK] [MASK] [MASK] months and [MASK] invests rs . [SEP] [MASK] [MASK] [MASK] months . [SEP] [MASK] of [MASK] [MASK] of rs . [SEP] [MASK] [MASK] [SEP] [MASK] ' [MASK] share is [SEP]
+OUT	[CLS] a and b are partners in a business . [SEP] a invest ##s rs . [SEP] 1000 after 6 months and b invest ##s rs . [SEP] 1200 after 6 months . [SEP] share of a profit of rs . [SEP] 1200 . [SEP] a ' s share is [SEP]
+
+IN	[CLS] [MASK] bought [MASK] [MASK] [MASK] [MASK] rs . [SEP] [MASK] . [SEP] [MASK] spent [MASK] . [SEP] [MASK] [MASK] [MASK] and sold [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] is his profit [MASK] ? [SEP]
+OUT	[CLS] he bought a car b for rs . [SEP] 800 . [SEP] he spent rs . [SEP] 800 on repairs and sold it for rs . [SEP] 1200 . [SEP] what is his profit percent ? [SEP]
+
+IN	[CLS] [MASK] can be purchased [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] for [MASK] [MASK] , [MASK] [MASK] [MASK] for [MASK] [MASK] . [SEP] [MASK] is the [MASK] number of [MASK] that can be purchased for [MASK] [MASK] ? [SEP]
+OUT	[CLS] books can be purchased for $ 10 each , $ 20 for $ 20 , and $ 30 for $ 30 . [SEP] what is the maximum number of books that can be purchased for $ 30 ? [SEP]
+
+IN	[CLS] [MASK] grapes contain 9 % [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] [MASK] [MASK] [MASK] 1 % [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] kgs of [MASK] grapes are [MASK] to get [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] some grapes contain 9 % of the water that is contained by a mixture that is 1 % water by volume . [SEP] how many kg ##s of the grapes are required to get water from the mixture ? [SEP]
+
+IN	[CLS] [MASK] has 9 ounces of [MASK] butter in [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] ounce jars . [SEP] [MASK] has an [MASK] number of [MASK] [MASK] jar . [SEP] [MASK] [MASK] jars of [MASK] butter does [MASK] have ? [SEP]
+OUT	[CLS] mary has 9 ounce ##s of peanut butter in a single jar . [SEP] in 8 ounce jars . [SEP] she has an equal number of jars per jar . [SEP] how many jars of peanut butter does she have ? [SEP]
+
+IN	[CLS] [MASK] is 9 years old [MASK] [MASK] is 1 years . [SEP] find the ratio of [MASK] ' s age to [MASK] ' s age . [SEP]
+OUT	[CLS] a is 9 years old and b is 1 years . [SEP] find the ratio of a ' s age to b ' s age . [SEP]
+
+IN	[CLS] [MASK] is 9 years old [MASK] [SEP] [MASK] is 1 times as [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] will [MASK] be when [MASK] is twice [MASK] [MASK] ? [SEP]
+OUT	[CLS] a is 9 years old . [SEP] b is 1 times as old as his son . [SEP] how old will b be when a is twice as old ? [SEP]
+
+IN	[CLS] [MASK] is a square . [SEP] [MASK] [MASK] [MASK] are the [MASK] of sides [MASK] and [MASK] , [MASK] . [SEP] [MASK] is the ratio of [MASK] [MASK] region area to [MASK] [MASK] region ? [SEP]
+OUT	[CLS] what is a square . [SEP] in the figure are the lengths of sides a and b , respectively . [SEP] what is the ratio of the square region area to the square region ? [SEP]
+
+IN	[CLS] [MASK] is painting [MASK] . [SEP] [MASK] has 9 [MASK] [MASK] of [MASK] gallon of paint remaining . [SEP] [MASK] [MASK] requires 1 [MASK] [MASK] gallon of paint . [SEP] [MASK] [MASK] [MASK] can she paint ? [SEP]
+OUT	[CLS] mary is painting alone . [SEP] she has 9 / 10 of a gallon of paint remaining . [SEP] if she requires 1 / 2 gallon of paint . [SEP] how many hours can she paint ? [SEP]
+
+IN	[CLS] [MASK] is younger [MASK] [MASK] by [MASK] years . [SEP] [MASK] [MASK] ages are in [MASK] [MASK] ratio of [MASK] [MASK] [MASK] , [MASK] [MASK] is [MASK] ? [SEP]
+OUT	[CLS] a is younger than b by 6 years . [SEP] if their ages are in the same ratio of a : b , how old is b ? [SEP]
+
+IN	[CLS] [MASK] needs 9 % to pass . [SEP] [MASK] [MASK] scored 1 marks and [MASK] [MASK] [MASK] [MASK] marks , [MASK] was the [MASK] marks he could have got ? [SEP]
+OUT	[CLS] he needs 9 % to pass . [SEP] if he scored 1 marks and failed by only 3 marks , what was the maximum marks he could have got ? [SEP]
+
+IN	[CLS] [MASK] on [MASK] [MASK] is traveling 9 miles per hour . [SEP] [MASK] [MASK] feet does she travel in [MASK] seconds ? [SEP] [MASK] [MASK] [MASK] = [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] someone on a bicycle is traveling 9 miles per hour . [SEP] how many feet does she travel in 10 seconds ? [SEP] ( 1 mile = 1 mile ) [SEP]
+
+IN	[CLS] [MASK] produces tomato [MASK] [MASK] [MASK] tomato juice [MASK] [SEP] [MASK] [MASK] [MASK] has [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] juice has [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] from [MASK] litres [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a produces tomato juice and b tomato juice . [SEP] if if b has a mixture of both these , the juice has a greater capacity . [SEP] what is the ratio of a to b , from 2 litres to 3 litres ? [SEP]
+
+IN	[CLS] [MASK] purchased 9 kg of grapes [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] kg [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] amount did he pay to [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he purchased 9 kg of grapes , 8 kg of tea , salt and 5 kg of salt from a shop ##keeper for $ 100 . [SEP] how much amount did he pay to buy grapes ? [SEP]
+
+IN	[CLS] [MASK] purchased 9 kg of grapes at [MASK] rate [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] amount did he pay to [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he purchased 9 kg of grapes at the rate of rs . 50 per kg and 10 kg of grapes at rs . 50 each . [SEP] how much amount did he pay to buy grapes ? [SEP]
+
+IN	[CLS] [MASK] requires 9 mins to [MASK] . [SEP] [MASK] have 1 mins [MASK] and [MASK] [MASK] mins [MASK] with [MASK] . [SEP] [MASK] [MASK] [MASK] measure 5 mins using [MASK] ? [SEP]
+OUT	[CLS] a requires 9 min ##s to measure . [SEP] b have 1 min ##s , and c 2 min ##s each with them . [SEP] how many can measure 5 min ##s using them ? [SEP]
+
+IN	[CLS] [MASK] spends 9 % of [MASK] [MASK] salary on food and [MASK] 1 % of [MASK] remaining [MASK] . [SEP] [MASK] [MASK] [MASK] salary is rs [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] money does [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] he spends 9 % of his monthly salary on food and spends 1 % of the remaining money . [SEP] if his monthly salary is rs . [SEP] 1000 , how much money does he spend on clothes ? [SEP]
+
+IN	[CLS] [MASK] spends 9 [MASK] [MASK] of [MASK] savings on [MASK] [MASK] and [MASK] [MASK] [MASK] less [MASK] [MASK] spent on [MASK] [MASK] for [MASK] [MASK] . [SEP] [MASK] fraction of [MASK] savings did she spend on [MASK] [MASK] and [MASK] ? [SEP]
+OUT	[CLS] she spends 9 / 10 of her savings on a computer and 2 / 3 less than she spent on a tv for a computer . [SEP] what fraction of her savings did she spend on a tv and computer ? [SEP]
+
+IN	[CLS] [MASK] spent $ [MASK] in [MASK] [MASK] [MASK] , [MASK] [MASK] [MASK] buying [MASK] and [MASK] % of [MASK] [MASK] amount he had as cash with [MASK] . [SEP] [MASK] was the [MASK] amount ? [SEP]
+OUT	[CLS] john spent $ 500 in a certain store , including the whole buying price and 20 % of the total amount he had as cash with him . [SEP] what was the total amount ? [SEP]
+
+IN	[CLS] [MASK] started a business with rs . [SEP] [MASK] [MASK] is joined [MASK] by [MASK] with rs . [SEP] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] months did [MASK] join if [MASK] profits at [MASK] end of [MASK] year are divided [MASK] ? [SEP]
+OUT	[CLS] a started a business with rs . [SEP] 1000 and is joined later by b with rs . [SEP] 1000 ##0 more . [SEP] how many more months did b join if the profits at the end of the year are divided equally ? [SEP]
+
+IN	[CLS] [MASK] volume and base area are 9 m [MASK] 1 [MASK] [MASK] m ^ [MASK] [MASK] . [SEP] find the height of [MASK] [MASK] ? [SEP]
+OUT	[CLS] its volume and base area are 9 m ^ 1 and 10 m ^ 2 respectively . [SEP] find the height of the cube ? [SEP]
+
+IN	[CLS] ? [SEP] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [SEP]
+OUT	[CLS] ? [SEP] find the number 9 / 10 [SEP]
+
+IN	[CLS] ? [SEP] [MASK] of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] ? [SEP] . of a . ? [SEP]
+
+IN	[CLS] [MASK] [MASK] , working 9 hours [MASK] [MASK] , can empty a tank in [MASK] days . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] to empty the [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a man , working 9 hours per day , can empty a tank in 10 days . [SEP] how many hours will he take to fill it to empty the tank in 10 days ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] was added [MASK] [MASK] [MASK] [MASK] of [MASK] % [MASK] [MASK] [MASK] . [SEP] find the [MASK] concentration [MASK] of [MASK] [MASK] [MASK] [MASK] mixture ? [SEP]
+OUT	[CLS] a solution of water and cis ##tern was added to a new solution of 20 % cis ##tern water . [SEP] find the new concentration w of cis ##tern and the mixture ? [SEP]
+
+IN	[CLS] [MASK] [MASK] can [MASK] [MASK] [MASK] of vehicles [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] is the [MASK] number of [MASK] that can [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a car can carry a number of vehicles . [SEP] a bus carries a total of 60 more people . [SEP] what is the maximum number of vehicles that can be carried in the bus ? [SEP]
+
+IN	[CLS] [MASK] [MASK] has [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] has [MASK] [MASK] 9 / [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] . [SEP] find p lines . [SEP]
+OUT	[CLS] if p has a number of lines in its set , then it has a length 9 / 10 of its own . [SEP] find the number of points of p . [SEP] find p lines . [SEP]
+
+IN	[CLS] [MASK] [MASK] , [MASK] [MASK] speed of [MASK] bus is 9 km / hr [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 1 km [MASK] [MASK] . [SEP] [MASK] [MASK] [MASK] minutes does [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in delhi , the average speed of a bus is 9 km / hr and it travels 2 km / hr in a direction of 1 km / hr . [SEP] how many more minutes does it take to reach delhi ? [SEP]
+
+IN	[CLS] [MASK] [MASK] , [MASK] speed of [MASK] bus is 9 kmph and including [MASK] [MASK] [MASK] [MASK] 1 kmph . [SEP] [MASK] [MASK] [MASK] minutes does [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in delhi , the speed of a bus is 9 km ##ph and including the stop ##page is 1 km ##ph . [SEP] how many more minutes does it take to stop ? [SEP]
+
+IN	[CLS] [MASK] [MASK] , [MASK] speed of [MASK] train is 9 kmph and including [MASK] [MASK] [MASK] 1 kmph . [SEP] [MASK] [MASK] [MASK] minutes does [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in delhi , the speed of a train is 9 km ##ph and including its length is 1 km ##ph . [SEP] how many more minutes does it take to cross delhi ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 % less [MASK] p [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] t is [MASK] [MASK] less [MASK] p . [SEP] [MASK] is the value of q ? [SEP]
+OUT	[CLS] q is 9 % less than p and t is 5 % more . [SEP] t is 10 % less than p . [SEP] what is the value of q ? [SEP]
+
+IN	[CLS] [MASK] [MASK] 9 [MASK] [MASK] [MASK] [MASK] hours [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] hours would [MASK] [MASK] 1 of [MASK] printing [MASK] [MASK] print [MASK] papers ? [SEP]
+OUT	[CLS] in a 9 - day week , hours are printed per day . [SEP] how many hours would 2 / 1 of the printing staff alone print the papers ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] , [MASK] ratio of [MASK] areas is 9 [MASK] [MASK] [MASK] [MASK] ratio of [MASK] [MASK] is [MASK] [MASK] [MASK] . [SEP] find the ratio of [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] in a triangle , the ratio of the areas is 9 : 5 and the ratio of the sides is 8 : 5 . [SEP] find the ratio of the sides . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 [MASK] [MASK] [MASK] blue and [MASK] [MASK] balls . [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] is the probability that [MASK] [MASK] red ? [SEP]
+OUT	[CLS] a ball contains 9 balls , 8 blue and 3 green balls . [SEP] if there are 3 green balls , what is the probability that both are red ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 hours to do [MASK] job . [SEP] [MASK] b takes 1 hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] both [MASK] [MASK] [MASK] [MASK] working [MASK] [MASK] [MASK] [MASK] to do the [MASK] job ? [SEP]
+OUT	[CLS] if a takes 9 hours to do a job . [SEP] if b takes 1 hours to do it , then ? [SEP] what is the time both of them will spend working together in the morning to do the same job ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 parts [MASK] [MASK] [MASK] [MASK] [MASK] parts [MASK] lemonade [MASK] . [SEP] [MASK] [MASK] parts of [MASK] solution should be [MASK] and replaced with water [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a solution contains 9 parts of water and the remaining parts of lemon ##ade solution . [SEP] how many parts of the solution should be removed and replaced with water to make a solution of lemon ##ade solution of lemon ##ade ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 people eat [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] both veg and [MASK] veg . [SEP] [MASK] [SEP] [MASK] [MASK] people eat veg in [MASK] family ? [SEP]
+OUT	[CLS] how many times 9 people eat ve ##g at a restaurant in a family dinner ? [SEP] how many people eat both ve ##g and mixed ve ##g . [SEP] ? [SEP] how many people eat ve ##g in the family ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] 9 percent more [MASK] y and y is [MASK] [MASK] less [MASK] z , [MASK] [MASK] is what percent of z ? [SEP]
+OUT	[CLS] if x is 9 percent more than y and y is 5 percent less than z , then x is what percent of z ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] b represent the tens and units digits , [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] divisible [MASK] [MASK] , [MASK] is the [MASK] [MASK] value of b x [MASK] ? [SEP]
+OUT	[CLS] if a , b , c and b represent the tens and units digits , respectively . [SEP] if a is a number di ##vis ##ible by 5 , what is the least possible value of b x c ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] , [MASK] trees are [MASK] at [MASK] distances , [MASK] tree being at [MASK] end of [MASK] yard . [SEP] [MASK] is the distance between [MASK] [MASK] trees [SEP]
+OUT	[CLS] in a certain yard , two trees are planted at equal distances , one tree being at each end of the yard . [SEP] what is the distance between the two trees [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] b represent the tens and units digits , [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] divisible [MASK] [MASK] , [MASK] is the [MASK] [MASK] value of b × [MASK] ? [SEP]
+OUT	[CLS] if a , b c , a , b represent the tens and units digits , respectively . [SEP] if a is exactly di ##vis ##ible by 5 , what is the least possible value of b × c ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] 9 feet by [MASK] feet [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] and deck is 1 [MASK] feet . [SEP] [MASK] is the width of [MASK] deck ? [SEP]
+OUT	[CLS] a rectangular deck is measuring 9 feet by 8 feet . [SEP] what is the length of the floor between them ? [SEP] the area of the rectangular floor and deck is 1 square feet . [SEP] what is the width of the deck ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] trees are [MASK] at [MASK] distances , [MASK] tree being at [MASK] end of [MASK] yard . [SEP] [MASK] is the distance between [MASK] [MASK] trees [SEP]
+OUT	[CLS] in a yard of 20 feet , two trees are planted at equal distances , one tree being at each end of the yard . [SEP] what is the distance between the two trees [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 9 machines [MASK] hours [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] orders [MASK] [SEP] [MASK] [MASK] [MASK] , [MASK] [MASK] hours of [MASK] work [MASK] [MASK] [MASK] are required to fill 1 [MASK] orders [MASK] [SEP]
+OUT	[CLS] a machine is to be filled by 9 machines 2 hours before it is filled by 2 more orders . [SEP] in a factory , how many hours of continuous work will the machines are required to fill 1 million orders ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] % and [MASK] driver [MASK] [MASK] [MASK] [MASK] [MASK] % more [MASK] gasoline [MASK] [MASK] [MASK] [MASK] percent should [MASK] [MASK] reduce the [MASK] of gasoline [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a car is driven at a rate 60 % and the driver is driven at rate 20 % more by gasoline . by how much percent should the driver reduce the price of gasoline to 50 % ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is divided by [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] is also [MASK] . [SEP] [MASK] is the [MASK] value of [MASK] ? [SEP]
+OUT	[CLS] if the sum of the number is divided by 5 , then the number is divided by 5 . if the sum of the numbers is 5 , it is also 5 . [SEP] what is the least value of n ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] boat goes [MASK] km [MASK] [MASK] [MASK] [MASK] [MASK] point in [MASK] hours , [MASK] find the speed of [MASK] [MASK] in [MASK] water ? [SEP]
+OUT	[CLS] if a boat goes 50 km downstream in 3 hours and b . [SEP] same boat goes 50 km downstream and reaches the starting point in 2 hours , then find the speed of the boat in still water ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] women are included in place [MASK] [MASK] [MASK] [MASK] [MASK] 9 [MASK] [MASK] years . [SEP] find the [MASK] age of [MASK] women ? [SEP]
+OUT	[CLS] if a man is selected from a certain group , how many women are included in place of the men who are 9 years 3 years . [SEP] find the average age of the women ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] water are [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] percent alcohol in water [MASK] . [SEP] [MASK] is the percentage of [MASK] in [MASK] [MASK] solution ? [SEP]
+OUT	[CLS] two liter ##s of water in a solution of pure water are added to a solution of the 20 percent alcohol in water solution . [SEP] what is the percentage of alcohol in the water solution ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] pencils can be distributed in [MASK] [MASK] [MASK] that [MASK] student gets the [MASK] number of pens and [MASK] number of pencils is : [SEP]
+OUT	[CLS] the number of pens , pencil ##s , pens and even pencil ##s can be distributed in a group such that each student gets the same number of pens and same number of pencil ##s is : [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] kg when [MASK] [MASK] person comes in place of [MASK] [MASK] [MASK] weighing 9 kg [MASK] [SEP] [MASK] [MASK] [MASK] the weight of [MASK] [MASK] person ? [SEP]
+OUT	[CLS] how many kilograms will be added to the mixture by 5 kg when a new person comes in place of a new person weighing 9 kg ? [SEP] what will be the weight of the new person ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the size of [MASK] [MASK] s height [MASK] [SEP] [MASK] [MASK] area of [MASK] parallelogram is [MASK] sq ft [MASK] [SEP] [MASK] is the height of [MASK] parallelogram ? [SEP]
+OUT	[CLS] what is the area of the square which is the size of square ' s height ? [SEP] if the area of the parallel ##og ##ram is 120 sq ft . [SEP] what is the height of the parallel ##og ##ram ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] number of heads be [MASK] and [MASK] number of feet equals 9 , [MASK] [MASK] number of [MASK] will [MASK] [SEP]
+OUT	[CLS] if the number of legs be 3 . [SEP] if the number of heads be 4 and the number of feet equals 9 , then the number of legs will be [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] cups of [MASK] [MASK] [MASK] [MASK] every [MASK] days [MASK] [MASK] 9 [MASK] . [SEP] [MASK] [MASK] cups of [MASK] seed would [MASK] [MASK] to feed 1 [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a certain farm is able to produce 100 cups of corn seed , which every 2 days increases by 9 % . [SEP] how many cups of corn seed would it take to feed 1 person in 1 day ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] mr [MASK] house in [MASK] days . [SEP] [MASK] [MASK] uses [MASK] [MASK] [MASK] [MASK] [MASK] , [MASK] [MASK] will they take to complete the job ? [SEP]
+OUT	[CLS] a man can do a job to complete mr . house in 10 days . [SEP] if he uses the money to pay expenses , how long will they take to complete the job ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] total [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] selected at random from [MASK] box , [MASK] is the probability [MASK] [MASK] [MASK] will be [MASK] ? [SEP]
+OUT	[CLS] if there are 4 random boxes and the total number of boxes is ? [SEP] if a number of balls is selected at random from each box , what is the probability that no balls will be drawn ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] ann sold 9 times [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] boxes of cookies were sold that day [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] sell ? [SEP]
+OUT	[CLS] how many boxes did she sell ? [SEP] ann sold 9 times the boxes she had sold . [SEP] if boxes of cookies were sold that day , how many boxes did she sell ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] s is 9 . [SEP] [MASK] average of [MASK] [MASK] them is [MASK] [MASK] [MASK] [MASK] average of [MASK] [MASK] 1 is 5 . [SEP] [MASK] is the average [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the average of 3 consecutive numbers ? [SEP] s is 9 . [SEP] the average of 2 of them is 6 , and the average of 2 and 1 is 5 . [SEP] what is the average of the number s and the number ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] boys are [MASK] [MASK] number [MASK] [MASK] [MASK] [MASK] th of [MASK] girls . [SEP] [MASK] is the ratio of [MASK] [MASK] [MASK] [MASK] in [MASK] school ? [SEP]
+OUT	[CLS] in a certain school , how many boys are there in number of boys and 6 th of the girls . [SEP] what is the ratio of boys to girls present in the school ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] kg when [MASK] [MASK] person comes in place of [MASK] [MASK] [MASK] weighing 9 kg [MASK] [SEP] [MASK] [MASK] [MASK] the weight of [MASK] [MASK] person ? [SEP]
+OUT	[CLS] how much weight will it be increased by 1 kg when a new person comes in place of a new person weighing 9 kg ? [SEP] what will be the weight of the new person ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by [MASK] kg when [MASK] [MASK] person comes in place of [MASK] [MASK] [MASK] weighing 9 kg [MASK] [SEP] [MASK] [MASK] the weight of [MASK] [MASK] person ? [SEP]
+OUT	[CLS] how much weight will it be increased by 1 kg when a new person comes in place of a new person weighing 9 kg ? [SEP] what is the weight of the new person ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] days . [SEP] [MASK] b [MASK] joins [MASK] [MASK] [MASK] [MASK] together finish [MASK] remaining [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] does it need for b [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a can do a piece of work in 10 days . [SEP] if b alone joins him , the two together finish the remaining work in 10 days . [SEP] how long does it need for b to do the work in time ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] days [MASK] [SEP] [MASK] [MASK] 9 % more [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] days taken [MASK] [MASK] [MASK] do the [MASK] piece of work : [SEP]
+OUT	[CLS] how many days can a man do in 10 days ? [SEP] he takes 9 % more than his son ? [SEP] how many more days taken by him to do the same piece of work : [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] batsman is 9 runs [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] score is 1 runs and [MASK] average excluding these [MASK] innings is 5 runs [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] the average score of a cricket batsman is 9 runs including 10 boundaries . [SEP] if the average of the other 5 innings score is 1 runs and the average excluding these 5 innings is 5 runs , what is his average ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] discount of [MASK] [MASK] sum [MASK] money is [MASK] [MASK] [SEP] [MASK] and [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] sum for [MASK] [MASK] time is [MASK] [MASK] [SEP] [MASK] . [SEP] [MASK] sum [MASK] is [SEP]
+OUT	[CLS] if the sum is at the discount of the same sum the money is rs . [SEP] 1200 and the sum received as the same sum for the same time is rs . [SEP] 1200 . [SEP] the sum received is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] family [MASK] [MASK] [MASK] to have a girl and [MASK] boys [MASK] assuming the probability of having [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] equal [MASK] ? [SEP]
+OUT	[CLS] how many of the big ##gs family members are likely to have a girl and two boys , assuming the probability of having a girl and a boy is equal to ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] percent of [MASK] employees are [MASK] , [MASK] [MASK] percent of [MASK] employees are [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] single , [MASK] fraction of [MASK] women are [MASK] [MASK] [SEP]
+OUT	[CLS] in a certain company , 60 percent of the employees are women , and 40 percent of the employees are men . [SEP] if there are 40 employees who are not single , what fraction of the women are men ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] the difference of [MASK] numbers is 9 . [SEP] [MASK] dividing the [MASK] number by [MASK] [MASK] , [MASK] get 1 [MASK] quotient and [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] find the sum of the squares the difference of two numbers is 9 . [SEP] on dividing the larger number by the smaller , we get 1 as quo ##tie ##nt and 2 as remainder . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] x received 9 / 1 [MASK] votes [MASK] [MASK] y [MASK] [MASK] [MASK] y received 5 / [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] z received [MASK] [MASK] [MASK] [MASK] votes did candidate x received ? [SEP]
+OUT	[CLS] in a certain election , candidate x received 9 / 1 of votes and candidate y received 8 . y received 5 / 4 of the total votes . [SEP] candidate z received how many of the votes did candidate x received ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] class . [SEP] [MASK] would like to give [MASK] student [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] should he give to [MASK] student ? [SEP]
+OUT	[CLS] what is the number ? [SEP] find the number of the students in the class . [SEP] he would like to give each student a number of the same number . what should he give to each student ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] the [MASK] of sides [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] area of triangle [MASK] is 9 square inches . [SEP] [MASK] is the area of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] what is the area of [SEP] in triangle a if the number of sides of the triangle is 12 . [SEP] the area of triangle b is 9 square inches . [SEP] what is the area of triangle b if the sides are equal ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] rate of sales tax was [MASK] [MASK] , find the amount [MASK] had to pay [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] c . [SEP] r [MASK] [SEP]
+OUT	[CLS] find the total amount ? [SEP] a . [SEP] m . [SEP] of the amount of the bill . [SEP] if the rate of sales tax was $ 100 , find the amount he had to pay for the remaining amount ? [SEP] c . [SEP] r . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] width of [MASK] rectangle is 9 [MASK] [MASK] [MASK] [MASK] area of [MASK] rectangle is [MASK] [MASK] [MASK] . [SEP] [MASK] is the ratio of [MASK] width [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a rec ##tangle is rectangular and the width of the rec ##tangle is 9 cm , then the area of the rec ##tangle is 5 cm ##s . [SEP] what is the ratio of the width of the rec ##tangle to length ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] and [MASK] width of [MASK] rectangle is 9 [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] area of [MASK] rectangle is [MASK] [MASK] [MASK] [SEP] [MASK] , [MASK] is the width of [MASK] rectangle [MASK] [SEP]
+OUT	[CLS] if there are 6 sides and the width of the rec ##tangle is 9 . 5 . [SEP] if the area of the rec ##tangle is 36 sq . [SEP] m , what is the width of the rec ##tangle ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] b [MASK] [SEP] [MASK] [MASK] [MASK] complete a work in [MASK] days [MASK] [MASK] [MASK] [MASK] of [MASK] [MASK] [MASK] [MASK] [MASK] b can together finish the work in ? [SEP]
+OUT	[CLS] how many days will if b and [SEP] c together can complete a work in 10 days , if the ratio of a , c , and b can together finish the work in ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] meter [MASK] [MASK] and marks it [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] breaks the branch along [MASK] [MASK] markings and [MASK] one piece of [MASK] [MASK] length [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] a man takes a 20 meter long branch and marks it with a piece of cloth . [SEP] the man breaks the branch along with the markings and removes one piece of cloth in length . [SEP] how many meters is the branch length ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] cricket game [MASK] [MASK] [MASK] rate was only [MASK] . [SEP] [MASK] should be the run [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] runs ? [SEP]
+OUT	[CLS] what was the average score of a cricket game if the run rate was only 3 . [SEP] what should be the run rate for the whole of the game if there were scores of 36 runs ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] cricket game [MASK] [MASK] [MASK] rate was only [MASK] . [SEP] [MASK] should be the run [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] runs ? [SEP]
+OUT	[CLS] what was the average score of a cricket game if the run rate was only 3 . [SEP] what should be the run rate for the whole game if it was a total of 100 runs ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] ratio of [MASK] areas is 9 [MASK] [MASK] and [MASK] [MASK] [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [SEP] find the ratio of [MASK] [MASK] ? [SEP]
+OUT	[CLS] in a rectangular garden the ratio of the areas is 9 : 5 and the area of sides is 8 : 5 . [SEP] find the ratio of the sides ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] the digits of [MASK] [MASK] [MASK] [MASK] number is [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] sum of [MASK] digits of [MASK] number is 9 . [SEP] [MASK] is the [MASK] number ? [SEP]
+OUT	[CLS] find the average number of the digits of a number if the number is doubled by 5 , then find n . [SEP] the sum of the digits of the number is 9 . [SEP] what is the doubled number ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] [MASK] to [MASK] as [MASK] paise from [MASK] member of group as is the number of members . [SEP] [MASK] [MASK] [MASK] collection amounts to [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] member is [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] a certain member is allowed to collect as many pa ##ise from each member of group as is the number of members . [SEP] if the total collection amounts to rs . [SEP] 300 , then the number of member is rs . 300 . [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] in [MASK] [MASK] th [MASK] [MASK] [MASK] [MASK] increases [MASK] [MASK] [MASK] by [MASK] . [SEP] [MASK] will be his [MASK] score after [MASK] innings ? [SEP]
+OUT	[CLS] he makes 100 runs in the 12 th inning , and thus increases his average score by 2 . [SEP] what will be his average score after 12 innings ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] lengths take 9 sec and [MASK] sec respectively [MASK] cross a telegraph [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] train be 1 m [MASK] [MASK] [MASK] time will they cross [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] two trains of equal lengths take 9 sec and 12 sec respectively to cross a telegraph post . [SEP] if the length of each train be 1 m , in what time will they cross other in the same direction ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] numbers [MASK] 9 . [SEP] [MASK] [MASK] [MASK] number is [MASK] by [MASK] [MASK] [MASK] , [MASK] quotient is [MASK] and [MASK] remainder is [MASK] . [SEP] [MASK] [MASK] number is [SEP]
+OUT	[CLS] if the sum of numbers is 9 . [SEP] if the least number is divided by 5 / 6 , the quo ##tie ##nt is 5 and the remainder is 3 . [SEP] the least number is [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] of rs [MASK] [SEP] [MASK] [MASK] shopkeeper gets a loss of [MASK] % [MASK] [MASK] [MASK] cost price is [MASK] . [SEP] [MASK] . [SEP] find the markup [MASK] [MASK] [SEP]
+OUT	[CLS] find the cost price of rs . [SEP] if the shop ##keeper gets a loss of 10 % , then the cost price is rs . [SEP] 100 . [SEP] find the mark ##up price ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] person [MASK] [MASK] [MASK] [MASK] [MASK] person [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] in [MASK] party then [MASK] is the number of [MASK] [MASK] in [MASK] party ? [SEP]
+OUT	[CLS] if there is one person in a party and one person in [SEP] a party is a member of the people in the party then what is the number of people present in the party ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] river is 9 mph [MASK] [SEP] [MASK] boat can [MASK] 1 mph [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] up [MASK] river can the boat travel [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] 5 hours [MASK] [SEP]
+OUT	[CLS] the speed of a river is 9 mph . [SEP] a boat can travel 1 mph in 4 hours . [SEP] how far up the river can the boat travel in the direction of the river in 5 hours ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [MASK] the price of wheat rose by [MASK] % . [SEP] [MASK] [MASK] [MASK] percent must [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] does not increase ? [SEP]
+OUT	[CLS] in a certain year the price of wheat rose by 20 % . [SEP] how much profit percent must be cut off from the price of wheat so that it does not increase ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] [SEP] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] receives 9 / 1 [MASK] [MASK] [MASK] b [MASK] [MASK] together [MASK] b receives 5 / 3 [MASK] [MASK] [MASK] c [MASK] [MASK] [SEP] [MASK] ' [MASK] share is [MASK] [SEP]
+OUT	[CLS] if a . [SEP] b receives 5 / 2 of the profit and c receives 9 / 1 of the profit b receives . together , b receives 5 / 3 of the profit c receives . [SEP] a ' s share is ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] a piece [MASK] work in [MASK] days . [SEP] [MASK] works [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] [MASK] will y take to complete the work ? [SEP]
+OUT	[CLS] y can do a piece of work in 10 days . [SEP] x works for a total of 6 days . x can do it in days . [SEP] how long will y take to complete the work ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] average of [MASK] third of [MASK] [MASK] is 9 ; [MASK] [MASK] [MASK] average of [MASK] rest is 1 . [SEP] [MASK] is the grade [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] ? [SEP]
+OUT	[CLS] in math the average of one third of the students is 9 ; and the arithmetic average of the rest is 1 . [SEP] what is the grade level of the students in math ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] boxes [MASK] [MASK] [MASK] can be [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] by boat [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] . [SEP] [MASK] is the [MASK] number of boxes that could be in [MASK] [MASK] ? [SEP]
+OUT	[CLS] how many more boxes of the kind can be loaded by rail , or loaded by boat , or by truck by truck . [SEP] what is the greatest number of boxes that could be in the container ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] f ( x [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] = [MASK] [MASK] [SEP] [MASK] value of [MASK] function at x [MASK] [MASK] [MASK] [MASK] [MASK] [SEP] [MASK] is the value [MASK] [MASK] ( x [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]
+OUT	[CLS] evaluate the function f ( x ) at x = 0 and at y = 0 . [SEP] the value of the function at x = y is 0 . [SEP] what is the value of f ( x ) at x = y ? [SEP]
+
+IN	[CLS] [MASK] [MASK] [MASK] is the [MASK] area in [MASK] inches of [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] sheet of paper measuring [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] of [MASK] [MASK] sheet [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] inches ? [SEP]
+OUT	[CLS] what percent greater is the surface area in square inches of a rectangular paper sheet than in a sheet of paper measuring in the ratio of the surface area of the rectangular sheet to the surface area of the square inches ? [SEP]
+

@@ -246,12 +246,17 @@ def fill_tags(tokens,nums,nams,must_mask):
     return new_mwps
     
 
-def bert_prediction(pathin,pathout,bert_version):
+def bert_prediction(pathin,pathout,bert_version,gibbs):
     lines_in = list((open(pathin, 'r',encoding='utf-8')).readlines())
     with open(pathout,'w',encoding='utf-8') as fout:
         tokenizer,model = get_bert(bert_version)
         for seed_sentence in lines_in:
             toks, seg_tensor, mask_ids = get_seed_sent(seed_sentence, tokenizer, masking="none", n_append_mask=0)
+            
+            # Gibbs Sampling (from left to right == auto-regression?)
+            #enum = [i for i in range(len(toks)) if toks[i] not in {'[SEP]','[CLS]'} ] # and i not in mask_ids
+            mask_ids = mask_ids * gibbs #+ enum * gibbs
+
             toks = masked_decoding(toks, seg_tensor, mask_ids, model, tokenizer, "argmax")
             toks = [tok.replace(' ##','') for tok in toks]
             print("Final: %s\n" % (" ".join(toks)))
@@ -311,6 +316,7 @@ parser.add_argument('-bert_version', type=str, default='',help='bert-(base|large
 parser.add_argument('-write_bert_in', action='store_true', help='')
 parser.add_argument('-word_level', action='store_true', help='for word_level baseline')
 parser.add_argument('-n_clusters', type=int, default='', help='number of clusters desired')
+parser.add_argument('-gibbs', type=int, default='1', help='number of bert prediction iteration (gibbs sampling)')
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -345,4 +351,4 @@ if __name__ == "__main__":
     
     if args.write_bert_in:
         write_bert_in()
-    bert_prediction(args.bert_in, args.bert_out, args.bert_version)
+    bert_prediction(args.bert_in, args.bert_out, args.bert_version, args.gibbs)
