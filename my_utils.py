@@ -212,12 +212,12 @@ def get_pure_toptemps(pure_path, some_types):
     
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('-data', type=str, default='', help='path to data dir')
-parser.add_argument('-tagged_fi', type=str, default='', help='path to tagged fi i.e. seg')
-parser.add_argument('-gen_fi', type=str, default='', help='path to gen fi')
+parser.add_argument('-tagged_fi', type=str, default='', help='path to tagged file i.e. segmentation')
+parser.add_argument('-gen_fi', type=str, default='', help='path to generation file')
 parser.add_argument('-pure', type=str, default='', help='path to pure_temps')
 
-parser.add_argument('-a_seg', action='store_true', help='')
-parser.add_argument('-a_gen', action='store_true', help='')
+parser.add_argument('-a_seg', action='store_true', help='Analysis segmentation file')
+parser.add_argument('-a_gen', action='store_true', help='Analyze generation file')
 
 if __name__ == '__main__':
     args = parser.parse_args()
