@@ -285,6 +285,7 @@ def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
     ----------
         sents   list of list
         new_gen_fi  if set to '', does not write file
+        must_mask   at least one token masked TODO least number/portion of tags
     Returns:
     ---------
         new_mwps    a list of n_preds*len(sents) new MWPs

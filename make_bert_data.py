@@ -16,15 +16,19 @@ TODO Modify the read-in part of blank_filling
 import os
 from tqdm import tqdm
 from blank_filling import get_mwp_seqs, get_template_seqs, get_lcs_sim_mat, cluster, mwp2masked, fi_tag_filling
+from lm_finetuning.pregenerate_training_data import DocumentDatabase
 n_preds = 1
 n_items = 20 # How many <PER_i>, <num>, ...?
 n_sequences = int(1e7) # 100K = 1e5 samples in the current largest dataset => 1e7 means infinity
 
 def is_bad(sent):
-    # HACK filter out bad samples: No sent should consist more than half numbers/symbols
+    """
+    Definition of "bad MWPs" skipped for all experiments (including valid/test!)
+    (HACK a copy in Datasets/make_data.py)
+    """
     return True if sum([1 for s in sent if s.isalpha()]) < len(sent)/2 else False
 
-def write_general_bert(word_level, data_path, seg_path, n_clusters, bert_general):
+def write_general_bert(word_level, data_path, seg_path, n_clusters):
     """
     [CLS] this [MASK] [MASK] sample sent . [SEP] what do you think ? [SEP]$$$is a
     Key difference from write_bert_in: w/ answers
@@ -51,86 +55,18 @@ def write_general_bert(word_level, data_path, seg_path, n_clusters, bert_general
     new_mwps = fi_tag_filling(sents, '', n_preds, n_items, must_mask=True)
 
     lines = [f"{m}$$${a}\n" for m,a in zip(new_mwps, ans)]
-    with open(os.path.join(bert_general,'general_in.txt', encoding='utf-8')) as fout:
+    with open(os.path.join(data_path,'general_in.txt', encoding='utf-8')) as fout:
         fout.writelines(lines)
 
-
-MaskedLmInstance = collections.namedtuple("MaskedLmInstance",
-                                          ["index", "label"])
-
-def create_masked_lm_predictions(tokens, masked_lm_prob, max_predictions_per_seq, whole_word_mask, vocab_list):
-    """Creates the predictions for the masked LM objective. This is mostly copied from the Google BERT repo, but
-    with several refactors to clean it up and remove a lot of unnecessary variables."""
-    cand_indices = []
-    for (i, token) in enumerate(tokens):
-        if token == "[CLS]" or token == "[SEP]":
-            continue
-        # Whole Word Masking means that if we mask all of the wordpieces
-        # corresponding to an original word. When a word has been split into
-        # WordPieces, the first token does not have any marker and any subsequence
-        # tokens are prefixed with ##. So whenever we see the ## token, we
-        # append it to the previous set of word indexes.
-        #
-        # Note that Whole Word Masking does *not* change the training code
-        # at all -- we still predict each WordPiece independently, softmaxed
-        # over the entire vocabulary.
-        if (whole_word_mask and len(cand_indices) >= 1 and token.startswith("##")):
-            cand_indices[-1].append(i)
-        else:
-            cand_indices.append([i])
-
-    num_to_mask = min(max_predictions_per_seq,
-                      max(1, int(round(len(tokens) * masked_lm_prob))))
-    shuffle(cand_indices)
-    masked_lms = []
-    covered_indexes = set()
-    for index_set in cand_indices:
-        if len(masked_lms) >= num_to_mask:
-            break
-        # If adding a whole-word mask would exceed the maximum number of
-        # predictions, then just skip this candidate.
-        if len(masked_lms) + len(index_set) > num_to_mask:
-            continue
-        is_any_index_covered = False
-        for index in index_set:
-            if index in covered_indexes:
-                is_any_index_covered = True
-                break
-        if is_any_index_covered:
-            continue
-        for index in index_set:
-            covered_indexes.add(index)
-
-            masked_token = None
-            # 80% of the time, replace with [MASK]
-            if random() < 0.8:
-                masked_token = "[MASK]"
-            else:
-                # 10% of the time, keep original
-                if random() < 0.5:
-                    masked_token = tokens[index]
-                # 10% of the time, replace with random word
-                else:
-                    masked_token = choice(vocab_list)
-            masked_lms.append(MaskedLmInstance(index=index, label=tokens[index]))
-            tokens[index] = masked_token
-
-    assert len(masked_lms) <= num_to_mask
-    masked_lms = sorted(masked_lms, key=lambda x: x.index)
-    mask_indices = [p.index for p in masked_lms]
-    masked_token_labels = [p.label for p in masked_lms]
-
-    return tokens, mask_indices, masked_token_labels
-
-
-def create_instances_from_document(
+        
+def my_create_instances_from_document(
         doc_database, doc_idx, max_seq_length, short_seq_prob,
         masked_lm_prob, max_predictions_per_seq, whole_word_mask, vocab_list):
     """This code is mostly a duplicate of the equivalent function from Google BERT's repo.
     However, we make some changes and improvements. Sampling is improved and no longer requires a loop in this function.
     Also, documents are sampled proportionally to the number of sentences they contain, which means each sentence
     (rather than each document) has an equal chance of being sampled as a false example for the NextSentence task."""
-    document, ans = doc_database[doc_idx]
+    document, answer = doc_database[doc_idx] # document: a list of sentence
     # Account for [CLS], [SEP], [SEP]
     max_num_tokens = max_seq_length - 3
 
@@ -155,8 +91,9 @@ def create_instances_from_document(
     current_length = 0
     i = 0
     while i < len(document):
-        segment = document[i]
+        segment = document[i] # document[i]: the ith sentence
         current_chunk.append(segment)
+        current_chunk_ans.append(answer[i])
         current_length += len(segment)
         if i == len(document) - 1 or current_length >= target_seq_length:
             if current_chunk:
@@ -166,11 +103,12 @@ def create_instances_from_document(
                 if len(current_chunk) >= 2:
                     a_end = randrange(1, len(current_chunk))
 
-                tokens_a = []
+                tokens_a,ans_a = [],[]
                 for j in range(a_end):
-                    tokens_a.extend(current_chunk[j])
+                    tokens_a.extend(current_chunk[j]) # Tokens in some sentences go to A
+                    ans_a.extend(current_chunk_ans[j])
 
-                tokens_b = []
+                tokens_b,ans_b = [],[]
 
                 # Random next
                 if len(current_chunk) == 1 or random() < 0.5:
@@ -178,11 +116,12 @@ def create_instances_from_document(
                     target_b_length = target_seq_length - len(tokens_a)
 
                     # Sample a random document, with longer docs being sampled more frequently
-                    random_document = doc_database.sample_doc(current_idx=doc_idx, sentence_weighted=True)
+                    random_document, random_ans = doc_database.sample_doc(current_idx=doc_idx, sentence_weighted=True)
 
                     random_start = randrange(0, len(random_document))
                     for j in range(random_start, len(random_document)):
-                        tokens_b.extend(random_document[j])
+                        tokens_b.extend(random_document[j]) # The others go to B
+                        ans_b.extend(random_ans[j])
                         if len(tokens_b) >= target_b_length:
                             break
                     # We didn't actually use these segments so we "put them back" so
@@ -194,18 +133,21 @@ def create_instances_from_document(
                     is_random_next = False
                     for j in range(a_end, len(current_chunk)):
                         tokens_b.extend(current_chunk[j])
+                        ans_b.extend(current_chunk_ans[j])
                 truncate_seq_pair(tokens_a, tokens_b, max_num_tokens)
 
                 assert len(tokens_a) >= 1
                 assert len(tokens_b) >= 1
 
                 tokens = ["[CLS]"] + tokens_a + ["[SEP]"] + tokens_b + ["[SEP]"]
+                masked_lm_labels = ans_a + ans_b # answer. Name changed to prevent confusion
                 # The segment IDs are 0 for the [CLS] token, the A tokens and the first [SEP]
                 # They are 1 for the B tokens and the final [SEP]
                 segment_ids = [0 for _ in range(len(tokens_a) + 2)] + [1 for _ in range(len(tokens_b) + 1)]
 
-                tokens, masked_lm_positions, masked_lm_labels = create_masked_lm_predictions(
-                    tokens, masked_lm_prob, max_predictions_per_seq, whole_word_mask, vocab_list)
+                masked_lm_positions = [i for i,w in enumerate(tokens) if w == '[MASK]']
+                #tokens, masked_lm_positions, masked_lm_labels = create_masked_lm_predictions(
+                #    tokens, masked_lm_prob, max_predictions_per_seq, whole_word_mask, vocab_list)
 
                 instance = {
                     "tokens": tokens,
@@ -221,12 +163,12 @@ def create_instances_from_document(
     return instances
 
 
-def create_training_file(docs, vocab_list, args, epoch_num):
+def my_create_training_file(docs, vocab_list, args, epoch_num):
     epoch_filename = args.output_dir / "epoch_{}.json".format(epoch_num)
     num_instances = 0
     with epoch_filename.open('w') as epoch_file:
         for doc_idx in trange(len(docs), desc="Document"):
-            doc_instances = create_instances_from_document(
+            doc_instances = my_create_instances_from_document(
                 docs, doc_idx, max_seq_length=args.max_seq_len, short_seq_prob=args.short_seq_prob,
                 masked_lm_prob=args.masked_lm_prob, max_predictions_per_seq=args.max_predictions_per_seq,
                 whole_word_mask=args.do_whole_word_mask, vocab_list=vocab_list)
@@ -243,8 +185,7 @@ def create_training_file(docs, vocab_list, args, epoch_num):
         metrics_file.write(json.dumps(metrics))
 
 
-def write_training_json(args):
-    from lm_finetuning.pregenerate_training_data import DocumentDatabase, create_training_file
+def main(args):
 
     tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
     vocab_list = list(tokenizer.vocab.keys())
@@ -261,7 +202,7 @@ def write_training_json(args):
         args.output_dir.mkdir(exist_ok=True)
     
         for epoch in trange(args.epochs_to_generate, desc="Epoch"):
-            create_training_file(docs, vocab_list, args, epoch)
+            my_create_training_file(docs, vocab_list, args, epoch)
         
 
 if __name__ == "__main__":
@@ -270,8 +211,29 @@ if __name__ == "__main__":
     parser.add_argument('-data_path', type=str, default='', help='path to data dir')
     parser.add_argument('-word_level', action='store_true', help='for word_level baseline')
     parser.add_argument('-n_clusters', type=int, default='', help='number of clusters desired')
+    
+    parser.add_argument('--train_corpus', type=Path, required=True)
+    parser.add_argument("--output_dir", type=Path, required=True)
+    parser.add_argument("--bert_model", type=str, required=True,
+                        choices=["bert-base-uncased", "bert-large-uncased", "bert-base-cased",
+                                    "bert-base-multilingual-uncased", "bert-base-chinese", "bert-base-multilingual-cased"])
+    parser.add_argument("--do_lower_case", action="store_true")
+    parser.add_argument("--do_whole_word_mask", action="store_true",
+                        help="Whether to use whole word masking rather than per-WordPiece masking.")
     parser.add_argument("--reduce_memory", action="store_true",
                         help="Reduce memory usage for large datasets by keeping data on disc rather than in memory")
+
+    parser.add_argument("--num_workers", type=int, default=1,
+                        help="The number of workers to use to write the files")
+    parser.add_argument("--epochs_to_generate", type=int, default=3,
+                        help="Number of epochs of data to pregenerate")
+    parser.add_argument("--max_seq_len", type=int, default=128)
+    parser.add_argument("--short_seq_prob", type=float, default=0.1,
+                        help="Probability of making a short sentence as a training example")
+    parser.add_argument("--masked_lm_prob", type=float, default=0.15,
+                        help="Probability of masking each token for the LM task")
+    parser.add_argument("--max_predictions_per_seq", type=int, default=20,
+                        help="Maximum number of tokens to mask in each sequence")
     args = parser.parse_args()
     print(args)
 
