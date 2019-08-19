@@ -96,13 +96,11 @@ def get_lcs_sim_mat(seqs):
 def get_template_seqs(seg_path):
     linenos, temps2sents, top_temps = parse_seg_file(seg_path)  
     # The seg_path was from train.txt unless specified 
-    # when training neural tempplate (so use the same split of data from all models!)
+    # when training neural tempplate (so using the same split of data from all models!)
     return top_temps, linenos, temps2sents
 
 def get_mwp_seqs(data_path):    
-    # HACK should've used valid for clustering, 
-    # but get_template_seqs uses train.txt too
-    seqs= None,None
+    seqs= None
     with open(os.path.join(data_path,'train.txt'),'r',encoding='utf-8') as f:
         # HACK avoid duplicated
         seqs = [s for s in set([tuple(line.split('|||')[0].split()) for line in list(f.readlines())])]
@@ -134,9 +132,9 @@ def update_lcs_sim_mat(ids, new_seqs, matrix, lcss):
         lcss[-1][si] = lcs # keep lower triangular
     return new_mat, lcss
 
-def cluster(seqs, spls, matrix, lcss):
-    # TODO keep a max-heap for the matrix 
-    # so extract-max O(n) -> O(log n)
+def cluster(seqs, spls, matrix, lcss): 
+    # heapq so extract-max O(n) -> O(log n)? 
+    # No, you modify O(n) elements. heapify does not help.
 
     print("len seqs:",len(seqs))
     ids = sorted([matrix.argmax(None)//len(seqs), matrix.argmax(None)%len(seqs)],reverse=True)  # [greater,less]
@@ -162,13 +160,14 @@ def temp2masked(seqs, spls, temps2sents):
         temps2sents     dict temp -> [([phrases],lineno)]
     Returns:
     ----------
-        temps   list of masked sents
+        new_sents   list of "[CLS] hello [MASK] ! [SEP]"
+        ans         list of "world"
     """
     # TODO: Counter() for most common list of phrases 
     # in the fixed positions, and use the most common combination only
     # For now, it's simply hollowing out the non-fixed segments
     OTHER_CODE = -1
-    new_sents = []
+    new_sents,ans = [],[]
     for seq,spl in zip(seqs,spls):          # iterate lcs
         for sp in spl:                      # iterate sample templates set
             for segs,_ in temps2sents[sp]:  # iterate mwps using that sample templates # (_ is lineno)
@@ -180,7 +179,7 @@ def temp2masked(seqs, spls, temps2sents):
                 mwp = f'{CLS} '+f' {SEP} '.join(sent_tokenize(' '.join(segs).replace(' '+EOS,'')))+f' {SEP}'
                 new_states = [OTHER_CODE if word in {SEP,CLS} else old_states.pop(0) for word in mwp.split()]
                 
-                new_tokes = [ ]
+                new_tokes,new_maskeds = [],[]
                 seq_copied = list(seq)
                 for s,w in zip(new_states,mwp.split()): # iterate words
                     if len(seq_copied) > 0 and s == seq_copied[0]:
@@ -192,16 +191,18 @@ def temp2masked(seqs, spls, temps2sents):
                     #    continue
                     else:
                         new_tokes.append(MASK)
-                new_sents.append(' '.join(new_tokes))                
-    return new_sents
+                        new_maskeds.append(w)
+                new_sents.append(' '.join(new_tokes))
+                ans.append(' '.join(new_maskeds))
+    return new_sents,ans
 
 def mwp2masked(seqs, spls):
     # Baseline model: not using tempalte at all
-    new_sents = []
+    new_sents,ans = [],[]
     for seq,spl in zip(seqs,spls):          # iterate lcs
         for sp in spl:                      # iterate sample templates set
             mwp = f'{CLS} '+f' {SEP} '.join(sent_tokenize(' '.join(sp).replace(' '+EOS,'')))+f' {SEP}'
-            new_tokes = []
+            new_tokes,new_maskeds = [],[]
             seq_copied = list(seq)
             for w in mwp.split(): # iterate words
                 if len(seq_copied) > 0 and w == seq_copied[0]:
@@ -211,8 +212,10 @@ def mwp2masked(seqs, spls):
                     new_tokes.append(w)
                 else:
                     new_tokes.append(MASK)
-            new_sents.append(' '.join(new_tokes))                
-    return new_sents
+                    new_maskeds.append(w)
+            new_sents.append(' '.join(new_tokes))
+            ans.append(' '.join(new_maskeds))
+    return new_sents,ans
 
 def read_ner_file(nerf_path):
     """
@@ -281,6 +284,10 @@ def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
     Parameters:
     ----------
         sents   list of list
+        new_gen_fi  if set to '', does not write file
+    Returns:
+    ---------
+        new_mwps    a list of n_preds*len(sents) new MWPs
     """
     
     def get_num_nam(n_preds, n_items):
@@ -292,11 +299,15 @@ def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
 
     nums, nams = get_num_nam(n_preds, n_items)
     new_mwps = [fill_tags(sent.split(),nums,nams,must_mask) for sent in sents]
-    new_mwps = [t for s in new_mwps for t in s]
+    new_mwps = [t for s in new_mwps for t in s] # because n_preds MWPs were grouped together
     lines = '\n'.join(new_mwps)+'\n'
 
-    with open(new_gen_fi,'w',encoding='utf-8') as fout:
+    if new_gen_fi != '':
+        with open(new_gen_fi,'w',encoding='utf-8') as fout:
+            fout.writelines(lines)        
         fout.writelines(lines)
+            fout.writelines(lines)        
+    return new_mwps
 
 def substitute_seg(seg_path, data_path, bert_in, n_preds, n_items):
     """
@@ -362,7 +373,7 @@ if __name__ == "__main__":
         print(f"len(seqs)={len(seqs)}; args.n_clusters={args.n_clusters} (clustered)")
         #print(seqs) # NOTE for temps, lists are merged; tuples aren't.
         
-        sents = mwp2masked(seqs, spls) if args.word_level else temp2masked(seqs, spls, temps2sents)
+        sents,_ = mwp2masked(seqs, spls) if args.word_level else temp2masked(seqs, spls, temps2sents)
         sents = sorted(list(set(sents)))
 
         fi_tag_filling(sents, args.bert_in, n_preds, n_items, must_mask=True)

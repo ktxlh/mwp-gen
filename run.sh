@@ -21,10 +21,10 @@ CMDS=command_tips.sh
 
 BERT_VERSION=lm_finetuning/finetuned_lm/ #bert-large-uncased #-whole-word-masking 
 # bert-(base|large)-(un)?cased(-whole-word-masking(-finetuned-squad)?)? # only some of them have shortcuts s.t. we can use it by simply specify the name
-WRITE_BERT_IN=-write_bert_in
-WORD_LEVEL=-word_level
+WRITE_BERT_IN= #-write_bert_in
+WORD_LEVEL= #-word_level
 N_CLSTR=1000 # number of clusters
-N_GIBBS=1   # number of iteration (prediction; Gibbs sampling)
+N_GIBBS=3   # number of iteration (prediction; Gibbs sampling)
 
 format () {
     if [ ${#CPFRCED} -gt 0 ]; then   # greater than

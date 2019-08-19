@@ -296,7 +296,7 @@ def main():
         train_dataloader = DataLoader(epoch_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
         tr_loss = 0
         nb_tr_examples, nb_tr_steps = 0, 0
-        with tqdm(total=len(train_dataloader), desc=f"Epoch {epoch}") as pbar:
+        with tqdm(total=len(train_dataloader), desc=f"Epoch {epoch}") as pbar: # tqdm: progress bar
             for step, batch in enumerate(train_dataloader):
                 batch = tuple(t.to(device) for t in batch)
                 input_ids, input_mask, segment_ids, lm_label_ids, is_next = batch
