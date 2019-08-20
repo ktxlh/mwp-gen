@@ -1,4 +1,4 @@
-CORPUS=~/Datasets/3k-mathqa-train-valid/tunebert.txt
+CORPUS=~/Datasets/all-mathqa-train-valid/tunebert.txt
 
 CUDA_VISIBLE_DEVICES=3 python pregenerate_training_data.py --train_corpus $CORPUS --bert_model bert-base-uncased --do_lower_case --output_dir training/ --epochs_to_generate 3 --max_seq_len 256
 

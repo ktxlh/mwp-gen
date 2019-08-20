@@ -15,6 +15,7 @@ import labeled_data
 from utils import logsumexp1, make_fwd_constr_idxs, make_bwd_constr_idxs, backtrace3, backtrace
 from data.utils import get_wikibio_poswrds, get_e2e_poswrds
 import infc
+from tqdm import trange
 
 import print_result, my_utils
 import pprint
@@ -1034,7 +1035,7 @@ if __name__ == "__main__":
         nsents = 0
         trainperm = torch.randperm(len(corpus.train))
         nmini_batches = min(len(corpus.train), args.max_mbs_per_epoch)
-        for batch_idx in range(nmini_batches):
+        for batch_idx in trange(nmini_batches):
             net.zero_grad()
             x, _, src, locs, inps = corpus.train[trainperm[batch_idx]]
             cidxs = train_cidxs[trainperm[batch_idx]] if epoch <= args.constr_tr_epochs else None

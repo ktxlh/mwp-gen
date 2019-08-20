@@ -15,16 +15,16 @@ WORD_AR= #-word_ar    # QwQ   # 33404 pars using word_ar OAO
 PURE=   #-pure   # TODO
 CPFRCED= #-copy_forced
 
-DATA_DIR=~/Datasets/3k-mathqa-train-valid #~/Datasets/srl-ai2-ilds-train-valid/ai2-ilds-train-valid-concated
+DATA_DIR=~/Datasets/30-mathqa-train-valid
 GEN_FROM=$DATA_DIR/src_valid.txt
 CMDS=command_tips.sh
 
 BERT_VERSION=lm_finetuning/finetuned_lm/ #bert-large-uncased #-whole-word-masking 
 # bert-(base|large)-(un)?cased(-whole-word-masking(-finetuned-squad)?)? # only some of them have shortcuts s.t. we can use it by simply specify the name
-WRITE_BERT_IN= #-write_bert_in
+WRITE_BERT_IN=-write_bert_in
 WORD_LEVEL= #-word_level
 N_CLSTR=1000 # number of clusters
-N_GIBBS=3   # number of iteration (prediction; Gibbs sampling)
+N_GIBBS=1   # number of iteration (prediction; Gibbs sampling)
 
 format () {
     if [ ${#CPFRCED} -gt 0 ]; then   # greater than
@@ -38,7 +38,7 @@ format () {
         AR_TAG=-far
     fi
     #########################################################
-    TAG=3k-mathqa-$EMB_SIZE-$K-$KMUL$AR_TAG$CP_TAG$WORD_LEVEL
+    TAG=30-mathqa-$EMB_SIZE-$K-$KMUL$AR_TAG$CP_TAG$WORD_LEVEL
     EXTRA=-$N_CLSTR-finetuned_bert-3 #3epochs
     #########################################################
 
@@ -107,6 +107,11 @@ blank_filling() {
 }
 > $CMDS
 
+make_bert_data(){
+    # HAAAAAAAAAAAAACK!!! (arbitrary paras.)
+    CUDA_VISIBLE_DEVICES=3 python make_bert_data.py -seg_path $TAGGED_FI -data_path $DATA_DIR --output_dir $DATA_DIR -n_clusters $N_CLSTR --bert_model "bert-base-uncased" --do_lower_case --reduce_memory $WORD_LEVEL 
+}
+
 with_gpu(){ # To run on server
     #for K in 35 55 75
     #do
@@ -121,7 +126,8 @@ with_gpu(){ # To run on server
             #analyze_seg
             #generate
             #analyze_gen
-            blank_filling
+            #blank_filling
+            make_bert_data
 
             echo "TAGs=$TAG$EXTRA, took "$(( SECONDS - kkstart ))" seconds in total"
     #    done

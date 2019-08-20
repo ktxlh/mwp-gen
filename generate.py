@@ -8,7 +8,7 @@ import argparse
 import torch
 import torch.nn.functional as F
 from torch.distributions import Categorical
-from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM, BertForMaskedLM
+from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
 
 MASK = "[MASK]"
 MASK_ATOM = "[MASK]"

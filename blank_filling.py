@@ -13,7 +13,7 @@ names = [line.strip() for line in open('names.txt','r').readlines()]
 import numpy as np
 from nltk.tokenize import sent_tokenize
 from pyclustering.cluster.kmedoids import kmedoids
-from pytorch_pretrained_bert import BertForMaskedLM, BertTokenizer
+from pytorch_pretrained_bert import BertTokenizer
 
 from generate import get_seed_sent, load_model, masked_decoding
 from my_utils import parse_seg_file, re_sort_metadata
@@ -305,9 +305,7 @@ def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
 
     if new_gen_fi != '':
         with open(new_gen_fi,'w',encoding='utf-8') as fout:
-            fout.writelines(lines)        
-        fout.writelines(lines)
-            fout.writelines(lines)        
+            fout.writelines(lines)
     return new_mwps
 
 def substitute_seg(seg_path, data_path, bert_in, n_preds, n_items):

@@ -13,10 +13,18 @@ Procedure:
 
 TODO Modify the read-in part of blank_filling
 """
+import argparse
 import os
-from tqdm import tqdm
-from blank_filling import get_mwp_seqs, get_template_seqs, get_lcs_sim_mat, cluster, mwp2masked, fi_tag_filling
+from pathlib import Path
+
+from pytorch_pretrained_bert import BertTokenizer
+from tqdm import tqdm, trange
+
+from blank_filling import (cluster, fi_tag_filling, get_lcs_sim_mat,
+                           get_mwp_seqs, get_template_seqs, mwp2masked,
+                           temp2masked)
 from lm_finetuning.pregenerate_training_data import DocumentDatabase
+
 n_preds = 1
 n_items = 20 # How many <PER_i>, <num>, ...?
 n_sequences = int(1e7) # 100K = 1e5 samples in the current largest dataset => 1e7 means infinity
@@ -29,6 +37,7 @@ def is_bad(sent):
     return True if sum([1 for s in sent if s.isalpha()]) < len(sent)/2 else False
 
 def write_general_bert(word_level, data_path, seg_path, n_clusters):
+    print(f"\nwrite_general_bert({word_level}, {data_path}, {seg_path}, {n_clusters})\n")
     """
     [CLS] this [MASK] [MASK] sample sent . [SEP] what do you think ? [SEP]$$$is a
     Key difference from write_bert_in: w/ answers
@@ -55,7 +64,13 @@ def write_general_bert(word_level, data_path, seg_path, n_clusters):
     new_mwps = fi_tag_filling(sents, '', n_preds, n_items, must_mask=True)
 
     lines = [f"{m}$$${a}\n" for m,a in zip(new_mwps, ans)]
-    with open(os.path.join(data_path,'general_in.txt', encoding='utf-8')) as fout:
+    for m,a in zip(new_mwps, ans):
+        try:
+            assert m.split().count('[MASK]') == len(a.split())
+        except Exception:
+            print(m.split().count('[MASK]'),m)
+            print(len(a.split()), a)
+    with open(os.path.join(data_path,'general_in.txt'), 'w', encoding='utf-8') as fout:
         fout.writelines(lines)
 
         
@@ -186,11 +201,11 @@ def my_create_training_file(docs, vocab_list, args, epoch_num):
 
 
 def main(args):
-
+    print(f"\nmain({args})\n")
     tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
     vocab_list = list(tokenizer.vocab.keys())
     with DocumentDatabase(reduce_memory=args.reduce_memory) as docs:
-        with args.bert_general.open() as f:
+        with open(os.path.join(args.data_path,'general_in.txt')) as f:
             for line in tqdm(f, desc="Loading Dataset", unit=" lines"):
                 # mwp_ans is a list of tuples ('hello [MASK] ! [SEP] how are you ? [SEP]', 'world')
                 mwp, ans = line[6:].strip().split('$$$')   # [6:] to avoid "[CLS] "
@@ -212,19 +227,19 @@ if __name__ == "__main__":
     parser.add_argument('-word_level', action='store_true', help='for word_level baseline')
     parser.add_argument('-n_clusters', type=int, default='', help='number of clusters desired')
     
-    parser.add_argument('--train_corpus', type=Path, required=True)
+    #parser.add_argument('--train_corpus', type=Path, required=True)
     parser.add_argument("--output_dir", type=Path, required=True)
     parser.add_argument("--bert_model", type=str, required=True,
                         choices=["bert-base-uncased", "bert-large-uncased", "bert-base-cased",
                                     "bert-base-multilingual-uncased", "bert-base-chinese", "bert-base-multilingual-cased"])
     parser.add_argument("--do_lower_case", action="store_true")
-    parser.add_argument("--do_whole_word_mask", action="store_true",
-                        help="Whether to use whole word masking rather than per-WordPiece masking.")
+    #parser.add_argument("--do_whole_word_mask", action="store_true",
+    #                    help="Whether to use whole word masking rather than per-WordPiece masking.")
     parser.add_argument("--reduce_memory", action="store_true",
                         help="Reduce memory usage for large datasets by keeping data on disc rather than in memory")
 
-    parser.add_argument("--num_workers", type=int, default=1,
-                        help="The number of workers to use to write the files")
+    #parser.add_argument("--num_workers", type=int, default=1,
+    #                    help="The number of workers to use to write the files")
     parser.add_argument("--epochs_to_generate", type=int, default=3,
                         help="Number of epochs of data to pregenerate")
     parser.add_argument("--max_seq_len", type=int, default=128)
@@ -237,5 +252,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
-    
-    
+    write_general_bert(args.word_level, args.data_path, args.seg_path, args.n_clusters)
+    main(args)
