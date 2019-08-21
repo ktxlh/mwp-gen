@@ -151,13 +151,15 @@ def cluster(seqs, spls, matrix, lcss):
     # each of several indices corresponding to seqs
     return new_seqs,new_spls,matrix,lcss 
 
-def temp2masked(seqs, spls, temps2sents):
+def temp2masked(seqs, spls, temps2sents, data_path, linenos):
     """
     Parameters:
     ----------
         seqs    list of template lcs
         spls    list of set of temps using of which their lcs is seqs
         temps2sents     dict temp -> [([phrases],lineno)]
+        data_path   string: path to data dir
+        linenos     converter. usage: train_lineno := linenos[seg_lineno]
     Returns:
     ----------
         new_sents   list of "[CLS] hello [MASK] ! [SEP]"
@@ -167,12 +169,32 @@ def temp2masked(seqs, spls, temps2sents):
     # in the fixed positions, and use the most common combination only
     # For now, it's simply hollowing out the non-fixed segments
     OTHER_CODE = -1
+
+    train_lines = [line.strip().split('|||')[0].split() \
+        for line in (open(os.path.join(data_path,'train.txt'),'r',encoding='utf-8')).readlines()]
+
     new_sents,ans = [],[]
     for seq,spl in zip(seqs,spls):          # iterate lcs
         for sp in spl:                      # iterate sample templates set
-            for segs,_ in temps2sents[sp]:  # iterate mwps using that sample templates # (_ is lineno)
+            for segs,lineno in temps2sents[sp]:  # iterate mwps using that sample templates # (_ is lineno)
+                
+                # Replace <unk>s in segs with original tokens,
+                # so the number of [MASK]s and ans match
+                # note: 1. fill
+                global_itok = 0
+                for segid, seg in enumerate(segs):
+                    if UNK_IN in seg: #####
+                        print(seg)  #####
+                    new_seg = []
+                    for tok in seg.split():
+                        if tok in {UNK_IN, NUMBER}: # NUMBER does not help: <num> in train.txt too
+                            new_seg.append(train_lines[linenos[lineno]][global_itok])
+                        else:
+                            new_seg.append(tok)
+                        global_itok += 1
+                    segs[segid] = ' '.join(new_seg)
 
-                # TODO doesn't make sense to use more than two sentences
+                # TODO doesn't make sense to use more than 2 [SEP]s
                 # See https://github.com/google-research/bert/issues/395 for details
                 # Suggestion: use unused1 (See vocab.txt) if needed => but it requires extra training :3
                 old_states = [ state for state,seg in zip(sp,segs) for _ in range(len(seg.split()))]
@@ -180,15 +202,13 @@ def temp2masked(seqs, spls, temps2sents):
                 new_states = [OTHER_CODE if word in {SEP,CLS} else old_states.pop(0) for word in mwp.split()]
                 
                 new_tokes,new_maskeds = [],[]
-                seq_copied = list(seq)
+                seq_copied = seq.copy()
                 for s,w in zip(new_states,mwp.split()): # iterate words
                     if len(seq_copied) > 0 and s == seq_copied[0]:
                         new_tokes.append(w)
                         del seq_copied[0]
                     elif s == OTHER_CODE:
                         new_tokes.append(w)
-                    #elif s == EOS: # should've been avoided
-                    #    continue
                     else:
                         new_tokes.append(MASK)
                         new_maskeds.append(w)
@@ -285,7 +305,7 @@ def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
     ----------
         sents   list of list
         new_gen_fi  if set to '', does not write file
-        must_mask   at least one token masked TODO least number/portion of tags
+       must_mask   at least one token masked TODO least number/portion of tags
     Returns:
     ---------
         new_mwps    a list of n_preds*len(sents) new MWPs
@@ -327,8 +347,6 @@ def substitute_seg(seg_path, data_path, bert_in, n_preds, n_items):
     # metadata: know where to tag   
 
 def gen_fi_tag_filling(old_fi_path,new_gen_fi,n_preds, n_items):
-    """
-    """
     with open(old_fi_path,'r', encoding='utf-8') as fin:
         sents = [line.split('|||')[0].replace('(c) ','').split()  for line in fin.readlines() if '|||' in line]
         fi_tag_filling(sents, new_gen_fi, n_preds, n_items, must_mask=False)
@@ -357,6 +375,7 @@ if __name__ == "__main__":
         
         #substitute_seg(args.seg_path, args.data_path, args.bert_in, n_preds, n_items)
 
+        linenos = []
         if args.word_level:
             seqs = get_mwp_seqs(args.data_path) # Simple non-template baseline
         else:
@@ -372,7 +391,11 @@ if __name__ == "__main__":
         print(f"len(seqs)={len(seqs)}; args.n_clusters={args.n_clusters} (clustered)")
         #print(seqs) # NOTE for temps, lists are merged; tuples aren't.
         
-        sents,_ = mwp2masked(seqs, spls) if args.word_level else temp2masked(seqs, spls, temps2sents)
+        if args.word_level
+            sents,_ = mwp2masked(seqs, spls)
+        else:
+            sents,_ = temp2masked(seqs, spls, temps2sents, args.data_path, linenos)
+        
         sents = sorted(list(set(sents)))
 
         fi_tag_filling(sents, args.bert_in, n_preds, n_items, must_mask=True)

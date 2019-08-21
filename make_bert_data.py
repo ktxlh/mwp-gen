@@ -42,6 +42,7 @@ def write_general_bert(word_level, data_path, seg_path, n_clusters):
     [CLS] this [MASK] [MASK] sample sent . [SEP] what do you think ? [SEP]$$$is a
     Key difference from write_bert_in: w/ answers
     """
+    linenos = []
     if word_level:
         seqs = get_mwp_seqs(data_path) # Simple non-template baseline
     else:
@@ -56,7 +57,7 @@ def write_general_bert(word_level, data_path, seg_path, n_clusters):
         seqs, spls, matrix, lcss = cluster(seqs, spls, matrix, lcss)
     print(f"len(seqs)={len(seqs)}; n_clusters={n_clusters} (clustered)")
     
-    sents,ans = mwp2masked(seqs, spls) if word_level else temp2masked(seqs, spls, temps2sents)
+    sents,ans = mwp2masked(seqs, spls) if word_level else temp2masked(seqs, spls, temps2sents, data_path, linenos)
     sents_ans = sorted(list(set(zip(sents, ans))))
     sents = [s for s,_ in sents_ans]
     ans = [a for _,a in sents_ans for __ in range(n_preds)]

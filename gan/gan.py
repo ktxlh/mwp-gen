@@ -3,9 +3,9 @@ from tqdm import trange
 
 import torch
 from torch import nn
-from pytorch_transformers.modeling_bert import (BertTokenizer,
-                                                BertForMaskedLM,
+from pytorch_transformers.modeling_bert import (BertForMaskedLM,
                                                 BertForSequenceClassification)
+from pytorch_pretrained_bert import BertTokenizer
 from utils import load_data
 from collections import defaultdict
 
@@ -14,7 +14,7 @@ class Instructor:
         # TODO requires_grad = False?
         self.args = args
         self.device = torch.device("cuda:0" if opt.cuda else "cpu")
-        self.tokenizer = BertTokenizer.from_pretrained(bert_model)
+        self.tokenizer = BertTokenizer.from_pretrained(args.bert_model)
 
         # Generator, Discriminator
         self.generator = BertForMaskedLM.from_pretrained(args.bert_model)
@@ -43,8 +43,8 @@ class Instructor:
         self.optimizerD = BertAdam(optimizer_grouped_parametersD,lr=2e-5,warmup=.1)
 
         # DataLoader
-        self.msk_data = load_data(args.data_path, args.maxlen, args.batch_size, 'masked') # masked mwp
-        self.org_data = load_data(args.data_path, args.maxlen, args.batch_size, 'original') # original mwp
+        self.msk_data = load_data(args.data_path, args.maxlen, args.batch_size, self.tokenizer, 'masked')
+        self.org_data = load_data(args.data_path, args.maxlen, args.batch_size, self.tokenizer, 'original')
 
     def _flat_accuracy_(preds, labels):
         pred_flat = np.argmax(preds, axis=1).flatten()
@@ -86,7 +86,7 @@ class Instructor:
                 msk_input_ids, msk_input_mask, msk_input_seg = msk_batch
                 labels.fill_(fake_label)
                 
-                # Predict [MASK]s and replace them simultaneously # TODO autoregression
+                # Predict [MASK]s and replace them simultaneously # TODO autoregressively
                 fake_ids = msk_input_ids #.clone() Soft copy to save space
                 preds = self.generator(pred_ids, msk_input_seg)     # batch_size x max_seq_len x vocab_size
                 fake_ids[msk_input_ids==mask_id] = preds[msk_input_ids==mask_id].argmax(dim=-1).clone()
@@ -114,8 +114,8 @@ class Instructor:
                     % (i_epoch, self.args.epochs, i, len(self.msk_data),
                         train_loss_set['lossD_real'], train_loss_set['lossD_fake'], train_loss_set['lossG']))
                 if i % 100 == 0:
-                    tokenizer.convert_ids_to_tokens(fake_ids.detach())
-                    print()
+                    tokens = tokenizer.convert_ids_to_tokens(fake_ids.detach())
+                    print(' '.join(tokens))
                     vutils.save_image(real_cpu,
                             '%s/real_samples.png' % opt.outf,
                             normalize=True)

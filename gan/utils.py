@@ -1,8 +1,7 @@
 from torch.utils.data import  Dataset, TensorDataset, DataLoader, RandomSampler, SequentialSampler
 from keras.preprocessing.sequence import pad_sequences
 
-
-def load_data(data_path, maxlen, batch_size, role):
+def load_data(data_path, maxlen, batch_size, tokenizer, role):
     """
     Load general_in into dataloader
     * No real/fake labels here
@@ -24,7 +23,7 @@ def load_data(data_path, maxlen, batch_size, role):
             mwps = [line.strip().split('$$$')[0] for line in f.readlines()]
             segs = [[0] * len(mwp.split()) for mwp in mwps]
 
-    input_ids = pad_sequences([tokenizer.convert_tokens_to_ids(mwp) for mwp in mwps], \
+    input_ids = pad_sequences([tokenizer.convert_tokens_to_ids(mwp.split()) for mwp in mwps], \
         maxlen=maxlen, dtype="long", truncating="post", padding="post")
     attention_masks = [[float(i>0) for i in seq] for seq in input_ids]
     
@@ -34,7 +33,7 @@ def load_data(data_path, maxlen, batch_size, role):
 
     if role == 'masked':
         data = TensorDataset(input_ids, attention_masks, segs)
-    elif role = 'original':
+    elif role == 'original':
         data = TensorDataset(input_ids, attention_masks)
     dataloader = DataLoader(data, sampler=RandomSampler(data), batch_size=batch_size)
     return dataloader
