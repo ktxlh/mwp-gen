@@ -15,7 +15,7 @@ WORD_AR= #-word_ar    # QwQ   # 33404 pars using word_ar OAO
 PURE=   #-pure   # TODO
 CPFRCED= #-copy_forced
 
-DATA_DIR=~/Datasets/30-mathqa-train-valid
+DATA_DIR=~/Datasets/bt_nn-mathqa-train-valid
 GEN_FROM=$DATA_DIR/src_valid.txt
 CMDS=command_tips.sh
 
@@ -38,7 +38,7 @@ format () {
         AR_TAG=-far
     fi
     #########################################################
-    TAG=30-mathqa-$EMB_SIZE-$K-$KMUL$AR_TAG$CP_TAG$WORD_LEVEL
+    TAG=bt_nn-mathqa-$EMB_SIZE-$K-$KMUL$AR_TAG$CP_TAG$WORD_LEVEL
     EXTRA=-$N_CLSTR-finetuned_bert-3 #3epochs
     #########################################################
 
@@ -120,9 +120,9 @@ with_gpu(){ # To run on server
             kkstart=$SECONDS
             echo "TAGs=$TAG$EXTRA"
 
-            #train
+            train
             MODEL=$MODEL.0
-            #segment
+            segment
             #analyze_seg
             #generate
             #analyze_gen

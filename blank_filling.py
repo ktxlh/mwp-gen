@@ -183,8 +183,6 @@ def temp2masked(seqs, spls, temps2sents, data_path, linenos):
                 # note: 1. fill
                 global_itok = 0
                 for segid, seg in enumerate(segs):
-                    if UNK_IN in seg: #####
-                        print(seg)  #####
                     new_seg = []
                     for tok in seg.split():
                         if tok in {UNK_IN, NUMBER}: # NUMBER does not help: <num> in train.txt too
@@ -193,6 +191,8 @@ def temp2masked(seqs, spls, temps2sents, data_path, linenos):
                             new_seg.append(tok)
                         global_itok += 1
                     segs[segid] = ' '.join(new_seg)
+                    #if UNK_IN in seg: #####
+                    #    print(seg, '->', segs[segid])  #####
 
                 # TODO doesn't make sense to use more than 2 [SEP]s
                 # See https://github.com/google-research/bert/issues/395 for details
@@ -202,7 +202,7 @@ def temp2masked(seqs, spls, temps2sents, data_path, linenos):
                 new_states = [OTHER_CODE if word in {SEP,CLS} else old_states.pop(0) for word in mwp.split()]
                 
                 new_tokes,new_maskeds = [],[]
-                seq_copied = seq.copy()
+                seq_copied = list(seq) #.copy() -> 'tuple' object has no attribute 'copy'
                 for s,w in zip(new_states,mwp.split()): # iterate words
                     if len(seq_copied) > 0 and s == seq_copied[0]:
                         new_tokes.append(w)
@@ -391,7 +391,7 @@ if __name__ == "__main__":
         print(f"len(seqs)={len(seqs)}; args.n_clusters={args.n_clusters} (clustered)")
         #print(seqs) # NOTE for temps, lists are merged; tuples aren't.
         
-        if args.word_level
+        if args.word_level:
             sents,_ = mwp2masked(seqs, spls)
         else:
             sents,_ = temp2masked(seqs, spls, temps2sents, args.data_path, linenos)

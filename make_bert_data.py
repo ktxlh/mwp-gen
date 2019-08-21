@@ -14,16 +14,24 @@ Procedure:
 TODO Modify the read-in part of blank_filling
 """
 import argparse
+import collections
+import json
 import os
+import shelve
+from argparse import ArgumentParser
+from multiprocessing import Pool
 from pathlib import Path
+from random import choice, randint, random, randrange, shuffle
+from tempfile import TemporaryDirectory
 
-from pytorch_pretrained_bert import BertTokenizer
+import numpy as np
 from tqdm import tqdm, trange
 
 from blank_filling import (cluster, fi_tag_filling, get_lcs_sim_mat,
                            get_mwp_seqs, get_template_seqs, mwp2masked,
                            temp2masked)
 from lm_finetuning.pregenerate_training_data import DocumentDatabase
+from pytorch_transformers.tokenization_bert import BertTokenizer
 
 n_preds = 1
 n_items = 20 # How many <PER_i>, <num>, ...?
@@ -35,6 +43,30 @@ def is_bad(sent):
     (HACK a copy in Datasets/make_data.py)
     """
     return True if sum([1 for s in sent if s.isalpha()]) < len(sent)/2 else False
+
+def my_truncate_seq_pair(tokens_a, ans_a, tokens_b, ans_b, max_num_tokens):
+    """
+    Truncates a pair of sequences to a maximum sequence length. Lifted from Google's BERT repo.
+    * Consider [MASK]s
+    """
+    while True:
+        total_length = len(tokens_a) + len(tokens_b)
+        if total_length <= max_num_tokens:
+            break
+
+        (trunc_tokens,trunc_ans) = (tokens_a,ans_a) if len(tokens_a) > len(tokens_b) else (tokens_b,ans_b)
+        assert len(trunc_tokens) >= 1
+
+        # We want to sometimes truncate from the front and sometimes from the
+        # back to add more randomness and avoid biases.
+        if random() < 0.5:
+            if trunc_tokens[0] == '[MASK]':
+                del trunc_ans[0]
+            del trunc_tokens[0]
+        else:
+            if trunc_tokens[-1] == '[MASK]':
+                trunc_ans.pop()
+            trunc_tokens.pop()
 
 def write_general_bert(word_level, data_path, seg_path, n_clusters):
     print(f"\nwrite_general_bert({word_level}, {data_path}, {seg_path}, {n_clusters})\n")
@@ -68,7 +100,8 @@ def write_general_bert(word_level, data_path, seg_path, n_clusters):
     for m,a in zip(new_mwps, ans):
         try:
             assert m.split().count('[MASK]') == len(a.split())
-        except Exception:
+        except Exception as e:
+            print("write_general_bert Exception",e)
             print(m.split().count('[MASK]'),m)
             print(len(a.split()), a)
     with open(os.path.join(data_path,'general_in.txt'), 'w', encoding='utf-8') as fout:
@@ -82,7 +115,7 @@ def my_create_instances_from_document(
     However, we make some changes and improvements. Sampling is improved and no longer requires a loop in this function.
     Also, documents are sampled proportionally to the number of sentences they contain, which means each sentence
     (rather than each document) has an equal chance of being sampled as a false example for the NextSentence task."""
-    document, answer = doc_database[doc_idx] # document: a list of sentence
+    document = doc_database[doc_idx] # document: a list of (sentence, answer)
     # Account for [CLS], [SEP], [SEP]
     max_num_tokens = max_seq_length - 3
 
@@ -103,13 +136,13 @@ def my_create_instances_from_document(
     # segments "A" and "B" based on the actual "sentences" provided by the user
     # input.
     instances = []
-    current_chunk = []
+    current_chunk,current_chunk_ans = [],[]
     current_length = 0
     i = 0
     while i < len(document):
-        segment = document[i] # document[i]: the ith sentence
+        segment, answer = document[i] # document[i]: the ith sentence
         current_chunk.append(segment)
-        current_chunk_ans.append(answer[i])
+        current_chunk_ans.append(answer)
         current_length += len(segment)
         if i == len(document) - 1 or current_length >= target_seq_length:
             if current_chunk:
@@ -132,12 +165,12 @@ def my_create_instances_from_document(
                     target_b_length = target_seq_length - len(tokens_a)
 
                     # Sample a random document, with longer docs being sampled more frequently
-                    random_document, random_ans = doc_database.sample_doc(current_idx=doc_idx, sentence_weighted=True)
+                    random_document = doc_database.sample_doc(current_idx=doc_idx, sentence_weighted=True)
 
                     random_start = randrange(0, len(random_document))
                     for j in range(random_start, len(random_document)):
-                        tokens_b.extend(random_document[j]) # The others go to B
-                        ans_b.extend(random_ans[j])
+                        tokens_b.extend(random_document[j][0]) # The others go to B
+                        ans_b.extend(random_document[j][1])
                         if len(tokens_b) >= target_b_length:
                             break
                     # We didn't actually use these segments so we "put them back" so
@@ -150,7 +183,8 @@ def my_create_instances_from_document(
                     for j in range(a_end, len(current_chunk)):
                         tokens_b.extend(current_chunk[j])
                         ans_b.extend(current_chunk_ans[j])
-                truncate_seq_pair(tokens_a, tokens_b, max_num_tokens)
+                # HACK disable
+                #my_truncate_seq_pair(tokens_a, ans_a, tokens_b, ans_b, max_num_tokens)
 
                 assert len(tokens_a) >= 1
                 assert len(tokens_b) >= 1
@@ -210,14 +244,13 @@ def main(args):
             for line in tqdm(f, desc="Loading Dataset", unit=" lines"):
                 # mwp_ans is a list of tuples ('hello [MASK] ! [SEP] how are you ? [SEP]', 'world')
                 mwp, ans = line[6:].strip().split('$$$')   # [6:] to avoid "[CLS] "
-                sents = mwp.split(' [SEP]')
+                sents = mwp.split(' [SEP]')[:-1]
                 ans = ans.split()
                 ans = [[ans.pop(0) for _ in range(s.count('[MASK]'))] for s in sents]
                 docs.add_document(list(zip([tokenizer.tokenize(s) for s in sents], ans)))
         assert len(docs) > 1
         args.output_dir.mkdir(exist_ok=True)
-    
-        for epoch in trange(args.epochs_to_generate, desc="Epoch"):
+        for epoch in range(args.epochs_to_generate):
             my_create_training_file(docs, vocab_list, args, epoch)
         
 
@@ -234,8 +267,8 @@ if __name__ == "__main__":
                         choices=["bert-base-uncased", "bert-large-uncased", "bert-base-cased",
                                     "bert-base-multilingual-uncased", "bert-base-chinese", "bert-base-multilingual-cased"])
     parser.add_argument("--do_lower_case", action="store_true")
-    #parser.add_argument("--do_whole_word_mask", action="store_true",
-    #                    help="Whether to use whole word masking rather than per-WordPiece masking.")
+    parser.add_argument("--do_whole_word_mask", action="store_true",
+                        help="Whether to use whole word masking rather than per-WordPiece masking.")
     parser.add_argument("--reduce_memory", action="store_true",
                         help="Reduce memory usage for large datasets by keeping data on disc rather than in memory")
 
