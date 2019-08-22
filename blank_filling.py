@@ -5,6 +5,7 @@ TODO: [UNK],[SEP],[PAD]
 import argparse
 import os
 from random import choice, random, shuffle
+from tqdm import tqdm, trange
 
 #import names
 names = [line.strip() for line in open('names.txt','r').readlines()]
@@ -82,7 +83,8 @@ def get_lcs_sim_mat(seqs):
     print("Computing lcs similarity matrix...")
     sim = np.zeros((len(seqs),len(seqs)))
     lcss = [[None]*len(seqs) for _ in range(len(seqs))]
-    for si1,s1 in enumerate(seqs):
+    for si1 in trange(len(seqs)):
+        s1 = seqs[si1]
         for si2,s2 in enumerate(seqs):
             if si2 >= si1:  # Lower triangular, id2 < id1
                 break

@@ -23,7 +23,7 @@ def load_data(data_path, maxlen, batch_size, tokenizer, role):
                     for wid,w in enumerate(question.split())]))
         elif role == 'masked':
             mwps = [line.strip().split('$$$')[0] for line in f.readlines()]
-            #segs = [[0] * len(mwp.split()) for mwp in mwps]
+    assert len(mwps) > 0
 
     input_ids = pad_sequences([tokenizer.convert_tokens_to_ids(mwp.split()) for mwp in mwps], \
         maxlen=maxlen, dtype="long", truncating="post", padding="post")
@@ -31,7 +31,6 @@ def load_data(data_path, maxlen, batch_size, tokenizer, role):
     
     input_ids = torch.tensor(input_ids)
     attention_masks = torch.tensor(attention_masks)
-    #segs = torch.tensor(segs)
     segs = torch.zeros_like(input_ids) # HACK 'cuz tensor must be fix-len in each dimension
 
     if role == 'masked':

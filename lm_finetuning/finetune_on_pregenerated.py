@@ -48,7 +48,12 @@ def convert_example_to_features(example, tokenizer, max_seq_length):
     segment_array[:len(segment_ids)] = segment_ids
 
     lm_label_array = np.full(max_seq_length, dtype=np.int, fill_value=-1)
-    lm_label_array[masked_lm_positions] = masked_label_ids
+    try:
+        lm_label_array[masked_lm_positions] = masked_label_ids
+    except Exception:
+        print(len(lm_label_array[masked_lm_positions]),lm_label_array[masked_lm_positions])
+        print(len(masked_label_ids),masked_label_ids)
+        exit()
 
     features = InputFeatures(input_ids=input_array,
                              input_mask=mask_array,

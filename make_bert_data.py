@@ -183,8 +183,7 @@ def my_create_instances_from_document(
                     for j in range(a_end, len(current_chunk)):
                         tokens_b.extend(current_chunk[j])
                         ans_b.extend(current_chunk_ans[j])
-                # HACK disable
-                #my_truncate_seq_pair(tokens_a, ans_a, tokens_b, ans_b, max_num_tokens)
+                my_truncate_seq_pair(tokens_a, ans_a, tokens_b, ans_b, max_num_tokens)
 
                 assert len(tokens_a) >= 1
                 assert len(tokens_b) >= 1
@@ -207,6 +206,7 @@ def my_create_instances_from_document(
                     "masked_lm_labels": masked_lm_labels}
                 instances.append(instance)
             current_chunk = []
+            current_chunk_ans = []
             current_length = 0
         i += 1
 
@@ -247,7 +247,8 @@ def main(args):
                 sents = mwp.split(' [SEP]')[:-1]
                 ans = ans.split()
                 ans = [[ans.pop(0) for _ in range(s.count('[MASK]'))] for s in sents]
-                docs.add_document(list(zip([tokenizer.tokenize(s) for s in sents], ans)))
+                #docs.add_document(list(zip([tokenizer.tokenize(s) for s in sents], ans)))
+                docs.add_document(list(zip([s.split() for s in sents], ans))) # It's bert-tokenized in make_data
         assert len(docs) > 1
         args.output_dir.mkdir(exist_ok=True)
         for epoch in range(args.epochs_to_generate):

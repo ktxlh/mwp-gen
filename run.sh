@@ -10,12 +10,13 @@ KMUL=3
 L=4
 LR=0.5
 SEED=1111
+MAX_SEQLEN=256
 SEP_ATTN=-sep_attn
 WORD_AR= #-word_ar    # QwQ   # 33404 pars using word_ar OAO
 PURE=   #-pure   # TODO
 CPFRCED= #-copy_forced
 
-DATA_DIR=~/Datasets/bt_nn-mathqa-train-valid
+DATA_DIR=~/Datasets/bt_nn_300-mathqa-train-valid
 GEN_FROM=$DATA_DIR/src_valid.txt
 CMDS=command_tips.sh
 
@@ -38,7 +39,7 @@ format () {
         AR_TAG=-far
     fi
     #########################################################
-    TAG=bt_nn-mathqa-$EMB_SIZE-$K-$KMUL$AR_TAG$CP_TAG$WORD_LEVEL
+    TAG=bt_nn_300-mathqa-$EMB_SIZE-$K-$KMUL$AR_TAG$CP_TAG$WORD_LEVEL
     EXTRA=-$N_CLSTR-finetuned_bert-3 #3epochs
     #########################################################
 
@@ -56,7 +57,7 @@ format () {
 # Training  +Autoregressive
 train () {
     start=$SECONDS
-    CUDA_VISIBLE_DEVICES=3 python chsmm.py -data $DATA_DIR -emb_size $EMB_SIZE -hid_size $HID_SIZE -layers $LAYERS -K $K -L $L -log_interval 200 -thresh $THRESH -emb_drop -bsz 15 -max_seqlen 55 -lr $LR $SEP_ATTN -max_pool -unif_lenps -one_rnn -Kmul $KMUL -mlpinp -onmt_decay -cuda -seed $SEED -save $MODEL -ar_after_decay -verbose $CPFRCED $WORD_AR
+    CUDA_VISIBLE_DEVICES=3 python chsmm.py -data $DATA_DIR -emb_size $EMB_SIZE -hid_size $HID_SIZE -layers $LAYERS -K $K -L $L -log_interval 200 -thresh $THRESH -emb_drop -bsz 15 -max_seqlen $MAX_SEQLEN -lr $LR $SEP_ATTN -max_pool -unif_lenps -one_rnn -Kmul $KMUL -mlpinp -onmt_decay -cuda -seed $SEED -save $MODEL -ar_after_decay -verbose $CPFRCED $WORD_AR
     echo $(( SECONDS - start ))
 }
 
@@ -65,7 +66,7 @@ segment () {
     start=$SECONDS
     echo "echo '# Viterbi Segmentation/Template Extraction'" >> $CMDS
     echo "scp shangling@140.109.19.51:~/ntg2/$TAGGED_FI ~/mwp/ntg2/segs" >> $CMDS
-    CUDA_VISIBLE_DEVICES=3 python chsmm.py -data $DATA_DIR -emb_size $EMB_SIZE -hid_size $HID_SIZE -layers $LAYERS -K $K -L $L -log_interval 200 -thresh $THRESH -emb_drop -bsz 15 -max_seqlen 55 -lr $LR  $SEP_ATTN -max_pool -unif_lenps -one_rnn -Kmul $KMUL -mlpinp -onmt_decay -cuda -load $MODEL -label_train -ar_after_decay -verbose $CPFRCED $WORD_AR > $TAGGED_FI #| tee $TAGGED_FI
+    CUDA_VISIBLE_DEVICES=3 python chsmm.py -data $DATA_DIR -emb_size $EMB_SIZE -hid_size $HID_SIZE -layers $LAYERS -K $K -L $L -log_interval 200 -thresh $THRESH -emb_drop -bsz 15 -max_seqlen $MAX_SEQLEN -lr $LR  $SEP_ATTN -max_pool -unif_lenps -one_rnn -Kmul $KMUL -mlpinp -onmt_decay -cuda -load $MODEL -label_train -ar_after_decay -verbose $CPFRCED $WORD_AR > $TAGGED_FI #| tee $TAGGED_FI
     echo $(( SECONDS - start ))
 }
 analyze_seg () {
@@ -120,9 +121,9 @@ with_gpu(){ # To run on server
             kkstart=$SECONDS
             echo "TAGs=$TAG$EXTRA"
 
-            train
+            #train
             MODEL=$MODEL.0
-            segment
+            #segment
             #analyze_seg
             #generate
             #analyze_gen
