@@ -21,10 +21,11 @@ import shelve
 from argparse import ArgumentParser
 from multiprocessing import Pool
 from pathlib import Path
-from random import choice, randint, random, randrange, shuffle
+from random import choice, randint, random, randrange, sample, shuffle
 from tempfile import TemporaryDirectory
 
 import numpy as np
+from nltk.tokenize import sent_tokenize
 from tqdm import tqdm, trange
 
 from blank_filling import (cluster, fi_tag_filling, get_lcs_sim_mat,
@@ -36,6 +37,9 @@ from pytorch_transformers.tokenization_bert import BertTokenizer
 n_preds = 1
 n_items = 20 # How many <PER_i>, <num>, ...?
 n_sequences = int(1e7) # 100K = 1e5 samples in the current largest dataset => 1e7 means infinity
+CLS = '[CLS]'
+SEP = '[SEP]'
+EOS = '<eos>'
 
 def is_bad(sent):
     """
@@ -44,32 +48,32 @@ def is_bad(sent):
     """
     return True if sum([1 for s in sent if s.isalpha()]) < len(sent)/2 else False
 
-def my_truncate_seq_pair(tokens_a, ans_a, tokens_b, ans_b, max_num_tokens):
-    """
-    Truncates a pair of sequences to a maximum sequence length. Lifted from Google's BERT repo.
-    * Consider [MASK]s
-    """
-    while True:
-        total_length = len(tokens_a) + len(tokens_b)
-        if total_length <= max_num_tokens:
-            break
+def write_general_in_rand_mask(data_path, rand_mask):
+    print(f"\nwrite_general_in_rand_mask({data_path}, {rand_mask})\n")
+    train_lines = [line.strip().split('|||')[0] \
+        for line in (open(os.path.join(data_path,'train.txt'),'r',encoding='utf-8')).readlines()]
+    new_mwps, ans = [], []
+    unmaskables = {CLS, SEP}
+    min_nb_tok_kept = 3 # Keep at least 3 tokens unmasked in each MWP
+    
+    for line in train_lines:
+        line = f'{CLS} '+f' {SEP} '.join(sent_tokenize(line.replace(' '+EOS,'')))+f' {SEP}'
+        tokens = line.split()
 
-        (trunc_tokens,trunc_ans) = (tokens_a,ans_a) if len(tokens_a) > len(tokens_b) else (tokens_b,ans_b)
-        assert len(trunc_tokens) >= 1
+        mwp_ans = []
+        maskable_idx = sorted([i for i in range(len(tokens)) if tokens[i] not in unmaskables])
+        for idx in sample(maskable_idx, min(rand_mask,max(len(maskable_idx)-min_nb_tok_kept,1))):
+            mwp_ans.append(tokens[idx])
+            tokens[idx] = '[MASK]'  
+        new_mwps.append(' '.join(tokens))
+        ans.append(' '.join(mwp_ans))
 
-        # We want to sometimes truncate from the front and sometimes from the
-        # back to add more randomness and avoid biases.
-        if random() < 0.5:
-            if trunc_tokens[0] == '[MASK]':
-                del trunc_ans[0]
-            del trunc_tokens[0]
-        else:
-            if trunc_tokens[-1] == '[MASK]':
-                trunc_ans.pop()
-            trunc_tokens.pop()
+    lines = [f"{m}$$${a}\n" for m,a in zip(new_mwps, ans)]
+    with open(os.path.join(data_path,'general_in_rand_mask.txt'), 'w', encoding='utf-8') as fout:
+        fout.writelines(lines)
 
-def write_general_bert(word_level, data_path, seg_path, n_clusters):
-    print(f"\nwrite_general_bert({word_level}, {data_path}, {seg_path}, {n_clusters})\n")
+def write_general_in_lcs(word_level, data_path, seg_path, n_clusters):
+    print(f"\nwrite_general_in_lcs({word_level}, {data_path}, {seg_path}, {n_clusters})\n")
     """
     [CLS] this [MASK] [MASK] sample sent . [SEP] what do you think ? [SEP]$$$is a
     Key difference from write_bert_in: w/ answers
@@ -96,16 +100,37 @@ def write_general_bert(word_level, data_path, seg_path, n_clusters):
 
     new_mwps = fi_tag_filling(sents, '', n_preds, n_items, must_mask=True)
 
-    lines = [f"{m}$$${a}\n" for m,a in zip(new_mwps, ans)]
     for m,a in zip(new_mwps, ans):
-        try:
-            assert m.split().count('[MASK]') == len(a.split())
-        except Exception as e:
-            print("write_general_bert Exception",e)
-            print(m.split().count('[MASK]'),m)
-            print(len(a.split()), a)
-    with open(os.path.join(data_path,'general_in.txt'), 'w', encoding='utf-8') as fout:
+        assert m.split().count('[MASK]') == len(a.split())
+
+    lines = [f"{m}$$${a}\n" for m,a in zip(new_mwps, ans)]
+    with open(os.path.join(data_path,'general_in_lcs.txt'), 'w', encoding='utf-8') as fout:
         fout.writelines(lines)
+
+
+def my_truncate_seq_pair(tokens_a, ans_a, tokens_b, ans_b, max_num_tokens):
+    """
+    Truncates a pair of sequences to a maximum sequence length. Lifted from Google's BERT repo.
+    * Consider [MASK]s
+    """
+    while True:
+        total_length = len(tokens_a) + len(tokens_b)
+        if total_length <= max_num_tokens:
+            break
+
+        (trunc_tokens,trunc_ans) = (tokens_a,ans_a) if len(tokens_a) > len(tokens_b) else (tokens_b,ans_b)
+        assert len(trunc_tokens) >= 1
+
+        # We want to sometimes truncate from the front and sometimes from the
+        # back to add more randomness and avoid biases.
+        if random() < 0.5:
+            if trunc_tokens[0] == '[MASK]':
+                del trunc_ans[0]
+            del trunc_tokens[0]
+        else:
+            if trunc_tokens[-1] == '[MASK]':
+                trunc_ans.pop()
+            trunc_tokens.pop()
 
         
 def my_create_instances_from_document(
@@ -239,8 +264,9 @@ def main(args):
     print(f"\nmain({args})\n")
     tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
     vocab_list = list(tokenizer.vocab.keys())
+    fin_name = 'general_in_rand_mask.txt' if args.rand_mask > 0 else 'general_in_lcs.txt'
     with DocumentDatabase(reduce_memory=args.reduce_memory) as docs:
-        with open(os.path.join(args.data_path,'general_in.txt')) as f:
+        with open(os.path.join(args.data_path,fin_name)) as f:
             for line in tqdm(f, desc="Loading Dataset", unit=" lines"):
                 # mwp_ans is a list of tuples ('hello [MASK] ! [SEP] how are you ? [SEP]', 'world')
                 mwp, ans = line[6:].strip().split('$$$')   # [6:] to avoid "[CLS] "
@@ -257,16 +283,17 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('-seg_path', type=str, default='', help='path to seg file')
+    
     parser.add_argument('-data_path', type=str, default='', help='path to data dir')
+    parser.add_argument('-rand_mask', type=int, default=0, help='ignore any masking scheme and randomly mask some')
+
+    parser.add_argument('-seg_path', type=str, default='', help='path to seg file')
     parser.add_argument('-word_level', action='store_true', help='for word_level baseline')
     parser.add_argument('-n_clusters', type=int, default='', help='number of clusters desired')
     
     #parser.add_argument('--train_corpus', type=Path, required=True)
     parser.add_argument("--output_dir", type=Path, required=True)
-    parser.add_argument("--bert_model", type=str, required=True,
-                        choices=["bert-base-uncased", "bert-large-uncased", "bert-base-cased",
-                                    "bert-base-multilingual-uncased", "bert-base-chinese", "bert-base-multilingual-cased"])
+    parser.add_argument("--bert_model", type=str, required=True)
     parser.add_argument("--do_lower_case", action="store_true")
     parser.add_argument("--do_whole_word_mask", action="store_true",
                         help="Whether to use whole word masking rather than per-WordPiece masking.")
@@ -287,5 +314,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
-    write_general_bert(args.word_level, args.data_path, args.seg_path, args.n_clusters)
+    if args.rand_mask > 0:
+        write_general_in_rand_mask(args.data_path, args.rand_mask)
+    else:
+        write_general_in_lcs(args.word_level, args.data_path, args.seg_path, args.n_clusters)
     main(args)

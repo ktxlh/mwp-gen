@@ -27,6 +27,8 @@ WORD_LEVEL= #-word_level
 N_CLSTR=1000 # number of clusters
 N_GIBBS=1   # number of iteration (prediction; Gibbs sampling)
 
+RAND_MASK=5
+
 format () {
     if [ ${#CPFRCED} -gt 0 ]; then   # greater than
         CP_TAG=-cp
@@ -110,7 +112,7 @@ blank_filling() {
 
 make_bert_data(){
     # HAAAAAAAAAAAAACK!!! (arbitrary paras.)
-    CUDA_VISIBLE_DEVICES=3 python make_bert_data.py -seg_path $TAGGED_FI -data_path $DATA_DIR --output_dir $DATA_DIR -n_clusters $N_CLSTR --bert_model "bert-base-uncased" --do_lower_case --reduce_memory $WORD_LEVEL 
+    CUDA_VISIBLE_DEVICES=3 python make_bert_data.py -seg_path $TAGGED_FI -data_path $DATA_DIR --output_dir $DATA_DIR -n_clusters $N_CLSTR --bert_model $BERT_VERSION -rand_mask $RAND_MASK --do_lower_case --reduce_memory $WORD_LEVEL 
 }
 
 with_gpu(){ # To run on server

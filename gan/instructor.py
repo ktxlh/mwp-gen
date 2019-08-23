@@ -1,17 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-TODO:
-[*] loss
-[*] debug lines >> file
-[*] more samples
-    [*] make_data
-    [*] make_bert_data
-[*] fine-tuned bert
-[ ] less masks
-[*] autoregressive
-"""
-
 import os
 from collections import defaultdict
 
@@ -44,8 +32,8 @@ class Instructor:
         self.optimizerD = self._get_optimizer_(self.discriminator)
 
         # DataLoader
-        self.msk_data = load_data(args.data_path, args.maxlen, args.batch_size, self.tokenizer, 'masked')
-        self.org_data = load_data(args.data_path, args.maxlen, args.batch_size, self.tokenizer, 'original')
+        self.msk_data = load_data(args.general_in, args.maxlen, args.batch_size, self.tokenizer, 'masked')
+        self.org_data = load_data(args.general_in, args.maxlen, args.batch_size, self.tokenizer, 'original')
     
     def _get_optimizer_(self, model):
         no_decay = ['bias', 'gamma', 'beta']
@@ -62,6 +50,7 @@ class Instructor:
         return BertAdam(optimizer_grouped_parameters,lr=2e-5,warmup=.1)
 
     def _id2prettyStr_helper_(self, id_tensor):
+        # from words' id_tensor to a string for printing
         tokens = self.tokenizer.convert_ids_to_tokens(id_tensor.tolist()[0])
         return ' '.join(tokens).replace(' [PAD]','').replace('[CLS] ','')
 
@@ -158,3 +147,9 @@ class Instructor:
             # do checkpointing
             torch.save(self.generator.state_dict(), '%s/gen_epoch_%d.pth' % (self.args.model_out, i_epoch))
             torch.save(self.discriminator.state_dict(), '%s/dis_epoch_%d.pth' % (self.args.model_out, i_epoch))
+
+"""
+Code references:
+* Pytorch DCGAN example:  https://github.com/pytorch/examples/blob/master/dcgan/main.py
+* BERT fine-tuning tutorial:    https://mccormickml.com/2019/07/22/BERT-fine-tuning/
+"""

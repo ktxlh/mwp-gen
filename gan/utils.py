@@ -3,18 +3,18 @@ import torch
 from torch.utils.data import  Dataset, TensorDataset, DataLoader, RandomSampler, SequentialSampler
 from keras.preprocessing.sequence import pad_sequences
 
-def load_data(data_path, maxlen, batch_size, tokenizer, role):
+def load_data(general_in, maxlen, batch_size, tokenizer, role):
     """
     Load general_in into dataloader
     * No real/fake labels here
     * GAN -> no validation set
     Parameters:
-        data_path   path to dir with general_in.txt (bert-tokenized in make_bert_data.py)
+        general_in   path to general_in*.txt (bert-tokenized in make_bert_data.py)
     """
     assert role in {'masked','original'}
 
     mwps,segs = [],[]
-    with open(os.path.join(data_path,'general_in.txt'), encoding='utf-8') as f:
+    with open(general_in, encoding='utf-8') as f:
         if role == 'original':
             q_as = [line.strip().split('$$$') for line in f.readlines()]
             for (question, answer) in q_as:

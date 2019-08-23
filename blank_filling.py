@@ -182,7 +182,6 @@ def temp2masked(seqs, spls, temps2sents, data_path, linenos):
                 
                 # Replace <unk>s in segs with original tokens,
                 # so the number of [MASK]s and ans match
-                # note: 1. fill
                 global_itok = 0
                 for segid, seg in enumerate(segs):
                     new_seg = []
@@ -193,8 +192,6 @@ def temp2masked(seqs, spls, temps2sents, data_path, linenos):
                             new_seg.append(tok)
                         global_itok += 1
                     segs[segid] = ' '.join(new_seg)
-                    #if UNK_IN in seg: #####
-                    #    print(seg, '->', segs[segid])  #####
 
                 # TODO doesn't make sense to use more than 2 [SEP]s
                 # See https://github.com/google-research/bert/issues/395 for details
@@ -302,12 +299,14 @@ def bert_prediction(pathin,pathout,bert_version,gibbs):
 
 def fi_tag_filling(sents, new_gen_fi, n_preds, n_items,must_mask):
     """
-    Fill in the <num> and <PER_#> and write it to new_gen_fi
+    1. Fill in the <num> and <PER_#> 
+    2. Replace <unk> with [MASK]
+    3. Write new_gen_fi
     Parameters:
     ----------
         sents   list of list
         new_gen_fi  if set to '', does not write file
-       must_mask   at least one token masked TODO least number/portion of tags
+        must_mask   at least one token masked TODO least number/portion of tags
     Returns:
     ---------
         new_mwps    a list of n_preds*len(sents) new MWPs
