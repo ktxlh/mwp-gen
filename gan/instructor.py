@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-
+"""
+BERT-GAN.
+Code references:
+* Pytorch DCGAN example:  https://github.com/pytorch/examples/blob/master/dcgan/main.py
+* BERT fine-tuning tutorial:    https://mccormickml.com/2019/07/22/BERT-fine-tuning/
+"""
 import os
 from collections import defaultdict
 
@@ -70,7 +75,7 @@ class Instructor:
                 fake_ids[p1,p2] = preds[p1,p2].argmax(dim=-1).clone()
 
     def train(self):
-        # NOTE bert input is a pair of sents but it should be more ones in our case
+        # NOTE bert input was a pair of sents but the number may differ here
         # NOTE # epochs for finetuning bert is suggested to be 2 to 4
 
         # Constants
@@ -147,9 +152,3 @@ class Instructor:
             # do checkpointing
             torch.save(self.generator.state_dict(), '%s/gen_epoch_%d.pth' % (self.args.model_out, i_epoch))
             torch.save(self.discriminator.state_dict(), '%s/dis_epoch_%d.pth' % (self.args.model_out, i_epoch))
-
-"""
-Code references:
-* Pytorch DCGAN example:  https://github.com/pytorch/examples/blob/master/dcgan/main.py
-* BERT fine-tuning tutorial:    https://mccormickml.com/2019/07/22/BERT-fine-tuning/
-"""

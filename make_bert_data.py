@@ -264,7 +264,13 @@ def main(args):
     print(f"\nmain({args})\n")
     tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
     vocab_list = list(tokenizer.vocab.keys())
-    fin_name = 'general_in_rand_mask.txt' if args.rand_mask > 0 else 'general_in_lcs.txt'
+    if args.rand_mask > 0:
+        fin_name = 'general_in_rand_mask.txt'  
+        args.output_dir = args.output_dir / 'rand_mask_bert_pregen'
+    else:
+        fin_name = 'general_in_lcs.txt'
+        args.output_dir = args.output_dir / 'lcs_bert_pregen'
+
     with DocumentDatabase(reduce_memory=args.reduce_memory) as docs:
         with open(os.path.join(args.data_path,fin_name)) as f:
             for line in tqdm(f, desc="Loading Dataset", unit=" lines"):
