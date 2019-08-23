@@ -46,8 +46,8 @@ class Instructor:
                 if any(nd in n for nd in no_decay)],
             'weight_decay_rate': 0.0}
         ]
-        # TODO config/tune lr
-        return BertAdam(optimizer_grouped_parameters,lr=2e-5,warmup=.1)
+        # TODO allow diff lr for G & D
+        return BertAdam(optimizer_grouped_parameters,lr=self.args.lr,warmup=self.args.warmup)
 
     def _id2prettyStr_helper_(self, id_tensor):
         # from words' id_tensor to a string for printing
@@ -88,7 +88,7 @@ class Instructor:
                 org_batch = tuple(t.to(self.device) for t in org_batch)
 
                 ###############################################################
-                # (1) Update D network: maximize log(D(x)) + log(1 - D(G(z))) #
+                # Update Discriminator: maximize log(D(x)) + log(1 - D(G(z))) #
                 ###############################################################
                 
                 #====== Train with real ======
@@ -121,7 +121,7 @@ class Instructor:
                 self.optimizerD.step()
 
                 ###############################################################
-                # (2) Update G network: maximize log(D(G(z)))                 #
+                # Update Generator: maximize log(D(G(z)))                     #
                 ###############################################################
                 self.generator.train()
                 self.discriminator.eval()
@@ -136,7 +136,7 @@ class Instructor:
                 print('[%d/%d][%d/%d] LossD_real: %.4f LossD_fake: %.4f LossG: %.4f'
                     % (i_epoch, self.args.epochs, i, len(self.msk_data),
                         train_loss_set['lossD_real'][i], train_loss_set['lossD_fake'][i], train_loss_set['lossG'][i]))
-                if i % 5 == 0: #100
+                if i % 5 == 0: #5 was100
                     self.generator.eval()
 
                     fixed_output = fixed_input[0].clone()                
