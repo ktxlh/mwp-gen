@@ -18,7 +18,7 @@ parser.add_argument('-loss_dir', type=str, default='', help='path to result loss
 parser.add_argument("-cuda", action="store_true", help="use gpu or not")
 
 parser.add_argument("-test", action="store_true", help="valid/test if true")
-parser.add_argument('-load', type=str, default='', help='path to saved gan model')
+parser.add_argument('-load_epoch', type=int, default=-1, help='0-indexed epoch of the model to load')
 parser.add_argument('-seed', type=int, default=2809, help='random seeds')
 
 args = parser.parse_args()

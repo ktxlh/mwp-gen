@@ -40,22 +40,26 @@ class Tester:
         md = " ".join(toks2).replace('[CLS] ','').replace(' [SEP]','\n')
         return pr,md
 
-models={
-    'ftd':'lm_finetuning/finetuned_lm/', #'lm_finetuning/bt_nn_3k-finetuned_lm/': This one sucks. Don't use it.
-    'org':'bert-base-uncased',
-    'gan':'gan/models/bt_nn_300-1/tok-gen_epoch_0/'}
+models=[
+    ('ftd','lm_finetuning/finetuned_lm/'), #'lm_finetuning/bt_nn_3k-finetuned_lm/': This one sucks. Don't use it.
+    ('org','bert-base-uncased'),
+    ('gan','gan/models/bt_nn_3k/tok-gen_epoch_4/')
+    ]
 sents=[
     "[CLS] a car drives 60 miles on local roads at [MASK] mph , and 195 miles [MASK] the [MASK] [MASK] 65 mph , what is [MASK] average speed of the entire trip ? [SEP]",
     "[CLS] [MASK] many numbers from 45 [MASK] [MASK] [MASK] [MASK] di ##vis ##ible by 12 ? [SEP]",
-    "[CLS] if y exceeds x [MASK] 25 % , [MASK] [MASK] is less [MASK] y [MASK] ? [SEP]"]
+    "[CLS] if y exceeds x [MASK] 25 % , [MASK] [MASK] is less [MASK] y [MASK] ? [SEP]"
+    ]
 def test(modellist=models,sentlist=sents):
-    testers=dict([(k,Tester(v)) for (k,v) in models.items()])
+    testers=[(k,Tester(v)) for (k,v) in modellist]
+    mds = ['\n\n# Formatted']
     for s in sentlist:
+        mds.append(f'\nIN:\t{s}')
         print()
-        for k,v in testers.items():
-            print(f'\n* {k}:')
+        for k,v in testers:
             pr,md=v.predict(s)
-            print('Pr:',pr)
-            print('Md:',md)
+            print(f'{k}:\t{pr}')
+            mds.append(f'* {k}:\t{md}')
+    print('\n'.join(mds))
     return testers,sents
 

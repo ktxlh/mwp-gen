@@ -153,9 +153,13 @@ def plot(losses, loss_dir):
     except Exception as e:
         print(str(e))
 
-def save_gan(tok,gen,dis,model_out,i_epoch):
+def get_gan_path(model_out, i_epoch):
     gen_save_dir = '%stok-gen_epoch_%d/' % (model_out, i_epoch)
     dis_save_dir = '%sdis_epoch_%d/' % (model_out, i_epoch)
+    return gen_save_dir, dis_save_dir
+
+def save_gan(tok,gen,dis,model_out,i_epoch):
+    gen_save_dir, dis_save_dir = get_gan_path(model_out, i_epoch)
     for save_dir in [gen_save_dir,dis_save_dir]:
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)

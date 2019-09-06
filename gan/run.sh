@@ -15,21 +15,21 @@ BERT_MODEL=~/ntg2/lm_finetuning/finetuned_lm/
 ########### TRAIN ###########
 MAXLEN=256
 BATCH_SIZE=8 # if 16, RuntimeError: CUDA out of memory.
-LR=1e-4 #2e-5 ##########################################
-############################ How to tune it? Diff for G/D?
+LR=1e-4 #2e-5 ############# How to tune it? Diff for G/D? This matters A LOT!
 WARMUP=.1
-EPOCHS=5
+LOAD_EPOCH=4 # 0-indexed
+EPOCHS=10
 CUDA=-cuda
 
 ########### OUT ###########
+MODEL_OUT=models/$FROM_TAG/
+
 TO_TAG=$FROM_TAG-$EPOCHS
-MODEL_OUT=models/$TO_TAG/
 RESULT_OUT=results/$TO_TAG # NOTE: no file extension
 LOSS_DIR=results/$TO_TAG/
 
 ########### TEST ###########
 TEST= #-test
-LOAD= #-load=$MODEL_OUT
 
 ########### COMMAND ###########
-CUDA_VISIBLE_DEVICES=3 python main.py -bert_model $BERT_MODEL -general_in $GENERAL_IN -maxlen $MAXLEN -batch_size $BATCH_SIZE -epochs $EPOCHS -lr $LR -warmup $WARMUP -model_out $MODEL_OUT -result_out $RESULT_OUT -loss_dir $LOSS_DIR $LOAD $TEST $CUDA
+CUDA_VISIBLE_DEVICES=3 python main.py -bert_model $BERT_MODEL -general_in $GENERAL_IN -maxlen $MAXLEN -batch_size $BATCH_SIZE -epochs $EPOCHS -lr $LR -warmup $WARMUP -model_out $MODEL_OUT -result_out $RESULT_OUT -loss_dir $LOSS_DIR -load_epoch $LOAD_EPOCH $TEST $CUDA

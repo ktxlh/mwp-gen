@@ -16,26 +16,23 @@ from tqdm import tqdm
 from pytorch_transformers.modeling_bert import (BertForMaskedLM,
                                                 BertForSequenceClassification)
 from pytorch_transformers.tokenization_bert import BertTokenizer
-from utils import (fixed_append_pred, fixed_write_orig, load_data, plot,
-                   predict_l2r, save_gan, test_write_mwps)
+from utils import (fixed_append_pred, fixed_write_orig, load_data, get_gan_path,
+                   plot, predict_l2r, save_gan, test_write_mwps)
+
 
 class Instructor:
     def __init__(self, args):
-        # TODO requires_grad = False?
         torch.manual_seed(args.seed)
         self.args = args
-        self.device = torch.device("cuda:0" if args.cuda else "cpu")
-        self.tokenizer = BertTokenizer.from_pretrained(args.bert_model)
-        self.mask_id = self.tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
 
-        # Generator, Discriminator
-        self.generator = BertForMaskedLM.from_pretrained(args.bert_model)
-        self.discriminator = BertForSequenceClassification.from_pretrained(args.bert_model, num_labels=2)
-        if len(args.load) > 0:
-            self.generator.load_state_dict(torch.load('%s/gen_epoch_%d.pth' % (self.args.load, self.args.epochs-1)))
-            self.discriminator.load_state_dict(torch.load('%s/dis_epoch_%d.pth' % (self.args.load, self.args.epochs-1)))
-        self.generator.to(self.device)
-        self.discriminator.to(self.device)
+        # Tokenizer, Generator, Discriminator
+        if args.load_epoch > -1: # NOTE: 0-indexed. Load from trained
+            gen_path, dis_path = get_gan_path(self.args.model_out, self.args.load_epoch)
+        else:
+            gen_path, dis_path = args.bert_model, args.bert_model
+        self.tokenizer = BertTokenizer.from_pretrained(gen_path) # TODO requires_grad = False?
+        self.generator = BertForMaskedLM.from_pretrained(gen_path)
+        self.discriminator = BertForSequenceClassification.from_pretrained(dis_path, num_labels=2)
 
         # Optimizer
         self.optimizerG = self._get_optimizer_(self.generator)
@@ -44,6 +41,11 @@ class Instructor:
         # DataLoader
         self.msk_data = load_data(args.general_in, args.maxlen, args.batch_size, self.tokenizer, args.seed, 'masked')
         self.org_data = load_data(args.general_in, args.maxlen, args.batch_size, self.tokenizer, args.seed, 'original')
+
+        self.mask_id = self.tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
+        self.device = torch.device("cuda:0" if args.cuda else "cpu")
+        self.generator.to(self.device)
+        self.discriminator.to(self.device)
     
     def _get_optimizer_(self, model):
         no_decay = ['bias', 'gamma', 'beta']
@@ -74,7 +76,7 @@ class Instructor:
         if not os.path.exists(self.args.model_out):
             os.makedirs(self.args.model_out)
 
-        for i_epoch in range(self.args.epochs):
+        for i_epoch in range(self.args.load_epoch+1, self.args.epochs):
             for i, (msk_batch, org_batch) in enumerate(zip(self.msk_data, self.org_data), 0): # 0 for 0-indexed
                 msk_batch = tuple(t.to(self.device) for t in msk_batch)
                 org_batch = tuple(t.to(self.device) for t in org_batch)
