@@ -17,7 +17,7 @@ MAXLEN=256
 BATCH_SIZE=8 # if 16, RuntimeError: CUDA out of memory.
 LR=1e-4 #2e-5 ############# How to tune it? Diff for G/D? This matters A LOT!
 WARMUP=.1
-LOAD_EPOCH=4 # 0-indexed
+LOAD_EPOCH=-1 #4 # 0-indexed. -1 for new
 EPOCHS=10
 CUDA=-cuda
 

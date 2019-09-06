@@ -107,6 +107,22 @@ def predict_l2r(generator, msk_input_ids, msk_input_seg, mask_id):
             fake_ids[p1,p2] = preds[p1,p2].argmax(dim=-1)
     return fake_ids
 
+"""
+# TODO 5~10 should be named 5~10 rather than 10
+loss_paths = ['results/bt_nn_3k-5','results/bt_nn_3k-10']
+new_dir = 'results/bt_nn_3k-5-10'
+losses = plot_combined_losses(loss_paths,new_dir)
+"""
+def plot_combined_losses(loss_paths,new_dir):
+    from collections import defaultdict
+    losses = defaultdict(list)
+    for path in loss_paths:
+        loss_dict = eval(open(os.path.join(path,'loss_.txt')).read())
+        for k,v in loss_dict.items():
+            losses[k].extend(v)
+    plot(losses,new_dir)
+    return losses
+
 def plot(losses, loss_dir):
     try:
         if not os.path.exists(loss_dir):
@@ -122,9 +138,9 @@ def plot(losses, loss_dir):
         open(os.path.join(loss_dir,f'loss_{fname_time}.txt'),'w').writelines(pp.pformat(dict(losses))+'\n')
 
         plt.title('Result Analysis: Real/Fake')
-        plt.plot('iteration','lossD_real',color=colors[0],data=losses,marker='.')
-        plt.plot('iteration','lossD_fake',color=colors[1],data=losses,marker='.')
-        plt.plot('iteration','lossG',color=colors[2],data=losses,marker='.')
+        plt.plot('iteration','lossD_real',color=colors[0],data=losses)
+        plt.plot('iteration','lossD_fake',color=colors[1],data=losses)
+        plt.plot('iteration','lossG',color=colors[2],data=losses)
         plt.legend(['lossD_real','lossD_fake','lossG'])
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
@@ -140,8 +156,8 @@ def plot(losses, loss_dir):
         plt.clf()
 
         plt.title('Result Analysis: Discriminator')
-        plt.plot('iteration','lossD_real',color=colors[0],data=losses,marker='.')
-        plt.plot('iteration','lossD_fake',color=colors[1],data=losses,marker='.')
+        plt.plot('iteration','lossD_real',color=colors[0],data=losses)
+        plt.plot('iteration','lossD_fake',color=colors[1],data=losses)
         plt.legend(['lossD_real','lossD_fake'])
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)

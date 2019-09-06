@@ -41,20 +41,26 @@ class Tester:
         return pr,md
 
 models=[
-    ('ftd','lm_finetuning/finetuned_lm/'), #'lm_finetuning/bt_nn_3k-finetuned_lm/': This one sucks. Don't use it.
     ('org','bert-base-uncased'),
-    ('gan','gan/models/bt_nn_3k/tok-gen_epoch_4/')
+    ('ftd','lm_finetuning/finetuned_lm/'), #'lm_finetuning/bt_nn_3k-finetuned_lm/': This one sucks. Don't use it.
+    ('ga4','gan/models/bt_nn_3k/tok-gen_epoch_4/'),
+    ('ga9','gan/models/bt_nn_3k/tok-gen_epoch_9/')
     ]
 sents=[
     "[CLS] a car drives 60 miles on local roads at [MASK] mph , and 195 miles [MASK] the [MASK] [MASK] 65 mph , what is [MASK] average speed of the entire trip ? [SEP]",
     "[CLS] [MASK] many numbers from 45 [MASK] [MASK] [MASK] [MASK] di ##vis ##ible by 12 ? [SEP]",
-    "[CLS] if y exceeds x [MASK] 25 % , [MASK] [MASK] is less [MASK] y [MASK] ? [SEP]"
+    "[CLS] if y exceeds x [MASK] 25 % , [MASK] [MASK] is less [MASK] y [MASK] ? [SEP]",
+    "[CLS] if y exceeds x [MASK] 25 % , [MASK] [MASK] is [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]",
+    "[CLS] if y exceeds x [MASK] 25 [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]",
+    "[CLS] if y [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [SEP]",
     ]
+testers=[]
 def test(modellist=models,sentlist=sents):
-    testers=[(k,Tester(v)) for (k,v) in modellist]
+    if not testers:
+        testers=[(k,Tester(v)) for (k,v) in modellist]
     mds = ['\n\n# Formatted']
     for s in sentlist:
-        mds.append(f'\nIN:\t{s}')
+        mds.append(f'\nIN:\t{s}'.replace('[CLS] ','').replace(' [SEP]','').replace('[MASK]','_'))
         print()
         for k,v in testers:
             pr,md=v.predict(s)
