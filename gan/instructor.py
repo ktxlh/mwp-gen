@@ -9,14 +9,15 @@ import os
 from collections import defaultdict
 
 import torch
-from pytorch_pretrained_bert import BertAdam, BertTokenizer
+from pytorch_pretrained_bert import BertAdam
 from torch import nn
 from tqdm import tqdm
 
 from pytorch_transformers.modeling_bert import (BertForMaskedLM,
                                                 BertForSequenceClassification)
+from pytorch_transformers.tokenization_bert import BertTokenizer
 from utils import (fixed_append_pred, fixed_write_orig, load_data, plot,
-                   predict_l2r, test_write_mwps)
+                   predict_l2r, save_gan, test_write_mwps)
 
 class Instructor:
     def __init__(self, args):
@@ -70,11 +71,13 @@ class Instructor:
         train_loss_set = defaultdict(list)
         fixed_input = None
 
+        if not os.path.exists(self.args.model_out):
+            os.makedirs(self.args.model_out)
+
         for i_epoch in range(self.args.epochs):
             for i, (msk_batch, org_batch) in enumerate(zip(self.msk_data, self.org_data), 0): # 0 for 0-indexed
                 msk_batch = tuple(t.to(self.device) for t in msk_batch)
                 org_batch = tuple(t.to(self.device) for t in org_batch)
-                train_loss_set['iteration'].append(i)
 
                 ###############################################################
                 # Update Discriminator: maximize log(D(x)) + log(1 - D(G(z))) #
@@ -98,9 +101,8 @@ class Instructor:
                     fixed_input = (msk_input_ids[:1].clone(), msk_input_seg[:1].clone())
                     fixed_write_orig(self.tokenizer, self.args.result_out, fixed_input[0])
                     
-                # Predict [MASK]s and replace them simultaneously
-                fake_ids = msk_input_ids # For readability
-                predict_l2r(self.generator, fake_ids, msk_input_seg, self.mask_id)
+                # Predict [MASK]s and replace them autoregressively
+                fake_ids = predict_l2r(self.generator, msk_input_ids, msk_input_seg, self.mask_id)
 
                 lossD_fake,_ = self.discriminator(fake_ids.detach(), token_type_ids=None, attention_mask=msk_input_mask, labels=labels)
                 lossD_fake.backward()
@@ -126,15 +128,11 @@ class Instructor:
                         train_loss_set['lossD_real'][i], train_loss_set['lossD_fake'][i], train_loss_set['lossG'][i]))
                 if i % 100 == 0:
                     with torch.no_grad():
-                        fixed_output = fixed_input[0].clone()                
-                        predict_l2r(self.generator, fixed_output, fixed_input[1], self.mask_id)
+                        fixed_output = predict_l2r(self.generator, fixed_input[0], fixed_input[1], self.mask_id)
                         fixed_append_pred(self.tokenizer, self.args.result_out, fixed_input[0], fixed_output, i_epoch, i)
         
             # do checkpointing
-            torch.save(self.generator.state_dict(), '%s/gen_epoch_%d.pth' % (self.args.model_out, i_epoch))
-            torch.save(self.discriminator.state_dict(), '%s/dis_epoch_%d.pth' % (self.args.model_out, i_epoch))
-            # TODO self.generator.save_pretrained(args.output_dir) should work better
-            # (with vocab and config saved along with the model!)
+            save_gan(self.tokenizer, self.generator, self.discriminator, self.args.model_out, i_epoch)
         
         # plot loss
         plot(train_loss_set, self.args.loss_dir)

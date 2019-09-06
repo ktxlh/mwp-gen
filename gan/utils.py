@@ -20,7 +20,7 @@ def load_data(general_in, maxlen, batch_size, tokenizer, seed, role):
         general_in   path to general_in*.txt (bert-tokenized in make_bert_data.py)
     """
     torch.manual_seed(seed)
-    #mask_id = tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
+    mask_id = tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
     assert role in {'masked','original'}
 
     mwps = []
@@ -37,7 +37,7 @@ def load_data(general_in, maxlen, batch_size, tokenizer, seed, role):
 
     input_ids = pad_sequences([tokenizer.convert_tokens_to_ids(mwp.split()) for mwp in mwps], \
         maxlen=maxlen, dtype="long", truncating="post", padding="post")
-    attention_masks = [[float(i>0) for i in seq] for seq in input_ids] # and i!=mask_id
+    attention_masks = [[float(i>0 and i!=mask_id) for i in seq] for seq in input_ids]
     
     input_ids = torch.tensor(input_ids)
     attention_masks = torch.tensor(attention_masks)
@@ -88,7 +88,7 @@ def _id2prettyStr_styled(tokenizer, orig_tensor, pred_tensor):
     assert len(origs) == len(preds)
     for i,orig in enumerate(origs):
         if orig == '[MASK]':
-            preds[i] = '<span style="color:blue">'+preds[i]+'</span>'
+            preds[i] = '<span style="color:blue"> '+preds[i]+' </span>'
     return ' '.join(preds).replace(' [PAD]','').replace('[CLS] ','')
 
 def predict_l2r(generator, msk_input_ids, msk_input_seg, mask_id):
@@ -104,35 +104,38 @@ def predict_l2r(generator, msk_input_ids, msk_input_seg, mask_id):
                 continue
             else:
                 p2 = p2[0][0]
-            fake_ids[p1,p2] = preds[p1,p2].argmax(dim=-1).clone()
+            fake_ids[p1,p2] = preds[p1,p2].argmax(dim=-1)
     return fake_ids
 
 def plot(losses, loss_dir):
     try:
-
         if not os.path.exists(loss_dir):
             os.makedirs(loss_dir)
 
-        fname_time = time.time()
+        print(f"Plotting loss to {loss_dir}...")
+        fname_time = '' #time.time()
         colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:brown', 'tab:pink', 'tab:gray', 'tab:olive', 'tab:cyan']
+        xlabel = 'batches' #'iteration times'
+        ylabel = 'loss'
 
-        open(os.path.join(loss_dir,f'loss_{fname_time}.txt'),'w').writelines(pp.pformat(losses)+'\n')
+        losses['iteration'] = [i for i in range(len(list(losses.values())[0]))]
+        open(os.path.join(loss_dir,f'loss_{fname_time}.txt'),'w').writelines(pp.pformat(dict(losses))+'\n')
 
         plt.title('Result Analysis: Real/Fake')
         plt.plot('iteration','lossD_real',color=colors[0],data=losses,marker='.')
         plt.plot('iteration','lossD_fake',color=colors[1],data=losses,marker='.')
         plt.plot('iteration','lossG',color=colors[2],data=losses,marker='.')
         plt.legend(['lossD_real','lossD_fake','lossG'])
-        plt.xlabel('iteration times')
-        plt.ylabel('loss')
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.savefig(f"{loss_dir}/lossSrc_{fname_time}.png")
         plt.clf()
 
         plt.title('Result Analysis: Generator')
         plt.plot('iteration','lossG',color=colors[2],data=losses)
         plt.legend(['lossG'])
-        plt.xlabel('iteration times')
-        plt.ylabel('loss')
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.savefig(f"{loss_dir}/lossG_{fname_time}.png")
         plt.clf()
 
@@ -140,12 +143,23 @@ def plot(losses, loss_dir):
         plt.plot('iteration','lossD_real',color=colors[0],data=losses,marker='.')
         plt.plot('iteration','lossD_fake',color=colors[1],data=losses,marker='.')
         plt.legend(['lossD_real','lossD_fake'])
-        plt.xlabel('iteration times')
-        plt.ylabel('loss')
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.savefig(f"{loss_dir}/lossD_{fname_time}.png")
         plt.clf()
 
-        print(f"Loss plots saved to {fname_time}")
+        print(f"Loss plots saved to {loss_dir}")
 
     except Exception as e:
         print(str(e))
+
+def save_gan(tok,gen,dis,model_out,i_epoch):
+    gen_save_dir = '%stok-gen_epoch_%d/' % (model_out, i_epoch)
+    dis_save_dir = '%sdis_epoch_%d/' % (model_out, i_epoch)
+    for save_dir in [gen_save_dir,dis_save_dir]:
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+    tok.save_pretrained(gen_save_dir)
+    gen.save_pretrained(gen_save_dir)
+    dis.save_pretrained(dis_save_dir)
+    print(f"GAN models saved to {gen_save_dir} and {dis_save_dir}")
