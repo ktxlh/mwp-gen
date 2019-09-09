@@ -9,46 +9,58 @@ from torch.utils.data import (DataLoader, Dataset, RandomSampler,
                               SequentialSampler, TensorDataset)
 
 pp = pprint.PrettyPrinter(indent=4)
-torch.manual_seed(2809)
 
-def load_data(general_in, maxlen, batch_size, tokenizer, seed, role):
+def load_data(mathqa_rand_mask, maxlen, batch_size, tokenizer, seed, role):
     """
-    Load general_in into dataloader
+    Load input data into dataloader
     * No real/fake labels here
     * GAN -> no validation set
     Parameters:
-        general_in   path to general_in*.txt (bert-tokenized in make_bert_data.py)
+        mathqa_rand_mask   path to mathqa_rand_mask.txt (from random_mask in make_gan_data.py)
     """
     torch.manual_seed(seed)
     mask_id = tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
     assert role in {'masked','original'}
 
-    mwps = []
-    with open(general_in, encoding='utf-8') as f:
-        if role == 'original':
-            q_as = [line.strip().split('$$$') for line in f.readlines()]
-            for (question, answer) in q_as:
+    categories = ['fake', 'gain', 'general', 'geometry', 'physics', 'probability', 'other']
+    cat2id = dict([(c,i) for (i,c) in enumerate(categories)])
+
+    mwps, cats = [],[]
+    with open(mathqa_rand_mask, encoding='utf-8') as f:
+        lines = [line.strip().split('@@@') for line in f.readlines()]
+        for (question, answer, category) in lines:
+            try:
+                cats.append(cat2id[category])
+            except Exception as e:
+                print("Exception",e)
+                print("question ",question)
+                print("answer   ",answer)
+                print("category ",category)
+                continue
+            if role == 'original':
                 answer = answer.split()
                 mwps.append(' '.join([(answer.pop(0) if w=='[MASK]' else w) \
                     for wid,w in enumerate(question.split())]))
-        elif role == 'masked':
-            mwps = [line.strip().split('$$$')[0] for line in f.readlines()]
+            elif role == 'masked':
+                mwps.append(question)
     assert len(mwps) > 0
 
-    input_ids = pad_sequences([tokenizer.convert_tokens_to_ids(mwp.split()) for mwp in mwps], \
+    input_ids = pad_sequences([tokenizer.convert_tokens_to_ids(mwp[0].split()) for mwp in mwps], \
         maxlen=maxlen, dtype="long", truncating="post", padding="post")
     attention_masks = [[float(i>0 and i!=mask_id) for i in seq] for seq in input_ids]
     
     input_ids = torch.tensor(input_ids)
     attention_masks = torch.tensor(attention_masks)
     segs = torch.zeros_like(input_ids) # HACK 'cuz tensor must be fix-len in each dimension
+    cats = torch.tensor(cats)
 
     if role == 'masked':
-        data = TensorDataset(input_ids, attention_masks, segs)
+        data = TensorDataset(input_ids, attention_masks, cats, segs)
     elif role == 'original':
-        data = TensorDataset(input_ids, attention_masks)
+        data = TensorDataset(input_ids, attention_masks, cats)
     dataloader = DataLoader(data, sampler=RandomSampler(data), batch_size=batch_size)
     return dataloader
+
 
 def test_write_mwps(args, tokenizer, result_out, orig_tensors, pred_tensors):
     print("Files written:",result_out+'_test.txt', result_out+'_test.md')

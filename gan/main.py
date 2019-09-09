@@ -6,7 +6,8 @@ from instructor import Instructor
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('-bert_model', type=str, default='', help='bert model string. used for training gan')
-parser.add_argument('-general_in', type=str, default='', help='path to general_in* file')
+parser.add_argument('-data_in', type=str, default='', help='path to input data e.g. general_in* file')
+parser.add_argument('-num_labels', type=int, default='',help='number of labels to classify')
 parser.add_argument('-maxlen', type=int, default='',help='max sequence length')
 parser.add_argument('-batch_size', type=int, default='',help='')
 parser.add_argument('-lr', type=float, default='',help='learning rate (lr) for BertAdam')

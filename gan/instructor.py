@@ -32,15 +32,15 @@ class Instructor:
             gen_path, dis_path = args.bert_model, args.bert_model
         self.tokenizer = BertTokenizer.from_pretrained(gen_path) # TODO requires_grad = False?
         self.generator = BertForMaskedLM.from_pretrained(gen_path)
-        self.discriminator = BertForSequenceClassification.from_pretrained(dis_path, num_labels=2)
+        self.discriminator = BertForSequenceClassification.from_pretrained(dis_path, num_labels=self.args.num_labels)
 
         # Optimizer
         self.optimizerG = self._get_optimizer_(self.generator)
         self.optimizerD = self._get_optimizer_(self.discriminator)
 
         # DataLoader
-        self.msk_data = load_data(args.general_in, args.maxlen, args.batch_size, self.tokenizer, args.seed, 'masked')
-        self.org_data = load_data(args.general_in, args.maxlen, args.batch_size, self.tokenizer, args.seed, 'original')
+        self.msk_data = load_data(args.data_in, args.maxlen, args.batch_size, self.tokenizer, args.seed, 'masked')
+        self.org_data = load_data(args.data_in, args.maxlen, args.batch_size, self.tokenizer, args.seed, 'original')
 
         self.mask_id = self.tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
         self.device = torch.device("cuda:0" if args.cuda else "cpu")
@@ -66,8 +66,8 @@ class Instructor:
         # NOTE # epochs for finetuning bert is suggested to be 2 to 4
 
         # Constants
-        real_label = 0
-        fake_label = 1
+        real_label = 1 #0
+        fake_label = 0 #1
         
         # Store loss for plotting; fix input for debugging
         train_loss_set = defaultdict(list)
@@ -89,14 +89,15 @@ class Instructor:
                 self.generator.eval()
                 self.discriminator.train()
                 
-                org_input_ids, org_input_mask = org_batch
-                labels = torch.full((self.args.batch_size,), real_label, device=self.device).long()
+                org_input_ids, org_input_mask, org_input_cat = org_batch
+                #labels = torch.full((self.args.batch_size,), real_label, device=self.device).long()
+                labels = org_input_cat
                 lossD_real,_ = self.discriminator(org_input_ids, token_type_ids=None, attention_mask=org_input_mask, labels=labels) #_: logits
                 lossD_real.backward()
                 train_loss_set["lossD_real"].append(lossD_real.item())
 
                 # ====== Train with fake ======
-                msk_input_ids, msk_input_mask, msk_input_seg = msk_batch
+                msk_input_ids, msk_input_mask, msk_input_cat, msk_input_seg = msk_batch
                 labels.fill_(fake_label)
                 
                 if not fixed_input:
@@ -118,7 +119,8 @@ class Instructor:
                 self.generator.train()
                 self.discriminator.eval()
 
-                labels.fill_(real_label)  # fake labels are real for generator cost
+                #labels.fill_(real_label)  # fake labels are real for generator cost (???)
+                labels = msk_input_cat
                 lossG,_ = self.discriminator(fake_ids, token_type_ids=None, attention_mask=msk_input_mask, labels=labels)
                 lossG.backward()
                 train_loss_set["lossG"].append(lossG.item())
